@@ -367,3 +367,43 @@ main { flex: 1; }
   .grid { grid-template-columns: 1fr; gap: 1rem; }
   .card { padding: 1.25rem 1.1rem 1rem; }
 }
+
+/* ============================================================
+   Mobile-Feinschliff
+   ============================================================ */
+
+/* 1. iOS Safari zoomt automatisch in Eingabefelder mit Schrift < 16 px.
+      Auf Touch-Geräten daher exakt 16 px verwenden. */
+@media (max-width: 600px) {
+  #search { font-size: 16px; }
+}
+
+/* 2. Hover-Effekte nur auf Geräten mit echter Maus.
+      Auf Touchscreens "klebt" der Hover-Zustand sonst nach dem Antippen. */
+@media (hover: none) {
+  .card:hover { transform: none; box-shadow: var(--shadow); }
+  .back-btn:hover { transform: none; }
+}
+
+/* Stattdessen: kurzes Feedback beim Antippen */
+.card:active { transform: scale(0.98); transition-duration: 0.1s; }
+
+/* 3. Grauen/blauen Tap-Blitz auf Android/iOS entfernen */
+a, button { -webkit-tap-highlight-color: transparent; }
+
+/* 4. Mindestgröße für Fingerbedienung (Apple/Google empfehlen ≥ 44 px) */
+.back-btn { min-height: 44px; }
+.breadcrumbs a { padding: 0.45rem 0.5rem; }
+
+/* 5. Abstand zu Notch / abgerundeten Displayecken (iPhone & Co.) */
+.container {
+  padding-left:  max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
+}
+.site-footer { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+
+/* 6. Sehr kleine Displays (< 360 px): etwas kompaktere Icons */
+@media (max-width: 360px) {
+  .card-icon { width: 46px; height: 46px; font-size: 1.4rem; }
+  .page-head h1 { font-size: 1.45rem; }
+}
