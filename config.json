@@ -86,15 +86,15 @@
           "folder": "jahrgang-11",
           "children": [
             {
-              "id": "gebaeudetechnik",
-              "title": "Gebäudetechnik",
-              "description": "Installationstechnik und Schutzmaßnahmen",
+              "id": "digitaltechnik",
+              "title": "Digitaltechnik",
+              "description": "Digitaltechnik",
               "icon": "🏗️",
               "children": [
                 {
-                  "id": "schutzmassnahmen",
-                  "title": "Schutzmaßnahmen",
-                  "description": "TN-, TT- und IT-System interaktiv vergleichen.",
+                  "id": "zählerbaustein_74193N",
+                  "title": "Zählerbaustein_74193N",
+                  "description": "Anwendung zählerbaustein_74193N",
                   "icon": "🛡️",
                   "tags": ["Simulation"]
                 }
