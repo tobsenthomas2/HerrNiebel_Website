@@ -3,7 +3,7 @@
 Digitales Dashboard und Startseite für Unterrichtsmaterialien und Web-Simulationen.
 Schüler navigieren von hier aus über **Jahrgang → Fach → Thema** zu den einzelnen Lerninhalten.
 
-🔗 **Live-Seite:** https://<dein-name>.github.io/<dein-repo>/
+🔗 **Live-Seite:** https://herrniebel.de
 
 ---
 
