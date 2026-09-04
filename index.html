@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lernlandschaft</title>
+  <meta name="description" content="Digitale Lernlandschaft – Unterrichtsmaterialien und Simulationen">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Kopfzeile mit Titel und Suche ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#/" class="brand">
+        <span class="brand-icon">⚡</span>
+        <span id="site-title">Lernlandschaft</span>
+      </a>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="search" placeholder="Thema suchen …" autocomplete="off"
+               aria-label="Alle Themen durchsuchen">
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Breadcrumbs (werden per JS befüllt) -->
+    <nav class="breadcrumbs" id="breadcrumbs" aria-label="Navigationspfad"></nav>
+
+    <!-- Seitenkopf: Zurück-Button, Überschrift, Untertitel -->
+    <section class="page-head">
+      <button class="back-btn" id="back-btn" type="button" hidden>← Zurück</button>
+      <h1 id="page-title">Lade …</h1>
+      <p id="page-subtitle" class="page-subtitle"></p>
+    </section>
+
+    <!-- Kachel-Raster (wird per JS befüllt) -->
+    <section class="grid" id="grid" aria-live="polite"></section>
+
+    <!-- Hinweis, wenn keine Kacheln vorhanden sind -->
+    <p id="empty" class="empty" hidden></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span id="footer-text"></span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
