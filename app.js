@@ -1,17 +1,25 @@
 /* ============================================================
    Lernlandschaft – app.js
    -----------------------------------------------------------
-   1. Lädt config.json
-   2. Liest die aktuelle Ebene aus dem URL-Hash:
-        #/              → Jahrgänge
-        #/jg10          → Fächer des Jahrgangs
-        #/jg10/digital  → Themen des Fachs
-   3. Rendert Breadcrumbs + Kacheln
-   4. Globale Suche über alle Themen
+   Beliebig tiefer Baum aus config.json:
+     - Eintrag MIT  "children" → Ebene (Beruf, Jahrgang, Fach …)
+     - Eintrag OHNE "children" → Thema (Link auf …/index.html)
+
+   Routing über den URL-Hash:
+     #/                       → Bildungsgänge
+     #/eat                    → Jahrgänge von EAT
+     #/eat/jg11               → Fächer
+     #/eat/jg11/steuerung     → Themen
+
+   Themen-URL wird aus den Ordnern gebildet:
+     <folder>/<folder>/…/<folder>/index.html
+   (fehlt "folder", wird die "id" verwendet;
+    ein explizites "url" im Thema gewinnt immer)
    ============================================================ */
 
-const CONFIG_URL   = "config.json";
+const CONFIG_URL    = "config.json";
 const DEFAULT_COLOR = "#2563eb";
+const DEFAULT_LABEL = ["Eintrag", "Einträge"];
 
 let config = null;
 
@@ -36,14 +44,17 @@ async function init() {
     const res = await fetch(`${CONFIG_URL}?v=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     config = await res.json();
+    if (!Array.isArray(config.children)) {
+      throw new Error('"children" fehlt auf oberster Ebene oder ist kein Array');
+    }
   } catch (err) {
     showError(err);
     return;
   }
 
   document.title = config.title || "Lernlandschaft";
-  $("#site-title").textContent   = config.title || "Lernlandschaft";
-  $("#footer-text").textContent  = config.footer || "";
+  $("#site-title").textContent  = config.title || "Lernlandschaft";
+  $("#footer-text").textContent = config.footer || "";
 
   window.addEventListener("hashchange", () => {
     searchInput.value = "";      // Suche beim Navigieren zurücksetzen
@@ -68,6 +79,50 @@ async function init() {
 }
 
 // =============================================================
+//  Baum-Hilfsfunktionen
+// =============================================================
+const isContainer = (node) => Array.isArray(node.children);
+
+/** Hash-Adresse für einen Pfad aus Knoten, z. B. "#/eat/jg11" */
+const hashFor = (path) => "#/" + path.map((n) => n.id).join("/");
+
+/** Farbe: eigene Farbe des Knotens, sonst vom nächsten Vorfahren erben */
+function colorFor(path) {
+  for (let i = path.length - 1; i >= 0; i--) {
+    if (path[i].color) return path[i].color;
+  }
+  return DEFAULT_COLOR;
+}
+
+/** Datei-Pfad aus "folder" (oder ersatzweise "id") aller Knoten im Pfad */
+function buildUrl(path) {
+  return path.map((n) => encodeURIComponent(n.folder || n.id)).join("/") + "/index.html";
+}
+
+/** Bezeichnung der Unterelemente eines Knotens: childLabel > levelNames[depth] > Standard */
+function labelFor(parent, depth) {
+  if (parent && Array.isArray(parent.childLabel) && parent.childLabel.length === 2) {
+    return parent.childLabel;
+  }
+  const names = config.levelNames || [];
+  return Array.isArray(names[depth]) && names[depth].length === 2 ? names[depth] : DEFAULT_LABEL;
+}
+
+function countLabel(n, parent, depth) {
+  const [singular, plural] = labelFor(parent, depth);
+  return `${n} ${n === 1 ? singular : plural}`;
+}
+
+/** Alle Themen (Blätter) rekursiv einsammeln – für die Suche */
+function collectTopics(nodes, path, out = []) {
+  for (const node of nodes) {
+    if (isContainer(node)) collectTopics(node.children, [...path, node], out);
+    else out.push({ node, path });
+  }
+  return out;
+}
+
+// =============================================================
 //  Routing
 // =============================================================
 function getRoute() {
@@ -76,14 +131,20 @@ function getRoute() {
     .split("/")
     .filter(Boolean);
 
-  const level   = config.levels.find((l) => l.id === parts[0]) || null;
-  const subject = level ? (level.subjects || []).find((s) => s.id === parts[1]) || null : null;
-  return { level, subject, raw: parts };
+  const path = [];
+  let nodes = config.children;
+  for (const id of parts) {
+    const node = nodes.find((n) => n.id === id && isContainer(n));
+    if (!node) break;
+    path.push(node);
+    nodes = node.children;
+  }
+  return { path, valid: path.length === parts.length };
 }
 
 function goBack() {
-  const { level, subject } = getRoute();
-  location.hash = subject ? `#/${level.id}` : "#/";
+  const { path } = getRoute();
+  location.hash = hashFor(path.slice(0, -1));
 }
 
 // =============================================================
@@ -96,46 +157,25 @@ function render() {
     return;
   }
 
-  const { level, subject, raw } = getRoute();
+  const { path, valid } = getRoute();
 
-  // Ungültige Route (z. B. Tippfehler oder gelöschte ID) → zur Startseite
-  if (raw.length > 0 && !level) { location.hash = "#/"; return; }
-  if (raw.length > 1 && !subject) { location.hash = `#/${level.id}`; return; }
+  // Ungültige Route (Tippfehler, gelöschte ID) → auf die tiefste gültige Ebene
+  if (!valid) { location.hash = hashFor(path); return; }
 
-  renderBreadcrumbs(level, subject);
-  backBtn.hidden = !level;
+  const current  = path.length ? path[path.length - 1] : null;
+  const children = current ? current.children : config.children;
+  const depth    = path.length;
 
-  let items = [];
+  renderBreadcrumbs(path);
+  backBtn.hidden = depth === 0;
+  setHeading(
+    current ? current.title : config.title,
+    current ? current.description : config.subtitle
+  );
 
-  if (!level) {
-    // ---- Ebene 1: Jahrgänge ----
-    setHeading(config.title, config.subtitle);
-    items = config.levels.map((l) => ({
-      title: l.title,
-      description: l.description,
-      icon: l.icon || "📚",
-      color: l.color,
-      href: `#/${l.id}`,
-      meta: countLabel((l.subjects || []).length, "Fach", "Fächer"),
-    }));
-  } else if (!subject) {
-    // ---- Ebene 2: Fächer ----
-    setHeading(level.title, level.description);
-    items = (level.subjects || []).map((s) => ({
-      title: s.title,
-      description: s.description,
-      icon: s.icon || "📘",
-      color: s.color || level.color,
-      href: `#/${level.id}/${s.id}`,
-      meta: countLabel((s.topics || []).length, "Thema", "Themen"),
-    }));
-  } else {
-    // ---- Ebene 3: Themen ----
-    setHeading(subject.title, subject.description);
-    items = (subject.topics || []).map((t) => topicToCard(t, subject.color || level.color));
-  }
-
-  renderCards(items, "Hier gibt es noch keine Inhalte – schau bald wieder vorbei.");
+  const items = children.map((node) => nodeToCard(node, path));
+  const [, plural] = labelFor(current, depth);
+  renderCards(items, `Hier gibt es noch keine ${plural} – schau bald wieder vorbei.`);
 }
 
 // =============================================================
@@ -143,54 +183,63 @@ function render() {
 // =============================================================
 function renderSearch(query) {
   backBtn.hidden = true;
-  renderBreadcrumbs(null, null, "Suche");
-  setHeading(`Suche: „${searchInput.value.trim()}“`, "Ergebnisse aus allen Jahrgängen und Fächern");
+  renderBreadcrumbs([], "Suche");
+  setHeading(`Suche: „${searchInput.value.trim()}“`, "Ergebnisse aus allen Bildungsgängen");
 
-  const results = [];
-  for (const level of config.levels) {
-    for (const subject of level.subjects || []) {
-      for (const topic of subject.topics || []) {
-        const haystack = [
-          topic.title, topic.description, subject.title, level.title, ...(topic.tags || []),
-        ].join(" ").toLowerCase();
-
-        if (haystack.includes(query)) {
-          results.push({
-            ...topicToCard(topic, subject.color || level.color),
-            meta: `${level.title} › ${subject.title}`,
-          });
-        }
-      }
-    }
-  }
+  const results = collectTopics(config.children, [])
+    .filter(({ node, path }) => {
+      const haystack = [
+        node.title, node.description, ...(node.tags || []), ...path.map((p) => p.title),
+      ].join(" ").toLowerCase();
+      return haystack.includes(query);
+    })
+    .map(({ node, path }) => ({
+      ...nodeToCard(node, path),
+      meta: path.map((p) => p.title).join(" › "),
+    }));
 
   renderCards(results, "Nichts gefunden. Versuche einen anderen Suchbegriff.");
 }
 
 // =============================================================
-//  Hilfsfunktionen
+//  Knoten → Kachel-Daten
 // =============================================================
-function topicToCard(topic, color) {
-  const external = /^https?:\/\//i.test(topic.url || "");
+function nodeToCard(node, path) {
+  const fullPath = [...path, node];
+  const color    = colorFor(fullPath);
+
+  if (isContainer(node)) {
+    // ---- Ebene (Beruf, Jahrgang, Fach …) ----
+    return {
+      title: node.title,
+      description: node.description,
+      icon: node.icon || "📁",
+      color,
+      href: hashFor(fullPath),
+      meta: countLabel(node.children.length, node, path.length + 1),
+    };
+  }
+
+  // ---- Thema (Blatt) ----
+  const url = node.url || buildUrl(fullPath);
   return {
-    title: topic.title,
-    description: topic.description,
-    icon: topic.icon || "📄",
+    title: node.title,
+    description: node.description,
+    icon: node.icon || "📄",
     color,
-    href: topic.url || "#",
-    external,
-    tags: topic.tags,
-    badge: topic.badge,
+    href: url,
+    external: /^https?:\/\//i.test(url),
+    tags: node.tags,
+    badge: node.badge,
   };
 }
 
+// =============================================================
+//  Darstellung
+// =============================================================
 function setHeading(title, subtitle) {
   pageTitle.textContent = title || "";
   pageSub.textContent   = subtitle || "";
-}
-
-function countLabel(n, singular, plural) {
-  return `${n} ${n === 1 ? singular : plural}`;
 }
 
 function softColor(hex) {
@@ -207,12 +256,11 @@ function el(tag, className, text) {
 }
 
 // ---- Breadcrumbs --------------------------------------------
-function renderBreadcrumbs(level, subject, extraLabel) {
+function renderBreadcrumbs(path, extraLabel) {
   crumbs.innerHTML = "";
 
   const trail = [{ label: "Start", href: "#/" }];
-  if (level)   trail.push({ label: level.title,   href: `#/${level.id}` });
-  if (subject) trail.push({ label: subject.title, href: `#/${level.id}/${subject.id}` });
+  path.forEach((node, i) => trail.push({ label: node.title, href: hashFor(path.slice(0, i + 1)) }));
   if (extraLabel) trail.push({ label: extraLabel });
 
   trail.forEach((item, i) => {
@@ -290,6 +338,6 @@ function showError(err) {
         <li>Du hast die Seite lokal per Doppelklick geöffnet (<code>file://</code>). Browser blockieren
             dann das Laden. Nutze GitHub Pages oder einen lokalen Server (z. B. VS Code „Live Server“).</li>
       </ul>
-      <p><small>Technische Meldung: ${String(err.message || err)}</small></p>
+      <p><small>Technische Meldung: ${String(err.message || err).replace(/</g, "&lt;")}</small></p>
     </div>`;
 }
