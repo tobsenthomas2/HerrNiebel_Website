@@ -1,0 +1,194 @@
+{
+  "title": "Lernlandschaft Elektrotechnik",
+  "subtitle": "Wähle deinen Jahrgang und finde Materialien, Simulationen und Übungen.",
+  "footer": "© Fachbereich Elektrotechnik · Fragen? Sprich mich im Unterricht an.",
+
+  "levels": [
+    {
+      "id": "jg10",
+      "title": "Jahrgang 10",
+      "description": "Grundlagen der Elektrotechnik und Digitaltechnik",
+      "icon": "🔟",
+      "color": "#2563eb",
+      "subjects": [
+        {
+          "id": "elektrotechnik",
+          "title": "Elektrotechnik",
+          "description": "Gleichstromkreise, Bauelemente, Messen",
+          "icon": "⚡",
+          "topics": [
+            {
+              "id": "ohmsches-gesetz",
+              "title": "Ohmsches Gesetz",
+              "description": "Interaktive Simulation: U, I und R live verändern und Zusammenhänge entdecken.",
+              "icon": "📐",
+              "url": "jahrgang-10/elektrotechnik/ohmsches-gesetz/index.html",
+              "tags": ["Simulation"]
+            },
+            {
+              "id": "reihen-parallel",
+              "title": "Reihen- & Parallelschaltung",
+              "description": "Widerstände kombinieren, Gesamtwiderstand berechnen, Spannungsteiler verstehen.",
+              "icon": "🔗",
+              "url": "jahrgang-10/elektrotechnik/reihen-parallel/index.html",
+              "tags": ["Simulation", "Übung"]
+            },
+            {
+              "id": "kondensator",
+              "title": "Kondensator laden & entladen",
+              "description": "Zeitkonstante τ = R·C grafisch erleben.",
+              "icon": "🔋",
+              "url": "jahrgang-10/elektrotechnik/kondensator/index.html",
+              "tags": ["Simulation"],
+              "badge": "Neu"
+            }
+          ]
+        },
+        {
+          "id": "digitaltechnik",
+          "title": "Digitaltechnik",
+          "description": "Logik, Schaltnetze und Schaltwerke",
+          "icon": "🔢",
+          "color": "#7c3aed",
+          "topics": [
+            {
+              "id": "logikgatter",
+              "title": "Logikgatter Grundlagen",
+              "description": "AND, OR, NOT, NAND, NOR, XOR – Wahrheitstabellen selbst erarbeiten.",
+              "icon": "🧩",
+              "url": "jahrgang-10/digitaltechnik/logikgatter/index.html",
+              "tags": ["Simulation", "Arbeitsblatt"]
+            },
+            {
+              "id": "zaehler-74193",
+              "title": "Zähler-IC 74193N",
+              "description": "Synchroner Auf-/Abwärtszähler: Anschlüsse, Timing, Anwendungen.",
+              "icon": "🧮",
+              "url": "jahrgang-10/digitaltechnik/zaehler-74193/index.html",
+              "tags": ["Simulation", "Datenblatt"]
+            },
+            {
+              "id": "kv-diagramm",
+              "title": "KV-Diagramme",
+              "description": "Schaltfunktionen mit Karnaugh-Veitch-Diagrammen minimieren.",
+              "icon": "🗂️",
+              "url": "jahrgang-10/digitaltechnik/kv-diagramm/index.html",
+              "tags": ["Übung"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "jg11",
+      "title": "Jahrgang 11",
+      "description": "Steuerungstechnik und Mikrocontroller",
+      "icon": "1️⃣1️⃣",
+      "color": "#059669",
+      "subjects": [
+        {
+          "id": "steuerungstechnik",
+          "title": "Steuerungstechnik",
+          "description": "Schützschaltungen und SPS",
+          "icon": "🎛️",
+          "topics": [
+            {
+              "id": "wendeschaltung",
+              "title": "Schütz-Wendeschaltung",
+              "description": "Stromlaufplan, Verriegelung und Fehlersuche interaktiv.",
+              "icon": "🔄",
+              "url": "jahrgang-11/steuerungstechnik/wendeschaltung/index.html",
+              "tags": ["Simulation"]
+            },
+            {
+              "id": "sps-grundlagen",
+              "title": "SPS-Grundlagen (FUP/KOP)",
+              "description": "Vom Schaltplan zum SPS-Programm.",
+              "icon": "🖥️",
+              "url": "jahrgang-11/steuerungstechnik/sps-grundlagen/index.html",
+              "tags": ["Skript", "Übung"]
+            }
+          ]
+        },
+        {
+          "id": "mikrocontroller",
+          "title": "Mikrocontroller",
+          "description": "Arduino, Bussysteme, Sensorik",
+          "icon": "🤖",
+          "color": "#d97706",
+          "topics": [
+            {
+              "id": "i2c-bus",
+              "title": "I²C-Bus",
+              "description": "SDA/SCL, Adressierung, ACK – Protokoll Schritt für Schritt animiert.",
+              "icon": "🚌",
+              "url": "jahrgang-11/mikrocontroller/i2c-bus/index.html",
+              "tags": ["Simulation"],
+              "badge": "Neu"
+            },
+            {
+              "id": "pwm",
+              "title": "PWM & Motorsteuerung",
+              "description": "Tastgrad, Frequenz und Mittelwert verstehen.",
+              "icon": "📶",
+              "url": "jahrgang-11/mikrocontroller/pwm/index.html",
+              "tags": ["Simulation", "Projekt"]
+            },
+            {
+              "id": "wokwi",
+              "title": "Online-Simulator Wokwi",
+              "description": "Externer Arduino-Simulator für eure Projekte.",
+              "icon": "🌐",
+              "url": "https://wokwi.com",
+              "tags": ["Extern"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "jg12",
+      "title": "Jahrgang 12",
+      "description": "Antriebstechnik und Messtechnik – Prüfungsvorbereitung",
+      "icon": "1️⃣2️⃣",
+      "color": "#dc2626",
+      "subjects": [
+        {
+          "id": "antriebstechnik",
+          "title": "Antriebstechnik",
+          "description": "Drehstrom, Motoren, Frequenzumrichter",
+          "icon": "⚙️",
+          "topics": [
+            {
+              "id": "drehstrommotor",
+              "title": "Drehstrom-Asynchronmotor",
+              "description": "Drehfeld, Schlupf und Stern-Dreieck-Anlauf visualisiert.",
+              "icon": "🌀",
+              "url": "jahrgang-12/antriebstechnik/drehstrommotor/index.html",
+              "tags": ["Simulation"]
+            }
+          ]
+        },
+        {
+          "id": "messtechnik",
+          "title": "Messtechnik",
+          "description": "Oszilloskop, Multimeter, Messfehler",
+          "icon": "📊",
+          "color": "#0891b2",
+          "topics": [
+            {
+              "id": "oszilloskop",
+              "title": "Oszilloskop-Simulator",
+              "description": "Zeitbasis, Trigger und Tastkopf virtuell einstellen.",
+              "icon": "📈",
+              "url": "jahrgang-12/messtechnik/oszilloskop/index.html",
+              "tags": ["Simulation"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
