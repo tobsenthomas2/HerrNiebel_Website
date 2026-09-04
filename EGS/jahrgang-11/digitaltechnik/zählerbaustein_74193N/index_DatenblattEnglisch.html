@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG größer als DIN A4</title>
+    <style>
+        body {
+            /* Flexbox-Layout für saubere Zentrierung */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 30px 50px 50px 50px;
+            min-height: 100vh;
+            font-family: sans-serif;
+        }
+
+        /* Styling für die obere Button-Leiste */
+        .button-leiste {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Styling für die Buttons */
+        .btn {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .vektor-grafik {
+            /* Die Übergröße (größer als A4: 21cm x 29.7cm) */
+            width: 25cm;
+            height: 35cm;
+            
+            /* Leichter Schatten für die Optik */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background-color: white; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="button-leiste">
+        <a href="https://www.jbs-mm.de/Interaktiv/J%C3%BCrgens-DIY/index_2.html" class="btn">Zurück</a>
+        
+        <a href="https://www.jbs-mm.de/Interaktiv/J%C3%BCrgens-DIY/index_druckMich_engl.html" class="btn">Druck mich!</a>
+        
+        <a href="https://www.jbs-mm.de/Interaktiv/J%C3%BCrgens-DIY/index_DatenblattDeutsch.html" class="btn">Auf Deutsch übersetzen</a>
+    </div>
+
+    <img src="Datenblatt_Englisch.svg" alt="Verlustfrei skalierbare Grafik" class="vektor-grafik">
+
+</body>
+</html>
