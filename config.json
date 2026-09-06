@@ -26,6 +26,13 @@
               "description": "Zufallsauswahl von Schülern, Gruppen oder Aufgaben.",
               "icon": "🔀",
               "tags": ["Tool"]
+            },
+            {
+              "id": "prüfungstimer",
+              "title": "Prüfungstimer",
+              "description": "Timer für Prüfungen und Tests inklusive Nachteilsausgleich.",
+              "icon": "⏱️",
+              "tags": ["Tool"]
             }
 
       ]

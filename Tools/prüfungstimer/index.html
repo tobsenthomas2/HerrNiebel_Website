@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer Tool</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Scrollen komplett unterbinden */
+        }
+        
+        .font-mono { font-family: 'Roboto Mono', monospace; }
+        .no-select { user-select: none; -webkit-user-select: none; }
+
+        @keyframes pulse-red {
+            0%, 100% { background-color: #fef2f2; border-color: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); }
+            50% { background-color: #ffffff; border-color: #fee2e2; }
+        }
+        .timer-finished { animation: pulse-red 1.2s infinite; }
+
+        /* Dynamisches Grid das den gesamten Platz ausfüllt */
+        .timers-container {
+            display: grid;
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            padding: 1rem;
+            gap: 1rem;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            transition: all 500ms ease;
+        }
+
+        .timers-container.two-active {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (orientation: portrait) {
+            .timers-container.two-active {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+        }
+
+        .timer-mount {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            min-height: 0;
+        }
+
+        .timer2-wrapper {
+            display: none;
+        }
+
+        .timers-container.two-active .timer2-wrapper {
+            display: flex;
+        }
+
+        /* Container Queries für fließende Skalierung */
+        .timer-card {
+            container-type: size;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly; /* Verteilt überschüssigen Platz gleichmäßig */
+            align-items: center;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            padding: 2cqh;
+        }
+        
+        /* Die Skalierungswerte wurden massiv erhöht, damit die Zahlen den Raum füllen */
+        .cq-text { font-size: min(22cqw, 40cqh); line-height: 0.85; }
+        .cq-icon { width: min(8cqw, 10cqh); height: min(8cqw, 10cqh); }
+        .cq-title { font-size: min(6cqw, 8cqh); }
+        .cq-btn { font-size: min(4cqw, 6cqh); padding: min(2cqw, 3cqh) min(6cqw, 8cqh); border-radius: 1rem; }
+        
+        .time-adjust-btn { transition: transform 0.2s ease, color 0.2s ease; padding: 1cqh; }
+        .time-adjust-btn:hover { color: #3b82f6; transform: scale(1.15); }
+    </style>
+</head>
+<body>
+
+    <div class="px-6 py-4 flex justify-center shrink-0">
+        <label class="bg-white px-6 py-3 rounded-full shadow-sm border border-slate-200 flex items-center gap-4 cursor-pointer hover:shadow-md transition-all">
+            <span class="font-medium text-slate-700">Timer Nachteilsausgleich aktivieren</span>
+            <div class="relative w-12 h-6">
+                <input type="checkbox" id="toggle-timer2" class="peer sr-only"/>
+                <div class="w-full h-full rounded-full bg-slate-200 peer-checked:bg-blue-500 transition-colors"></div>
+                <div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-6 shadow-sm"></div>
+            </div>
+        </label>
+    </div>
+
+    <div id="timers-container" class="timers-container">
+        <div class="timer-mount">
+            <div id="timer1-mount" class="w-full h-full"></div>
+        </div>
+        <div class="timer-mount timer2-wrapper">
+            <div id="timer2-mount" class="w-full h-full"></div>
+        </div>
+    </div>
+
+    <template id="timer-template">
+        <div class="timer-card border-2 border-transparent">
+            <input type="text" class="timer-title w-[90%] px-2 py-1 text-center cq-title font-semibold text-slate-700 bg-transparent border-b-2 border-dashed border-slate-300 hover:border-blue-400 hover:bg-slate-50 focus:outline-none focus:border-solid focus:border-blue-500 focus:bg-slate-50 transition-all cursor-text rounded-t" value="Timer" title="Titel bearbeiten" placeholder="Titel eingeben...">
+            <div class="flex justify-center items-center gap-1 md:gap-3 cq-text font-mono font-medium text-slate-800 no-select w-full">
+                <div class="flex flex-col items-center"><button class="time-adjust-btn btn-up" data-add="600"><svg xmlns="http://www.w3.org/2000/svg" class="cq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 15l7-7 7 7"/></svg></button><span class="digit-m10">0</span><button class="time-adjust-btn btn-down" data-add="-600"><svg xmlns="http://www.w3.org/2000/svg" class="cq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M19 9l-7 7-7-7"/></svg></button></div>
+                <div class="flex flex-col items-center"><button class="time-adjust-btn btn-up" data-add="60"><svg xmlns="http://www.w3.org/2000/svg" class="cq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 15l7-7 7 7"/></svg></button><span class="digit-m1">0</span><button class="time-adjust-btn btn-down" data-add="-60"><svg xmlns="http://www.w3.org/2000/svg" class="cq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M19 9l-7 7-7-7"/></svg></button></div>
+                
+                <!-- Doppelpunkt perfekt zentriert zur Anzeige -->
+                <div class="font-bold self-center transform -translate-y-[15%]">:</div>
+                
+                <div class="flex flex-col items-center"><button class="time-adjust-btn btn-up" data-add="10"><svg xmlns="http://www.w3.org/2000/svg" class="cq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 15l7-7 7 7"/></svg></button><span class="digit-s10">0</span><button class="time-adjust-btn btn-down" data-add="-10"><svg xmlns="http://www.w3.org/2000/svg" class="cq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M19 9l-7 7-7-7"/></svg></button></div>
+                <div class="flex flex-col items-center"><button class="time-adjust-btn btn-up" data-add="1"><svg xmlns="http://www.w3.org/2000/svg" class="cq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 15l7-7 7 7"/></svg></button><span class="digit-s1">0</span><button class="time-adjust-btn btn-down" data-add="-1"><svg xmlns="http://www.w3.org/2000/svg" class="cq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M19 9l-7 7-7-7"/></svg></button></div>
+            </div>
+            <div class="flex gap-4">
+                <button class="btn-start-pause cq-btn font-semibold text-white bg-blue-500 hover:bg-blue-600 shadow-sm transition-colors">Start</button>
+                <button class="btn-reset cq-btn font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 shadow-sm transition-colors">Reset</button>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        let audioCtx = null;
+        function initAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); audioCtx.resume(); }
+
+        class Timer {
+            constructor(mountId, title, isSlave = false) {
+                const clone = document.getElementById('timer-template').content.cloneNode(true);
+                const mount = document.getElementById(mountId);
+                mount.appendChild(clone);
+                this.card = mount.querySelector('.timer-card');
+                
+                // Setze Standard-Titel
+                this.card.querySelector('.timer-title').value = title;
+                
+                this.dom = { m10: mount.querySelector('.digit-m10'), m1: mount.querySelector('.digit-m1'), s10: mount.querySelector('.digit-s10'), s1: mount.querySelector('.digit-s1') };
+                this.btnStart = mount.querySelector('.btn-start-pause');
+                this.btnReset = mount.querySelector('.btn-reset');
+                
+                this.totalSeconds = 0;
+                this.isSlave = isSlave;
+                this.linkedTimer = null; // Hier kann Timer 1 den Timer 2 hinterlegen
+
+                if (this.isSlave) {
+                    // Verstecke die manuellen Einstell-Buttons, behalte sie aber im DOM für symmetrisches Layout
+                    mount.querySelectorAll('.time-adjust-btn').forEach(b => b.style.visibility = 'hidden');
+                    
+                    // Ersetze Start/Reset Buttons durch das Eingabefeld für den Nachteilsausgleich
+                    const btnContainer = this.btnStart.parentElement;
+                    btnContainer.className = "flex justify-center items-center gap-3 cq-btn text-slate-700 font-semibold w-full px-4";
+                    btnContainer.innerHTML = `
+                        <label for="${mountId}-perc" class="whitespace-nowrap">Nachteilsausgleich in %:</label>
+                        <input type="number" id="${mountId}-perc" value="20" min="0" max="100" class="w-[12cqw] min-w-[4rem] text-center bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 py-1 shadow-inner">
+                    `;
+                    this.btnStart = null;
+                    this.btnReset = null;
+                    this.percInput = document.getElementById(`${mountId}-perc`);
+                } else {
+                    mount.querySelectorAll('.time-adjust-btn').forEach(b => b.addEventListener('click', (e) => { 
+                        initAudio(); 
+                        this.adjust(parseInt(b.dataset.add)); 
+                    }));
+                    this.btnStart.addEventListener('click', () => { initAudio(); this.toggle(); });
+                    this.btnReset.addEventListener('click', () => this.reset());
+                }
+            }
+            
+            adjust(amt) { 
+                const oldSec = this.totalSeconds;
+                this.totalSeconds = Math.max(0, Math.min(5999, this.totalSeconds + amt)); 
+                
+                // Ermittle, um wie viele Sekunden sich die Zeit tatsächlich verändert hat
+                const actualDelta = this.totalSeconds - oldSec;
+                this.update(); 
+                
+                // Falls es einen verlinkten Timer gibt (T2), reiche die Änderung prozentual weiter
+                if (this.linkedTimer && actualDelta !== 0) {
+                    this.linkedTimer.applyDelta(actualDelta);
+                }
+            }
+            
+            update() { 
+                const m = Math.floor(this.totalSeconds / 60), s = this.totalSeconds % 60;
+                this.dom.m10.textContent = Math.floor(m/10); this.dom.m1.textContent = m%10;
+                this.dom.s10.textContent = Math.floor(s/10); this.dom.s1.textContent = s%10;
+            }
+            
+            toggle() { 
+                if(this.interval) {
+                    this.pause();
+                    if (this.linkedTimer) this.linkedTimer.pause(); // Stoppt T2 mit
+                } else { 
+                    this.start();
+                    if (this.linkedTimer) this.linkedTimer.start(); // Startet T2 mit
+                } 
+            }
+
+            start() {
+                if (!this.interval) {
+                    this.interval = setInterval(() => this.tick(), 1000);
+                    if (this.btnStart) this.btnStart.textContent = "Pause";
+                }
+            }
+
+            pause() {
+                if (this.interval) {
+                    clearInterval(this.interval);
+                    this.interval = null;
+                    if (this.btnStart) this.btnStart.textContent = "Start";
+                }
+            }
+            
+            tick() { 
+                if (this.totalSeconds > 0) { 
+                    this.totalSeconds--; 
+                    this.update(); 
+                } else { 
+                    this.pause(); 
+                    this.card.classList.add('timer-finished'); 
+                    this.playAlarm(); 
+                } 
+            }
+            
+            reset() { 
+                this.pause();
+                this.totalSeconds = 0; 
+                this.card.classList.remove('timer-finished'); 
+                this.update(); 
+                
+                // Resette T2 mit
+                if (this.linkedTimer) {
+                    this.linkedTimer.reset();
+                }
+            }
+
+            // Diese Methode berechnet die Zeit für T2 komplett neu (z.B. bei %-Eingabe)
+            syncFromMaster(masterSec) {
+                if (!this.isSlave || !this.percInput) return;
+                const perc = parseFloat(this.percInput.value) || 0;
+                this.totalSeconds = Math.round(masterSec * (1 + perc / 100));
+                this.fractionalSeconds = 0; // Setzt Rundungs-Cache zurück
+                this.totalSeconds = Math.max(0, Math.min(5999, this.totalSeconds));
+                this.card.classList.remove('timer-finished');
+                this.update();
+            }
+
+            // Diese Methode fügt T2 prozentual Zeit hinzu, wenn T1 während des Laufs angepasst wird
+            applyDelta(masterDelta) {
+                if (!this.isSlave || !this.percInput) return;
+                const perc = parseFloat(this.percInput.value) || 0;
+                
+                // FractionalSeconds speichert kleine Nachkommastellen (z.B. bei +1s Klicks), damit kein Rundungsschwund entsteht
+                this.fractionalSeconds = (this.fractionalSeconds || 0) + (masterDelta * (1 + perc / 100));
+                const slaveDelta = Math.round(this.fractionalSeconds);
+                this.fractionalSeconds -= slaveDelta; 
+                
+                this.totalSeconds = Math.max(0, Math.min(5999, this.totalSeconds + slaveDelta));
+                this.card.classList.remove('timer-finished');
+                this.update();
+            }
+
+            playAlarm() {
+                if (!audioCtx) return;
+                const now = audioCtx.currentTime;
+                const playChime = (freq, startTime) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine'; 
+                    osc.frequency.setValueAtTime(freq, startTime);
+                    gain.gain.setValueAtTime(0, startTime);
+                    gain.gain.linearRampToValueAtTime(1.0, startTime + 0.03); 
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.25);
+                };
+                playChime(440, now);          
+                playChime(440, now + 0.25);   
+            }
+        }
+
+        const t1 = new Timer('timer1-mount', 'Bearbeitungszeit');
+        const t2 = new Timer('timer2-mount', 'Zeit mit Nachteilsausgleich', true); // true = ist Slave-Timer
+        
+        // Verknüpfe Master (t1) mit Slave (t2)
+        t1.linkedTimer = t2;
+
+        // Wenn der Nutzer die Prozentzahl ändert, berechne T2 sofort aus T1 neu
+        t2.percInput.addEventListener('input', () => {
+            t2.syncFromMaster(t1.totalSeconds);
+        });
+
+        document.getElementById('toggle-timer2').addEventListener('change', (e) => document.getElementById('timers-container').classList.toggle('two-active', e.target.checked));
+    </script>
+</body>
+</html>
