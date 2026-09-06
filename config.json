@@ -176,15 +176,7 @@
           "icon": "📗",
           "folder": "jahrgang-11",
           "children": [
-            {
-              "id": "steuerungstechnik",
-              "title": "Steuerungstechnik",
-              "description": "Schützschaltungen und SPS",
-              "icon": "🎛️",
-              "children": [
 
-              ]
-            },
             {
               "id": "mikrocontroller",
               "title": "Mikrocontroller",
@@ -212,15 +204,7 @@
           "icon": "📘",
           "folder": "jahrgang-12",
           "children": [
-            {
-              "id": "antriebstechnik",
-              "title": "Antriebstechnik",
-              "description": "Drehstrom, Motoren, Frequenzumrichter",
-              "icon": "⚙️",
-              "children": [
 
-              ]
-            }
           ]
         },
         {
@@ -230,15 +214,7 @@
           "icon": "📙",
           "folder": "jahrgang-13",
           "children": [
-            {
-              "id": "messtechnik",
-              "title": "Messtechnik",
-              "description": "Oszilloskop, Multimeter, Messfehler",
-              "icon": "📊",
-              "children": [
 
-              ]
-            }
           ]
         }
       ]
@@ -259,14 +235,7 @@
           "icon": "📗",
           "folder": "jahrgang-11",
           "children": [
-            {
-              "id": "installationstechnik",
-              "title": "Installationstechnik",
-              "description": "Schaltungen der Hausinstallation",
-              "icon": "🔧",
-              "children": [
-              ]
-            }
+
           ]
         },
         {
