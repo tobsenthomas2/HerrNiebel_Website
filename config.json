@@ -88,6 +88,32 @@
               "badge": "Neu"
             }
           ]
+        },
+        {
+          "id": "steuerungstechnik",
+          "title": "Steuerungstechnik",
+          "description": "Schützschaltungen und Steuerstromkreise",
+          "icon": "🎛️",
+          "folder": "steuerungstechnik",
+          "children": [
+            {
+              "id": "schützschaltung",
+              "title": "Schützschaltung",
+              "description": "Grundlagen der Schützsteuerung",
+              "icon": "🔧",
+              "folder": "schützschaltung",
+              "children": [
+                {
+                  "id": "schütz_tippbetrieb",
+                  "title": "Tippbetrieb",
+                  "description": "Interaktive Simulation einer Schützschaltung im Tippbetrieb.",
+                  "icon": "⚙️",
+                  "folder": "tippbetrieb",
+                  "tags": ["Simulation"]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
