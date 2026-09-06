@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I2C Protokoll Signal-Simulator - Visionary Displays</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vd_dark: '#0f172a',
+                        vd_blue: '#3b82f6',
+                        vd_cyan: '#06b6d4',
+                        vd_green: '#10b981'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        /* Verhindert verschwommene Kanten auf High-DPI Displays */
+        canvas {
+            image-rendering: pixelated;
+        }
+    </style>
+</head>
+<body class="bg-vd_dark text-slate-300 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 flex-none">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                    <i class="fa-solid fa-microchip text-vd_cyan text-2xl"></i>
+                    <span class="text-white font-bold text-xl tracking-wider">VISIONARY<span class="text-vd_blue">DISPLAYS</span></span>
+                </a>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="index.html" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                            <i class="fa-solid fa-arrow-left mr-2"></i> Zurück zur Erklärung
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow w-full max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        
+        <div class="mb-8">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-vd_blue mb-4">
+                <i class="fa-solid fa-wave-square text-2xl"></i>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-2 tracking-tight">I²C Protokoll Signal-Simulator</h1>
+            <p class="text-slate-400">Konfiguriere die I²C-Nachricht und analysiere den generierten Signalverlauf in Echtzeit.</p>
+        </div>
+
+        <!-- Kontrollpanel -->
+        <div class="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700 mb-8">
+            <h2 class="text-lg font-bold mb-4 text-white">Nachrichten-Parameter</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 items-end">
+                
+                <!-- Adresse -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-1" for="addrInput">Adresse (7-bit Hex)</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">0x</span>
+                        <input type="text" id="addrInput" value="50" maxlength="2" class="w-full bg-slate-900 border border-slate-600 rounded-lg py-2 pl-9 pr-3 focus:outline-none focus:ring-2 focus:ring-vd_blue text-white uppercase font-mono transition-colors">
+                    </div>
+                </div>
+
+                <!-- R/W Bit -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-1" for="rwInput">Operation (R/W)</label>
+                    <select id="rwInput" class="w-full bg-slate-900 border border-slate-600 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-vd_blue text-white transition-colors">
+                        <option value="0">Write (0)</option>
+                        <option value="1">Read (1)</option>
+                    </select>
+                </div>
+
+                <!-- Address ACK -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-1" for="addrAckInput">Adress-Frame ACK</label>
+                    <select id="addrAckInput" class="w-full bg-slate-900 border border-slate-600 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-vd_blue text-white transition-colors">
+                        <option value="0">ACK (Low)</option>
+                        <option value="1">NACK (High)</option>
+                    </select>
+                </div>
+
+                <!-- Daten -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-1" for="dataInput">Daten (8-bit Hex)</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">0x</span>
+                        <input type="text" id="dataInput" value="A5" maxlength="2" class="w-full bg-slate-900 border border-slate-600 rounded-lg py-2 pl-9 pr-3 focus:outline-none focus:ring-2 focus:ring-vd_blue text-white uppercase font-mono transition-colors">
+                    </div>
+                </div>
+
+                <!-- Data ACK -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-1" for="dataAckInput">Daten-Frame ACK</label>
+                    <select id="dataAckInput" class="w-full bg-slate-900 border border-slate-600 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-vd_blue text-white transition-colors">
+                        <option value="0">ACK (Low)</option>
+                        <option value="1">NACK (High)</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Logic Analyzer Anzeige -->
+        <div id="canvasContainer" class="bg-slate-900 rounded-2xl shadow-2xl p-6 border border-slate-700 relative overflow-hidden">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-vd_cyan text-xs font-bold uppercase tracking-wider"><i class="fa-solid fa-display mr-2"></i>Logic Analyzer Ansicht</h3>
+                <button id="downloadBtn" class="flex items-center gap-2 text-xs font-semibold bg-slate-800 hover:bg-slate-700 hover:text-white text-slate-300 border border-slate-600 py-1.5 px-3 rounded-lg transition-colors shadow-sm">
+                    <i class="fa-solid fa-download"></i> Als PNG speichern
+                </button>
+            </div>
+            <div class="overflow-x-auto rounded border border-slate-800">
+                <canvas id="waveformCanvas" height="280" class="block cursor-crosshair min-w-full bg-slate-900"></canvas>
+            </div>
+        </div>
+        
+        <div class="mt-6 flex gap-6 text-sm text-slate-400 justify-center font-mono bg-slate-800/50 py-3 px-6 rounded-full w-max mx-auto border border-slate-700">
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-vd_cyan shadow-[0_0_8px_rgba(6,182,212,0.6)]"></span> SCL (Clock)</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-vd_green shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span> SDA (Data)</div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t border-slate-800 flex-none mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-xs">
+            <p>&copy; 2026 Visionary Displays GmbH. Ein fiktives Lern-Projekt.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hilfsklasse zum Generieren der Signalzustände (Ticks)
+        class I2CWaveform {
+            constructor() {
+                this.ticks = [];
+                this.regions = [];
+                this.currentTick = 0;
+            }
+
+            pushState(scl, sda, label = '') {
+                this.ticks.push({ tick: this.currentTick, scl, sda, label });
+                this.currentTick++;
+            }
+
+            addRegion(name, color, startTick, endTick) {
+                this.regions.push({ name, color, startTick, endTick });
+            }
+
+            idle(duration = 4) {
+                for(let i=0; i<duration; i++) this.pushState(1, 1);
+            }
+
+            // Startbedingung: SDA fällt während SCL High ist
+            start() {
+                this.pushState(1, 1);     // Setup
+                this.pushState(1, 0, 'S'); // SDA fällt
+                this.pushState(0, 0);     // SCL fällt
+                this.pushState(0, 0);     // Hold
+            }
+
+            // Ein Datenbit übertragen
+            bit(val, label = '') {
+                this.pushState(0, val);          // SCL Low, SDA darf wechseln
+                this.pushState(1, val, label);   // SCL High, SDA wird gesampelt
+                this.pushState(1, val);          // SCL Hold
+                this.pushState(0, val);          // SCL fällt
+            }
+
+            // Stopbedingung: SDA steigt während SCL High ist
+            stop() {
+                this.pushState(0, 0);     // SCL Low, SDA auf Low vorbereiten
+                this.pushState(1, 0);     // SCL steigt
+                this.pushState(1, 1, 'P'); // SDA steigt
+                this.pushState(1, 1);     // Hold
+            }
+        }
+
+        function buildAndDraw() {
+            // Inputs auslesen
+            let addrStr = document.getElementById('addrInput').value || '0';
+            let dataStr = document.getElementById('dataInput').value || '0';
+            let rw = parseInt(document.getElementById('rwInput').value);
+            let addrAck = parseInt(document.getElementById('addrAckInput').value);
+            let dataAck = parseInt(document.getElementById('dataAckInput').value);
+
+            // Hex parsen und begrenzen
+            let addr = parseInt(addrStr, 16);
+            if (isNaN(addr)) addr = 0;
+            addr = addr & 0x7F; // 7-bit
+
+            let data = parseInt(dataStr, 16);
+            if (isNaN(data)) data = 0;
+            data = data & 0xFF; // 8-bit
+
+            // Waveform generieren
+            const wf = new I2CWaveform();
+            wf.idle(2); // Initial Idle
+
+            // START
+            let startIdx = wf.currentTick;
+            wf.start();
+            wf.addRegion('START', 'rgba(234, 179, 8, 0.15)', startIdx, wf.currentTick);
+
+            // ADRESSE (7 bits, MSB first)
+            startIdx = wf.currentTick;
+            for (let i = 6; i >= 0; i--) {
+                wf.bit((addr >> i) & 1, 'A' + i);
+            }
+            wf.addRegion(`ADDR (0x${addr.toString(16).toUpperCase().padStart(2,'0')})`, 'rgba(59, 130, 246, 0.15)', startIdx, wf.currentTick);
+
+            // R/W BIT
+            startIdx = wf.currentTick;
+            wf.bit(rw, rw ? 'R' : 'W\u0305');
+            wf.addRegion('READ\nW\u0305R\u0305I\u0305T\u0305E\u0305', 'rgba(168, 85, 247, 0.15)', startIdx, wf.currentTick);
+
+            // ADDR ACK
+            startIdx = wf.currentTick;
+            wf.bit(addrAck, addrAck ? 'N' : 'A');
+            wf.addRegion(addrAck ? 'NACK' : 'ACK', addrAck ? 'rgba(239, 68, 68, 0.2)' : 'rgba(34, 197, 94, 0.2)', startIdx, wf.currentTick);
+
+            // DATEN (8 bits, MSB first)
+            startIdx = wf.currentTick;
+            for (let i = 7; i >= 0; i--) {
+                wf.bit((data >> i) & 1, 'D' + i);
+            }
+            wf.addRegion(`DATA (0x${data.toString(16).toUpperCase().padStart(2,'0')})`, 'rgba(249, 115, 22, 0.15)', startIdx, wf.currentTick);
+
+            // DATA ACK
+            startIdx = wf.currentTick;
+            wf.bit(dataAck, dataAck ? 'N' : 'A');
+            wf.addRegion(dataAck ? 'NACK' : 'ACK', dataAck ? 'rgba(239, 68, 68, 0.2)' : 'rgba(34, 197, 94, 0.2)', startIdx, wf.currentTick);
+
+            // STOP
+            startIdx = wf.currentTick;
+            wf.stop();
+            wf.addRegion('STOP', 'rgba(234, 179, 8, 0.15)', startIdx, wf.currentTick);
+
+            wf.idle(4); // End Idle
+
+            renderCanvas(wf);
+        }
+
+        function renderCanvas(wf) {
+            const canvas = document.getElementById('waveformCanvas');
+            const container = document.getElementById('canvasContainer');
+            
+            // Canvas Breite an Container anpassen für Responsivität
+            canvas.width = Math.max(container.clientWidth - 48, 800); // Min-width für Scrollen auf kleinen Screens
+            
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+            
+            ctx.clearRect(0, 0, w, h);
+
+            const marginX = 60;
+            const totalTicks = wf.ticks.length;
+            const tickW = (w - marginX * 2) / totalTicks;
+
+            const sclHighY = 60;
+            const sclLowY = 110;
+            const sdaHighY = 170;
+            const sdaLowY = 220;
+
+            // 1. Regionen (Hintergrund-Blöcke) zeichnen
+            wf.regions.forEach(r => {
+                const xStart = marginX + r.startTick * tickW;
+                const xEnd = marginX + r.endTick * tickW;
+                
+                ctx.fillStyle = r.color;
+                ctx.fillRect(xStart, 0, xEnd - xStart, h);
+
+                // Regions-Text
+                ctx.fillStyle = '#94a3b8'; // slate-400
+                ctx.font = 'bold 11px sans-serif';
+                ctx.textAlign = 'center';
+                
+                // Mehrzeiligen Text unterstützen
+                const lines = r.name.split('\n');
+                lines.forEach((line, index) => {
+                    // Wenn es mehrere Zeilen gibt, verteilen wir diese in der Höhe (y=16 und y=28)
+                    const yOffset = lines.length > 1 ? 16 + (index * 12) : 25;
+                    ctx.fillText(line, xStart + (xEnd - xStart)/2, yOffset);
+                });
+            });
+
+            // 2. Vertikale Rasterlinien (Clock Edges)
+            ctx.beginPath();
+            ctx.setLineDash([2, 4]);
+            ctx.strokeStyle = '#334155'; // slate-700
+            ctx.lineWidth = 1;
+            for (let i = 1; i < totalTicks; i++) {
+                // Zeichne Linie bei jedem Taktwechsel (SCL Low -> High)
+                if (wf.ticks[i].scl === 1 && wf.ticks[i-1].scl === 0) {
+                    const x = marginX + i * tickW;
+                    ctx.moveTo(x, 40);
+                    ctx.lineTo(x, h - 20);
+                }
+            }
+            ctx.stroke();
+            ctx.setLineDash([]); // Reset dash
+
+            // Hilfsfunktion zum Linienzeichnen
+            const drawTrack = (signalKey, highY, lowY, color) => {
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3;
+                ctx.lineJoin = 'round';
+
+                for (let i = 0; i < totalTicks; i++) {
+                    const t = wf.ticks[i];
+                    const xStart = marginX + i * tickW;
+                    const xEnd = marginX + (i + 1) * tickW;
+                    const y = t[signalKey] ? highY : lowY;
+
+                    if (i === 0) {
+                        ctx.moveTo(xStart, y);
+                    } else {
+                        const prevY = wf.ticks[i-1][signalKey] ? highY : lowY;
+                        if (prevY !== y) {
+                            ctx.lineTo(xStart, y); // Vertikale Flanke
+                        }
+                    }
+                    ctx.lineTo(xEnd, y); // Horizontales Halten
+                }
+                ctx.stroke();
+            };
+
+            // 3. SCL und SDA Signale zeichnen
+            drawTrack('scl', sclHighY, sclLowY, '#06b6d4'); // Cyan
+            drawTrack('sda', sdaHighY, sdaLowY, '#10b981'); // Emerald (Grün)
+
+            // 4. Bit-Labels und Signal-Namen zeichnen
+            ctx.font = '12px monospace';
+            for (let i = 0; i < totalTicks; i++) {
+                const t = wf.ticks[i];
+                if (t.label && i % 4 === 1) { // Platziere Label zentriert über der SCL High Phase
+                    const x = marginX + i * tickW + tickW;
+                    
+                    // Zeichne Bit-Label unterhalb von SDA
+                    ctx.fillStyle = '#f8fafc'; // slate-50
+                    ctx.textAlign = 'center';
+                    ctx.fillText(t.label, x, sdaLowY + 25);
+                }
+            }
+
+            // Achsenbeschriftung Links
+            ctx.fillStyle = '#06b6d4';
+            ctx.textAlign = 'right';
+            ctx.font = 'bold 14px sans-serif';
+            ctx.fillText('SCL', marginX - 15, sclLowY - 20);
+
+            ctx.fillStyle = '#10b981';
+            ctx.fillText('SDA', marginX - 15, sdaLowY - 20);
+        }
+
+        // Event-Listener für alle Inputs registrieren
+        const inputs = ['addrInput', 'rwInput', 'addrAckInput', 'dataInput', 'dataAckInput'];
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', buildAndDraw);
+            document.getElementById(id).addEventListener('change', buildAndDraw);
+        });
+
+        // Auf Fensteränderungen reagieren
+        window.addEventListener('resize', buildAndDraw);
+
+        // Download PNG Logik
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const canvas = document.getElementById('waveformCanvas');
+            // Erstelle einen temporären Link zum Herunterladen
+            const link = document.createElement('a');
+            link.download = 'i2c_waveform.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+
+        // Initiale Darstellung
+        buildAndDraw();
+    </script>
+</body>
+</html>

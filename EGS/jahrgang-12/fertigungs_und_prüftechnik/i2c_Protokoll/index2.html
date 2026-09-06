@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visionary Displays - Bestellung</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vd_dark: '#0f172a',
+                        vd_blue: '#3b82f6',
+                        vd_cyan: '#06b6d4',
+                        vd_green: '#10b981'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+    </style>
+</head>
+<body class="bg-vd_dark text-slate-300 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Navigation (Exakt wie im Original) -->
+    <nav class="fixed w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-microchip text-vd_cyan text-2xl"></i>
+                    <span class="text-white font-bold text-xl tracking-wider">VISIONARY<span class="text-vd_blue">DISPLAYS</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="index.html#intro" class="hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Warum I²C?</a>
+                        <a href="index.html#hardware" class="hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Hardware-Ebene</a>
+                        <a href="index.html#protocol" class="hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Das Protokoll</a>
+                        <a href="index.html#simulator" class="hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Live-Simulator</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center pt-32 pb-20 relative overflow-hidden">
+        <!-- Hintergrund-Effekt -->
+        <div class="absolute inset-0 bg-gradient-to-br from-vd_blue/10 to-vd_dark z-0"></div>
+        
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            
+            <!-- Das eine Bild (angepasst für das Hochformat-Foto) -->
+            <div class="w-full max-w-sm md:max-w-md mx-auto rounded-xl border-2 border-slate-600 bg-slate-800 shadow-2xl shadow-vd_cyan/20 overflow-hidden mb-10 relative group flex items-center justify-center">
+                <img src="Hardware_plus_Lehrer.jpg" 
+                     alt="Lehrer mit Voltix Hardware" 
+                     class="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105">
+            </div>
+
+            <!-- Der Text -->
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-6 leading-tight">
+                Schön, dass du dich interessierst und dir ein funktionierendes LCD bestellen möchtest.
+            </h1>
+            
+            <div class="bg-slate-800/80 backdrop-blur border border-slate-700 p-6 rounded-2xl inline-block shadow-lg">
+                <p class="text-xl text-slate-300">
+                    Für heute hat deine Schule die Hardware gekauft.
+                </p>
+                <p class="text-2xl font-bold text-vd_cyan mt-3">
+                    Also weiter mit der Fehlersuche :)
+                </p>
+            </div>
+
+            <!-- Optional: Zurück-Button zur Hauptseite -->
+            <div class="mt-12">
+                <a href="index.html" class="bg-slate-700 hover:bg-slate-600 border border-slate-500 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition-all inline-flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Zurück zur Website
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer (Exakt wie im Original) -->
+    <footer class="bg-black py-12 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center gap-2 mb-4 md:mb-0">
+                <i class="fa-solid fa-microchip text-slate-500 text-xl"></i>
+                <span class="text-slate-400 font-bold text-lg">VISIONARY<span class="text-slate-600">DISPLAYS</span></span>
+            </div>
+            <div class="text-slate-500 text-sm text-center md:text-right">
+                <p>&copy; 2026 Visionary Displays GmbH. Ein fiktives Lern-Projekt.</p>
+                <p>Erstellt für Auszubildende zum Elektroniker für Geräte und Systeme (LF 11: Prüfsysteme einrichten und anwenden).</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

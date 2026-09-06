@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Verdrahtung - Visionary Displays</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vd_dark: '#0f172a',
+                        vd_blue: '#3b82f6',
+                        vd_cyan: '#06b6d4',
+                        vd_green: '#10b981'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+    </style>
+</head>
+<body class="bg-vd_dark text-slate-300 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 flex-none sticky top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                    <i class="fa-solid fa-microchip text-vd_cyan text-2xl"></i>
+                    <span class="text-white font-bold text-xl tracking-wider">VISIONARY<span class="text-vd_blue">DISPLAYS</span></span>
+                </a>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="index.html#intro" class="hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Warum I²C?</a>
+                        <a href="index.html#hardware" class="hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Hardware-Ebene</a>
+                        <a href="index.html#protocol" class="hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Das Protokoll</a>
+                        <a href="index.html#simulator" class="hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Live-Simulator</a>
+                        <a href="arduino_verdrahtung.html" class="text-white px-3 py-2 rounded-md text-sm font-medium transition-colors border-b-2 border-vd_blue">Arduino Verdrahtung</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow w-full max-w-5xl mx-auto py-16 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 text-vd_blue mb-6 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                <i class="fa-solid fa-plug text-3xl"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+                Arduino Verdrahtung
+            </h1>
+            <p class="text-xl text-vd_cyan">
+                So wird unsere LCD über I2C mit dem Arduino verbunden.
+            </p>
+        </div>
+
+        <!-- Image Container -->
+        <div class="w-full bg-slate-800 p-4 md:p-8 rounded-2xl border border-slate-700 shadow-2xl relative overflow-hidden group hover:border-vd_blue transition-colors duration-300">
+            <!-- Deko Hintergrund -->
+            <div class="absolute -top-32 -left-32 w-64 h-64 bg-vd_blue/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-32 -right-32 w-64 h-64 bg-vd_cyan/5 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 flex flex-col items-center justify-center w-full min-h-[400px] bg-slate-900 rounded-xl border-2 border-dashed border-slate-600 overflow-hidden">
+                
+                <!-- Platzhalter Text, der sichtbar ist, falls das Bild nicht lädt -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-500 z-0 p-4 text-center">
+                    <i class="fa-solid fa-image text-5xl mb-4 opacity-50"></i>
+                    <p>Bild <strong>arduino_lcd_verdrahtung.png</strong> wird hier geladen.</p>
+                </div>
+
+                <!-- Das eigentliche Bild -->
+                <img src="arduino_lcd_verdrahtung.png" alt="Verdrahtung Arduino mit I2C LCD" class="relative z-10 w-full h-auto object-contain max-h-[70vh] rounded-lg shadow-lg">
+            </div>
+        </div>
+
+        <div class="mt-12">
+            <a href="index.html" class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-slate-700 hover:bg-slate-600 text-white font-semibold transition-all shadow-lg border border-slate-500 gap-2">
+                <i class="fa-solid fa-arrow-left"></i> Zurück zur Hauptseite
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t border-slate-800 flex-none mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center gap-2 mb-4 md:mb-0">
+                <i class="fa-solid fa-microchip text-slate-500 text-xl"></i>
+                <span class="text-slate-400 font-bold text-lg">VISIONARY<span class="text-slate-600">DISPLAYS</span></span>
+            </div>
+            <div class="text-slate-500 text-sm text-center md:text-right">
+                <p>&copy; 2026 Visionary Displays GmbH. Ein fiktives Lern-Projekt.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

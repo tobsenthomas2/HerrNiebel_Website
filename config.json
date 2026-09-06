@@ -49,47 +49,6 @@
       "childLabel": ["Fach", "Fächer"],
       "children": [
         {
-          "id": "elektrotechnik",
-          "title": "Elektrotechnik",
-          "description": "Gleichstromkreise, Bauelemente, Messen",
-          "icon": "⚡",
-          "children": [
-
-            {
-              "id": "reihen-parallel",
-              "title": "Reihen- & Parallelschaltung",
-              "description": "Widerstände kombinieren, Gesamtwiderstand berechnen.",
-              "icon": "🔗",
-              "tags": ["Simulation", "Übung"]
-            }
-          ]
-        },
-        {
-          "id": "digitaltechnik",
-          "title": "Digitaltechnik",
-          "description": "Logik, Schaltnetze und Schaltwerke",
-          "icon": "🔢",
-          "color": "#7c3aed",
-          "children": [
-            {
-              "id": "logikgatter",
-              "title": "Logikgatter Grundlagen",
-              "description": "AND, OR, NOT, NAND, NOR, XOR – Wahrheitstabellen erarbeiten.",
-              "icon": "🧩",
-              "tags": ["Simulation", "Arbeitsblatt"]
-            },
-            {
-              "id": "vorwaertszaehler",
-              "title": "Vorwärtszähler 74193N",
-              "description": "Synchroner Auf-/Abwärtszähler: Anschlüsse, Timing, Anwendungen.",
-              "icon": "🧮",
-              "folder": "Vorwärtszähler",
-              "tags": ["Simulation", "Datenblatt"],
-              "badge": "Neu"
-            }
-          ]
-        },
-        {
           "id": "steuerungstechnik",
           "title": "Steuerungstechnik",
           "description": "Schützschaltungen und Steuerstromkreise",
@@ -169,6 +128,23 @@
                   "description": "Topologie, Gruppenadressen, Telegrammaufbau.",
                   "icon": "🕸️",
                   "tags": ["Skript", "Übung"]
+                }
+              ]
+            },
+            {
+              "id": "fertigungs_und_prüftechnik",
+              "title": "Fertigungs- und Prüftechnik",
+              "description": "Prüf- und Fertigungstechnik mit Mikrocontroller-Schnittstellen",
+              "icon": "🔬",
+              "folder": "fertigungs_und_prüftechnik",
+              "children": [
+                {
+                  "id": "i2c_Protokoll",
+                  "title": "I²C-Protokoll",
+                  "description": "Interaktive Einführung in das I²C-Protokoll.",
+                  "icon": "🚌",
+                  "folder": "i2c_Protokoll",
+                  "tags": ["Simulation", "Übung"]
                 }
               ]
             }
