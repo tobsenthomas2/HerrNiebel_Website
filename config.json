@@ -12,7 +12,7 @@
 
   "children": [
     {
-            "id": "tools",
+      "id": "tools",
       "title": "Tools",
       "description": "nützliche Tools für den Unterricht",
       "icon": "🛠️",
@@ -28,7 +28,7 @@
               "tags": ["Tool"]
             }
 
-      ],
+      ]
 
     },
     {
