@@ -182,20 +182,7 @@
               "description": "Schützschaltungen und SPS",
               "icon": "🎛️",
               "children": [
-                {
-                  "id": "wendeschaltung",
-                  "title": "Schütz-Wendeschaltung",
-                  "description": "Stromlaufplan, Verriegelung und Fehlersuche interaktiv.",
-                  "icon": "🔄",
-                  "tags": ["Simulation"]
-                },
-                {
-                  "id": "sps-grundlagen",
-                  "title": "SPS-Grundlagen (FUP/KOP)",
-                  "description": "Vom Schaltplan zum SPS-Programm.",
-                  "icon": "🖥️",
-                  "tags": ["Skript", "Übung"]
-                }
+
               ]
             },
             {
@@ -205,14 +192,7 @@
               "icon": "🤖",
               "color": "#0891b2",
               "children": [
-                {
-                  "id": "i2c-bus",
-                  "title": "I²C-Bus",
-                  "description": "SDA/SCL, Adressierung, ACK – Schritt für Schritt animiert.",
-                  "icon": "🚌",
-                  "tags": ["Simulation"],
-                  "badge": "Neu"
-                },
+
                 {
                   "id": "wokwi",
                   "title": "Online-Simulator Wokwi",
@@ -238,13 +218,7 @@
               "description": "Drehstrom, Motoren, Frequenzumrichter",
               "icon": "⚙️",
               "children": [
-                {
-                  "id": "drehstrommotor",
-                  "title": "Drehstrom-Asynchronmotor",
-                  "description": "Drehfeld, Schlupf und Stern-Dreieck-Anlauf visualisiert.",
-                  "icon": "🌀",
-                  "tags": ["Simulation"]
-                }
+
               ]
             }
           ]
@@ -262,13 +236,7 @@
               "description": "Oszilloskop, Multimeter, Messfehler",
               "icon": "📊",
               "children": [
-                {
-                  "id": "oszilloskop",
-                  "title": "Oszilloskop-Simulator",
-                  "description": "Zeitbasis, Trigger und Tastkopf virtuell einstellen.",
-                  "icon": "📈",
-                  "tags": ["Simulation"]
-                }
+
               ]
             }
           ]
@@ -297,13 +265,6 @@
               "description": "Schaltungen der Hausinstallation",
               "icon": "🔧",
               "children": [
-                {
-                  "id": "wechselschaltung",
-                  "title": "Aus-, Wechsel- & Kreuzschaltung",
-                  "description": "Installationsschaltungen interaktiv verdrahten.",
-                  "icon": "💡",
-                  "tags": ["Simulation", "Übung"]
-                }
               ]
             }
           ]
