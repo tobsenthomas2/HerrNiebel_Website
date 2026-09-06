@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zufallsgenerator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* --- HAUPTANZEIGE --- */
+        #display-area {
+            text-align: center;
+            width: 100%;
+        }
+
+        #result-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: inline-block;
+            min-width: 300px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+        }
+
+        #current-name {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #333;
+            margin: 0;
+        }
+
+        #spin-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+
+        #spin-btn:active { transform: scale(0.96); }
+        #spin-btn:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; }
+
+        /* --- SETUP BUTTONS --- */
+        
+        /* 1. Sichtbarer Button für Klassenliste (Oben Links) */
+        #btn-setup-class {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #555;
+            z-index: 100;
+        }
+        #btn-setup-class:hover { background: #eee; }
+
+        /* 2. UNSICHTBARER Button für Manipulation (Oben Rechts) */
+        #btn-setup-rigged {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px; /* Groß genug zum Treffen */
+            height: 100px;
+            background: transparent; /* Durchsichtig */
+            border: none;
+            cursor: default; /* WICHTIG: Zeiger ändert sich nicht zur Hand! */
+            z-index: 100;
+            outline: none;
+        }
+
+        /* --- MODAL FENSTER (Popups) --- */
+        .modal {
+            display: none; /* Standardmäßig versteckt */
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .modal h2 { margin-top: 0; color: #333; }
+        
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            resize: vertical;
+            box-sizing: border-box; /* Damit Padding nicht die Breite sprengt */
+        }
+
+        .save-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .close-hint {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #999;
+            cursor: pointer;
+        }
+        
+        .highlight { color: #28a745 !important; }
+
+    </style>
+</head>
+<body>
+
+    <button id="btn-setup-class" onclick="openClassModal()">📋 Klassenliste</button>
+    
+    <button id="btn-setup-rigged" onclick="openRiggedModal()"></button>
+
+
+    <div id="display-area">
+        <div id="result-box">
+            <div id="current-name">Startklar</div>
+        </div>
+        <br>
+        <button id="spin-btn" onclick="spin()">ZUFALL STARTEN</button>
+    </div>
+
+
+    <div id="modal-class" class="modal">
+        <div class="modal-content">
+            <div class="close-hint" onclick="closeModals()">X Schließen</div>
+            <h2>Alle Schüler</h2>
+            <p style="font-size:0.9rem; color:#666;">Bitte Namen untereinander einfügen (Excel Copy-Paste möglich):</p>
+            <textarea id="input-class-list" placeholder="Max Mustermann&#10;Lisa Müller&#10;Tom Schulze"></textarea>
+            <button class="save-btn" onclick="saveClassList()">Speichern</button>
+        </div>
+    </div>
+
+    <div id="modal-rigged" class="modal">
+        <div class="modal-content" style="border: 2px solid red;"> <div class="close-hint" onclick="closeModals()">X Schließen</div>
+            <h2>⚠️ Geheime Reihenfolge</h2>
+            <p style="font-size:0.9rem; color:#666;">Diese Schüler kommen nacheinander dran. Danach zufällig.</p>
+            <textarea id="input-rigged-list" placeholder="Zuerst Dran&#10;Als Zweites&#10;Als Drittes"></textarea>
+            <button class="save-btn" style="background-color: #d9534f;" onclick="saveRiggedList()">Geheim speichern</button>
+        </div>
+    </div>
+
+
+    <script>
+        // Speicher für die Daten
+        let allStudents = ["Schüler 1", "Schüler 2", "Schüler 3"]; // Standardwerte
+        let riggedQueue = [];
+
+        // --- Initialisierung ---
+        // Beim Laden prüfen wir, ob schon was im Speicher (LocalStorage) ist
+        window.onload = function() {
+            const storedClass = localStorage.getItem('class_list');
+            if (storedClass) {
+                allStudents = JSON.parse(storedClass);
+            }
+        };
+
+        // --- Modal Funktionen ---
+        function openClassModal() {
+            document.getElementById('modal-class').style.display = 'flex';
+            // Textarea mit aktuellen Werten füllen (mit Zeilenumbruch verbunden)
+            document.getElementById('input-class-list').value = allStudents.join('\n');
+        }
+
+        function openRiggedModal() {
+            document.getElementById('modal-rigged').style.display = 'flex';
+            // Queue anzeigen
+            document.getElementById('input-rigged-list').value = riggedQueue.join('\n');
+        }
+
+        function closeModals() {
+            document.getElementById('modal-class').style.display = 'none';
+            document.getElementById('modal-rigged').style.display = 'none';
+        }
+
+        // --- Speichern Funktionen ---
+        
+        function saveClassList() {
+            const rawText = document.getElementById('input-class-list').value;
+            // Splitten am Zeilenumbruch, Leerzeichen entfernen, leere Zeilen löschen
+            allStudents = rawText.split('\n').map(s => s.trim()).filter(s => s !== "");
+            
+            // Im Browser speichern damit es beim Neuladen noch da ist
+            localStorage.setItem('class_list', JSON.stringify(allStudents));
+            
+            closeModals();
+            alert(allStudents.length + " Schüler gespeichert!");
+        }
+
+        function saveRiggedList() {
+            const rawText = document.getElementById('input-rigged-list').value;
+            riggedQueue = rawText.split('\n').map(s => s.trim()).filter(s => s !== "");
+            
+            closeModals();
+            // Kein Alert, damit Schüler nichts merken, falls der Beamer an ist
+            console.log("Geheime Liste aktualisiert: ", riggedQueue);
+        }
+
+
+        // --- Die "Zufalls" Logik ---
+
+        function spin() {
+            if (allStudents.length === 0) {
+                alert("Bitte erst eine Klassenliste anlegen!");
+                return;
+            }
+
+            const nameDisplay = document.getElementById('current-name');
+            const btn = document.getElementById('spin-btn');
+            
+            // UI vorbereiten
+            btn.disabled = true;
+            nameDisplay.style.color = "#333"; // Farbe zurücksetzen
+            nameDisplay.classList.remove('highlight');
+            
+            let counter = 0;
+            let maxIterations = 25; // Anzahl der Namen die durchrattern
+            
+            // Animation Loop
+            let interval = setInterval(() => {
+                // Zeige IMMER einen zufälligen Namen aus der Gesamtliste für den Effekt
+                const randomName = allStudents[Math.floor(Math.random() * allStudents.length)];
+                nameDisplay.innerText = randomName;
+                
+                counter++;
+                // Ende der Animation
+                if (counter > maxIterations) {
+                    clearInterval(interval);
+                    selectWinner();
+                }
+            }, 80); // Geschwindigkeit in ms
+        }
+
+        function selectWinner() {
+            const nameDisplay = document.getElementById('current-name');
+            const btn = document.getElementById('spin-btn');
+            
+            let finalName = "";
+
+            // LOGIK: Ist die manipulierte Liste leer?
+            if (riggedQueue.length > 0) {
+                // Nein: Nimm den ersten von der geheimen Liste
+                finalName = riggedQueue.shift(); // .shift() nimmt das erste Element und löscht es aus dem Array
+            } else {
+                // Ja: Nimm einen echten Zufall aus der Klassenliste
+                finalName = allStudents[Math.floor(Math.random() * allStudents.length)];
+            }
+
+            nameDisplay.innerText = finalName;
+            nameDisplay.style.color = "#28a745"; // Grün machen
+            nameDisplay.classList.add('highlight');
+            btn.disabled = false;
+        }
+
+        // Schließen der Modals wenn man daneben klickt
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModals();
+            }
+        }
+    </script>
+</body>
+</html>

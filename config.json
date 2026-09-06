@@ -1,7 +1,7 @@
 {
   "title": "Lernlandschaft Elektrotechnik",
   "subtitle": "Wähle deinen Bildungsgang – danach Jahrgang, Fach und Thema.",
-  "footer": "© Fachbereich Elektrotechnik · Fragen? Sprich mich im Unterricht an.",
+  "footer": "© Tobias Niebel · Fragen? Sprich mich im Unterricht an. KI-generierte Inhalte.",
 
   "levelNames": [
     ["Bildungsgang", "Bildungsgänge"],
@@ -12,6 +12,27 @@
 
   "children": [
     {
+            "id": "tools",
+      "title": "Tools",
+      "description": "nützliche Tools für den Unterricht",
+      "icon": "🛠️",
+      "color": "#2563eb",
+      "folder": "Tools",
+      "childLabel": ["Fach", "Fächer"],
+      "children": [
+            {
+              "id": "randompicker",
+              "title": "RandomPicker",
+              "description": "Zufallsauswahl von Schülern, Gruppen oder Aufgaben.",
+              "icon": "🔀",
+              "tags": ["Tool"]
+            }
+
+      ],
+
+    },
+    {
+
       "id": "et10",
       "title": "ET 10",
       "description": "Berufsfachschule Elektrotechnik – Klasse 10",
@@ -26,13 +47,7 @@
           "description": "Gleichstromkreise, Bauelemente, Messen",
           "icon": "⚡",
           "children": [
-            {
-              "id": "ohmsches-gesetz",
-              "title": "Ohmsches Gesetz",
-              "description": "Interaktive Simulation: U, I und R live verändern.",
-              "icon": "📐",
-              "tags": ["Simulation"]
-            },
+
             {
               "id": "reihen-parallel",
               "title": "Reihen- & Parallelschaltung",
