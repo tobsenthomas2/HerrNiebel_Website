@@ -27,6 +27,7 @@
                     <a href="#" class="text-2xl font-bold tracking-wider text-blue-400">Nova<span class="text-white">Track</span></a>
                     <span class="block text-xs text-gray-400 uppercase tracking-widest">Consulting</span>
                 </div>
+                <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#wer-sind-wir" id="nav-wer-sind-wir" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer text-blue-400">Wer sind wir?</a>
@@ -34,6 +35,25 @@
                         <a href="#kontakt" class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-md text-sm font-medium transition-colors shadow-lg">Kontakt</a>
                     </div>
                 </div>
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Hauptmenü öffnen</span>
+                        <!-- Icon (Hamburger) -->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="md:hidden hidden bg-slate-800 shadow-inner" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#wer-sind-wir" id="nav-wer-sind-wir-mobil" class="text-blue-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Wer sind wir?</a>
+                <a href="#projektmanagement" id="nav-projektmanagement-mobil" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projektmanagement</a>
+                <a href="#kontakt" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Kontakt</a>
             </div>
         </div>
     </nav>
@@ -194,9 +214,13 @@
         document.addEventListener('DOMContentLoaded', () => {
             const linkWer = document.getElementById('nav-wer-sind-wir');
             const linkPM = document.getElementById('nav-projektmanagement');
+            const linkWerMobil = document.getElementById('nav-wer-sind-wir-mobil');
+            const linkPMMobil = document.getElementById('nav-projektmanagement-mobil');
             const secWer = document.getElementById('wer-sind-wir');
             const secPM = document.getElementById('projektmanagement');
             const heroLink = document.getElementById('hero-cta-link');
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
 
             // Funktion zum Wechseln der sichtbaren Bereiche
             function switchTab(tab) {
@@ -204,20 +228,55 @@
                     secWer.classList.remove('hidden');
                     secPM.classList.add('hidden');
                     
-                    // Aktiven Link in der Navigation blau färben
+                    // Aktiven Link in der Navigation blau färben (Desktop)
                     linkWer.classList.add('text-blue-400');
                     linkPM.classList.remove('text-blue-400');
+                    
+                    // Aktiven Link in der Navigation blau färben (Mobil)
+                    linkWerMobil.classList.add('text-blue-400');
+                    linkWerMobil.classList.remove('text-gray-300');
+                    linkPMMobil.classList.remove('text-blue-400');
+                    linkPMMobil.classList.add('text-gray-300');
                 } else if (tab === 'pm') {
                     secPM.classList.remove('hidden');
                     secWer.classList.add('hidden');
                     
-                    // Aktiven Link in der Navigation blau färben
+                    // Aktiven Link in der Navigation blau färben (Desktop)
                     linkPM.classList.add('text-blue-400');
                     linkWer.classList.remove('text-blue-400');
+                    
+                    // Aktiven Link in der Navigation blau färben (Mobil)
+                    linkPMMobil.classList.add('text-blue-400');
+                    linkPMMobil.classList.remove('text-gray-300');
+                    linkWerMobil.classList.remove('text-blue-400');
+                    linkWerMobil.classList.add('text-gray-300');
                 }
             }
 
-            // Klick-Events für die Links in der Navigation
+            // Mobiles Menü ein/ausklappen
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Hilfsfunktion für mobile Klicks (Menü nach Klick schließen)
+            function handleMobileClick(tab, sec) {
+                switchTab(tab);
+                mobileMenu.classList.add('hidden'); // Menü schließen
+                window.scrollTo({ top: sec.offsetTop - 80, behavior: 'smooth' });
+            }
+
+            // Klick-Events für Mobile Links
+            linkWerMobil.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleMobileClick('wer', secWer);
+            });
+
+            linkPMMobil.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleMobileClick('pm', secPM);
+            });
+
+            // Klick-Events für die Links in der Navigation (Desktop)
             linkWer.addEventListener('click', (e) => {
                 e.preventDefault(); // Verhindert das Standard-Springen
                 switchTab('wer');
