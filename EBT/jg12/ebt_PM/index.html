@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaTrack Consulting | Projektmanagement Excellence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-pattern {
+            background-color: #0f172a;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231e293b' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Top Navbar -->
+    <nav class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold tracking-wider text-blue-400">Nova<span class="text-white">Track</span></a>
+                    <span class="block text-xs text-gray-400 uppercase tracking-widest">Consulting</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#wer-sind-wir" id="nav-wer-sind-wir" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer text-blue-400">Wer sind wir?</a>
+                        <a href="#projektmanagement" id="nav-projektmanagement" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer">Projektmanagement</a>
+                        <a href="#kontakt" class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-md text-sm font-medium transition-colors shadow-lg">Kontakt</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-pattern text-white py-32 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">Wir bringen Ordnung in die Komplexität.</h1>
+            <p class="text-xl text-gray-300 mb-10">Tiefgreifendes Expertenwissen und absolute Verlässlichkeit für Ihre anspruchsvollsten Projekte. Wenn Scheitern keine Option ist, sind wir Ihr Partner.</p>
+            <a href="#wer-sind-wir" id="hero-cta-link" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:-translate-y-1 cursor-pointer">Lernen Sie uns kennen</a>
+        </div>
+    </header>
+
+    <!-- Wer sind wir? -->
+    <section id="wer-sind-wir" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Story & USP -->
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">Wer sind wir?</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        NovaTrack Consulting wurde aus einer simplen, aber entscheidenden Erkenntnis heraus gegründet: Je komplexer die technologische und wirtschaftliche Welt wird, desto größer ist das Risiko für kostspieliges Projektversagen. Ohne ein exzellentes Management verläuft die Umsetzung chaotisch.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        <strong>Unsere Unique Selling Proposition (USP):</strong> Wir sind nicht nur Berater, wir sind Umsetzungspartner. Wir vereinen strikte methodische Präzision (nach DIN-Normen) mit agiler Flexibilität. Wir garantieren absolute Transparenz, Termintreue und Kosteneffizienz – selbst unter extremsten Rahmenbedingungen. Wir übernehmen die Führungsaufgaben, die Organisation und die Steuerung, damit Sie sich auf Ihr Kerngeschäft konzentrieren können.
+                    </p>
+                </div>
+
+                <!-- NASA Reference Case -->
+                <div class="bg-slate-800 text-white rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13h-13L12 6.5z"/></svg>
+                    </div>
+                    <div class="relative z-10">
+                        <span class="inline-block px-3 py-1 bg-blue-900 text-blue-200 text-xs font-bold rounded-full uppercase tracking-wide mb-4">Success Story</span>
+                        <h3 class="text-2xl font-bold mb-4">Mission Critical: Projektunterstützung für die NASA</h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Im Rahmen der Vorbereitungen zur Artemis-Mission stand ein Zulieferer der <strong>NASA</strong> vor einer immensen Herausforderung: Die Entwicklung eines neuen Mikro-Telemetrie-Sensor-Arrays drohte aufgrund massiver Ressourcenengpässe den strikten Starttermin zu gefährden.
+                        </p>
+                        <ul class="text-sm text-gray-400 space-y-2 mb-6">
+                            <li><span class="text-blue-400">✓</span> <strong>Die Herausforderung:</strong> Neustrukturierung des Entwicklungsablaufs innerhalb von 14 Tagen unter laufendem Betrieb.</li>
+                            <li><span class="text-blue-400">✓</span> <strong>Unsere Lösung:</strong> Implementierung eines strengen, hybriden Projektmanagements mit klarem Fokus auf das Magische Dreieck (Termin, Kosten, Qualität).</li>
+                            <li><span class="text-blue-400">✓</span> <strong>Das Ergebnis:</strong> Das Sensor-Array wurde 2 Wochen vor der finalen Deadline erfolgreich ausgeliefert, bei gleichzeitiger Budgetunterschreitung von 1,2 Millionen US-Dollar.</li>
+                        </ul>
+                        <p class="font-semibold text-blue-300">"Absolute Verlässlichkeit unter Schwerelosigkeit."</p>
+                        
+                        <div class="mt-8 rounded-xl overflow-hidden shadow-lg border border-slate-700 bg-slate-800">
+                            <img src="Onkoo_SuS_Nasa.png" 
+                                 alt="NASA Projekt Referenz" 
+                                 class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/800x400/1e293b/94a3b8?text=Hier+Onkoo_SuS_Nasa.png+ablegen';">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projektmanagement (PDF Content + Expertise) -->
+    <section id="projektmanagement" class="py-24 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Projektmanagement-Exzellenz</h2>
+                <p class="text-lg text-gray-600">Fundiertes Wissen nach Industriestandards, erweitert um modernste Best Practices für Ihren Erfolg.</p>
+            </div>
+
+            <!-- PDF Based Content: The Fundamentals -->
+            <h3 class="text-2xl font-semibold text-slate-800 mb-8 border-b pb-2">Die Grundlagen (Basierend auf DIN 69901)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                
+                <!-- Card 1: Definition -->
+                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition-shadow border-t-4 border-blue-500">
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Was ist ein Projekt?</h4>
+                    <p class="text-gray-600 text-sm mb-4">Ein Projekt ist ein zielgerichtetes, einmaliges Vorhaben. Nach DIN 69901 ist es gekennzeichnet durch die Einmaligkeit der Bedingungen in ihrer Gesamtheit.</p>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• Eindeutige Aufgabenstellung & Ziele</li>
+                        <li>• Klarer Anfangs- und Endtermin</li>
+                        <li>• Begrenzte Ressourcen (Geld, Personal)</li>
+                        <li>• Aufgeteilt auf ein Projektteam</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: The Magic Triangle -->
+                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition-shadow border-t-4 border-indigo-500">
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Das Magische Dreieck</h4>
+                    <p class="text-gray-600 text-sm mb-4">Da Projekte begrenzte Ressourcen haben, bewegt sich das Management im Spannungsfeld dreier Hauptziele, um Kundenzufriedenheit zu garantieren:</p>
+                    <ul class="text-sm text-gray-700 space-y-2 font-medium">
+                        <li class="flex items-center text-red-600"><span class="w-2 h-2 rounded-full bg-red-600 mr-2"></span> Kostenrahmen nicht sprengen</li>
+                        <li class="flex items-center text-red-600"><span class="w-2 h-2 rounded-full bg-red-600 mr-2"></span> Termine zwingend einhalten</li>
+                        <li class="flex items-center text-red-600"><span class="w-2 h-2 rounded-full bg-red-600 mr-2"></span> Hohe Qualität & Wiederverwertbarkeit</li>
+                    </ul>
+                    <p class="text-xs text-gray-500 mt-4 italic">Getragen durch gute Teamarbeit.</p>
+                </div>
+
+                <!-- Card 3: Why PM? -->
+                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition-shadow border-t-4 border-teal-500">
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Warum Projektmanagement?</h4>
+                    <p class="text-gray-600 text-sm mb-4">Es ist die Gesamtheit von Führungsaufgaben, -organisation und -techniken für die Initiierung, Planung, Steuerung und den Abschluss von Projekten.</p>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li><strong>✓ Effizienz:</strong> Zeiteinsparung & optimale Zeitnutzung</li>
+                        <li><strong>✓ Budget:</strong> Signifikante Kostenersparnis</li>
+                        <li><strong>✓ Klarheit:</strong> Klare Ansprechpartner & Zuständigkeiten (Entlastung des Teams)</li>
+                        <li><strong>✓ Kontrolle:</strong> Lückenlose Dokumentation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Added Expertise Content -->
+            <h3 class="text-2xl font-semibold text-slate-800 mb-8 border-b pb-2">Unsere erweiterte Expertise</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Extra 1: Agile & Hybrid -->
+                <div class="bg-slate-900 text-white rounded-xl shadow-md p-6">
+                    <div class="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Hybride & Agile Methoden</h4>
+                    <p class="text-gray-400 text-sm">Die reine Wasserfall-Methode (DIN-Klassik) reicht heute oft nicht mehr aus. Wir integrieren <strong>Scrum</strong>- und <strong>Kanban</strong>-Elemente in traditionelle Strukturen. Dies ermöglicht schnelle Kurskorrekturen bei veränderten Anforderungen, ohne das Endziel aus den Augen zu verlieren.</p>
+                </div>
+
+                <!-- Extra 2: Risk Management -->
+                <div class="bg-slate-900 text-white rounded-xl shadow-md p-6">
+                    <div class="bg-red-600 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Proaktives Risikomanagement</h4>
+                    <p class="text-gray-400 text-sm">Probleme zu lösen ist gut, sie zu verhindern ist besser. Wir implementieren bei Projektstart eine systematische Risikoanalyse (FMEA) und definieren präventive Maßnahmen sowie Notfallpläne, lange bevor ein Risiko zum akuten Problem wird.</p>
+                </div>
+
+                <!-- Extra 3: Stakeholder Mgt -->
+                <div class="bg-slate-900 text-white rounded-xl shadow-md p-6">
+                    <div class="bg-green-600 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Stakeholder-Kommunikation</h4>
+                    <p class="text-gray-400 text-sm">Die besten Projektpläne scheitern, wenn die Kommunikation fehlt. Wir sorgen durch strukturierte Status-Reports, transparente Dashboards und regelmäßige Meilenstein-Reviews dafür, dass Auftraggeber, Team und externe Partner stets synchronisiert sind.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontakt" class="bg-slate-900 border-t border-slate-800 text-gray-400 py-12 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-white mb-4">Bereit für Ihr nächstes Erfolgsprojekt?</h2>
+            <p class="mb-8">Kontaktieren Sie uns für eine unverbindliche Erstberatung.</p>
+            <a href="mailto:contact@novatrack-consulting.de" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-8 rounded-md shadow transition-colors">contact@novatrack-consulting.de</a>
+            <div class="mt-12 text-sm">
+                &copy; 2026 NovaTrack Consulting. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const linkWer = document.getElementById('nav-wer-sind-wir');
+            const linkPM = document.getElementById('nav-projektmanagement');
+            const secWer = document.getElementById('wer-sind-wir');
+            const secPM = document.getElementById('projektmanagement');
+            const heroLink = document.getElementById('hero-cta-link');
+
+            // Funktion zum Wechseln der sichtbaren Bereiche
+            function switchTab(tab) {
+                if (tab === 'wer') {
+                    secWer.classList.remove('hidden');
+                    secPM.classList.add('hidden');
+                    
+                    // Aktiven Link in der Navigation blau färben
+                    linkWer.classList.add('text-blue-400');
+                    linkPM.classList.remove('text-blue-400');
+                } else if (tab === 'pm') {
+                    secPM.classList.remove('hidden');
+                    secWer.classList.add('hidden');
+                    
+                    // Aktiven Link in der Navigation blau färben
+                    linkPM.classList.add('text-blue-400');
+                    linkWer.classList.remove('text-blue-400');
+                }
+            }
+
+            // Klick-Events für die Links in der Navigation
+            linkWer.addEventListener('click', (e) => {
+                e.preventDefault(); // Verhindert das Standard-Springen
+                switchTab('wer');
+                window.scrollTo({ top: secWer.offsetTop - 80, behavior: 'smooth' }); // -80px wegen der fixierten Navbar
+            });
+
+            linkPM.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab('pm');
+                window.scrollTo({ top: secPM.offsetTop - 80, behavior: 'smooth' });
+            });
+
+            // Klick-Event für den großen Button oben
+            heroLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab('wer');
+                window.scrollTo({ top: secWer.offsetTop - 80, behavior: 'smooth' });
+            });
+
+            // Start-Zustand: Zeige "Wer sind wir?", verstecke "Projektmanagement"
+            switchTab('wer');
+        });
+    </script>
+</body>
+</html>
