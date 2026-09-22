@@ -302,14 +302,12 @@
               "title": "Betriebstechnik",
               "description": "Fachspezifische Inhalte der Betriebstechnik",
               "icon": "🏭",
-              "folder": "betriebstechnik",
               "children": [
                 {
                   "id": "projektmanagement",
                   "title": "Projektmanagement",
                   "description": "Grundlagen und Methoden des Projektmanagements",
                   "icon": "📊",
-                  "folder": "projektmanagement",
                   "tags": [
                     "Theorie",
                     "Übung"
