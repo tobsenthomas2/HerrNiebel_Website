@@ -2,14 +2,24 @@
   "title": "Lernlandschaft Elektrotechnik",
   "subtitle": "Wähle deinen Bildungsgang – danach Jahrgang, Fach und Thema.",
   "footer": "© Tobias Niebel · Fragen? Sprich mich im Unterricht an. KI-generierte Inhalte.",
-
   "levelNames": [
-    ["Bildungsgang", "Bildungsgänge"],
-    ["Jahrgang", "Jahrgänge"],
-    ["Fach", "Fächer"],
-    ["Thema", "Themen"]
+    [
+      "Bildungsgang",
+      "Bildungsgänge"
+    ],
+    [
+      "Jahrgang",
+      "Jahrgänge"
+    ],
+    [
+      "Fach",
+      "Fächer"
+    ],
+    [
+      "Thema",
+      "Themen"
+    ]
   ],
-
   "children": [
     {
       "id": "tools",
@@ -18,35 +28,42 @@
       "icon": "🛠️",
       "color": "#2563eb",
       "folder": "Tools",
-      "childLabel": ["Fach", "Fächer"],
+      "childLabel": [
+        "Fach",
+        "Fächer"
+      ],
       "children": [
-            {
-              "id": "randompicker",
-              "title": "RandomPicker",
-              "description": "Zufallsauswahl von Schülern, Gruppen oder Aufgaben.",
-              "icon": "🔀",
-              "tags": ["Tool"]
-            },
-            {
-              "id": "prüfungstimer",
-              "title": "Prüfungstimer",
-              "description": "Timer für Prüfungen und Tests inklusive Nachteilsausgleich.",
-              "icon": "⏱️",
-              "tags": ["Tool"]
-            }
-
+        {
+          "id": "randompicker",
+          "title": "RandomPicker",
+          "description": "Zufallsauswahl von Schülern, Gruppen oder Aufgaben.",
+          "icon": "🔀",
+          "tags": [
+            "Tool"
+          ]
+        },
+        {
+          "id": "prüfungstimer",
+          "title": "Prüfungstimer",
+          "description": "Timer für Prüfungen und Tests inklusive Nachteilsausgleich.",
+          "icon": "⏱️",
+          "tags": [
+            "Tool"
+          ]
+        }
       ]
-
     },
     {
-
       "id": "et10",
       "title": "ET 10",
       "description": "Berufsfachschule Elektrotechnik – Klasse 10",
       "icon": "🔌",
       "color": "#2563eb",
       "folder": "ET10",
-      "childLabel": ["Fach", "Fächer"],
+      "childLabel": [
+        "Fach",
+        "Fächer"
+      ],
       "children": [
         {
           "id": "steuerungstechnik",
@@ -68,7 +85,9 @@
                   "description": "Interaktive Simulation einer Schützschaltung im Tippbetrieb.",
                   "icon": "⚙️",
                   "folder": "tippbetrieb",
-                  "tags": ["Simulation"]
+                  "tags": [
+                    "Simulation"
+                  ]
                 }
               ]
             }
@@ -76,7 +95,6 @@
         }
       ]
     },
-
     {
       "id": "egs",
       "title": "EGS",
@@ -103,7 +121,9 @@
                   "title": "Zählerbaustein_74193N",
                   "description": "Anwendung zählerbaustein_74193N",
                   "icon": "🛡️",
-                  "tags": ["Simulation"]
+                  "tags": [
+                    "Simulation"
+                  ]
                 }
               ]
             }
@@ -127,7 +147,10 @@
                   "title": "KNX-Grundlagen",
                   "description": "Topologie, Gruppenadressen, Telegrammaufbau.",
                   "icon": "🕸️",
-                  "tags": ["Skript", "Übung"]
+                  "tags": [
+                    "Skript",
+                    "Übung"
+                  ]
                 }
               ]
             },
@@ -144,7 +167,10 @@
                   "description": "Interaktive Einführung in das I²C-Protokoll.",
                   "icon": "🚌",
                   "folder": "i2c_Protokoll",
-                  "tags": ["Simulation", "Übung"]
+                  "tags": [
+                    "Simulation",
+                    "Übung"
+                  ]
                 }
               ]
             }
@@ -160,7 +186,6 @@
         }
       ]
     },
-
     {
       "id": "eat",
       "title": "EAT",
@@ -176,7 +201,6 @@
           "icon": "📗",
           "folder": "jahrgang-11",
           "children": [
-
             {
               "id": "mikrocontroller",
               "title": "Mikrocontroller",
@@ -184,14 +208,15 @@
               "icon": "🤖",
               "color": "#0891b2",
               "children": [
-
                 {
                   "id": "wokwi",
                   "title": "Online-Simulator Wokwi",
                   "description": "Externer Arduino-Simulator für eure Projekte.",
                   "icon": "🌐",
                   "url": "https://wokwi.com",
-                  "tags": ["Extern"]
+                  "tags": [
+                    "Extern"
+                  ]
                 }
               ]
             }
@@ -203,9 +228,7 @@
           "description": "2. Ausbildungsjahr",
           "icon": "📘",
           "folder": "jahrgang-12",
-          "children": [
-
-          ]
+          "children": []
         },
         {
           "id": "jg13",
@@ -213,13 +236,10 @@
           "description": "3. Ausbildungsjahr – Prüfungsvorbereitung",
           "icon": "📙",
           "folder": "jahrgang-13",
-          "children": [
-
-          ]
+          "children": []
         }
       ]
     },
-
     {
       "id": "eeg",
       "title": "EEG",
@@ -234,9 +254,7 @@
           "description": "1. Ausbildungsjahr",
           "icon": "📗",
           "folder": "jahrgang-11",
-          "children": [
-
-          ]
+          "children": []
         },
         {
           "id": "jg12",
@@ -245,6 +263,49 @@
           "icon": "📘",
           "folder": "jahrgang-12",
           "children": []
+        },
+        {
+          "id": "jg13",
+          "title": "Jahrgang 13",
+          "description": "3. Ausbildungsjahr – Prüfungsvorbereitung",
+          "icon": "📙",
+          "folder": "jahrgang-13",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "ebt",
+      "title": "EBT",
+      "description": "Elektroniker/in für Betriebstechnik",
+      "icon": "⚙️",
+      "color": "#7c3aed",
+      "folder": "EBT",
+      "children": [
+        {
+          "id": "jg11",
+          "title": "Jahrgang 11",
+          "description": "1. Ausbildungsjahr",
+          "icon": "📗",
+          "folder": "jahrgang-11",
+          "children": []
+        },
+        {
+          "id": "jg12",
+          "title": "Jahrgang 12",
+          "description": "2. Ausbildungsjahr",
+          "icon": "📘",
+          "folder": "jahrgang-12",
+          "children": [
+            {
+              "id": "ebt_PM",
+              "title": "Projektmanagement",
+              "description": "Grundlagen und Methoden des Projektmanagements",
+              "icon": "📊",
+              "folder": "ebt_PM",
+              "children": []
+            }
+          ]
         },
         {
           "id": "jg13",
