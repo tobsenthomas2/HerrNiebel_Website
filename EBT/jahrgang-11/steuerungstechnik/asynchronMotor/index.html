@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Security: CSP to restrict resource loading and prevent object embedding -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: https:; object-src 'none'; base-uri 'none';">
+    <title>Canvas Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 1rem;
+        }
+        
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BavariaMotion Antriebstechnik | High-Performance Drehstromantriebe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0f3d63;       /* Industrial Deep Navy */
+      --primary-light: #1b5b91;
+      --accent: #e67e00;        /* Copper / Bronze / High Torque */
+      --accent-glow: rgba(230, 126, 0, 0.3);
+      --dark: #12181f;
+      --light-bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --text: #2c3e50;
+      --text-muted: #64748b;
+      --border: #dbe2ea;
+      --success: #1e7e34;
+      --radius: 8px;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* HEADER & B2B NAV */
+    header {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--primary);
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--primary), #2073b5);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .brand-text h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: var(--dark);
+      line-height: 1.1;
+    }
+
+    .brand-text span {
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.8px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 0.65rem 1.2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      border-radius: var(--radius);
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background-color: #edf2f7;
+      color: var(--primary);
+    }
+
+    .nav-btn.active {
+      background-color: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* MAIN CONTAINER */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* TYPOGRAPHY & CARDS */
+    .hero-b2b {
+      background: linear-gradient(135deg, #09253d, #164268);
+      color: white;
+      padding: 3.5rem 2.5rem;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-b2b::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(230,126,0,0.18) 0%, rgba(255,255,255,0) 70%);
+      pointer-events: none;
+    }
+
+    .hero-b2b h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .hero-b2b p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      color: #cbd5e1;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(230, 126, 0, 0.2);
+      border: 1px solid var(--accent);
+      color: #ffb454;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .card h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-primary { background-color: rgba(15, 61, 99, 0.12); color: var(--primary); }
+    .badge-accent { background-color: rgba(230, 126, 0, 0.15); color: var(--accent); }
+
+    /* TABLES & FORMULAS */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+      background: #fff;
+    }
+
+    th, td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background-color: #f8fafc;
+      color: var(--primary);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background-color: #fafbfc; }
+
+    .formula-tag {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.05rem;
+      background: #f1f5f9;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      color: var(--primary);
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    /* SIMULATION COMPONENTS */
+    .sim-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      padding: 1.2rem 1.8rem;
+      background: #ffffff;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .mode-switch-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-mode {
+      padding: 0.7rem 1.4rem;
+      border: 2px solid var(--primary);
+      background: white;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary);
+      border-radius: var(--radius);
+      transition: all 0.2s;
+    }
+
+    .btn-mode.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .sim-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 950px) {
+      .sim-layout { grid-template-columns: 1fr; }
+    }
+
+    /* KLEMMBRETT DESIGN */
+    .terminal-enclosure {
+      background: #1a222d;
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+      border: 2px solid #2d3748;
+    }
+
+    .terminal-board {
+      position: relative;
+      width: 320px;
+      height: 240px;
+      background: #2b3644;
+      border-radius: 12px;
+      border: 4px solid #1a222d;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      margin: 1.5rem 0;
+    }
+
+    /* Klemmenbolzen */
+    .terminal-bolt {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      background: radial-gradient(circle, #e6c875 30%, #a48232 90%);
+      border: 3px solid #634e1b;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.8rem;
+      color: #111;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+      z-index: 5;
+    }
+
+    .bolt-label {
+      position: absolute;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    /* Positionen Bolzen (Standard-Normierung) */
+    /* Reihe Oben: W2, U2, V2 */
+    .b-w2 { top: 30px; left: 40px; }
+    .b-u2 { top: 30px; left: 138px; }
+    .b-v2 { top: 30px; left: 236px; }
+
+    /* Reihe Unten: U1, V1, W1 */
+    .b-u1 { top: 155px; left: 40px; }
+    .b-v1 { top: 155px; left: 138px; }
+    .b-w1 { top: 155px; left: 236px; }
+
+    /* SVG Wicklungen Schematik */
+    .windings-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Massive Messing-Kontaktbrücken */
+    .busbar {
+      position: absolute;
+      background: linear-gradient(to right, #ffd369, #e5a93c, #ffd369);
+      border: 2px solid #8c6214;
+      border-radius: 5px;
+      z-index: 4;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+      transition: all 0.3s ease;
+    }
+
+    .busbar-star {
+      top: 38px;
+      left: 45px;
+      width: 230px;
+      height: 28px;
+    }
+
+    .busbar-delta-1 { top: 38px; left: 47px; width: 30px; height: 150px; }
+    .busbar-delta-2 { top: 38px; left: 145px; width: 30px; height: 150px; }
+    .busbar-delta-3 { top: 38px; left: 243px; width: 30px; height: 150px; }
+
+    /* CANVAS DREHFELD */
+    #motorCanvas {
+      background: #090e17;
+      border-radius: var(--radius);
+      width: 100%;
+      height: 310px;
+      display: block;
+      border: 1px solid #1f2937;
+    }
+
+    .kpi-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .kpi-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem;
+      text-align: center;
+    }
+
+    .kpi-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .kpi-sub {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: #94a3b8;
+      padding: 3rem 1.5rem 1.5rem;
+      margin-top: auto;
+      font-size: 0.9rem;
+    }
+
+    .footer-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #232d3d;
+    }
+
+    .footer-item h5 {
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 1.5rem auto 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #556980;
+    }
+
+    @media (max-width: 768px) {
+      .nav-container { flex-direction: column; gap: 1rem; }
+      nav ul { width: 100%; justify-content: space-between; }
+      .nav-btn { padding: 0.5rem 0.6rem; font-size: 0.8rem; }
+      .hero-b2b h2 { font-size: 1.6rem; }
+      .terminal-board { transform: scale(0.9); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand" onclick="navigate('tab-about')">
+        <div class="brand-logo">BM</div>
+        <div class="brand-text">
+          <h1>BAVARIAMOTION</h1>
+          <span>ELEKTROMOTORENWERK PFAFFENHOFEN</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><button class="nav-btn active" id="btn-tab-about" onclick="navigate('tab-about')">Wer sind wir?</button></li>
+          <li><button class="nav-btn" id="btn-tab-tech" onclick="navigate('tab-tech')">Technik & Verkettung</button></li>
+          <li><button class="nav-btn" id="btn-tab-sim" onclick="navigate('tab-sim')">Schau dir die Funktion im Detail an</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- REITER 1: WER SIND WIR? -->
+    <section id="tab-about" class="tab-content active">
+      <div class="hero-b2b">
+        <span class="hero-tag">Industrieantriebe Made in Bavaria</span>
+        <h2>High-End Drehstrommotoren für kompromisslose Leistungsansprüche</h2>
+        <p>BavariaMotion Antriebstechnik entwickelt und fertigt hochbelastbare Drehstrom-Asynchronmaschinen für Maschinenbau, Automatisierungstechnik und anspruchsvolle Handwerksbetriebe. Direkt vor den Toren Pfaffenhofens an der Ilm verbinden wir traditionelle Wertarbeit mit modernster elektromagnetischer Präzision.</p>
+        <button class="nav-btn" style="background: var(--accent); color: white; border: none; font-weight:700;" onclick="navigate('tab-tech')">Technologiedaten einsehen</button>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>📍 Entwicklungszentrum Ilmtal</h3>
+          <p>Unser moderner Fertigungsstandort im Landkreis <strong>Pfaffenhofen a. d. Ilm</strong> garantiert dank strategisch optimaler Lage im Herzen Bayerns kürzeste Lieferzeiten, direkten Ingenieurskontakt und exzellente Serienqualität nach ISO-Norm.</p>
+        </div>
+        <div class="card">
+          <h3>⚙️ Robuste Asynchrontechnologie</h3>
+          <p>Unsere Stator-Pakete und Kurzschlussläufer zeichnen sich durch höchste Temperaturfestigkeit, verschleißfreien Dauerbetrieb und exzellente Drehmomentreserven bei symmetrischer Netzbelastung aus.</p>
+        </div>
+        <div class="card">
+          <h3>🔌 Universelles 6-Bolzen-System</h3>
+          <p>Alle BavariaMotion-Maschinen sind ab Werk mit genormten Klemmbrettern ausgerüstet. Ein Wechsel zwischen Sternschaltung (z. B. lastfreier Anlauf) und Dreieckschaltung (maximale Nennleistung) gelingt werkzeugoptimiert in Sekunden.</p>
+        </div>
+      </div>
+
+      <div class="card" style="border-left: 4px solid var(--primary);">
+        <h3>Unser Qualitätsstandard für Industrie und Fachhandwerk</h3>
+        <p>Als Antriebsspezialist legen wir größten Wert auf Transparenz und technische Klarheit. Wir statten Fachplaner, Elektrotechniker und anspruchsvolle Betreiber mit exakten elektrotechnischen Kennwerten aus, um den fehlerfreien, energieeffizienten und sicheren Betrieb unserer Maschinen an jedem 400-V-Dreiphasennetz zu garantieren.</p>
+      </div>
+    </section>
+
+    <!-- REITER 2: TECHNIK & VERKETTUNG (FACHINHALTE AUS DEM PDF) -->
+    <section id="tab-tech" class="tab-content">
+      
+      <div class="card" style="margin-bottom: 2rem;">
+        <span class="badge badge-primary">Systemarchitektur</span>
+        <h3 style="margin-top: 0.5rem;">Elektromagnetischer Aufbau der Ständerwicklung</h3>
+        <p>Der Ständer (Stator) eines zweipoligen Drehstrom-Asynchronmotors besteht aus <strong>drei räumlich um genau 120° versetzt angeordneten Spulen (Strängen)</strong>. Diese Spulen sind als verteilte Drehstromwicklung in den Nuten des isolierten Ständerblechpaketes integriert.</p>
+        
+        <div class="grid-2" style="margin-top: 1.5rem; margin-bottom: 0;">
+          <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border);">
+            <h4 style="color:var(--primary); margin-bottom: 0.4rem;">Symmetrische Netzbelastung</h4>
+            <p style="font-size: 0.95rem;">Da alle drei Motorwicklungen absolut identische Impedanzen besitzen (<span class="formula-tag">R<sub>Str1</sub> = R<sub>Str2</sub> = R<sub>Str3</sub></span>), heben sich die Rückströme im Sternpunkt im ungestörten Betrieb gegenseitig auf:</p>
+            <p style="margin-top: 0.5rem;"><span class="formula-tag">I<sub>N</sub> = 0 A</span> &rarr; Die Motorzuleitung wird effizient 4-adrig (L1, L2, L3, PE) ohne Neutralleiter ausgeführt.</p>
+          </div>
+          <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border);">
+            <h4 style="color:var(--primary); margin-bottom: 0.4rem;">Drehfeld-Steuerung & Drehrichtung</h4>
+            <p style="font-size: 0.95rem;"><strong>Rechtslauf (Standard):</strong> Belegung der Zuleiter L1, L2, L3 an die Klemmen U1, V1, W1 erzeugt ein rechtsdrehendes Stator-Drehfeld.<br>
+            <strong>Linkslauf:</strong> Durch Vertauschen zweier beliebiger Außenleiter (z. B. L1 und L2) kehrt sich der Drehfeldsinn um.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMELN & VERKETTUNGSFAKTOR -->
+      <div class="card">
+        <span class="badge badge-accent">Physikalische Grundlagen</span>
+        <h3 style="margin-top: 0.5rem;">Verkettungsarten: Sternschaltung (Y) vs. Dreieckschaltung (&Delta;)</h3>
+        <p>Durch die Phasenverschiebung des Drehstromsystems um 120° verknüpft der sogenannte <strong>Verkettungsfaktor &radic;3 (&approx; 1,732)</strong> die Außenleiterspannungen mit den internen Strangspannungen der Wicklungen:</p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Elektrische Größe</th>
+                <th>Sternschaltung (Symbol: Y)</th>
+                <th>Dreieckschaltung (Symbol: &Delta;)</th>
+                <th>Verhältnis / Technischer Effekt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Zusammenhang Spannung (U &harr; U<sub>Str</sub>)</strong></td>
+                <td><span class="formula-tag">U = &radic;3 &middot; U<sub>Str</sub></span> &rarr; U<sub>Str</sub> = 230 V</td>
+                <td><span class="formula-tag">U = U<sub>Str</sub></span> &rarr; U<sub>Str</sub> = 400 V</td>
+                <td>U<sub>Str,&Delta;</sub> / U<sub>Str,Y</sub> = <strong>&radic;3 (&approx; 1,73)</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Zusammenhang Strom (I &harr; I<sub>Str</sub>)</strong></td>
+                <td><span class="formula-tag">I = I<sub>Str</sub></span></td>
+                <td><span class="formula-tag">I = &radic;3 &middot; I<sub>Str</sub></span></td>
+                <td>Außenleiterstrom im &Delta; um <strong>Faktor 3</strong> größer</td>
+              </tr>
+              <tr>
+                <td><strong>Strang-Wirkleistung (P<sub>Str</sub>)</strong></td>
+                <td><span class="formula-tag">P<sub>Str</sub> = U<sub>Str</sub> &middot; I<sub>Str</sub></span></td>
+                <td><span class="formula-tag">P<sub>Str</sub> = U<sub>Str</sub> &middot; I<sub>Str</sub></span></td>
+                <td>Formel gilt identisch für beide Schaltungsarten</td>
+              </tr>
+              <tr>
+                <td><strong>Gesamte Wirkleistung (P)</strong></td>
+                <td><span class="formula-tag">P<sub>Y</sub> = 3 &middot; P<sub>Str</sub> = &radic;3 &middot; U &middot; I</span></td>
+                <td><span class="formula-tag">P<sub>&Delta;</sub> = 3 &middot; P<sub>Str</sub> = &radic;3 &middot; U &middot; I</span></td>
+                <td><strong>P<sub>&Delta;</sub> / P<sub>Y</sub> = 3</strong> (Dreifache Leistungsausbeute)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PRÜFSTANDS-VERGLEICH 50 OHM -->
+      <div class="card" style="margin-top: 2rem;">
+        <h3>Prüfstands-Validierung: Belastungsdaten an 400-V-Netz (R<sub>Str</sub> = 50 &Omega;)</h3>
+        <p style="color:var(--text-muted); margin-bottom: 1.2rem;">Vergleichende Analyse identischer Wicklungen bei unterschiedlicher Brückenverkettung:</p>
+        
+        <div class="grid-2">
+          <div style="background:#ffffff; border: 1px solid var(--border); border-top: 4px solid var(--primary); padding: 1.5rem; border-radius: var(--radius);">
+            <h4 style="color:var(--primary); margin-bottom: 0.8rem; font-family:'Montserrat';">Betriebsart: Sternschaltung (Y)</h4>
+            <p>1. Strangspannung: <span class="formula-tag">U<sub>Str</sub> = 400 V / &radic;3 = 230 V</span></p>
+            <p style="margin-top:0.4rem;">2. Strangstrom: <span class="formula-tag">I<sub>Str</sub> = 230 V / 50 &Omega; = 4,60 A</span></p>
+            <p style="margin-top:0.4rem;">3. Außenleiterstrom: <span class="formula-tag">I = I<sub>Str</sub> = 4,60 A</span></p>
+            <p style="margin-top:0.4rem;">4. Strang-Wirkleistung: <span class="formula-tag">P<sub>Str</sub> = 230 V &middot; 4,60 A = 1058 W</span></p>
+            <p style="margin-top:0.4rem; font-weight:700;">5. Gesamt-Wirkleistung: <span class="formula-tag" style="color:var(--primary);">P<sub>Y</sub> = 3 &middot; 1058 W = 3174 W</span></p>
+          </div>
+
+          <div style="background:#ffffff; border: 1px solid var(--border); border-top: 4px solid var(--accent); padding: 1.5rem; border-radius: var(--radius);">
+            <h4 style="color:var(--accent); margin-bottom: 0.8rem; font-family:'Montserrat';">Betriebsart: Dreieckschaltung (&Delta;)</h4>
+            <p>1. Strangspannung: <span class="formula-tag">U<sub>Str</sub> = U = 400 V</span></p>
+            <p style="margin-top:0.4rem;">2. Strangstrom: <span class="formula-tag">I<sub>Str</sub> = 400 V / 50 &Omega; = 8,00 A</span></p>
+            <p style="margin-top:0.4rem;">3. Außenleiterstrom: <span class="formula-tag">I = &radic;3 &middot; 8,00 A = 13,86 A</span></p>
+            <p style="margin-top:0.4rem;">4. Strang-Wirkleistung: <span class="formula-tag">P<sub>Str</sub> = 400 V &middot; 8,00 A = 3200 W</span></p>
+            <p style="margin-top:0.4rem; font-weight:700;">5. Gesamt-Wirkleistung: <span class="formula-tag" style="color:var(--accent);">P<sub>&Delta;</sub> = 3 &middot; 3200 W = 9600 W</span></p>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; padding: 1.2rem; background: #eef6fc; border-left: 4px solid var(--primary); border-radius: 4px;">
+          <strong>Ingenieur-Fazit zur Auslegung:</strong> Für maximale Drehmomententfaltung und Nennleistung unter Volllast ist zwingend die <strong>Dreieckschaltung</strong> zu wählen, da die aufgenommene Wirkleistung exakt um den <strong>Faktor 3</strong> höher ist als in Sternschaltung (<span class="formula-tag">P<sub>&Delta;</sub> / P<sub>Y</sub> = 3</span>).
+        </div>
+      </div>
+
+    </section>
+
+    <!-- REITER 3: INTERAKTIVE SIMULATION -->
+    <section id="tab-sim" class="tab-content">
+      
+      <div class="sim-bar">
+        <div style="display:flex; align-items:center; gap: 15px;">
+          <span style="font-weight: 700; font-family:'Montserrat';">Verkettung wählen:</span>
+          <div class="mode-switch-group">
+            <button class="btn-mode active" id="btn-opt-star" onclick="selectMode('star')">Sternschaltung (Y)</button>
+            <button class="btn-mode" id="btn-opt-delta" onclick="selectMode('delta')">Dreieckschaltung (&Delta;)</button>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap: 12px;">
+          <label for="strResistance" style="font-size:0.9rem; font-weight:600;">Strangwiderstand (R<sub>Str</sub>):</label>
+          <input type="range" id="strResistance" min="25" max="100" value="50" oninput="calcTelemetry()">
+          <span id="strResistanceTxt" class="formula-tag" style="min-width: 65px; text-align: center;">50 &Omega;</span>
+        </div>
+      </div>
+
+      <div class="sim-layout">
+        
+        <!-- MOTORKLEMMBRETT (Klar, sauber und normgerecht) -->
+        <div class="terminal-enclosure">
+          <h4 style="font-family:'Montserrat'; font-size:1.1rem; color:#f1f5f9; margin-bottom: 4px;">Klemmenkasten (Norm-Klemmbrett)</h4>
+          <span style="font-size:0.8rem; color:#94a3b8;">Drei versetzte Ständerwicklungen nach DIN EN 60034-8</span>
+
+          <div class="terminal-board">
+            
+            <!-- SVG: Reale Spulenverbindungen (U1-U2, V1-V2, W1-W2) -->
+            <svg class="windings-svg">
+              <defs>
+                <pattern id="coilPattern" patternUnits="userSpaceOnUse" width="12" height="12">
+                  <path d="M 0,6 Q 3,0 6,6 T 12,6" fill="none" stroke="#d97706" stroke-width="2.5" />
+                </pattern>
+              </defs>
+
+              <!-- Spule U: Klemme U1 (unten links) zu U2 (oben mitte) -->
+              <line x1="62" y1="177" x2="160" y2="52" stroke="#d97706" stroke-dasharray="4,3" stroke-width="2.5" opacity="0.6"/>
+              <!-- Spule V: Klemme V1 (unten mitte) zu V2 (oben rechts) -->
+              <line x1="160" y1="177" x2="258" y2="52" stroke="#10b981" stroke-dasharray="4,3" stroke-width="2.5" opacity="0.6"/>
+              <!-- Spule W: Klemme W1 (unten rechts) zu W2 (oben links) -->
+              <line x1="258" y1="177" x2="62" y2="52" stroke="#38bdf8" stroke-dasharray="4,3" stroke-width="2.5" opacity="0.6"/>
+            </svg>
+
+            <!-- Obere Bolzenreihe (W2, U2, V2) -->
+            <div class="terminal-bolt b-w2">W2</div>
+            <div class="terminal-bolt b-u2">U2</div>
+            <div class="terminal-bolt b-v2">V2</div>
+
+            <!-- Untere Bolzenreihe (U1, V1, W1 mit Netzeinspeisung) -->
+            <div class="terminal-bolt b-u1" style="box-shadow: 0 0 10px rgba(56,189,248,0.5);">U1</div>
+            <div class="terminal-bolt b-v1" style="box-shadow: 0 0 10px rgba(16,185,129,0.5);">V1</div>
+            <div class="terminal-bolt b-w1" style="box-shadow: 0 0 10px rgba(239,68,68,0.5);">W1</div>
+
+            <!-- Dynamische Kontaktbrücken -->
+            <div id="busbarPlates"></div>
+          </div>
+
+          <!-- Klemmenkasten Statuszeile -->
+          <div style="background:#111822; padding: 0.9rem 1.2rem; border-radius: 6px; width: 100%; border: 1px solid #232d3d; font-size: 0.85rem;">
+            <p id="terminalInfoText"></p>
+          </div>
+        </div>
+
+        <!-- STÄNDER-DREHFELD & MAGNETFLUSS SIMULATION -->
+        <div class="card" style="margin: 0; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <h3>Dynamisches Stator-Drehfeld & Magnetfluss</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem;">
+              Visualisierung der magnetischen Feldlinien (&Phi;) und des rotierenden Summenvektors.
+            </p>
+            <canvas id="motorCanvas" width="450" height="310"></canvas>
+          </div>
+
+          <!-- LIVE MESSWERTE -->
+          <div class="kpi-container">
+            <div class="kpi-card">
+              <div class="kpi-num" id="val-ustr">230 V</div>
+              <div class="kpi-sub">Strangspannung (U<sub>Str</sub>)</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-num" id="val-ileiter">4.60 A</div>
+              <div class="kpi-sub">Außenleiterstrom (I)</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-num" id="val-pstr">1058 W</div>
+              <div class="kpi-sub">Strang-Wirkleistung (P<sub>Str</sub>)</div>
+            </div>
+            <div class="kpi-card" style="border-color: var(--accent); background: #fffaf2;">
+              <div class="kpi-num" id="val-ptot" style="color: var(--accent);">3174 W</div>
+              <div class="kpi-sub" style="color: var(--dark); font-weight: 800;">Gesamt-Wirkleistung (P)</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-wrap">
+      <div class="footer-item">
+        <h5>BavariaMotion Antriebstechnik GmbH</h5>
+        <p>Gewerbepark Ilmtal 4<br>85276 Pfaffenhofen a. d. Ilm<br>Bayern | Germany</p>
+      </div>
+      <div class="footer-item">
+        <h5>Engineering & Support</h5>
+        <p>Entwicklung & Systemprüfung für Drehstromtechnik<br>Prüfstandsvalidierte Qualität nach DIN EN 60034</p>
+      </div>
+      <div class="footer-item">
+        <h5>Fachberatung</h5>
+        <p>E-Mail: engineering@bavariamotion.de<br>Zentrale: +49 (0) 8441 / 89 44-0</p>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2026 BavariaMotion Antriebstechnik GmbH • Werk Pfaffenhofen. Alle technischen Angaben entsprechen dem Lehrplan Steuerungstechnik / LF08.
+    </div>
+  </footer>
+
+  <!-- SKRIPT: LOGIK, BERECHNUNG & CANVAS RENDERING -->
+  <script>
+    // Tab Navigation
+    function navigate(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      document.getElementById('btn-' + tabId).classList.add('active');
+
+      if (tabId === 'tab-sim') {
+        startCanvasSimulation();
+      }
+    }
+
+    // Verkettungszustand
+    let activeMode = 'star';
+    const U_GRID = 400; // 400 V Netzspannung
+    const SQRT3 = Math.sqrt(3);
+
+    function selectMode(mode) {
+      activeMode = mode;
+      document.getElementById('btn-opt-star').classList.toggle('active', mode === 'star');
+      document.getElementById('btn-opt-delta').classList.toggle('active', mode === 'delta');
+      renderBridges();
+      calcTelemetry();
+    }
+
+    function renderBridges() {
+      const container = document.getElementById('busbarPlates');
+      const info = document.getElementById('terminalInfoText');
+      container.innerHTML = '';
+
+      if (activeMode === 'star') {
+        const bar = document.createElement('div');
+        bar.className = 'busbar busbar-star';
+        container.appendChild(bar);
+        info.innerHTML = '<span style="color:#38bdf8; font-weight:700;">STERN (Y):</span> Horizontale Messingbrücke verbindet <strong>W2 – U2 – V2</strong> zum Sternpunkt. An den Spulen liegt die auf <strong>230 V</strong> reduzierte Strangspannung an (optimal für sanften Anlauf).';
+      } else {
+        const b1 = document.createElement('div'); b1.className = 'busbar busbar-delta-1';
+        const b2 = document.createElement('div'); b2.className = 'busbar busbar-delta-2';
+        const b3 = document.createElement('div'); b3.className = 'busbar busbar-delta-3';
+        container.appendChild(b1);
+        container.appendChild(b2);
+        container.appendChild(b3);
+        info.innerHTML = '<span style="color:#f59e0b; font-weight:700;">DREIECK (&Delta;):</span> Drei vertikale Messingbrücken (<strong>U1-W2, V1-U2, W1-V2</strong>). Jede Wicklung liegt direkt an <strong>400 V</strong> Außenleiterspannung &rarr; <strong>3-fache Gesamtleistung</strong>!';
+      }
+    }
+
+    function calcTelemetry() {
+      const rStr = parseFloat(document.getElementById('strResistance').value);
+      document.getElementById('strResistanceTxt').innerText = rStr + ' Ω';
+
+      let uStr, iStr, iLine, pStr, pTotal;
+
+      if (activeMode === 'star') {
+        uStr = U_GRID / SQRT3; // 230.94 V
+        iStr = uStr / rStr;
+        iLine = iStr;
+        pStr = uStr * iStr;
+        pTotal = 3 * pStr;
+      } else {
+        uStr = U_GRID; // 400 V
+        iStr = uStr / rStr;
+        iLine = SQRT3 * iStr;
+        pStr = uStr * iStr;
+        pTotal = 3 * pStr;
+      }
+
+      document.getElementById('val-ustr').innerText = Math.round(uStr) + ' V';
+      document.getElementById('val-ileiter').innerText = iLine.toFixed(2) + ' A';
+      document.getElementById('val-pstr').innerText = Math.round(pStr) + ' W';
+      document.getElementById('val-ptot').innerText = Math.round(pTotal) + ' W';
+    }
+
+    // CANVAS MAGNETFELD-SIMULATION
+    let cvs, ctx;
+    let timeStep = 0;
+    let animRequest;
+
+    function startCanvasSimulation() {
+      cvs = document.getElementById('motorCanvas');
+      if (!cvs) return;
+      ctx = cvs.getContext('2d');
+      if (!animRequest) {
+        loop();
+      }
+    }
+
+    function loop() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, cvs.width, cvs.height);
+
+      const cx = cvs.width / 2;
+      const cy = cvs.height / 2;
+      const rStator = 100;
+      const rRotor = 42;
+
+      // Drehgeschwindigkeit & Flussdichte abhängig von Stern/Dreieck
+      const fluxStrength = activeMode === 'star' ? 0.55 : 1.0;
+      const omega = activeMode === 'star' ? 0.03 : 0.055;
+      timeStep += omega;
+
+      // 1. STATORGEHÄUSE
+      ctx.beginPath();
+      ctx.arc(cx, cy, rStator + 26, 0, 2 * Math.PI);
+      ctx.fillStyle = '#161f2e';
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = '#2d3748';
+      ctx.stroke();
+
+      // 2. PHASENERREGUNG & STATORSPOLE (120° Versatz)
+      const phases = [
+        { name: 'U', rad: -Math.PI / 2, color: '#ef4444' },              // Oben (Phase 1)
+        { name: 'V', rad: -Math.PI / 2 + (2 * Math.PI / 3), color: '#10b981' }, // Rechts unten (Phase 2)
+        { name: 'W', rad: -Math.PI / 2 + (4 * Math.PI / 3), color: '#38bdf8' }  // Links unten (Phase 3)
+      ];
+
+      // 3. DYNAMISCHE MAGNETISCHE FELDLINIEN DURCH DEN LÄUFER
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(timeStep);
+
+      const numLines = activeMode === 'star' ? 5 : 9;
+      ctx.strokeStyle = activeMode === 'star' ? 'rgba(56, 189, 248, 0.45)' : 'rgba(230, 126, 0, 0.75)';
+      ctx.lineWidth = activeMode === 'star' ? 1.5 : 2.5;
+
+      for (let i = -numLines / 2; i <= numLines / 2; i++) {
+        const offset = i * (activeMode === 'star' ? 14 : 9);
+        ctx.beginPath();
+        // Feldlinien-Bögen von Nord nach Süd
+        ctx.moveTo(-rStator + 10, offset * 0.4);
+        ctx.bezierCurveTo(-rRotor, offset, rRotor, offset, rStator - 10, offset * 0.4);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // 4. LÄUFER (ROTOR)
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(timeStep);
+
+      // Läufer-Körper
+      ctx.beginPath();
+      ctx.arc(0, 0, rRotor, 0, 2 * Math.PI);
+      ctx.fillStyle = '#202938';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = activeMode === 'star' ? '#475569' : '#e67e00';
+      ctx.stroke();
+
+      // Käfigstäbe des Rotors
+      for (let j = 0; j < 8; j++) {
+        const barAngle = (j * Math.PI) / 4;
+        const bx = Math.cos(barAngle) * (rRotor - 8);
+        const by = Math.sin(barAngle) * (rRotor - 8);
+        ctx.beginPath();
+        ctx.arc(bx, by, 3.5, 0, 2 * Math.PI);
+        ctx.fillStyle = '#d97706';
+        ctx.fill();
+      }
+
+      // Welle im Zentrum
+      ctx.beginPath();
+      ctx.arc(0, 0, 12, 0, 2 * Math.PI);
+      ctx.fillStyle = '#64748b';
+      ctx.fill();
+      ctx.restore();
+
+      // 5. SPULENKÖPFE MIT ERREGUNGS-PULSIEREN
+      phases.forEach((p, idx) => {
+        const currentSin = Math.sin(timeStep - idx * (2 * Math.PI / 3));
+        const px = cx + Math.cos(p.rad) * rStator;
+        const py = cy + Math.sin(p.rad) * rStator;
+
+        // Erregungshof
+        ctx.beginPath();
+        ctx.arc(px, py, 18 + Math.abs(currentSin) * 8 * fluxStrength, 0, 2 * Math.PI);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = 0.25 * Math.abs(currentSin) * fluxStrength;
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+
+        // Spulenblock
+        ctx.beginPath();
+        ctx.arc(px, py, 14, 0, 2 * Math.PI);
+        ctx.fillStyle = '#1e293b';
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth = 3;
+        ctx.fill();
+        ctx.stroke();
+
+        // Klemmenbeschriftung im Stator
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 11px Montserrat';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(p.name, px, py);
+      });
+
+      // 6. ROTIERENDER MAGNETISCHER HAUPTVEKTOR (B-Feld)
+      const vecLen = activeMode === 'star' ? 55 : 85;
+      const vx = cx + Math.cos(timeStep) * vecLen;
+      const vy = cy + Math.sin(timeStep) * vecLen;
+
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(vx, vy);
+      ctx.strokeStyle = activeMode === 'star' ? '#38bdf8' : '#e67e00';
+      ctx.lineWidth = 3.5;
+      ctx.stroke();
+
+      // Pfeilspitze B-Feld
+      ctx.beginPath();
+      ctx.arc(vx, vy, 5.5, 0, 2 * Math.PI);
+      ctx.fillStyle = activeMode === 'star' ? '#38bdf8' : '#e67e00';
+      ctx.fill();
+
+      // Textuelle Feldstärkeanzeige im Canvas
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '11px Roboto';
+      ctx.textAlign = 'center';
+      ctx.fillText(
+        activeMode === 'star' ? 'Magnetische Flussdichte: B ~ 1,0 (Stern)' : 'Magnetische Flussdichte: B ~ 1,73 (Dreieck / Starkfeld)',
+        cx,
+        cy + rStator + 42
+      );
+
+      animRequest = requestAnimationFrame(loop);
+    }
+
+    // Init beim Start
+    window.addEventListener('DOMContentLoaded', () => {
+      renderBridges();
+      calcTelemetry();
+    });
+  </script>
+</body>
+</html>
+    <script>
+        function showSecurityMessage() {
+            // Avoid duplicates
+            if (document.getElementById('security-alert-box')) return;
+            
+            const msg = document.createElement('div');
+            msg.id = 'security-alert-box';
+            msg.style.cssText = 'position: fixed; bottom: 10px; left: 10px; right: 10px; background: #fff3cd; color: #856404; padding: 15px; border: 1px solid #ffeeba; border-radius: 4px; font-family: system-ui, -apple-system, sans-serif; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px;';
+            msg.innerHTML = '<span style="font-size: 1.2em;">⚠️</span><div><strong>Sicherheitshinweis:</strong> Einige Funktionen dieses Codes wurden blockiert, da sie potenziell unsicher sind. Dies dient dem Schutz Ihrer Daten.</div>';
+            document.body.appendChild(msg);
+        }
+
+        document.addEventListener('securitypolicyviolation', (e) => {
+            showSecurityMessage();
+        });
+
+        try {
+            
+        } catch (error) {
+            console.error('JavaScript Error:', error);
+            if (error.name === 'SecurityError' || error.message.includes('Security')) {
+                showSecurityMessage();
+            } else {
+                document.body.innerHTML += '<div style="color: red; padding: 1rem; background: #fee; border: 1px solid red; margin-top: 1rem;">Error: ' + error.message + '</div>';
+            }
+        }
+    </script>
+</body>
+</html>
