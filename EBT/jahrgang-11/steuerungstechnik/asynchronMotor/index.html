@@ -1,30 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Security: CSP to restrict resource loading and prevent object embedding -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: https:; object-src 'none'; base-uri 'none';">
-    <title>Canvas Preview</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            padding: 1rem;
-        }
-        
-    </style>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="de">
-<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: https:; object-src 'none'; base-uri 'none';">
   <title>BavariaMotion Antriebstechnik | High-Performance Drehstromantriebe</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -491,7 +470,7 @@
       margin-top: 4px;
     }
 
-    /* ERGÄNZUNG: NEUTRALLEITER BUTTON HOVER EFFECT */
+    /* NEUTRALLEITER BUTTON HOVER EFFECT */
     .btn-action-link {
       display: inline-block;
       background: var(--accent);
@@ -608,7 +587,7 @@
       </div>
     </section>
 
-    <!-- REITER 2: TECHNIK & VERKETTUNG (FACHINHALTE AUS DEM PDF) -->
+    <!-- REITER 2: TECHNIK & VERKETTUNG -->
     <section id="tab-tech" class="tab-content">
       
       <div class="card" style="margin-bottom: 2rem;">
@@ -630,7 +609,6 @@
         </div>
       </div>
 
-      <!-- FORMELN & VERKETTUNGSFAKTOR -->
       <div class="card">
         <span class="badge badge-accent">Physikalische Grundlagen</span>
         <h3 style="margin-top: 0.5rem;">Verkettungsarten: Sternschaltung (Y) vs. Dreieckschaltung (&Delta;)</h3>
@@ -676,7 +654,6 @@
         </div>
       </div>
 
-      <!-- PRÜFSTANDS-VERGLEICH 50 OHM -->
       <div class="card" style="margin-top: 2rem;">
         <h3>Prüfstands-Validierung: Belastungsdaten an 400-V-Netz (R<sub>Str</sub> = 50 &Omega;)</h3>
         <p style="color:var(--text-muted); margin-bottom: 1.2rem;">Vergleichende Analyse identischer Wicklungen bei unterschiedlicher Brückenverkettung:</p>
@@ -708,7 +685,7 @@
 
     </section>
 
-    <!-- REITER 3: INTERAKTIVE SIMULATION -->
+    <!-- REITER 3: INTERAKTIVE SIMULATION & ERKLÄRUNGEN -->
     <section id="tab-sim" class="tab-content">
       
       <div class="sim-bar">
@@ -729,50 +706,34 @@
 
       <div class="sim-layout">
         
-        <!-- MOTORKLEMMBRETT (Klar, sauber und normgerecht) -->
         <div class="terminal-enclosure">
           <h4 style="font-family:'Montserrat'; font-size:1.1rem; color:#f1f5f9; margin-bottom: 4px;">Klemmenkasten (Norm-Klemmbrett)</h4>
           <span style="font-size:0.8rem; color:#94a3b8;">Drei versetzte Ständerwicklungen nach DIN EN 60034-8</span>
 
           <div class="terminal-board">
-            
-            <!-- SVG: Reale Spulenverbindungen (U1-U2, V1-V2, W1-W2) -->
             <svg class="windings-svg">
               <defs>
                 <pattern id="coilPattern" patternUnits="userSpaceOnUse" width="12" height="12">
                   <path d="M 0,6 Q 3,0 6,6 T 12,6" fill="none" stroke="#d97706" stroke-width="2.5" />
                 </pattern>
               </defs>
-
-              <!-- Spule U: Klemme U1 (unten links) zu U2 (oben mitte) -->
               <line x1="62" y1="177" x2="160" y2="52" stroke="#d97706" stroke-dasharray="4,3" stroke-width="2.5" opacity="0.6"/>
-              <!-- Spule V: Klemme V1 (unten mitte) zu V2 (oben rechts) -->
               <line x1="160" y1="177" x2="258" y2="52" stroke="#10b981" stroke-dasharray="4,3" stroke-width="2.5" opacity="0.6"/>
-              <!-- Spule W: Klemme W1 (unten rechts) zu W2 (oben links) -->
               <line x1="258" y1="177" x2="62" y2="52" stroke="#38bdf8" stroke-dasharray="4,3" stroke-width="2.5" opacity="0.6"/>
             </svg>
-
-            <!-- Obere Bolzenreihe (W2, U2, V2) -->
             <div class="terminal-bolt b-w2">W2</div>
             <div class="terminal-bolt b-u2">U2</div>
             <div class="terminal-bolt b-v2">V2</div>
-
-            <!-- Untere Bolzenreihe (U1, V1, W1 mit Netzeinspeisung) -->
             <div class="terminal-bolt b-u1" style="box-shadow: 0 0 10px rgba(56,189,248,0.5);">U1</div>
             <div class="terminal-bolt b-v1" style="box-shadow: 0 0 10px rgba(16,185,129,0.5);">V1</div>
             <div class="terminal-bolt b-w1" style="box-shadow: 0 0 10px rgba(239,68,68,0.5);">W1</div>
-
-            <!-- Dynamische Kontaktbrücken -->
             <div id="busbarPlates"></div>
           </div>
-
-          <!-- Klemmenkasten Statuszeile -->
           <div style="background:#111822; padding: 0.9rem 1.2rem; border-radius: 6px; width: 100%; border: 1px solid #232d3d; font-size: 0.85rem;">
             <p id="terminalInfoText"></p>
           </div>
         </div>
 
-        <!-- STÄNDER-DREHFELD & MAGNETFLUSS SIMULATION -->
         <div class="card" style="margin: 0; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <h3>Dynamisches Stator-Drehfeld & Magnetfluss</h3>
@@ -782,7 +743,6 @@
             <canvas id="motorCanvas" width="450" height="310"></canvas>
           </div>
 
-          <!-- LIVE MESSWERTE -->
           <div class="kpi-container">
             <div class="kpi-card">
               <div class="kpi-num" id="val-ustr">230 V</div>
@@ -802,17 +762,58 @@
             </div>
           </div>
         </div>
-
       </div>
 
-      <!-- NEUER BEREICH: BUTTON ZUR PHASENBILANZ -->
+      <!-- NEU: AZUBI ERKLÄRUNG ZUR PRÜFUNGSFALLE -->
+      <div class="card" style="margin-top: 2rem; border-left: 4px solid var(--accent);">
+        <h3 style="color: var(--accent); margin-bottom: 1rem;">Prüfungsfalle: Warum die Formel gleich aussieht, aber die Leistung verdreifacht wird</h3>
+        <p style="margin-bottom: 1.5rem;">Die Formel <span class="formula-tag">P = &radic;3 &middot; U &middot; I</span> in der Tabelle ist eine typische Prüfungsfalle, weil sie für Stern und Dreieck identisch im Tabellenbuch steht. Der Schlüssel zum Verständnis liegt im Unterschied zwischen dem Blick auf die <strong>einzelne Motorspule</strong> und der <strong>Messung mit der Stromzange</strong> an der Zuleitung.</p>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="color:var(--primary); font-family: 'Montserrat', sans-serif; margin-bottom: 0.5rem;">Schritt 1: Was passiert an der einzelnen Spule?</h4>
+          <p>Stell dir vor, du schaust dir nur eine einzige der drei Spulen im Motor an:</p>
+          <ul style="margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.8rem; line-height: 1.7;">
+            <li><strong>Im Stern:</strong> Die Spule teilt sich die Spannung mit einer anderen Spule. Sie bekommt nur 230 V ab (<span class="formula-tag">U<sub>Str</sub> = U / &radic;3</span>). Weil weniger Spannung anliegt, fließt auch weniger Strom durch ihren Kupferdraht.</li>
+            <li><strong>Im Dreieck:</strong> Die Spule hängt direkt zwischen zwei Außenleitern (L1 und L2) und bekommt volle 400 V ab (<span class="formula-tag">U = U<sub>Str</sub></span>).</li>
+          </ul>
+          <p style="background: #f8fafc; padding: 0.8rem; border-radius: 4px; border: 1px solid var(--border);">
+            Mehr Spannung an demselben Spulenwiderstand bedeutet nach dem ohmschen Gesetz: Durch die Spule fließt bereits das <strong>1,73-Fache (&radic;3)</strong> an Strom.
+          </p>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="color:var(--primary); font-family: 'Montserrat', sans-serif; margin-bottom: 0.5rem;">Schritt 2: Was misst die Stromzange am Zuleitungskabel?</h4>
+          <p>Jetzt gehst du mit der Strommesszange an die Zuleitung (Außenleiter L1):</p>
+          <ul style="margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.8rem; line-height: 1.7;">
+            <li><strong>Im Stern:</strong> Das Kabel geht einfach direkt in die Spule rein. Was durch das Kabel fließt, fließt 1:1 durch die Spule (<span class="formula-tag">I = I<sub>Str</sub></span>).</li>
+            <li><strong>Im Dreieck:</strong> Am Klemmbrett teilen sich die Drähte auf. An den Außenleiter L1 sind gleich zwei Spulen angeschlossen. Es fließt also nicht nur in jeder Spule schon &radic;3-mal mehr Strom, sondern die Ströme zweier Spulen treffen sich auch noch am Knotenpunkt (<span class="formula-tag">I = &radic;3 &middot; I<sub>Str</sub></span>).</li>
+          </ul>
+          <p style="background: #f8fafc; padding: 0.8rem; border-radius: 4px; border: 1px solid var(--border);">
+            Dadurch multipliziert sich der Effekt (&radic;3 &middot; &radic;3 = 3): <strong>Deine Strommesszange zeigt im Dreieck exakt den 3-fachen Strom an wie im Stern</strong> (<span class="formula-tag">I<sub>&Delta;</sub> = 3 &middot; I<sub>Y</sub></span>).
+          </p>
+        </div>
+
+        <div>
+          <h4 style="color:var(--primary); font-family: 'Montserrat', sans-serif; margin-bottom: 0.5rem;">Schritt 3: Warum die Formel trotzdem gleich aussieht</h4>
+          <p>Auf dem Arbeitsblatt steht für beide Fälle dieselbe Formel: <span class="formula-tag">P = &radic;3 &middot; U &middot; I</span></p>
+          <p style="margin-top: 0.5rem;">Das <strong>U</strong> ist in beiden Fällen die Netzspannung (immer 400 V). Aber das <strong>I</strong> in der Formel ist der Strom, den du außen am Zuleitungskabel misst:</p>
+          <ul style="list-style-type: none; margin-top: 0.8rem; margin-bottom: 1rem;">
+            <li style="margin-bottom: 0.5rem;">Messung im Stern: <span class="formula-tag">P<sub>Y</sub> = &radic;3 &middot; 400 V &middot; I<sub>Y</sub></span></li>
+            <li>Messung im Dreieck: <span class="formula-tag">P<sub>&Delta;</sub> = &radic;3 &middot; 400 V &middot; (3 &middot; I<sub>Y</sub>) = 3 &middot; P<sub>Y</sub></span></li>
+          </ul>
+          <div style="padding: 1.2rem; background: #eef6fc; border-left: 4px solid var(--primary); border-radius: 4px; line-height: 1.6;">
+            <strong>Fazit:</strong> Die Formel <span class="formula-tag">P = &radic;3 &middot; U &middot; I</span> ist die "Zuleitungsformel". Sie gilt immer für Drehstrom, egal was hinten dran hängt. Dass der Motor im Dreieck dreimal so viel Leistung hat, siehst du in der Praxis daran, dass die Stromzange am Zuleitungskabel den dreifachen Wert anzeigt.
+          </div>
+        </div>
+      </div>
+      <!-- ENDE AZUBI ERKLÄRUNG -->
+
       <div style="text-align: center; margin-top: 3rem; margin-bottom: 1rem; padding: 2rem; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);">
         <h4 style="font-family: 'Montserrat', sans-serif; color: var(--primary); margin-bottom: 1.2rem; font-size: 1.2rem;">Weiterführendes Wissen</h4>
         <a href="Drehstromsystem_Phasenbilanz.html" class="btn-action-link" target="_blank">
           Warum der Neutralleiter bei Asynchronmotoren nicht nötig ist. KLICK MICH
         </a>
       </div>
-      <!-- ENDE NEUER BEREICH -->
 
     </section>
 
@@ -1077,34 +1078,5 @@
       calcTelemetry();
     });
   </script>
-</body>
-</html>
-    <script>
-        function showSecurityMessage() {
-            // Avoid duplicates
-            if (document.getElementById('security-alert-box')) return;
-            
-            const msg = document.createElement('div');
-            msg.id = 'security-alert-box';
-            msg.style.cssText = 'position: fixed; bottom: 10px; left: 10px; right: 10px; background: #fff3cd; color: #856404; padding: 15px; border: 1px solid #ffeeba; border-radius: 4px; font-family: system-ui, -apple-system, sans-serif; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px;';
-            msg.innerHTML = '<span style="font-size: 1.2em;">⚠️</span><div><strong>Sicherheitshinweis:</strong> Einige Funktionen dieses Codes wurden blockiert, da sie potenziell unsicher sind. Dies dient dem Schutz Ihrer Daten.</div>';
-            document.body.appendChild(msg);
-        }
-
-        document.addEventListener('securitypolicyviolation', (e) => {
-            showSecurityMessage();
-        });
-
-        try {
-            
-        } catch (error) {
-            console.error('JavaScript Error:', error);
-            if (error.name === 'SecurityError' || error.message.includes('Security')) {
-                showSecurityMessage();
-            } else {
-                document.body.innerHTML += '<div style="color: red; padding: 1rem; background: #fee; border: 1px solid red; margin-top: 1rem;">Error: ' + error.message + '</div>';
-            }
-        }
-    </script>
 </body>
 </html>
