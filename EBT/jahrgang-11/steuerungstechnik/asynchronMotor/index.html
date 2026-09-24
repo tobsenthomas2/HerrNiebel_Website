@@ -491,6 +491,25 @@
       margin-top: 4px;
     }
 
+    /* ERGÄNZUNG: NEUTRALLEITER BUTTON HOVER EFFECT */
+    .btn-action-link {
+      display: inline-block;
+      background: var(--accent);
+      color: white !important;
+      padding: 1.2rem 2.5rem;
+      text-decoration: none;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: var(--shadow);
+    }
+    .btn-action-link:hover {
+      background: #cc7000;
+      transform: translateY(-2px);
+    }
+
     /* FOOTER */
     footer {
       background: var(--dark);
@@ -785,6 +804,15 @@
         </div>
 
       </div>
+
+      <!-- NEUER BEREICH: BUTTON ZUR PHASENBILANZ -->
+      <div style="text-align: center; margin-top: 3rem; margin-bottom: 1rem; padding: 2rem; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);">
+        <h4 style="font-family: 'Montserrat', sans-serif; color: var(--primary); margin-bottom: 1.2rem; font-size: 1.2rem;">Weiterführendes Wissen</h4>
+        <a href="Drehstromsystem_Phasenbilanz.html" class="btn-action-link" target="_blank">
+          Warum der Neutralleiter bei Asynchronmotoren nicht nötig ist. KLICK MICH
+        </a>
+      </div>
+      <!-- ENDE NEUER BEREICH -->
 
     </section>
 
