@@ -288,7 +288,26 @@
           "description": "1. Ausbildungsjahr",
           "icon": "📗",
           "folder": "jahrgang-11",
-          "children": []
+          "children": [
+            {
+              "id": "steuerungstechnik",
+              "title": "Steuerungstechnik",
+              "description": "Grundlagen der Steuerungstechnik",
+              "icon": "🎛️",
+              "children": [
+                {
+                  "id": "asynchronMotor",
+                  "title": "Drehstromasynchronmotor",
+                  "description": "Aufbau und Funktion des Asynchronmotors",
+                  "icon": "🔄",
+                  "tags": [
+                    "Theorie",
+                    "Aufbau"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "jg12",
