@@ -245,6 +245,62 @@
     .badge-primary { background-color: rgba(15, 61, 99, 0.12); color: var(--primary); }
     .badge-accent { background-color: rgba(230, 126, 0, 0.15); color: var(--accent); }
 
+    /* ZEITSTRAHL (TIMELINE) */
+    .timeline {
+      position: relative;
+      margin: 2.5rem 0 1rem;
+      padding-left: 2.5rem;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 11px;
+      height: 100%;
+      width: 3px;
+      background: var(--primary-light);
+      border-radius: 2px;
+      opacity: 0.3;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.5rem;
+      width: 16px;
+      height: 16px;
+      background: var(--accent);
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px var(--primary-light);
+      top: 6px;
+      z-index: 2;
+    }
+
+    .timeline-content {
+      background: #f8fafc;
+      padding: 1.2rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .timeline-date {
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+    }
+
     /* TABLES & FORMULAS */
     .table-container {
       overflow-x: auto;
@@ -386,12 +442,9 @@
     }
 
     /* Positionen Bolzen (Standard-Normierung) */
-    /* Reihe Oben: W2, U2, V2 */
     .b-w2 { top: 30px; left: 40px; }
     .b-u2 { top: 30px; left: 138px; }
     .b-v2 { top: 30px; left: 236px; }
-
-    /* Reihe Unten: U1, V1, W1 */
     .b-u1 { top: 155px; left: 40px; }
     .b-v1 { top: 155px; left: 138px; }
     .b-w1 { top: 155px; left: 236px; }
@@ -470,7 +523,6 @@
       margin-top: 4px;
     }
 
-    /* NEUTRALLEITER BUTTON HOVER EFFECT */
     .btn-action-link {
       display: inline-block;
       background: var(--accent);
@@ -484,6 +536,7 @@
       transition: background 0.3s, transform 0.2s;
       box-shadow: var(--shadow);
     }
+    
     .btn-action-link:hover {
       background: #cc7000;
       transform: translateY(-2px);
@@ -522,11 +575,12 @@
       text-align: center;
       font-size: 0.8rem;
       color: #556980;
+      line-height: 1.8;
     }
 
     @media (max-width: 768px) {
       .nav-container { flex-direction: column; gap: 1rem; }
-      nav ul { width: 100%; justify-content: space-between; }
+      nav ul { width: 100%; justify-content: space-between; flex-wrap: wrap; }
       .nav-btn { padding: 0.5rem 0.6rem; font-size: 0.8rem; }
       .hero-b2b h2 { font-size: 1.6rem; }
       .terminal-board { transform: scale(0.9); }
@@ -548,8 +602,8 @@
       <nav>
         <ul>
           <li><button class="nav-btn active" id="btn-tab-about" onclick="navigate('tab-about')">Wer sind wir?</button></li>
-          <li><button class="nav-btn" id="btn-tab-tech" onclick="navigate('tab-tech')">Technik & Verkettung</button></li>
-          <li><button class="nav-btn" id="btn-tab-sim" onclick="navigate('tab-sim')">Schau dir die Funktion im Detail an</button></li>
+          <li><button class="nav-btn" id="btn-tab-tech" onclick="navigate('tab-tech')">Unsere Technik</button></li>
+          <li><button class="nav-btn" id="btn-tab-sim" onclick="navigate('tab-sim')">Visualisierungen zur Technik</button></li>
         </ul>
       </nav>
     </div>
@@ -581,20 +635,124 @@
         </div>
       </div>
 
+      <!-- FIRMENGESCHICHTE (ZEITSTRAHL) -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 0.5rem;">Unsere Geschichte & Meilensteine</h3>
+        <p style="color: var(--text-muted);">Seit über 50 Jahren treiben wir den technologischen Fortschritt in der Antriebstechnik voran.</p>
+        
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">1972</div>
+              <strong>Gründung in Pfaffenhofen</strong>
+              <p style="font-size: 0.9rem; margin-top: 0.4rem;">Als regionaler Handwerksbetrieb für Motoreninstandsetzung durch Anton Müller gegründet, legte BavariaMotion den Grundstein für bayerische Präzisionsarbeit.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">1995</div>
+              <strong>Einstieg in die Serienfertigung</strong>
+              <p style="font-size: 0.9rem; margin-top: 0.4rem;">Eröffnung der ersten industriellen Fertigungsstraße für Asynchronmotoren. BavariaMotion wird Zulieferer für den süddeutschen Maschinenbau.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">2010</div>
+              <strong>Neues Entwicklungszentrum Ilmtal</strong>
+              <p style="font-size: 0.9rem; margin-top: 0.4rem;">Bezug des modernen Forschungszentrums mit Fokus auf höchste Energieeffizienzklassen (IE3 und IE4) zur Reduzierung industrieller Energiekosten.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">2026</div>
+              <strong>Smarte Antriebsüberwachung</strong>
+              <p style="font-size: 0.9rem; margin-top: 0.4rem;">Vorstellung der neuen Generation IoT-fähiger Motoren, die Betriebsdaten in Echtzeit an die Leittechnik übergeben (Predictive Maintenance).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="card" style="border-left: 4px solid var(--primary);">
         <h3>Unser Qualitätsstandard für Industrie und Fachhandwerk</h3>
         <p>Als Antriebsspezialist legen wir größten Wert auf Transparenz und technische Klarheit. Wir statten Fachplaner, Elektrotechniker und anspruchsvolle Betreiber mit exakten elektrotechnischen Kennwerten aus, um den fehlerfreien, energieeffizienten und sicheren Betrieb unserer Maschinen an jedem 400-V-Dreiphasennetz zu garantieren.</p>
       </div>
     </section>
 
-    <!-- REITER 2: TECHNIK & VERKETTUNG -->
+    <!-- REITER 2: UNSERE TECHNIK -->
     <section id="tab-tech" class="tab-content">
       
       <div class="card" style="margin-bottom: 2rem;">
-        <span class="badge badge-primary">Systemarchitektur</span>
-        <h3 style="margin-top: 0.5rem;">Elektromagnetischer Aufbau der Ständerwicklung</h3>
-        <p>Der Ständer (Stator) eines zweipoligen Drehstrom-Asynchronmotors besteht aus <strong>drei räumlich um genau 120° versetzt angeordneten Spulen (Strängen)</strong>. Diese Spulen sind als verteilte Drehstromwicklung in den Nuten des isolierten Ständerblechpaketes integriert.</p>
+        <span class="badge badge-primary">Mechanischer Grundaufbau</span>
+        <h3 style="margin-top: 0.5rem;">Komponenten des Drehstrom-Asynchronmotors</h3>
+        <p style="margin-bottom: 1.5rem;">Bevor wir in die elektrische Verschaltung und Verkettung eintauchen, betrachten wir die mechanischen Hauptbestandteile unserer hochrobusten Industrieantriebe. Das Design ist bewusst wartungsarm, da es ohne verschleißanfällige Schleifkontakte (Bürsten) auskommt.</p>
         
+        <figure style="margin-bottom: 2rem; text-align: center;">
+          <img src="Aufbau_Asynchron_Motor.png" 
+               onerror="this.onerror=null;this.src='https://placehold.co/800x350/eef6fc/0f3d63?text=Foto-Platzhalter:+Aufbau_Asynchron_Motor.png';" 
+               alt="Aufbau Asynchronmotor" 
+               style="width: 100%; max-width: 800px; height: auto; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+          <figcaption style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'Montserrat', sans-serif;">Abb. 1: Querschnitt und mechanische Hauptkomponenten eines BavariaMotion Asynchronmotors.</figcaption>
+        </figure>
+
+        <div class="grid-3" style="margin-bottom: 0;">
+          <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border); border-top: 3px solid var(--primary);">
+            <h4 style="color:var(--primary); margin-bottom: 0.4rem; font-size: 1.05rem;">🧲 1. Stator (Ständer)</h4>
+            <p style="font-size: 0.9rem;">Das feststehende Außenteil. Es besteht aus einem genuteten Blechpaket, in das die drei Kupferwicklungen (Stränge) eingelegt sind. Wird hier Drehstrom angelegt, entsteht das rotierende Magnetfeld.</p>
+          </div>
+          <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border); border-top: 3px solid var(--accent);">
+            <h4 style="color:var(--primary); margin-bottom: 0.4rem; font-size: 1.05rem;">⚙️ 2. Rotor (Läufer)</h4>
+            <p style="font-size: 0.9rem;">Das rotierende Innenteil auf der Motorwelle. Meist als massiver <strong>Kurzschlussläufer</strong> (Käfigläufer) ausgeführt. Die Magnetlinien des Stators induzieren hier Ströme, wodurch der Rotor dem Stator-Feld folgt.</p>
+          </div>
+          <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border); border-top: 3px solid #64748b;">
+            <h4 style="color:var(--primary); margin-bottom: 0.4rem; font-size: 1.05rem;">🛡️ 3. Gehäuse & Peripherie</h4>
+            <p style="font-size: 0.9rem;">Ein robustes Rippengehäuse fasst das System ein. Zwei Lagerschilder führen die Welle. Am hinteren Ende sitzt der <strong>Klemmkasten</strong> für den Anschluss sowie ein aufgesetztes Lüfterrad zur Eigenkühlung.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <span class="badge badge-primary">Systemarchitektur</span>
+        <h3 style="margin-top: 0.5rem;">Aufbau der Ständerwicklung</h3>
+        
+        <div style="background: rgba(15, 61, 99, 0.05); border-left: 4px solid var(--accent); padding: 1rem 1.2rem; margin-bottom: 1.5rem; border-radius: 0 var(--radius) var(--radius) 0;">
+          <strong style="color: var(--primary); font-family: 'Montserrat', sans-serif; display: block; margin-bottom: 0.2rem;">💡 Ihr BavariaMotion Flexibilitätsversprechen:</strong>
+          Bei uns haben Sie die Wahl aus verschiedenen Bauformen und Wicklungstechniken – exakt abgestimmt auf Ihr spezifisches industrielles Applikationsprofil.
+        </div>
+
+        <p>Der Ständer (Stator) eines zweipoligen Drehstrom-Asynchronmotors besteht aus <strong>drei räumlich um genau 120° versetzt angeordneten Spulen (Strängen)</strong>. Je nach Anforderung an die Maschine werden die Wicklungen unterschiedlich in das genutete Stator-Blechpaket eingelegt:</p>
+        
+        <div class="grid-2" style="margin-top: 1.5rem; margin-bottom: 2rem;">
+          
+          <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border); border-top: 3px solid var(--primary);">
+            <figure style="margin-bottom: 1rem; text-align: center;">
+              <img src="konzentrische_Wicklung.png" 
+                   onerror="this.onerror=null;this.src='https://placehold.co/400x250/eef6fc/0f3d63?text=Platzhalter:+konzentrische_Wicklung.png';" 
+                   alt="Konzentrierte Wicklung" 
+                   style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--border);">
+            </figure>
+            <h4 style="color:var(--primary); margin-bottom: 0.2rem;">Konzentrierte Wicklung</h4>
+            <p style="font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 0.8rem;">(Wicklung über nur einen Stator-Zahn)</p>
+            <p style="font-size: 0.9rem;"><strong>Anwendung & Vorteil:</strong> Da die Spule nur um einen einzelnen Zahn gewickelt wird, entstehen extrem kurze Wickelköpfe. Dies spart Kupfer, senkt den ohmschen Widerstand (Wärmeverlust) und ermöglicht eine sehr kompakte Bauweise. In der Drehstromtechnik wird diese Wicklungsart vor allem bei hochdynamischen Synchron-Servomotoren (z. B. in der Robotik und Automatisierung) eingesetzt, bei denen eine extrem hohe Drehmomentdichte bei geringem Bauraum gefordert ist.</p>
+          </div>
+
+          <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border); border-top: 3px solid var(--accent);">
+            <figure style="margin-bottom: 1rem; text-align: center;">
+              <img src="verteilte_Wicklung.png" 
+                   onerror="this.onerror=null;this.src='https://placehold.co/400x250/fffaf2/e67e00?text=Platzhalter:+verteilte_Wicklung.png';" 
+                   alt="Verteilte Wicklung" 
+                   style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--border);">
+            </figure>
+            <h4 style="color:var(--primary); margin-bottom: 0.2rem;">Verteilte Wicklung</h4>
+            <p style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.8rem;">(Wicklung über mind. zwei Stator-Zähne)</p>
+            <p style="font-size: 0.9rem;"><strong>Anwendung & Vorteil:</strong> Der absolute Standard bei klassischen Industrie-Asynchronmotoren. Durch die Verteilung der Spule über mehrere Nuten erzeugt die Statorwicklung ein wesentlich runderes, sinusförmiges Magnetfeld (geringere Oberwellen). Dies sorgt für einen extrem ruhigen, vibrationsarmen Lauf und höchste Effizienz im industriellen Dauerbetrieb (S1) am 400-V-Netz.</p>
+          </div>
+
+        </div>
+
         <div class="grid-2" style="margin-top: 1.5rem; margin-bottom: 0;">
           <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border);">
             <h4 style="color:var(--primary); margin-bottom: 0.4rem;">Symmetrische Netzbelastung</h4>
@@ -606,6 +764,26 @@
             <p style="font-size: 0.95rem;"><strong>Rechtslauf (Standard):</strong> Belegung der Zuleiter L1, L2, L3 an die Klemmen U1, V1, W1 erzeugt ein rechtsdrehendes Stator-Drehfeld.<br>
             <strong>Linkslauf:</strong> Durch Vertauschen zweier beliebiger Außenleiter (z. B. L1 und L2) kehrt sich der Drehfeldsinn um.</p>
           </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <span class="badge" style="background-color: rgba(230, 126, 0, 0.15); color: var(--accent);">Rotortechnologie</span>
+        <h3 style="margin-top: 0.5rem;">Der Kurzschlussläufer (Käfigläufer)</h3>
+        
+        <figure style="margin-bottom: 1.5rem; text-align: center;">
+          <img src="Käfigläufer.jpg" 
+               onerror="this.onerror=null;this.src='https://placehold.co/800x350/eef6fc/0f3d63?text=Platzhalter:+Käfigläufer.jpg';" 
+               alt="Aufbau des Kurzschlussläufers" 
+               style="width: 100%; max-width: 800px; height: auto; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+          <figcaption style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'Montserrat', sans-serif;">Abb. 2: Typischer Aufbau eines massiven Kurzschlussläufers ohne Schleifringe.</figcaption>
+        </figure>
+
+        <p style="margin-bottom: 1rem;">Der absolute Branchenstandard für robuste Industrieantriebe ist der <strong>Drehstrom-Asynchronmotor mit Kurzschlussläufer</strong>. Das vom Stator erzeugte Drehfeld induziert in den Kurzschlussstäben (meist aus Aluminium oder Kupfer) des Rotors eine Spannung, wodurch starke Ströme fließen und das Drehmoment völlig kontaktlos und verschleißfrei aufgebaut wird.</p>
+        
+        <div style="background: #f8fafc; padding: 1.2rem; border-left: 4px solid var(--primary); border-radius: 4px; border: 1px solid var(--border);">
+          <h4 style="color:var(--primary); font-family: 'Montserrat', sans-serif; font-size: 1rem; margin-bottom: 0.5rem;">Abgrenzung zum Synchronmotor</h4>
+          <p style="font-size: 0.95rem; line-height: 1.6;">Die Motortypen <em>Asynchron</em> und <em>Synchron</em> teilen sich den identischen Statoraufbau (das Drehfeld). Der wesentliche Unterschied liegt <strong>ausschließlich im Aufbau des Rotors</strong>. <br><br>Während der Asynchronmotor den passiven Käfigläufer nutzt und dem Drehfeld physikalisch bedingt immer leicht "hinterherhinkt" (Schlupf), dreht ein <strong>Synchronmotor</strong> exakt synchron zur Geschwindigkeit des Drehfeldes. Dies wird erreicht, indem der Rotor des Synchronmotors selbst ein aktives Magnetfeld besitzt – realisiert durch aufgeklebte <strong>Dauermagnete (Permanentmagnete)</strong> oder eine über Schleifringe <strong>fremderregte Spule</strong> (Elektromagnet). Für den unkomplizierten, robusten Dauerbetrieb direkt am 400-V-Netz bleibt der Asynchronmotor jedoch die erste Wahl.</p>
         </div>
       </div>
 
@@ -685,7 +863,7 @@
 
     </section>
 
-    <!-- REITER 3: INTERAKTIVE SIMULATION & ERKLÄRUNGEN -->
+    <!-- REITER 3: VISUALISIERUNGEN ZUR TECHNIK -->
     <section id="tab-sim" class="tab-content">
       
       <div class="sim-bar">
@@ -764,7 +942,7 @@
         </div>
       </div>
 
-      <!-- NEU: AZUBI ERKLÄRUNG ZUR PRÜFUNGSFALLE -->
+      <!-- AZUBI ERKLÄRUNG ZUR PRÜFUNGSFALLE -->
       <div class="card" style="margin-top: 2rem; border-left: 4px solid var(--accent);">
         <h3 style="color: var(--accent); margin-bottom: 1rem;">Prüfungsfalle: Warum die Formel gleich aussieht, aber die Leistung verdreifacht wird</h3>
         <p style="margin-bottom: 1.5rem;">Die Formel <span class="formula-tag">P = &radic;3 &middot; U &middot; I</span> in der Tabelle ist eine typische Prüfungsfalle, weil sie für Stern und Dreieck identisch im Tabellenbuch steht. Der Schlüssel zum Verständnis liegt im Unterschied zwischen dem Blick auf die <strong>einzelne Motorspule</strong> und der <strong>Messung mit der Stromzange</strong> an der Zuleitung.</p>
@@ -806,7 +984,6 @@
           </div>
         </div>
       </div>
-      <!-- ENDE AZUBI ERKLÄRUNG -->
 
       <div style="text-align: center; margin-top: 3rem; margin-bottom: 1rem; padding: 2rem; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);">
         <h4 style="font-family: 'Montserrat', sans-serif; color: var(--primary); margin-bottom: 1.2rem; font-size: 1.2rem;">Weiterführendes Wissen</h4>
@@ -836,7 +1013,8 @@
       </div>
     </div>
     <div class="copyright">
-      &copy; 2026 BavariaMotion Antriebstechnik GmbH • Werk Pfaffenhofen. Alle technischen Angaben entsprechen dem Lehrplan Steuerungstechnik / LF08.
+      &copy; 2026 BavariaMotion Antriebstechnik GmbH • Werk Pfaffenhofen. Alle technischen Angaben entsprechen dem Lehrplan Steuerungstechnik / LF08.<br><br>
+      <span style="color: #cbd5e1; font-weight: 500;">Hinweis: Diese Website enthält KI-generierte Inhalte und dient ausschließlich zu Lehr- und Demonstrationszwecken. Sie repräsentiert kein reales Unternehmen.</span>
     </div>
   </footer>
 
