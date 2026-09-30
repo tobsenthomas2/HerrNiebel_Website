@@ -523,6 +523,7 @@
       margin-top: 4px;
     }
 
+    /* NEUTRALLEITER BUTTON HOVER EFFECT */
     .btn-action-link {
       display: inline-block;
       background: var(--accent);
@@ -536,7 +537,6 @@
       transition: background 0.3s, transform 0.2s;
       box-shadow: var(--shadow);
     }
-    
     .btn-action-link:hover {
       background: #cc7000;
       transform: translateY(-2px);
@@ -575,7 +575,6 @@
       text-align: center;
       font-size: 0.8rem;
       color: #556980;
-      line-height: 1.8;
     }
 
     @media (max-width: 768px) {
@@ -690,13 +689,22 @@
         <h3 style="margin-top: 0.5rem;">Komponenten des Drehstrom-Asynchronmotors</h3>
         <p style="margin-bottom: 1.5rem;">Bevor wir in die elektrische Verschaltung und Verkettung eintauchen, betrachten wir die mechanischen Hauptbestandteile unserer hochrobusten Industrieantriebe. Das Design ist bewusst wartungsarm, da es ohne verschleißanfällige Schleifkontakte (Bürsten) auskommt.</p>
         
-        <figure style="margin-bottom: 2rem; text-align: center;">
-          <img src="Aufbau_Asynchron_Motor.png" 
-               onerror="this.onerror=null;this.src='https://placehold.co/800x350/eef6fc/0f3d63?text=Foto-Platzhalter:+Aufbau_Asynchron_Motor.png';" 
-               alt="Aufbau Asynchronmotor" 
-               style="width: 100%; max-width: 800px; height: auto; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-          <figcaption style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'Montserrat', sans-serif;">Abb. 1: Querschnitt und mechanische Hauptkomponenten eines BavariaMotion Asynchronmotors.</figcaption>
-        </figure>
+        <div class="grid-2" style="margin-bottom: 2rem;">
+          <figure style="text-align: center;">
+            <img src="Aufbau_Asynchron_Motor.png" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/600x350/eef6fc/0f3d63?text=Foto-Platzhalter:+Aufbau_Asynchron_Motor.png';" 
+                 alt="Aufbau Asynchronmotor" 
+                 style="width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <figcaption style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'Montserrat', sans-serif;">Abb. 1: Querschnitt und Hauptkomponenten eines BavariaMotion Motors.</figcaption>
+          </figure>
+          <figure style="text-align: center;">
+            <img src="Asynchron_Motor_Wicklungen.jpg" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/600x350/eef6fc/0f3d63?text=Foto-Platzhalter:+Asynchron_Motor_Wicklungen.jpg';" 
+                 alt="Statorwicklungen" 
+                 style="width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <figcaption style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'Montserrat', sans-serif;">Abb. 2: Detailansicht der eingelegten Statorwicklungen.</figcaption>
+          </figure>
+        </div>
 
         <div class="grid-3" style="margin-bottom: 0;">
           <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border); border-top: 3px solid var(--primary);">
@@ -704,7 +712,7 @@
             <p style="font-size: 0.9rem;">Das feststehende Außenteil. Es besteht aus einem genuteten Blechpaket, in das die drei Kupferwicklungen (Stränge) eingelegt sind. Wird hier Drehstrom angelegt, entsteht das rotierende Magnetfeld.</p>
           </div>
           <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border); border-top: 3px solid var(--accent);">
-            <h4 style="color:var(--primary); margin-bottom: 0.4rem; font-size: 1.05rem;">⚙️ 2. Rotor (Läufer)</h4>
+            <h4 style="color:var(--primary); margin-bottom: 0.4rem; font-size: 1.05rem;">⚙️️ 2. Rotor (Läufer)</h4>
             <p style="font-size: 0.9rem;">Das rotierende Innenteil auf der Motorwelle. Meist als massiver <strong>Kurzschlussläufer</strong> (Käfigläufer) ausgeführt. Die Magnetlinien des Stators induzieren hier Ströme, wodurch der Rotor dem Stator-Feld folgt.</p>
           </div>
           <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border); border-top: 3px solid #64748b;">
@@ -776,7 +784,7 @@
                onerror="this.onerror=null;this.src='https://placehold.co/800x350/eef6fc/0f3d63?text=Platzhalter:+Käfigläufer.jpg';" 
                alt="Aufbau des Kurzschlussläufers" 
                style="width: 100%; max-width: 800px; height: auto; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-          <figcaption style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'Montserrat', sans-serif;">Abb. 2: Typischer Aufbau eines massiven Kurzschlussläufers ohne Schleifringe.</figcaption>
+          <figcaption style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'Montserrat', sans-serif;">Abb. 3: Typischer Aufbau eines massiven Kurzschlussläufers ohne Schleifringe.</figcaption>
         </figure>
 
         <p style="margin-bottom: 1rem;">Der absolute Branchenstandard für robuste Industrieantriebe ist der <strong>Drehstrom-Asynchronmotor mit Kurzschlussläufer</strong>. Das vom Stator erzeugte Drehfeld induziert in den Kurzschlussstäben (meist aus Aluminium oder Kupfer) des Rotors eine Spannung, wodurch starke Ströme fließen und das Drehmoment völlig kontaktlos und verschleißfrei aufgebaut wird.</p>
