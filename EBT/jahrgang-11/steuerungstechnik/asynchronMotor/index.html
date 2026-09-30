@@ -1137,9 +1137,10 @@
       const rStator = 100;
       const rRotor = 42;
 
-      // Drehgeschwindigkeit & Flussdichte abhängig von Stern/Dreieck
+      // Die Drehgeschwindigkeit (omega) bleibt konstant, da sie von der Netzfrequenz abhängt!
+      // Nur die magnetische Flussdichte (fluxStrength) ändert sich durch die höhere Spannung im Dreieck.
       const fluxStrength = activeMode === 'star' ? 0.55 : 1.0;
-      const omega = activeMode === 'star' ? 0.03 : 0.055;
+      const omega = 0.045; // Feste, gleichbleibende Synchrondrehzahl
       timeStep += omega;
 
       // 1. STATORGEHÄUSE
