@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>BavariaMotion Zertifizierungs-Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f3d63;
+      --accent: #e67e00;
+      --bg: #f5f7fa;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg);
+      margin: 0;
+      padding: 20px;
+      color: #2c3e50;
+    }
+    .container {
+      max-width: 1250px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      border-top: 5px solid var(--primary);
+    }
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(230, 126, 0, 0.15);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .workspace {
+      position: relative;
+      margin-top: 25px;
+      background: #fff;
+      border: 2px solid #dbe2ea;
+      border-radius: 8px;
+      background-size: 20px 20px;
+      background-position: -1px -1px;
+      background-image:
+        linear-gradient(to right, #f0f4f8 1px, transparent 1px),
+        linear-gradient(to bottom, #f0f4f8 1px, transparent 1px);
+      width: 1200px;
+      height: 750px;
+      overflow: hidden;
+      user-select: none;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .terminal {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .terminal:hover {
+      fill: var(--accent);
+      stroke: var(--accent);
+    }
+    .terminal.selected {
+      fill: #ef4444;
+      stroke: #ef4444;
+      r: 10;
+    }
+    .wire {
+      stroke: #ef4444;
+      stroke-width: 4;
+      stroke-linecap: round;
+      cursor: pointer;
+      transition: stroke 0.2s;
+    }
+    .wire:hover {
+      stroke: #dc2626;
+      stroke-width: 7;
+    }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    button {
+      font-family: 'Montserrat', sans-serif;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      transition: transform 0.2s, background 0.3s;
+    }
+    button:hover {
+      background: #1b5b91;
+      transform: translateY(-2px);
+    }
+    .btn-check {
+      background: var(--accent);
+    }
+    .btn-check:hover {
+      background: #cc7000;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      font-weight: 700;
+      display: none;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #10b981;
+    }
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #ef4444;
+    }
+    .discount-code {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #065f46;
+      color: white;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      border-radius: 4px;
+      border: 2px dashed rgba(255,255,255,0.5);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <span class="badge">Zertifizierungs-Programm</span>
+  <h2>BavariaMotion Verdrahtungs-Test</h2>
+  <p>
+    Teste, ob du unsere Asynchronmotoren für den Industrieeinsatz normgerecht verdrahten kannst und <strong>sichere dir 5% Rabatt</strong> auf deine nächste Bestellung!<br><br>
+    <strong>Aufgabe:</strong> Schließe den linken Motor in <strong>Sternschaltung</strong> und den rechten in <strong>Dreieckschaltung</strong> an (beide für <strong>Rechtslauf</strong>). Verbinde die Schützausgänge mit den Klemmbrettern, setze die Kontaktbrücken und vergiss den PE (Schutzleiter) nicht!<br>
+    <span style="font-size: 0.9rem; color: #64748b;"><em>Anleitung: Klicke auf zwei weiße Anschlusspunkte (Kreise), um eine Leitung zu ziehen. Ein Klick auf eine bestehende Leitung entfernt diese wieder.</em></span>
+  </p>
+
+  <div class="workspace" id="workspace">
+    <svg id="schematic" viewBox="0 0 1200 750">
+      
+      <!-- F1 Box -->
+      <rect x="180" y="50" width="120" height="150" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+      <text x="200" y="40" font-family="Arial" font-size="14" fill="#333">F1</text>
+
+      <!-- F2 Box -->
+      <rect x="320" y="50" width="760" height="400" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+      <text x="340" y="40" font-family="Arial" font-size="14" fill="#333">F2</text>
+      <text x="940" y="420" font-family="Arial" font-size="16" fill="#64748b" font-weight="bold">Elektro-Verteilung</text>
+
+      <!-- RCD Box inside F2 -->
+      <rect x="340" y="90" width="50" height="80" fill="#9ca3af" stroke="#333" stroke-width="2"/>
+      <text x="346" y="135" font-family="Arial" font-size="16" fill="#111">RCD</text>
+
+      <g stroke="#111" stroke-width="2" fill="none">
+        <!-- Inductors left -->
+        <path d="M 120 100 q 7.5 -15 15 0 q 7.5 -15 15 0 q 7.5 -15 15 0 q 7.5 -15 15 0"/>
+        <path d="M 120 120 q 7.5 -15 15 0 q 7.5 -15 15 0 q 7.5 -15 15 0 q 7.5 -15 15 0"/>
+        <path d="M 120 140 q 7.5 -15 15 0 q 7.5 -15 15 0 q 7.5 -15 15 0 q 7.5 -15 15 0"/>
+
+        <!-- Horizontal lines from left to right -->
+        <!-- L1 -->
+        <line x1="60" y1="100" x2="120" y2="100"/>
+        <line x1="180" y1="100" x2="340" y2="100"/> <!-- to RCD (passes through fuse) -->
+        <rect x="200" y="94" width="60" height="12"/> <!-- F1 fuse -->
+        <line x1="390" y1="100" x2="1140" y2="100"/> <!-- after RCD -->
+
+        <!-- L2 -->
+        <line x1="60" y1="120" x2="120" y2="120"/>
+        <line x1="180" y1="120" x2="340" y2="120"/>
+        <rect x="200" y="114" width="60" height="12"/> <!-- F1 fuse -->
+        <line x1="390" y1="120" x2="1140" y2="120"/>
+
+        <!-- L3 -->
+        <line x1="60" y1="140" x2="120" y2="140"/>
+        <line x1="180" y1="140" x2="340" y2="140"/>
+        <rect x="200" y="134" width="60" height="12"/> <!-- F1 fuse -->
+        <line x1="390" y1="140" x2="1140" y2="140"/>
+
+        <!-- N -->
+        <line x1="240" y1="160" x2="340" y2="160"/>
+        <line x1="390" y1="160" x2="1140" y2="160"/>
+        
+        <!-- PE -->
+        <line x1="60" y1="180" x2="1140" y2="180"/>
+
+        <!-- PEN split in F1 -->
+        <line x1="240" y1="180" x2="240" y2="160"/>
+        
+        <!-- Ground left -->
+        <line x1="60" y1="100" x2="60" y2="280"/>
+        <line x1="45" y1="280" x2="75" y2="280"/>
+        <line x1="51" y1="288" x2="69" y2="288"/>
+        <line x1="57" y1="296" x2="63" y2="296"/>
+      </g>
+
+      <!-- Dots for left side -->
+      <circle cx="60" cy="100" r="4" fill="#111"/>
+      <circle cx="60" cy="120" r="4" fill="#111"/>
+      <circle cx="60" cy="140" r="4" fill="#111"/>
+      <circle cx="60" cy="180" r="4" fill="#111"/>
+      <circle cx="240" cy="180" r="4" fill="#111"/>
+      <circle cx="240" cy="160" r="4" fill="#111"/>
+
+      <!-- Labels Right -->
+      <g font-family="Arial" font-size="16" fill="#111">
+        <text x="1150" y="105">L1</text>
+        <text x="1150" y="125">L2</text>
+        <text x="1150" y="145">L3</text>
+        <text x="1150" y="165">N</text>
+        <text x="1150" y="185">PE</text>
+      </g>
+
+      <!-- M1 Branch (Left) -->
+      <g stroke="#111" stroke-width="2" fill="none">
+        <!-- Lines from L1,L2,L3 -->
+        <line x1="460" y1="100" x2="460" y2="220"/>
+        <line x1="490" y1="120" x2="490" y2="220"/>
+        <line x1="520" y1="140" x2="520" y2="220"/>
+        
+        <!-- F3 Label -->
+        <text x="420" y="260" font-family="Arial" font-size="14" fill="#111" stroke="none">F3</text>
+        
+        <!-- F3 (Motorschutzschalter) -->
+        <line x1="460" y1="280" x2="445" y2="220"/>
+        <line x1="490" y1="280" x2="475" y2="220"/>
+        <line x1="520" y1="280" x2="505" y2="220"/>
+        
+        <!-- F3 arrows (Motorschutz) -->
+        <line x1="452.5" y1="250" x2="442.8" y2="252.4"/>
+        <polygon points="435.0,254.3 441.8,248.5 443.8,256.3" fill="#111" stroke="none"/>
+        <line x1="482.5" y1="250" x2="472.8" y2="252.4"/>
+        <polygon points="465.0,254.3 471.8,248.5 473.8,256.3" fill="#111" stroke="none"/>
+        <line x1="512.5" y1="250" x2="502.8" y2="252.4"/>
+        <polygon points="495.0,254.3 501.8,248.5 503.8,256.3" fill="#111" stroke="none"/>
+
+        <!-- F3 to Q1 -->
+        <line x1="460" y1="280" x2="460" y2="340"/>
+        <line x1="490" y1="280" x2="490" y2="340"/>
+        <line x1="520" y1="280" x2="520" y2="340"/>
+
+        <!-- Q1 Label -->
+        <text x="420" y="380" font-family="Arial" font-size="14" fill="#111" stroke="none">Q1</text>
+
+        <!-- Q1 (Schütz) -->
+        <line x1="460" y1="400" x2="445" y2="340"/>
+        <line x1="490" y1="400" x2="475" y2="340"/>
+        <line x1="520" y1="400" x2="505" y2="340"/>
+        <!-- Q1 dashed line -->
+        <line x1="435" y1="370" x2="515" y2="370" stroke-dasharray="6,4" stroke-width="1.5"/>
+      </g>
+      
+      <!-- Dots for M1 -->
+      <circle cx="460" cy="100" r="4" fill="#111"/>
+      <circle cx="490" cy="120" r="4" fill="#111"/>
+      <circle cx="520" cy="140" r="4" fill="#111"/>
+
+      <g fill="#fff" stroke="#111" stroke-width="2">
+        <circle cx="460" cy="220" r="3"/> <circle cx="460" cy="280" r="3"/>
+        <circle cx="490" cy="220" r="3"/> <circle cx="490" cy="280" r="3"/>
+        <circle cx="520" cy="220" r="3"/> <circle cx="520" cy="280" r="3"/>
+
+        <circle cx="460" cy="340" r="3"/> 
+        <circle cx="490" cy="340" r="3"/> 
+        <circle cx="520" cy="340" r="3"/> 
+      </g>
+      <g font-family="Arial" font-size="12" fill="#2563eb">
+        <text x="445" y="215">1</text> <text x="445" y="295">2</text>
+        <text x="475" y="215">3</text> <text x="475" y="295">4</text>
+        <text x="505" y="215">5</text> <text x="505" y="295">6</text>
+
+        <text x="445" y="335">1</text> <text x="445" y="415">2</text>
+        <text x="475" y="335">3</text> <text x="475" y="415">4</text>
+        <text x="505" y="335">5</text> <text x="505" y="415">6</text>
+      </g>
+
+      <!-- M2 Branch (Right) -->
+      <g stroke="#111" stroke-width="2" fill="none">
+        <line x1="760" y1="100" x2="760" y2="220"/>
+        <line x1="790" y1="120" x2="790" y2="220"/>
+        <line x1="820" y1="140" x2="820" y2="220"/>
+        
+        <text x="720" y="260" font-family="Arial" font-size="14" fill="#111" stroke="none">F4</text>
+        
+        <line x1="760" y1="280" x2="745" y2="220"/>
+        <line x1="790" y1="280" x2="775" y2="220"/>
+        <line x1="820" y1="280" x2="805" y2="220"/>
+        <!-- F4 arrows (Motorschutz) -->
+        <line x1="752.5" y1="250" x2="742.8" y2="252.4"/>
+        <polygon points="735.0,254.3 741.8,248.5 743.8,256.3" fill="#111" stroke="none"/>
+        <line x1="782.5" y1="250" x2="772.8" y2="252.4"/>
+        <polygon points="765.0,254.3 771.8,248.5 773.8,256.3" fill="#111" stroke="none"/>
+        <line x1="812.5" y1="250" x2="802.8" y2="252.4"/>
+        <polygon points="795.0,254.3 801.8,248.5 803.8,256.3" fill="#111" stroke="none"/>
+
+        <line x1="760" y1="280" x2="760" y2="340"/>
+        <line x1="790" y1="280" x2="790" y2="340"/>
+        <line x1="820" y1="280" x2="820" y2="340"/>
+
+        <text x="720" y="380" font-family="Arial" font-size="14" fill="#111" stroke="none">Q2</text>
+
+        <line x1="760" y1="400" x2="745" y2="340"/>
+        <line x1="790" y1="400" x2="775" y2="340"/>
+        <line x1="820" y1="400" x2="805" y2="340"/>
+        <line x1="735" y1="370" x2="815" y2="370" stroke-dasharray="6,4" stroke-width="1.5"/>
+      </g>
+
+      <!-- Dots for M2 -->
+      <circle cx="760" cy="100" r="4" fill="#111"/>
+      <circle cx="790" cy="120" r="4" fill="#111"/>
+      <circle cx="820" cy="140" r="4" fill="#111"/>
+
+      <g fill="#fff" stroke="#111" stroke-width="2">
+        <circle cx="760" cy="220" r="3"/> <circle cx="760" cy="280" r="3"/>
+        <circle cx="790" cy="220" r="3"/> <circle cx="790" cy="280" r="3"/>
+        <circle cx="820" cy="220" r="3"/> <circle cx="820" cy="280" r="3"/>
+
+        <circle cx="760" cy="340" r="3"/> 
+        <circle cx="790" cy="340" r="3"/> 
+        <circle cx="820" cy="340" r="3"/> 
+      </g>
+      <g font-family="Arial" font-size="12" fill="#2563eb">
+        <text x="745" y="215">1</text> <text x="745" y="295">2</text>
+        <text x="775" y="215">3</text> <text x="775" y="295">4</text>
+        <text x="805" y="215">5</text> <text x="805" y="295">6</text>
+
+        <text x="745" y="335">1</text> <text x="745" y="415">2</text>
+        <text x="775" y="335">3</text> <text x="775" y="415">4</text>
+        <text x="805" y="335">5</text> <text x="805" y="415">6</text>
+      </g>
+
+      <!-- Motors -->
+      <!-- Motor 1 (Stern) -->
+      <g transform="translate(0,0)">
+        <rect x="400" y="520" width="200" height="140" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+        <text x="370" y="535" font-family="Arial" font-size="14" fill="#111">M1</text>
+        <text x="300" y="590" font-family="Arial" font-size="16" fill="#111">Stern-</text>
+        <text x="275" y="610" font-family="Arial" font-size="16" fill="#111">Schaltung</text>
+        <text x="420" y="685" font-family="Arial" font-size="14" fill="#333">Asynchron-</text>
+        <text x="440" y="705" font-family="Arial" font-size="14" fill="#333">motor</text>
+
+        <text x="450" y="540" font-family="Arial" font-size="14">U1</text>
+        <text x="480" y="540" font-family="Arial" font-size="14">V1</text>
+        <text x="510" y="540" font-family="Arial" font-size="14">W1</text>
+
+        <text x="450" y="635" font-family="Arial" font-size="14">W2</text>
+        <text x="480" y="635" font-family="Arial" font-size="14">U2</text>
+        <text x="510" y="635" font-family="Arial" font-size="14">V2</text>
+        
+        <text x="555" y="585" font-family="Arial" font-size="14">GND</text>
+      </g>
+
+      <!-- Motor 2 (Dreieck) -->
+      <g transform="translate(0,0)">
+        <rect x="700" y="520" width="200" height="140" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+        <text x="670" y="535" font-family="Arial" font-size="14" fill="#111">M2</text>
+        <text x="930" y="590" font-family="Arial" font-size="16" fill="#111">Dreieck-</text>
+        <text x="930" y="610" font-family="Arial" font-size="16" fill="#111">Schaltung</text>
+        <text x="720" y="685" font-family="Arial" font-size="14" fill="#333">Asynchron-</text>
+        <text x="740" y="705" font-family="Arial" font-size="14" fill="#333">motor</text>
+
+        <text x="750" y="540" font-family="Arial" font-size="14">U1</text>
+        <text x="780" y="540" font-family="Arial" font-size="14">V1</text>
+        <text x="810" y="540" font-family="Arial" font-size="14">W1</text>
+
+        <text x="750" y="635" font-family="Arial" font-size="14">W2</text>
+        <text x="780" y="635" font-family="Arial" font-size="14">U2</text>
+        <text x="810" y="635" font-family="Arial" font-size="14">V2</text>
+        
+        <text x="855" y="585" font-family="Arial" font-size="14">GND</text>
+      </g>
+
+      <!-- Dynamic Wires Group (drawn below terminals) -->
+      <g id="wiresGroup"></g>
+
+      <!-- Clickable Terminals (Nodes) for User Wiring -->
+      <g id="terminalsGroup" fill="#ffffff" stroke="#334155" stroke-width="2">
+        <!-- PE Line Connection Points -->
+        <circle cx="580" cy="180" r="7" class="terminal" data-id="PE_1"/>
+        <circle cx="880" cy="180" r="7" class="terminal" data-id="PE_2"/>
+        <circle cx="1000" cy="180" r="7" class="terminal" data-id="PE_3"/>
+
+        <!-- Q1 Outputs -->
+        <circle cx="460" cy="400" r="7" class="terminal" data-id="Q1_2"/>
+        <circle cx="490" cy="400" r="7" class="terminal" data-id="Q1_4"/>
+        <circle cx="520" cy="400" r="7" class="terminal" data-id="Q1_6"/>
+
+        <!-- Motor 1 (Stern) -->
+        <circle cx="460" cy="555" r="7" class="terminal" data-id="M1_U1"/>
+        <circle cx="490" cy="555" r="7" class="terminal" data-id="M1_V1"/>
+        <circle cx="520" cy="555" r="7" class="terminal" data-id="M1_W1"/>
+        
+        <circle cx="460" cy="610" r="7" class="terminal" data-id="M1_W2"/>
+        <circle cx="490" cy="610" r="7" class="terminal" data-id="M1_U2"/>
+        <circle cx="520" cy="610" r="7" class="terminal" data-id="M1_V2"/>
+        
+        <circle cx="570" cy="560" r="7" class="terminal" data-id="M1_GND"/>
+
+        <!-- Q2 Outputs -->
+        <circle cx="760" cy="400" r="7" class="terminal" data-id="Q2_2"/>
+        <circle cx="790" cy="400" r="7" class="terminal" data-id="Q2_4"/>
+        <circle cx="820" cy="400" r="7" class="terminal" data-id="Q2_6"/>
+
+        <!-- Motor 2 (Dreieck) -->
+        <circle cx="760" cy="555" r="7" class="terminal" data-id="M2_U1"/>
+        <circle cx="790" cy="555" r="7" class="terminal" data-id="M2_V1"/>
+        <circle cx="820" cy="555" r="7" class="terminal" data-id="M2_W1"/>
+        
+        <circle cx="760" cy="610" r="7" class="terminal" data-id="M2_W2"/>
+        <circle cx="790" cy="610" r="7" class="terminal" data-id="M2_U2"/>
+        <circle cx="820" cy="610" r="7" class="terminal" data-id="M2_V2"/>
+        
+        <circle cx="870" cy="560" r="7" class="terminal" data-id="M2_GND"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="controls">
+    <button class="btn-check" onclick="checkWiring()">Verdrahtung prüfen</button>
+    <button onclick="clearWires()" style="background: #e2e8f0; color: #475569;">Löschen</button>
+  </div>
+
+  <div id="result"></div>
+</div>
+
+<script>
+  let selectedTerminal = null;
+  let wires = [];
+  const wiresGroup = document.getElementById('wiresGroup');
+  const resultDiv = document.getElementById('result');
+
+  // Add click events to terminals
+  document.querySelectorAll('.terminal').forEach(term => {
+    term.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (selectedTerminal === this) {
+        this.classList.remove('selected');
+        selectedTerminal = null;
+      } else if (!selectedTerminal) {
+        this.classList.add('selected');
+        selectedTerminal = this;
+      } else {
+        addWire(selectedTerminal, this);
+        selectedTerminal.classList.remove('selected');
+        selectedTerminal = null;
+      }
+    });
+  });
+
+  function addWire(t1, t2) {
+    if (t1.dataset.id === t2.dataset.id) return;
+    
+    // Check if wire already exists
+    const exists = wires.some(w => 
+      (w.t1 === t1.dataset.id && w.t2 === t2.dataset.id) ||
+      (w.t1 === t2.dataset.id && w.t2 === t1.dataset.id)
+    );
+    if (exists) return;
+
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", t1.getAttribute("cx"));
+    line.setAttribute("y1", t1.getAttribute("cy"));
+    line.setAttribute("x2", t2.getAttribute("cx"));
+    line.setAttribute("y2", t2.getAttribute("cy"));
+    line.setAttribute("class", "wire");
+    
+    const wireObj = { t1: t1.dataset.id, t2: t2.dataset.id, el: line };
+    wires.push(wireObj);
+    
+    line.addEventListener('click', function(e) {
+      e.stopPropagation();
+      wiresGroup.removeChild(this);
+      wires = wires.filter(w => w.el !== this);
+    });
+    
+    wiresGroup.appendChild(line);
+  }
+
+  function clearWires() {
+    wiresGroup.innerHTML = '';
+    wires = [];
+    resultDiv.style.display = 'none';
+    if (selectedTerminal) {
+      selectedTerminal.classList.remove('selected');
+      selectedTerminal = null;
+    }
+  }
+
+  function getConnectedComponents() {
+    const parent = {};
+    function find(i) {
+      if (parent[i] === undefined) parent[i] = i;
+      if (parent[i] === i) return i;
+      return parent[i] = find(parent[i]);
+    }
+    function union(i, j) {
+      const rootI = find(i);
+      const rootJ = find(j);
+      if (rootI !== rootJ) {
+        parent[rootI] = rootJ;
+      }
+    }
+
+    wires.forEach(w => {
+      union(w.t1, w.t2);
+    });
+
+    const groups = {};
+    document.querySelectorAll('.terminal').forEach(t => {
+      const id = t.dataset.id;
+      const root = find(id);
+      if (!groups[root]) groups[root] = [];
+      groups[root].push(id);
+    });
+
+    return Object.values(groups).filter(g => g.length > 1);
+  }
+
+  function checkWiring() {
+    const components = getConnectedComponents();
+    
+    function getGroup(node) {
+      return components.find(c => c.includes(node)) || [node];
+    }
+
+    function checkExactGroup(nodesArr, allowedNodesArr) {
+      const g = getGroup(nodesArr[0]);
+      const hasAll = nodesArr.every(n => g.includes(n));
+      const noExtras = g.every(n => allowedNodesArr.includes(n));
+      return hasAll && noExtras;
+    }
+
+    let errors = [];
+
+    // M1 (Stern)
+    if (!checkExactGroup(['Q1_2', 'M1_U1'], ['Q1_2', 'M1_U1'])) {
+      errors.push("M1 (Phase 1): Q1_2 muss genau mit U1 verbunden werden.");
+    }
+    if (!checkExactGroup(['Q1_4', 'M1_V1'], ['Q1_4', 'M1_V1'])) {
+      errors.push("M1 (Phase 2): Q1_4 muss genau mit V1 verbunden werden.");
+    }
+    if (!checkExactGroup(['Q1_6', 'M1_W1'], ['Q1_6', 'M1_W1'])) {
+      errors.push("M1 (Phase 3): Q1_6 muss genau mit W1 verbunden werden.");
+    }
+    if (!checkExactGroup(['M1_W2', 'M1_U2', 'M1_V2'], ['M1_W2', 'M1_U2', 'M1_V2'])) {
+      errors.push("M1 (Sternbrücke): W2, U2 und V2 müssen miteinander verbunden sein (und mit nichts anderem).");
+    }
+
+    // M2 (Dreieck)
+    if (!checkExactGroup(['Q2_2', 'M2_U1', 'M2_W2'], ['Q2_2', 'M2_U1', 'M2_W2'])) {
+      errors.push("M2 (Phase 1): Q2_2 muss mit U1 und W2 verbunden werden.");
+    }
+    if (!checkExactGroup(['Q2_4', 'M2_V1', 'M2_U2'], ['Q2_4', 'M2_V1', 'M2_U2'])) {
+      errors.push("M2 (Phase 2): Q2_4 muss mit V1 und U2 verbunden werden.");
+    }
+    if (!checkExactGroup(['Q2_6', 'M2_W1', 'M2_V2'], ['Q2_6', 'M2_W1', 'M2_V2'])) {
+      errors.push("M2 (Phase 3): Q2_6 muss mit W1 und V2 verbunden werden.");
+    }
+
+    // PE
+    const m1GndOk = components.some(g => (g.includes('PE_1') || g.includes('PE_2') || g.includes('PE_3')) && g.includes('M1_GND'));
+    const m2GndOk = components.some(g => (g.includes('PE_1') || g.includes('PE_2') || g.includes('PE_3')) && g.includes('M2_GND'));
+    if (!m1GndOk || !m2GndOk) {
+      errors.push("Der Schutzleiter (PE) muss vom Netz an die Gehäuse beider Motoren angeschlossen werden!");
+    }
+
+    resultDiv.style.display = 'block';
+    if (errors.length === 0) {
+      resultDiv.className = 'success';
+      resultDiv.innerHTML = `
+        🎉 <strong>Glückwunsch! Verdrahtung 100% korrekt!</strong><br><br>
+        Der linke Motor läuft im Stern an, der rechte im Dreieck, und der Rechtslauf ist gesichert.<br><br>
+        Hier ist dein 5% Rabattcode für BavariaMotion:<br>
+        <div class="discount-code">BAVARIA-MASTER-5</div>
+      `;
+    } else {
+      resultDiv.className = 'error';
+      resultDiv.innerHTML = `
+        ⚠️ <strong>Prüfung fehlgeschlagen:</strong><br>
+        <ul style="margin-top: 10px; margin-bottom: 0;">
+          ${errors.map(e => `<li>${e}</li>`).join('')}
+        </ul>
+      `;
+    }
+  }
+</script>
+
+</body>
+</html>
