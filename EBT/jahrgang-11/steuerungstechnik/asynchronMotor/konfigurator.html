@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BavariaMotion | Erweiterter Antriebs-Konfigurator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f3d63;       
+      --primary-light: #1b5b91;
+      --accent: #e67e00;        
+      --dark: #12181f;
+      --light-bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --text: #2c3e50;
+      --text-muted: #64748b;
+      --border: #dbe2ea;
+      --success: #1e7e34;
+      --radius: 8px;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--primary);
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--primary), #2073b5);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    .brand-text h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+    .brand-text span {
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .nav-btn {
+      background: transparent;
+      border: 1px solid var(--primary);
+      padding: 0.65rem 1.2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover {
+      background-color: var(--primary);
+      color: #fff;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .card h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .config-group {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .config-group:last-of-type {
+      border-bottom: none;
+    }
+    .config-group h4 {
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1rem;
+      color: var(--dark);
+      font-size: 1.1rem;
+    }
+    .config-option {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .config-option:hover {
+      background: #eef6fc;
+      border-color: var(--primary-light);
+    }
+    .config-option input[type="radio"] {
+      margin-right: 15px;
+      transform: scale(1.2);
+    }
+    .btn-submit {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 1.2rem 2rem;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(15, 61, 99, 0.2);
+    }
+    .btn-submit:hover {
+      background: var(--primary-light);
+    }
+    #result-box {
+      margin-top: 2rem;
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      display: none;
+      background: #eef6fc;
+      border: 2px solid var(--primary-light);
+    }
+    #result-box h3 {
+      color: var(--primary);
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-size: 1.6rem;
+    }
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .result-item {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-left: 4px solid var(--accent);
+    }
+    .result-item h4 {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .result-item .val {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .result-item p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .marketing-cta {
+      margin-top: 2.5rem;
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .marketing-cta p {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    .btn-cta {
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+    .btn-cta:hover {
+      background: #cc7000;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 768px) {
+      .result-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand">
+      <div class="brand-logo">BM</div>
+      <div class="brand-text">
+        <h1>BAVARIAMOTION</h1>
+        <span>ELEKTROMOTORENWERK PFAFFENHOFEN</span>
+      </div>
+    </a>
+    <a href="index.html" class="nav-btn">Zurück zur Startseite</a>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Interaktiver Antriebs-Konfigurator PRO</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2.5rem;">Definieren Sie Ihr exaktes Anlagenprofil. Unser System errechnet in Echtzeit die passenden Parameter für Betriebsart, Kühlart, Isolierstoffklasse und Schutzart für maximale Lebensdauer.</p>
+
+      <form id="configForm">
+        
+        <div class="config-group">
+          <h4>1. Wie sieht der zeitliche Lastzyklus (Duty Cycle) aus?</h4>
+          <label class="config-option">
+            <input type="radio" name="betrieb" value="s1" checked> 
+            <span><strong>Dauerbetrieb:</strong> Der Motor läuft stundenlang unter konstanter Nennlast (z.B. Pumpen, Lüfter).</span>
+          </label>
+          <label class="config-option">
+            <input type="radio" name="betrieb" value="s2"> 
+            <span><strong>Kurzzeitbetrieb:</strong> Motor läuft z.B. 10 Min, danach folgt eine lange Pause zur kompletten Abkühlung (z.B. Hebebühne).</span>
+          </label>
+          <label class="config-option">
+            <input type="radio" name="betrieb" value="s3"> 
+            <span><strong>Aussetzbetrieb (periodisch):</strong> Konstanter Wechsel aus Last- und Pausenzeiten ohne Anlaufwärme (z.B. Förderbänder).</span>
+          </label>
+          <label class="config-option">
+            <input type="radio" name="betrieb" value="s5"> 
+            <span><strong>Häufiges Anlaufen & Bremsen:</strong> Permanent wechselnde Lasten inkl. elektrischem Bremsen (z.B. Positionierantriebe).</span>
+          </label>
+        </div>
+
+        <div class="config-group">
+          <h4>2. Steuerung & Drehzahlen (Netz vs. Frequenzumrichter)</h4>
+          <label class="config-option">
+            <input type="radio" name="fu" value="netz" checked> 
+            <span><strong>Direkter Netzbetrieb (50 Hz):</strong> Konstante Drehzahlen, Ansteuerung über Schütz (Stern/Dreieck).</span>
+          </label>
+          <label class="config-option">
+            <input type="radio" name="fu" value="fu_normal"> 
+            <span><strong>Frequenzumrichter (FU) Standard:</strong> Geregelte Drehzahl, aber keine extremen Schleichfahrten.</span>
+          </label>
+          <label class="config-option">
+            <input type="radio" name="fu" value="fu_niedrig"> 
+            <span><strong>FU mit Dauer-Schleichfahrt:</strong> Antrieb muss lange bei Drehzahlen nahe 0 U/min hohes Moment liefern.</span>
+          </label>
+        </div>
+
+        <div class="config-group">
+          <h4>3. Umgebungstemperatur am Einsatzort</h4>
+          <label class="config-option">
+            <input type="radio" name="temp" value="normal" checked> 
+            <span><strong>Normale Industriehalle (bis 40 °C):</strong> Klima ist gemäßigt.</span>
+          </label>
+          <label class="config-option">
+            <input type="radio" name="temp" value="heiss"> 
+            <span><strong>Erschwerte Bedingungen (bis 60 °C):</strong> Z.B. Kesselhaus, direkte Sonneneinstrahlung im Sommer.</span>
+          </label>
+          <label class="config-option">
+            <input type="radio" name="temp" value="extrem"> 
+            <span><strong>Extrembedingungen (> 60 °C):</strong> Z.B. Stahlwerk, Gießerei, direkte Strahlungswärme.</span>
+          </label>
+        </div>
+
+        <div class="config-group">
+          <h4>4. Feuchtigkeit, Staub & Gefahrenstoffe (Atmosphäre)</h4>
+          <label class="config-option">
+            <input type="radio" name="umgebung" value="sauber" checked> 
+            <span><strong>Trocken & Sauber:</strong> Normale Hallenumgebung ohne viel Schmutz.</span>
+          </label>
+          <label class="config-option">
+            <input type="radio" name="umgebung" value="staub"> 
+            <span><strong>Extreme Staub- oder Faserbelastung:</strong> Holzverarbeitung, Textilindustrie, Zementwerk.</span>
+          </label>
+          <label class="config-option">
+            <input type="radio" name="umgebung" value="nass"> 
+            <span><strong>Strahlwasser / Außenbereich:</strong> Motor ist Regen oder Hochdruckreinigern ausgesetzt (Food/Beverage).</span>
+          </label>
+          <label class="config-option">
+            <input type="radio" name="umgebung" value="atex"> 
+            <span><strong>Explosionsgefährdet (ATEX):</strong> Dämpfe, Gase oder explosive Stäube vorhanden.</span>
+          </label>
+        </div>
+
+        <button type="button" class="btn-submit" onclick="calculateConfig()">Antriebsauslegung berechnen</button>
+      </form>
+
+      <div id="result-box">
+        <h3>Ihre individuelle Antriebsempfehlung</h3>
+        
+        <div class="result-grid">
+          <div class="result-item">
+            <h4>Empfohlene Betriebsart</h4>
+            <div class="val" id="res-betriebsart">S1</div>
+            <p id="res-betriebsart-desc">-</p>
+          </div>
+          
+          <div class="result-item">
+            <h4>Empfohlene Kühlart</h4>
+            <div class="val" id="res-kuehlart">IC 411</div>
+            <p id="res-kuehlart-desc">-</p>
+          </div>
+          
+          <div class="result-item">
+            <h4>Isolierstoffklasse</h4>
+            <div class="val" id="res-iso">Klasse F</div>
+            <p id="res-iso-desc">-</p>
+          </div>
+
+          <div class="result-item">
+            <h4>Schutzart & Optionen</h4>
+            <div class="val" id="res-schutz">IP 55</div>
+            <p id="res-schutz-desc">-</p>
+          </div>
+        </div>
+
+        <div class="marketing-cta">
+          <p>Perfekt! Das BavariaMotion Engineering-Team baut diesen Motor exakt nach diesen Spezifikationen.</p>
+          <a href="angebot.html" class="btn-cta">Jetzt unverbindliches Angebot anfordern</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function calculateConfig() {
+      const form = document.getElementById('configForm');
+      const formData = new FormData(form);
+      
+      const betrieb = formData.get('betrieb');
+      const fu = formData.get('fu');
+      const temp = formData.get('temp');
+      const umgebung = formData.get('umgebung');
+
+      // Elemente
+      const rBetrieb = document.getElementById('res-betriebsart');
+      const rBetriebD = document.getElementById('res-betriebsart-desc');
+      const rKuehl = document.getElementById('res-kuehlart');
+      const rKuehlD = document.getElementById('res-kuehlart-desc');
+      const rIso = document.getElementById('res-iso');
+      const rIsoD = document.getElementById('res-iso-desc');
+      const rSchutz = document.getElementById('res-schutz');
+      const rSchutzD = document.getElementById('res-schutz-desc');
+
+      // 1. Logik Betriebsart
+      switch (betrieb) {
+        case 's1':
+          rBetrieb.innerText = 'S1 (Dauerbetrieb)';
+          rBetriebD.innerText = 'Thermisch ausgelegt für 100% Einschaltdauer. Massive Ausführung für absolute Zuverlässigkeit im Dauerlauf.';
+          break;
+        case 's2':
+          rBetrieb.innerText = 'S2 (Kurzzeitbetrieb)';
+          rBetriebD.innerText = 'Motor wird kleiner und kostengünstiger ausgelegt, da er die Pausenzeiten zur Abkühlung auf Umgebungstemperatur nutzt.';
+          break;
+        case 's3':
+          rBetrieb.innerText = 'S3 (Aussetzbetrieb)';
+          rBetriebD.innerText = 'Optimiert für zyklische Belastungen ohne vollständige Abkühlung. Ein idealer Kompromiss aus Baugröße und Thermik.';
+          break;
+        case 's5':
+          rBetrieb.innerText = 'S5 / S7 (Schaltbetrieb)';
+          rBetriebD.innerText = 'Spezielle Rotoren mit geringem Trägheitsmoment erlauben häufiges Starten und Bremsen, ohne thermisch zu überhitzen.';
+          break;
+      }
+
+      // 2. Logik Kühlart (IC-Code)
+      if (fu === 'fu_niedrig') {
+        rKuehl.innerText = 'IC 416 (Fremdkühlung)';
+        rKuehlD.innerText = 'Lebensnotwendig: Ein externer Lüftermotor kühlt den Hauptmotor unabhängig von dessen Drehzahl. Verhindert den sicheren Hitzetod bei Schleichfahrt.';
+      } else if (umgebung === 'staub') {
+        rKuehl.innerText = 'IC 410 (Selbstkühlung)';
+        rKuehlD.innerText = 'Keine Lüfterhaube, keine verstopfenden Kühlrippen. Die Wärme wird rein über das spezialgeformte Gehäuse abgestrahlt.';
+      } else {
+        rKuehl.innerText = 'IC 411 (Eigenkühlung)';
+        rKuehlD.innerText = 'Der klassische Wellenlüfter. Die Luft wird automatisch drehzahlabhängig über die Kühlrippen geblasen.';
+      }
+
+      // 3. Logik Isolierstoffklasse & Umrichterfestigkeit
+      if (temp === 'extrem' || betrieb === 's5') {
+        rIso.innerText = 'Klasse H (180 °C)';
+        rIsoD.innerText = 'Hochtemperatur-Isolationssystem für extreme Reserven. Übersteht auch höchste Strahlungswärme oder Schaltbelastungen.';
+      } else if (temp === 'heiss' || fu !== 'netz') {
+        rIso.innerText = 'Klasse F (155 °C) - FU fest';
+        rIsoD.innerText = 'Verstärkte Phasenisolation zum Schutz vor Spannungsspitzen (dU/dt) des Umrichters und leicht erhöhten Temperaturen.';
+      } else {
+        rIso.innerText = 'Klasse F (155 °C)';
+        rIsoD.innerText = 'Der Industrie-Standard für normale Beanspruchung. Gewährleistet bei 40°C Umgebungstemperatur eine extrem lange Lebensdauer.';
+      }
+
+      // 4. Logik Schutzart (IP-Code)
+      switch (umgebung) {
+        case 'sauber':
+          rSchutz.innerText = 'IP 55';
+          rSchutzD.innerText = 'Geschützt gegen Staub in schädigender Menge und gegen Strahlwasser aus beliebigem Winkel.';
+          break;
+        case 'staub':
+          rSchutz.innerText = 'IP 66';
+          rSchutzD.innerText = 'Vollkommen staubdicht. Keine Partikel können in die Wicklung eindringen und Kurzschlüsse verursachen.';
+          break;
+        case 'nass':
+          rSchutz.innerText = 'IP 66 + Heizung';
+          rSchutzD.innerText = 'Wasserdicht auch gegen starken Wasserstrahl. Integrierte Stillstandsheizung verhindert Kondenswasser im Inneren bei Abkühlung.';
+          break;
+        case 'atex':
+          rSchutz.innerText = 'ATEX (Ex-Schutz)';
+          rSchutzD.innerText = 'Druckfeste Kapselung oder erhöhte Sicherheit (z.B. Ex db oder Ex eb). Zertifiziert für Gefahrenbereiche.';
+          break;
+      }
+
+      // Result anzeigen
+      document.getElementById('result-box').style.display = 'block';
+      
+      // Smooth Scroll
+      setTimeout(() => {
+        document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  </script>
+</body>
+</html>

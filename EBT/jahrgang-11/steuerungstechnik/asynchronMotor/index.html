@@ -210,6 +210,13 @@
 
     .grid-3 {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .grid-3 {
+      display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       margin-bottom: 2rem;
@@ -602,6 +609,7 @@
         <ul>
           <li><button class="nav-btn active" id="btn-tab-about" onclick="navigate('tab-about')">Wer sind wir?</button></li>
           <li><button class="nav-btn" id="btn-tab-tech" onclick="navigate('tab-tech')">Unsere Technik</button></li>
+          <li><button class="nav-btn" id="btn-tab-wissen" onclick="navigate('tab-wissen')">Praxiswissen & Leistungsschild</button></li>
           <li><button class="nav-btn" id="btn-tab-sim" onclick="navigate('tab-sim')">Visualisierungen zur Technik</button></li>
         </ul>
       </nav>
@@ -884,7 +892,88 @@
 
     </section>
 
-    <!-- REITER 3: VISUALISIERUNGEN ZUR TECHNIK -->
+    <!-- REITER: PRAXISWISSEN & LEISTUNGSSCHILD -->
+    <section id="tab-wissen" class="tab-content">
+      <div class="hero-b2b" style="background: linear-gradient(135deg, #1b5b91, #0f3d63); padding: 2.5rem 2.5rem;">
+        <h2>Praxiswissen: Leistungsschilder & Einsatzgebiete</h2>
+        <p>Erfahren Sie, warum die korrekte Dimensionierung und der richtige Netzanschluss in der Praxis über Lebensdauer und Anlagensicherheit entscheiden – und warum BavariaMotion Ihr verlässlicher Partner ist.</p>
+      </div>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <span class="badge badge-primary">Der Personalausweis des Motors</span>
+        <h3 style="margin-top: 0.5rem;">Das Leistungsschild verstehen</h3>
+        <p style="margin-bottom: 1.5rem;">Jeder Asynchronmotor trägt ein Leistungsschild (Typenschild), auf dem alle essenziellen elektrischen und mechanischen Parameter verzeichnet sind. Nur wer diese Daten richtig liest, bewahrt seine Anlagen vor teuren Ausfällen.</p>
+        
+        <div class="grid-2">
+          <div style="background: #f8fafc; padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+            <h4 style="color:var(--primary); margin-bottom: 0.8rem; font-family:'Montserrat';">Wichtige Bemessungsgrößen</h4>
+            <ul style="margin-left: 1.5rem; color: var(--text-muted); line-height: 1.6;">
+              <li><strong>Motorart (3 ~ Motor):</strong> Kennzeichnet den Drehstrom-Asynchronmotor.</li>
+              <li><strong>Spannung & Strom (z.B. 400 V / 690 V / Δ / Y):</strong> Legt die maximalen Strangspannungen fest.</li>
+              <li><strong>Mechanische Bemessungsleistung:</strong> Die tatsächliche Wellenleistung in kW.</li>
+              <li><strong>Wirkleistungsfaktor (cos φ):</strong> Verhältnis von Wirk- zu Scheinleistung.</li>
+            </ul>
+          </div>
+          <div style="background: rgba(230, 126, 0, 0.05); border-left: 4px solid var(--accent); padding: 1.5rem; border-radius: 0 var(--radius) var(--radius) 0;">
+            <h4 style="color:var(--accent); margin-bottom: 0.8rem; font-family:'Montserrat';">Praxis-Falle: Spannungsfestigkeit!</h4>
+            <p style="font-size: 0.95rem;">Wird ein Motor mit der Angabe "230V / 400V / Δ / Y" versehentlich in <strong>Dreieckschaltung</strong> an ein klassisches 400V-Netz angeschlossen, erhalten die Stränge 400V statt der zulässigen 230V. Die Folge: Der Motor brennt innerhalb kürzester Zeit durch. <strong>BavariaMotion liefert auf Wunsch steckerfertige Systeme und fehlerfreie Klemmbrett-Layouts, um dies zu 100% auszuschließen.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <span class="badge badge-primary">Thermische Auslegung</span>
+        <h3 style="margin-top: 0.5rem;">Betriebsarten (S1-S10) & Isolierstoffklassen</h3>
+        <p style="margin-bottom: 1.5rem;">Ein Elektromotor muss zu seinem Lastzyklus (Duty Cycle) passen, um nicht thermisch zu überlasten.</p>
+        
+        <div class="grid-3">
+          <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border);">
+            <h4 style="color:var(--primary); font-size: 1rem;">Betriebsart S1</h4>
+            <p style="font-size: 0.9rem;"><strong>Dauerbetrieb:</strong> Die Maschine läuft durchgehend unter Nennlast (z.B. bei Lüftungsanlagen oder Dauerpumpen). BavariaMotion S1-Motoren sind für maximale Effizienz im Dauerlauf konzipiert.</p>
+          </div>
+          <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border);">
+            <h4 style="color:var(--primary); font-size: 1rem;">Betriebsart S2 / S3</h4>
+            <p style="font-size: 0.9rem;"><strong>Kurzzeit- & Aussetzbetrieb:</strong> Maschinen, die nur kurz laufen (Mixer, Hebebühnen). Nach dem Betrieb kühlt der Motor vollständig ab. Eine falsche Auslegung (z.B. S2-Motor im S1-Betrieb) führt zur Zerstörung.</p>
+          </div>
+          <div style="background: #f8fafc; padding: 1.2rem; border-radius: var(--radius); border: 1px solid var(--border);">
+            <h4 style="color:var(--primary); font-size: 1rem;">Isolierstoffklassen</h4>
+            <p style="font-size: 0.9rem;">Gibt die maximale Einsatztemperatur der Wicklung an (z.B. Klasse F = 155 °C, H = 180 °C). Eine dauerhafte Überschreitung halbiert die Lebensdauer der Isolation rapide.</p>
+          </div>
+        </div>
+        
+        <div style="margin-top: 1.5rem; padding: 1.2rem; background: #eef6fc; border-left: 4px solid var(--primary); border-radius: 4px;">
+          <strong>Ihr B2B-Vorteil:</strong> BavariaMotion analysiert Ihre realen Lastprofile und wählt die perfekte thermische Kombination aus. So vermeiden Sie teure Überdimensionierungen und sichern sich maximale Anlagenverfügbarkeit.
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <span class="badge badge-primary">Umwelteinflüsse</span>
+        <h3 style="margin-top: 0.5rem;">Kühlarten und der IC-Code (EN 60034-6)</h3>
+        <p style="margin-bottom: 1.5rem;">Die Art der Kühlung entscheidet darüber, ob ein Motor in rauen Industrieumgebungen überlebt. Der IC-Code klassifiziert die Kühlmethode.</p>
+        
+        <div class="grid-2">
+          <div>
+            <ul style="list-style: none;">
+              <li style="margin-bottom: 1rem; background: #f8fafc; padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                <strong style="color: var(--primary);">IC 411 (Eigenkühlung):</strong> Der Standard. Ein Lüfterrad sitzt auf der Welle und bläst Luft über die Kühlrippen.
+              </li>
+              <li style="margin-bottom: 1rem; background: #f8fafc; padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                <strong style="color: var(--primary);">IC 416 (Fremdkühlung):</strong> Ein separater, unabhängiger Lüftermotor kühlt den Hauptmotor. Unverzichtbar beim Einsatz von Frequenzumrichtern bei niedrigen Drehzahlen!
+              </li>
+              <li style="background: #f8fafc; padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                <strong style="color: var(--primary);">IC 410 (Selbstkühlung):</strong> Wärmeabgabe rein über Abstrahlung (ohne Lüfter), ideal für stark staubige oder verschmutzte Umgebungen.
+              </li>
+            </ul>
+          </div>
+          <div style="background: rgba(15, 61, 99, 0.05); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+            <h4 style="color:var(--primary); font-family: 'Montserrat', sans-serif; margin-bottom: 0.8rem;">Die Frequenzumrichter-Falle</h4>
+            <p style="font-size: 0.95rem;">Wird ein klassischer IC 411 Motor an einem Umrichter sehr langsam betrieben, dreht auch sein eigener Lüfter zu langsam. Die Kühlleistung bricht ein, der Motor stirbt den Hitzetod. <strong>BavariaMotion bietet Ihnen exakt abgestimmte IC 416 Fremdlüfter-Konzepte, die auch bei 0 U/min für konstanten Durchzug sorgen.</strong> Sprechen Sie mit unserem Engineering-Team!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REITER 4: VISUALISIERUNGEN ZUR TECHNIK -->
     <section id="tab-sim" class="tab-content">
       
       <div class="sim-bar">
@@ -1013,7 +1102,15 @@
         </a>
         <br><br>
         <a href="Schaltungssimulation.html" class="btn-action-link" target="_blank" style="background-color: var(--primary);">
-          BavariaMotion Verdrahtungs-Test (5% Rabatt sichern!)
+          BavariaMotion Verdrahtungs-Test
+        </a>
+        <br><br>
+        <a href="quiz.html" class="btn-action-link" target="_blank" style="background-color: var(--accent);">
+          Experten-Quiz (5% Rabatt sichern!)
+        </a>
+        <br><br>
+        <a href="konfigurator.html" class="btn-action-link" target="_blank" style="background-color: var(--primary-light);">
+          Zum interaktiven Antriebs-Konfigurator
         </a>
       </div>
 
