@@ -49,7 +49,6 @@
         }
         canvas {
             background-color: #0f3460;
-            border: 2px solid #f9a826;
             border-radius: 8px;
             margin-top: 10px;
         }
@@ -188,7 +187,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Padding for drawing
-            const padding = 40;
+            const padding = 60;
             const drawW = canvas.width - 2 * padding;
             const drawH = canvas.height - 2 * padding;
 
@@ -200,19 +199,30 @@
             const startX = (canvas.width - rectW) / 2;
             const startY = (canvas.height - rectH) / 2;
 
-            // Draw Building Base
-            ctx.fillStyle = '#16213e';
+            // Draw Building Base (Dachfläche)
+            ctx.fillStyle = '#2c3e50'; // distinct gray-blue roof color
             ctx.fillRect(startX, startY, rectW, rectH);
-            ctx.strokeStyle = '#a0aab2';
-            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1;
             ctx.strokeRect(startX, startY, rectW, rectH);
 
+            // Roof label
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.font = '24px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('DACHFLÄCHE', canvas.width / 2, canvas.height / 2 + 8);
+
             // Draw Meshes (Lightning Protection Wire)
+            // Draw perimeter wire a bit thicker to show it's the ring conductor
             ctx.strokeStyle = '#f9a826';
-            ctx.lineWidth = 3;
+            ctx.lineWidth = 4;
+            ctx.strokeRect(startX, startY, rectW, rectH);
+
+            // Inner wires
+            ctx.lineWidth = 2;
 
             // Vertical lines
-            for (let i = 0; i <= nx; i++) {
+            for (let i = 1; i < nx; i++) {
                 const x = startX + i * (actualMx * scale);
                 ctx.beginPath();
                 ctx.moveTo(x, startY);
@@ -221,7 +231,7 @@
             }
 
             // Horizontal lines
-            for (let i = 0; i <= ny; i++) {
+            for (let i = 1; i < ny; i++) {
                 const y = startY + i * (actualMy * scale);
                 ctx.beginPath();
                 ctx.moveTo(startX, y);
@@ -229,15 +239,16 @@
                 ctx.stroke();
             }
 
-            // Draw Dimensions
-            ctx.fillStyle = '#ffffff';
+            // Draw Dimensions outside the roof
+            ctx.fillStyle = '#a0aab2';
             ctx.font = '14px sans-serif';
             ctx.textAlign = 'center';
-            // Length a
-            ctx.fillText(`a = ${a} m`, canvas.width / 2, startY - 10);
-            // Width b
+            
+            // Length a (Top)
+            ctx.fillText(`a = ${a} m`, canvas.width / 2, startY - 15);
+            // Width b (Left)
             ctx.save();
-            ctx.translate(startX - 10, canvas.height / 2);
+            ctx.translate(startX - 20, canvas.height / 2);
             ctx.rotate(-Math.PI / 2);
             ctx.fillText(`b = ${b} m`, 0, 0);
             ctx.restore();
