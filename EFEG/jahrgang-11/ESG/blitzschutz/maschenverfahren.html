@@ -135,24 +135,112 @@
         </div>
 
         <div class="visualization">
-            <label>Draufsicht Dach (Simulation)</label>
-            <canvas id="roofCanvas" width="500" height="400"></canvas>
+            <label>3D Gebäude-Ansicht (Drehbar)</label>
+            <canvas id="threeCanvas" width="500" height="400"></canvas>
         </div>
     </div>
 
     <a href="index.html" class="back-link">⬅ Zurück zur Übersicht</a>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script>
         const classSelect = document.getElementById('classSelect');
         const lengthInput = document.getElementById('lengthInput');
         const widthInput = document.getElementById('widthInput');
-        const canvas = document.getElementById('roofCanvas');
-        const ctx = canvas.getContext('2d');
 
         const resMeshSize = document.getElementById('resMeshSize');
         const resNx = document.getElementById('resNx');
         const resNy = document.getElementById('resNy');
         const resWire = document.getElementById('resWire');
+
+        // Three.js Setup
+        const canvas = document.getElementById('threeCanvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, canvas.width / canvas.height, 0.1, 1000);
+        
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(canvas.width, canvas.height);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(50, 100, 50);
+        scene.add(dirLight);
+
+        let buildingMesh;
+        let wireGroup;
+
+        function draw3DHouse(a, b, nx, ny, actualMx, actualMy) {
+            if (buildingMesh) scene.remove(buildingMesh);
+            if (wireGroup) scene.remove(wireGroup);
+
+            // Adaptive Höhe des Gebäudes, mindestens 5m, maximal 15m
+            const h = Math.max(5, Math.min(15, (a + b) / 4));
+
+            // Building (Graues Gebäude)
+            const geo = new THREE.BoxGeometry(a, h, b);
+            const mat = new THREE.MeshStandardMaterial({ color: '#34495e', roughness: 0.8 });
+            buildingMesh = new THREE.Mesh(geo, mat);
+            buildingMesh.position.y = h / 2;
+            scene.add(buildingMesh);
+
+            // Wire Grid
+            wireGroup = new THREE.Group();
+            
+            // In modern three.js LineBasicMaterial doesn't support linewidth > 1 on Windows,
+            // but we use it anyway for simplicity. It's visible enough.
+            const wireMatOuter = new THREE.LineBasicMaterial({ color: 0xf9a826 });
+            const wireMatInner = new THREE.LineBasicMaterial({ color: 0xf9a826 });
+
+            const roofY = h + 0.1; // knapp über dem Dach
+            const startX = -a / 2;
+            const startZ = -b / 2;
+
+            // Outer ring
+            const outerPoints = [
+                new THREE.Vector3(startX, roofY, startZ),
+                new THREE.Vector3(startX + a, roofY, startZ),
+                new THREE.Vector3(startX + a, roofY, startZ + b),
+                new THREE.Vector3(startX, roofY, startZ + b),
+                new THREE.Vector3(startX, roofY, startZ)
+            ];
+            const outerGeo = new THREE.BufferGeometry().setFromPoints(outerPoints);
+            wireGroup.add(new THREE.Line(outerGeo, wireMatOuter));
+
+            // Inner lines along Z (parallel to b)
+            for (let i = 1; i < nx; i++) {
+                const x = startX + i * actualMx;
+                const pts = [
+                    new THREE.Vector3(x, roofY, startZ),
+                    new THREE.Vector3(x, roofY, startZ + b)
+                ];
+                const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+                wireGroup.add(new THREE.LineSegments(lineGeo, wireMatInner));
+            }
+
+            // Inner lines along X (parallel to a)
+            for (let i = 1; i < ny; i++) {
+                const z = startZ + i * actualMy;
+                const pts = [
+                    new THREE.Vector3(startX, roofY, z),
+                    new THREE.Vector3(startX + a, roofY, z)
+                ];
+                const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+                wireGroup.add(new THREE.LineSegments(lineGeo, wireMatInner));
+            }
+
+            scene.add(wireGroup);
+
+            // Auto fit camera
+            const maxDim = Math.max(a, b);
+            camera.position.set(maxDim * 0.8, maxDim * 0.6, maxDim * 0.8);
+            camera.lookAt(0, h/2, 0);
+            controls.target.set(0, h/2, 0);
+        }
 
         function updateSimulation() {
             const m = parseFloat(classSelect.value);
@@ -161,105 +249,34 @@
 
             if (isNaN(a) || isNaN(b) || a <= 0 || b <= 0) return;
 
-            // Calculate meshes
             const nx = Math.ceil(a / m);
             const ny = Math.ceil(b / m);
             
-            // Actual mesh sizes used
             const actualMx = a / nx;
             const actualMy = b / ny;
 
-            // Wire length
-            // Lines parallel to b (there are nx + 1 of them, each length b)
-            // Lines parallel to a (there are ny + 1 of them, each length a)
             const wireLength = (nx + 1) * b + (ny + 1) * a;
 
-            // Update UI
             resMeshSize.innerText = m;
             resNx.innerText = nx;
             resNy.innerText = ny;
             resWire.innerText = wireLength.toFixed(1);
 
-            drawRoof(a, b, nx, ny, actualMx, actualMy);
-        }
-
-        function drawRoof(a, b, nx, ny, actualMx, actualMy) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Padding for drawing
-            const padding = 60;
-            const drawW = canvas.width - 2 * padding;
-            const drawH = canvas.height - 2 * padding;
-
-            // Scale factor to fit roof into canvas
-            const scale = Math.min(drawW / a, drawH / b);
-
-            const rectW = a * scale;
-            const rectH = b * scale;
-            const startX = (canvas.width - rectW) / 2;
-            const startY = (canvas.height - rectH) / 2;
-
-            // Draw Building Base (Dachfläche)
-            ctx.fillStyle = '#2c3e50'; // distinct gray-blue roof color
-            ctx.fillRect(startX, startY, rectW, rectH);
-            ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 1;
-            ctx.strokeRect(startX, startY, rectW, rectH);
-
-            // Roof label
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-            ctx.font = '24px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('DACHFLÄCHE', canvas.width / 2, canvas.height / 2 + 8);
-
-            // Draw Meshes (Lightning Protection Wire)
-            // Draw perimeter wire a bit thicker to show it's the ring conductor
-            ctx.strokeStyle = '#f9a826';
-            ctx.lineWidth = 4;
-            ctx.strokeRect(startX, startY, rectW, rectH);
-
-            // Inner wires
-            ctx.lineWidth = 2;
-
-            // Vertical lines
-            for (let i = 1; i < nx; i++) {
-                const x = startX + i * (actualMx * scale);
-                ctx.beginPath();
-                ctx.moveTo(x, startY);
-                ctx.lineTo(x, startY + rectH);
-                ctx.stroke();
-            }
-
-            // Horizontal lines
-            for (let i = 1; i < ny; i++) {
-                const y = startY + i * (actualMy * scale);
-                ctx.beginPath();
-                ctx.moveTo(startX, y);
-                ctx.lineTo(startX + rectW, y);
-                ctx.stroke();
-            }
-
-            // Draw Dimensions outside the roof
-            ctx.fillStyle = '#a0aab2';
-            ctx.font = '14px sans-serif';
-            ctx.textAlign = 'center';
-            
-            // Length a (Top)
-            ctx.fillText(`a = ${a} m`, canvas.width / 2, startY - 15);
-            // Width b (Left)
-            ctx.save();
-            ctx.translate(startX - 20, canvas.height / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.fillText(`b = ${b} m`, 0, 0);
-            ctx.restore();
+            draw3DHouse(a, b, nx, ny, actualMx, actualMy);
         }
 
         classSelect.addEventListener('change', updateSimulation);
         lengthInput.addEventListener('input', updateSimulation);
         widthInput.addEventListener('input', updateSimulation);
 
-        // Init
         updateSimulation();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
     </script>
 </body>
 </html>
