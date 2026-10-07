@@ -345,6 +345,44 @@
           "children": []
         }
       ]
+    },
+    {
+      "id": "efeg",
+      "title": "EFEG",
+      "description": "Elektroniker/in für Fachrichtung Energie- und Gebäudetechnik",
+      "icon": "⚡",
+      "color": "#f59e0b",
+      "folder": "EFEG",
+      "children": [
+        {
+          "id": "jg11",
+          "title": "Jahrgang 11",
+          "description": "1. Ausbildungsjahr",
+          "icon": "📗",
+          "folder": "jahrgang-11",
+          "children": [
+            {
+              "id": "esg",
+              "title": "ESG",
+              "description": "Energie- und Schutztechnik",
+              "icon": "🛡️",
+              "folder": "ESG",
+              "children": [
+                {
+                  "id": "blitzschutz",
+                  "title": "Blitzschutz",
+                  "description": "Simulationen zum Blitzkugel- & Schutzwinkelverfahren",
+                  "icon": "⚡",
+                  "folder": "blitzschutz",
+                  "tags": [
+                    "Simulation"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

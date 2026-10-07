@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blitzschutz Simulationen</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #f9a826;
+            text-shadow: 0 0 10px rgba(249, 168, 38, 0.5);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background-color: #16213e;
+            border: 2px solid #0f3460;
+            border-radius: 12px;
+            width: 300px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(249, 168, 38, 0.2);
+            border-color: #f9a826;
+        }
+        .card h2 {
+            color: #e94560;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        .card p {
+            color: #a0aab2;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #7a7a7a;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>⚡ Blitzschutz Simulationen</h1>
+
+    <div class="container">
+        <a href="blitzkugekverfahren.html" class="card">
+            <div class="icon">🔮</div>
+            <h2>Blitzkugelverfahren</h2>
+            <p>Interaktive Simulation zum Blitzkugelverfahren. Berechne und visualisiere den Schutzbereich mit der rollenden Kugel.</p>
+        </a>
+
+        <a href="schutzwinkelverfahren.html" class="card">
+            <div class="icon">📐</div>
+            <h2>Schutzwinkelverfahren</h2>
+            <p>Interaktive Simulation zum Schutzwinkelverfahren. Bestimme den Schutzwinkel abhängig von der Höhe und Blitzschutzklasse.</p>
+        </a>
+    </div>
+
+    <div class="footer">
+        &copy; Herr Niebel
+    </div>
+
+</body>
+</html>
