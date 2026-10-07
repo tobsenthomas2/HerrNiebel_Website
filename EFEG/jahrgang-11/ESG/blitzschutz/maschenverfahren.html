@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maschenverfahren - Äußerer Blitzschutz</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #f9a826;
+            text-shadow: 0 0 10px rgba(249, 168, 38, 0.5);
+            margin-top: 30px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            margin-top: 20px;
+            background-color: #16213e;
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #0f3460;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 900px;
+            width: 90%;
+        }
+        .controls {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .visualization {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        canvas {
+            background-color: #0f3460;
+            border: 2px solid #f9a826;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        label {
+            font-size: 1.1rem;
+            color: #a0aab2;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #4a4e69;
+            background-color: #1a1a2e;
+            color: #ffffff;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        .result-box {
+            background-color: #e94560;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .result-box h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+        }
+        .result-box p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .back-link {
+            margin-top: 30px;
+            color: #f9a826;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        .back-link:hover {
+            color: #ffffff;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🕸️ Maschenverfahren</h1>
+
+    <div class="container">
+        <div class="controls">
+            <div>
+                <label for="classSelect">Blitzschutzklasse:</label>
+                <select id="classSelect">
+                    <option value="5">Klasse I (5 x 5 m)</option>
+                    <option value="10">Klasse II (10 x 10 m)</option>
+                    <option value="15">Klasse III (15 x 15 m)</option>
+                    <option value="20" selected>Klasse IV (20 x 20 m)</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="lengthInput">Gebäudelänge a (m):</label>
+                <input type="number" id="lengthInput" value="30" min="1" max="200">
+            </div>
+            
+            <div>
+                <label for="widthInput">Gebäudebreite b (m):</label>
+                <input type="number" id="widthInput" value="20" min="1" max="200">
+            </div>
+
+            <div class="result-box">
+                <h3>Ergebnis</h3>
+                <p>Max. Maschenweite: <span id="resMeshSize">20</span> m</p>
+                <p>Anzahl Maschen (a): <span id="resNx">2</span></p>
+                <p>Anzahl Maschen (b): <span id="resNy">1</span></p>
+                <p>Benötigter Draht (Dach): <span id="resWire">130</span> m</p>
+            </div>
+        </div>
+
+        <div class="visualization">
+            <label>Draufsicht Dach (Simulation)</label>
+            <canvas id="roofCanvas" width="500" height="400"></canvas>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-link">⬅ Zurück zur Übersicht</a>
+
+    <script>
+        const classSelect = document.getElementById('classSelect');
+        const lengthInput = document.getElementById('lengthInput');
+        const widthInput = document.getElementById('widthInput');
+        const canvas = document.getElementById('roofCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const resMeshSize = document.getElementById('resMeshSize');
+        const resNx = document.getElementById('resNx');
+        const resNy = document.getElementById('resNy');
+        const resWire = document.getElementById('resWire');
+
+        function updateSimulation() {
+            const m = parseFloat(classSelect.value);
+            const a = parseFloat(lengthInput.value);
+            const b = parseFloat(widthInput.value);
+
+            if (isNaN(a) || isNaN(b) || a <= 0 || b <= 0) return;
+
+            // Calculate meshes
+            const nx = Math.ceil(a / m);
+            const ny = Math.ceil(b / m);
+            
+            // Actual mesh sizes used
+            const actualMx = a / nx;
+            const actualMy = b / ny;
+
+            // Wire length
+            // Lines parallel to b (there are nx + 1 of them, each length b)
+            // Lines parallel to a (there are ny + 1 of them, each length a)
+            const wireLength = (nx + 1) * b + (ny + 1) * a;
+
+            // Update UI
+            resMeshSize.innerText = m;
+            resNx.innerText = nx;
+            resNy.innerText = ny;
+            resWire.innerText = wireLength.toFixed(1);
+
+            drawRoof(a, b, nx, ny, actualMx, actualMy);
+        }
+
+        function drawRoof(a, b, nx, ny, actualMx, actualMy) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Padding for drawing
+            const padding = 40;
+            const drawW = canvas.width - 2 * padding;
+            const drawH = canvas.height - 2 * padding;
+
+            // Scale factor to fit roof into canvas
+            const scale = Math.min(drawW / a, drawH / b);
+
+            const rectW = a * scale;
+            const rectH = b * scale;
+            const startX = (canvas.width - rectW) / 2;
+            const startY = (canvas.height - rectH) / 2;
+
+            // Draw Building Base
+            ctx.fillStyle = '#16213e';
+            ctx.fillRect(startX, startY, rectW, rectH);
+            ctx.strokeStyle = '#a0aab2';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(startX, startY, rectW, rectH);
+
+            // Draw Meshes (Lightning Protection Wire)
+            ctx.strokeStyle = '#f9a826';
+            ctx.lineWidth = 3;
+
+            // Vertical lines
+            for (let i = 0; i <= nx; i++) {
+                const x = startX + i * (actualMx * scale);
+                ctx.beginPath();
+                ctx.moveTo(x, startY);
+                ctx.lineTo(x, startY + rectH);
+                ctx.stroke();
+            }
+
+            // Horizontal lines
+            for (let i = 0; i <= ny; i++) {
+                const y = startY + i * (actualMy * scale);
+                ctx.beginPath();
+                ctx.moveTo(startX, y);
+                ctx.lineTo(startX + rectW, y);
+                ctx.stroke();
+            }
+
+            // Draw Dimensions
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '14px sans-serif';
+            ctx.textAlign = 'center';
+            // Length a
+            ctx.fillText(`a = ${a} m`, canvas.width / 2, startY - 10);
+            // Width b
+            ctx.save();
+            ctx.translate(startX - 10, canvas.height / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText(`b = ${b} m`, 0, 0);
+            ctx.restore();
+        }
+
+        classSelect.addEventListener('change', updateSimulation);
+        lengthInput.addEventListener('input', updateSimulation);
+        widthInput.addEventListener('input', updateSimulation);
+
+        // Init
+        updateSimulation();
+    </script>
+</body>
+</html>
