@@ -489,6 +489,38 @@
     .busbar-delta-2 { top: 38px; left: 145px; width: 30px; height: 150px; }
     .busbar-delta-3 { top: 38px; left: 243px; width: 30px; height: 150px; }
 
+    /* Legende Klemmbrett */
+    .terminal-legend {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+    .terminal-legend .legend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .terminal-legend svg,
+    .terminal-legend .legend-busbar {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .terminal-legend strong { color: #f1f5f9; }
+    .legend-busbar {
+      display: inline-block;
+      width: 46px;
+      height: 14px;
+      background: linear-gradient(to right, #ffd369, #e5a93c, #ffd369);
+      border: 2px solid #8c6214;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
     /* CANVAS DREHFELD */
     #motorCanvas {
       background: #090e17;
@@ -1016,6 +1048,20 @@
             <div class="terminal-bolt b-v1" style="box-shadow: 0 0 10px rgba(16,185,129,0.5);">V1</div>
             <div class="terminal-bolt b-w1" style="box-shadow: 0 0 10px rgba(239,68,68,0.5);">W1</div>
             <div id="busbarPlates"></div>
+          </div>
+          <div class="terminal-legend">
+            <div class="legend-item">
+              <svg width="46" height="18" viewBox="0 0 46 18" aria-hidden="true">
+                <line x1="2" y1="4" x2="44" y2="4" stroke="#d97706" stroke-dasharray="4,3" stroke-width="2.5" opacity="0.8"/>
+                <line x1="2" y1="9" x2="44" y2="9" stroke="#10b981" stroke-dasharray="4,3" stroke-width="2.5" opacity="0.8"/>
+                <line x1="2" y1="14" x2="44" y2="14" stroke="#38bdf8" stroke-dasharray="4,3" stroke-width="2.5" opacity="0.8"/>
+              </svg>
+              <span><strong>Gestrichelte Linien:</strong> Die drei Ständerwicklungen (U1&ndash;U2, V1&ndash;V2, W1&ndash;W2) im <strong>Inneren des Motors</strong>. Sie sind nur zur Veranschaulichung eingezeichnet und auf dem echten Klemmbrett <strong>nicht sichtbar</strong>.</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-busbar" aria-hidden="true"></span>
+              <span><strong>Dicke goldene Schienen:</strong> Die <strong>Kontaktbrücken (Verbinder)</strong> aus Messing, die man von Hand auf die Klemmbolzen des Klemmbretts setzt, um Stern- oder Dreieckschaltung herzustellen.</span>
+            </div>
           </div>
           <div style="background:#111822; padding: 0.9rem 1.2rem; border-radius: 6px; width: 100%; border: 1px solid #232d3d; font-size: 0.85rem;">
             <p id="terminalInfoText"></p>
