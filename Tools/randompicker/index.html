@@ -3,307 +3,792 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zufallsgenerator</title>
+    <title>Klassen Zufalls-Picker (Datenschutzkonform)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        /* --- HAUPTANZEIGE --- */
-        #display-area {
-            text-align: center;
-            width: 100%;
-        }
-
-        #result-box {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            display: inline-block;
-            min-width: 300px;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            border: 2px solid #e0e0e0;
-        }
-
-        #current-name {
-            font-size: 4rem;
-            font-weight: 800;
-            color: #333;
-            margin: 0;
-        }
-
-        #spin-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 20px 50px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.1s, box-shadow 0.2s;
-        }
-
-        #spin-btn:active { transform: scale(0.96); }
-        #spin-btn:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; }
-
-        /* --- SETUP BUTTONS --- */
-        
-        /* 1. Sichtbarer Button für Klassenliste (Oben Links) */
-        #btn-setup-class {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: #fff;
-            border: 1px solid #ccc;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            color: #555;
-            z-index: 100;
-        }
-        #btn-setup-class:hover { background: #eee; }
-
-        /* 2. UNSICHTBARER Button für Manipulation (Oben Rechts) */
-        #btn-setup-rigged {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px; /* Groß genug zum Treffen */
-            height: 100px;
-            background: transparent; /* Durchsichtig */
-            border: none;
-            cursor: default; /* WICHTIG: Zeiger ändert sich nicht zur Hand! */
-            z-index: 100;
-            outline: none;
-        }
-
-        /* --- MODAL FENSTER (Popups) --- */
-        .modal {
-            display: none; /* Standardmäßig versteckt */
-            position: fixed;
-            z-index: 200;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .modal h2 { margin-top: 0; color: #333; }
-        
-        textarea {
-            width: 100%;
-            height: 200px;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: monospace;
-            resize: vertical;
-            box-sizing: border-box; /* Damit Padding nicht die Breite sprengt */
-        }
-
-        .save-btn {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            width: 100%;
-        }
-
-        .close-hint {
-            text-align: right;
-            font-size: 0.8rem;
-            color: #999;
-            cursor: pointer;
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease forwards;
         }
         
-        .highlight { color: #28a745 !important; }
+        .container-transition {
+            transition: max-width 0.3s ease-in-out, padding 0.3s ease-in-out;
+        }
 
+        /* Custom Scrollbar for Attendance Grid */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
     </style>
 </head>
-<body>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col font-sans">
 
-    <button id="btn-setup-class" onclick="openClassModal()">📋 Klassenliste</button>
-    
-    <button id="btn-setup-rigged" onclick="openRiggedModal()"></button>
-
-
-    <div id="display-area">
-        <div id="result-box">
-            <div id="current-name">Startklar</div>
-        </div>
-        <br>
-        <button id="spin-btn" onclick="spin()">ZUFALL STARTEN</button>
-    </div>
-
-
-    <div id="modal-class" class="modal">
-        <div class="modal-content">
-            <div class="close-hint" onclick="closeModals()">X Schließen</div>
-            <h2>Alle Schüler</h2>
-            <p style="font-size:0.9rem; color:#666;">Bitte Namen untereinander einfügen (Excel Copy-Paste möglich):</p>
-            <textarea id="input-class-list" placeholder="Max Mustermann&#10;Lisa Müller&#10;Tom Schulze"></textarea>
-            <button class="save-btn" onclick="saveClassList()">Speichern</button>
+    <!-- Custom Modal Overlay -->
+    <div id="custom-modal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-sm shadow-2xl border border-slate-200 animate-fade-in">
+            <p id="modal-message" class="text-lg mb-6 text-center text-slate-700 font-medium"></p>
+            <div id="modal-buttons" class="flex justify-center gap-3">
+                <!-- Dynamische Buttons -->
+            </div>
         </div>
     </div>
 
-    <div id="modal-rigged" class="modal">
-        <div class="modal-content" style="border: 2px solid red;"> <div class="close-hint" onclick="closeModals()">X Schließen</div>
-            <h2>⚠️ Geheime Reihenfolge</h2>
-            <p style="font-size:0.9rem; color:#666;">Diese Schüler kommen nacheinander dran. Danach zufällig.</p>
-            <textarea id="input-rigged-list" placeholder="Zuerst Dran&#10;Als Zweites&#10;Als Drittes"></textarea>
-            <button class="save-btn" style="background-color: #d9534f;" onclick="saveRiggedList()">Geheim speichern</button>
+    <!-- Secret Modal (Für Reihenfolge und Gruppenzuweisung) -->
+    <div id="secret-modal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl border border-slate-200 animate-fade-in">
+            <h3 id="secret-title" class="text-lg font-bold text-slate-800 mb-4 text-center">Vorauswahl</h3>
+            <div id="secret-list" class="max-h-64 overflow-y-auto pr-2 space-y-2 mb-6 custom-scrollbar">
+                <!-- Dynamisch generiert -->
+            </div>
+            <div class="flex justify-end gap-3">
+                <button onclick="closeSecretModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-bold text-sm transition-all">Abbrechen</button>
+                <button id="secret-save-btn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-sm transition-all shadow-md">OK</button>
+            </div>
         </div>
     </div>
 
+    <!-- Haupt-Wrapper -->
+    <div class="flex-grow flex items-center justify-center p-4 md:p-8 w-full">
+        
+        <!-- Hauptcontainer mit dynamischer Breite -->
+        <div id="main-container" class="bg-white p-6 sm:p-10 rounded-2xl shadow-xl w-full max-w-xl border border-slate-200 container-transition">
+            
+            <!-- 1. IMPORT BILDSCHIRM -->
+            <div id="import-screen" class="block animate-fade-in">
+                <div class="text-center mb-6">
+                    <span class="inline-block p-3 bg-blue-50 text-blue-600 rounded-2xl mb-3 shadow-sm border border-blue-100">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 0115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                    </span>
+                    <h1 class="text-3xl font-bold text-slate-800">Klasse laden</h1>
+                    <p class="text-sm text-slate-500 mt-1">Lade eine Namensliste (.txt oder .csv) hoch. Keine Daten werden gespeichert!</p>
+                </div>
+
+                <!-- Drag & Drop / File Input Box -->
+                <div id="drop-zone" onclick="document.getElementById('file-input').click()" class="border-2 border-dashed border-blue-300 hover:border-blue-500 bg-blue-50/50 hover:bg-blue-50 rounded-2xl p-8 text-center cursor-pointer transition-all mb-6 group">
+                    <input type="file" id="file-input" accept=".txt,.csv" class="hidden" onchange="handleFileSelect(event)">
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <svg class="w-12 h-12 text-blue-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <span class="font-bold text-slate-700 text-lg">Klassendatei auswählen</span>
+                        <span class="text-xs text-slate-400">Klick hier oder ziehe eine Datei hinein</span>
+                    </div>
+                </div>
+
+                <!-- Alternative Textarea Toggle -->
+                <div class="border-t border-slate-200 pt-4">
+                    <button onclick="toggleManualInput()" class="text-xs text-slate-500 hover:text-blue-600 font-semibold flex items-center justify-center gap-1 w-full text-center">
+                        <span>Oder Namen manuell / aus Excel einfügen</span>
+                        <svg id="manual-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    
+                    <div id="manual-input-box" class="hidden mt-4">
+                        <textarea id="manual-names-input" placeholder="Ein Name pro Zeile..." class="w-full h-36 bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 mb-3 resize-y"></textarea>
+                        <button onclick="handleManualSubmit()" class="w-full bg-slate-800 hover:bg-slate-900 text-white py-2.5 rounded-lg font-bold text-sm transition-all active:scale-95 shadow-sm">
+                            Namen übernehmen
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-3 text-xs text-amber-800">
+                    <span class="text-base">🔒</span>
+                    <div>
+                        <strong>Maximale Datenschutz-Sicherheit:</strong> Alle Namen verbleiben ausschließlich im Arbeitsspeicher deines Browsers. Beim Schließen dieser Seite werden alle Daten automatisch unwiderruflich gelöscht.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. ANWESENHEITS-BILDSCHIRM (ZWISCHENSCHRITT) -->
+            <div id="attendance-screen" class="hidden">
+                <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                            <span>📋</span> Anwesenheit prüfen
+                        </h2>
+                        <p id="class-file-title" class="text-xs font-semibold text-slate-500 truncate max-w-[250px]"></p>
+                    </div>
+                    <span id="attendance-count" class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-full">
+                        0 / 0 anwesend
+                    </span>
+                </div>
+
+                <div class="flex gap-2 mb-3">
+                    <button onclick="setAllAttendance(true)" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2 rounded-lg transition-colors border border-slate-200">
+                        ✓ Alle auswählen
+                    </button>
+                    <button onclick="setAllAttendance(false)" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2 rounded-lg transition-colors border border-slate-200">
+                        ✗ Alle abwählen
+                    </button>
+                </div>
+
+                <!-- Liste aller Schüler mit Checkboxen -->
+                <div id="attendance-list" class="max-h-64 overflow-y-auto pr-1 space-y-2 mb-6 custom-scrollbar border border-slate-200 rounded-xl p-3 bg-slate-50/50">
+                    <!-- Wird dynamisch per JS befüllt -->
+                </div>
+
+                <div class="flex gap-3">
+                    <button onclick="showImportScreen()" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-3 rounded-lg font-bold transition-all active:scale-95 text-sm">
+                        Andere Datei
+                    </button>
+                    <button onclick="confirmAttendanceAndProceed()" class="flex-[2] bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-bold transition-all active:scale-95 shadow-md shadow-blue-600/20 flex justify-center items-center gap-2 text-sm">
+                        Weiter zur Auslosung ➔
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. MODUS-AUSWAHL BILDSCHIRM -->
+            <div id="mode-screen" class="hidden">
+                <h1 class="text-3xl font-bold mb-2 text-center text-blue-600 flex items-center justify-center gap-2">
+                    Was möchtest du tun?
+                </h1>
+                <p id="mode-active-info" class="text-center text-slate-500 mb-6 font-medium text-sm"></p>
+                
+                <div class="flex flex-col gap-4 mb-6">
+                    <button onclick="startPicker()" class="w-full bg-white hover:bg-amber-50 border-2 border-amber-200 hover:border-amber-400 p-5 rounded-xl transition-all active:scale-95 flex items-center gap-4 text-left group">
+                        <span class="text-4xl group-hover:scale-110 transition-transform">🎯</span>
+                        <div>
+                            <div class="text-xl font-bold text-amber-700">Eine Person ziehen</div>
+                            <div class="text-sm font-medium text-amber-600/80">Klassischer Zufallsgenerator (ohne Zurücklegen)</div>
+                        </div>
+                    </button>
+                    
+                    <button onclick="showGroupSetup()" class="w-full bg-white hover:bg-purple-50 border-2 border-purple-200 hover:border-purple-400 p-5 rounded-xl transition-all active:scale-95 flex items-center gap-4 text-left group">
+                        <span class="text-4xl group-hover:scale-110 transition-transform">👥</span>
+                        <div>
+                            <div class="text-xl font-bold text-purple-700">Gruppen auslosen</div>
+                            <div class="text-sm font-medium text-purple-600/80">Zufällige Teams oder Gruppen erstellen</div>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="flex gap-3">
+                    <button onclick="showAttendanceScreen()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2.5 rounded-lg font-bold text-xs transition-all border border-slate-300">
+                        ✏️ Anwesenheit anpassen
+                    </button>
+                    <button onclick="showImportScreen()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2.5 rounded-lg font-bold text-xs transition-all border border-slate-300">
+                        📂 Neue Datei laden
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. GRUPPEN-SETUP BILDSCHIRM -->
+            <div id="group-setup-screen" class="hidden relative">
+                <button onclick="openSecretGroupModal()" class="absolute top-0 left-0 w-8 h-8 opacity-0 hover:opacity-100 transition-opacity cursor-pointer text-slate-400 hover:text-slate-700 bg-slate-100/50 hover:bg-slate-200 rounded-full flex items-center justify-center text-xs">⚙️</button>
+                <h1 class="text-2xl font-bold mb-6 text-center text-purple-600 flex items-center justify-center gap-2">
+                    <span class="text-3xl">👥</span> Gruppen einstellen
+                </h1>
+                
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 mb-6">
+                    <label class="block text-sm font-semibold text-slate-700 mb-3">Wie möchtest du aufteilen?</label>
+                    
+                    <div class="flex gap-4 mb-5">
+                        <label class="flex-1 cursor-pointer">
+                            <input type="radio" name="groupMode" value="numGroups" class="peer sr-only" checked>
+                            <div class="p-3 bg-white border-2 border-slate-200 rounded-lg text-center text-sm font-bold text-slate-500 peer-checked:bg-purple-50 peer-checked:border-purple-500 peer-checked:text-purple-700 transition-all hover:bg-slate-50">
+                                Anzahl der Gruppen
+                            </div>
+                        </label>
+                        <label class="flex-1 cursor-pointer">
+                            <input type="radio" name="groupMode" value="groupSize" class="peer sr-only">
+                            <div class="p-3 bg-white border-2 border-slate-200 rounded-lg text-center text-sm font-bold text-slate-500 peer-checked:bg-purple-50 peer-checked:border-purple-500 peer-checked:text-purple-700 transition-all hover:bg-slate-50">
+                                Personen pro Gruppe
+                            </div>
+                        </label>
+                    </div>
+
+                    <label for="group-number" class="block text-sm font-semibold text-slate-700 mb-2">Anzahl:</label>
+                    <input type="number" id="group-number" min="1" value="4" class="w-full bg-white border border-slate-300 rounded-lg p-3 text-slate-800 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 text-center text-2xl font-bold shadow-inner">
+                </div>
+
+                <div class="flex gap-3">
+                    <button onclick="showModeScreen()" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-3 rounded-lg font-bold transition-all active:scale-95 text-sm">
+                        Zurück
+                    </button>
+                    <button onclick="prepareGroups()" class="flex-[2] bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg font-bold transition-all active:scale-95 shadow-md shadow-purple-600/20 flex justify-center items-center gap-2 text-sm">
+                        ✨ Auslosen
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. GRUPPEN-ERGEBNIS BILDSCHIRM -->
+            <div id="group-result-screen" class="hidden flex flex-col h-full max-h-[85vh]">
+                <h1 class="text-3xl font-bold mb-6 text-center text-purple-700 shrink-0 flex items-center justify-center gap-3">
+                    <span>✨</span> Auslosungsergebnis <span>✨</span>
+                </h1>
+                
+                <div id="groups-container" class="flex-grow overflow-y-auto pr-2 pb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                    <!-- Gruppen werden hier per JS eingefügt -->
+                </div>
+
+                <div class="flex gap-3 mt-6 pt-4 border-t border-slate-200 shrink-0 justify-center">
+                    <button onclick="showModeScreen()" class="w-40 bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-3 rounded-lg font-bold transition-all active:scale-95 text-sm">
+                        Zurück zum Menü
+                    </button>
+                    <button id="group-start-btn" onclick="startGroupAnimation()" class="w-48 bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg font-bold transition-all active:scale-95 shadow-md shadow-purple-600/20 text-sm">
+                        Start
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. PICKER-BILDSCHIRM -->
+            <div id="picker-screen" class="hidden text-center relative">
+                <button onclick="openSecretPickerModal()" class="absolute top-0 left-0 w-8 h-8 opacity-0 hover:opacity-100 transition-opacity cursor-pointer text-slate-400 hover:text-slate-700 bg-slate-100/50 hover:bg-slate-200 rounded-full flex items-center justify-center text-xs">⚙️</button>
+                <h2 id="picker-title" class="text-2xl font-bold text-slate-700 mb-2">Auslosung</h2>
+                <div id="picker-stats" class="text-sm font-semibold text-slate-500 mb-8 bg-slate-100 inline-block px-4 py-2 rounded-full border border-slate-200">Noch 0 Personen im Topf</div>
+                
+                <div id="result-box" class="text-5xl sm:text-7xl font-black text-amber-500 min-h-[160px] flex items-center justify-center break-words my-8 py-6 px-4 bg-amber-50 rounded-2xl border-2 border-amber-200/50 shadow-inner">
+                    ?
+                </div>
+                
+                <button id="draw-btn" onclick="drawName()" class="w-full bg-emerald-500 hover:bg-emerald-600 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed text-white text-xl py-5 rounded-xl font-bold transition-all active:scale-95 shadow-md shadow-emerald-500/20 flex justify-center items-center gap-2 mb-8">
+                    <span class="text-2xl">🎲</span> Name ziehen!
+                </button>
+                
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="resetPot()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-3 rounded-lg font-bold transition-all border border-slate-300 active:scale-95 flex justify-center items-center gap-2 text-sm">
+                        🔄 Topf zurücksetzen
+                    </button>
+                    <button onclick="showModeScreen()" class="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 px-4 py-3 rounded-lg font-bold transition-all border border-blue-200 active:scale-95 flex justify-center items-center gap-2 text-sm">
+                        Menü
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <script>
-        // Speicher für die Daten
-        let allStudents = ["Schüler 1", "Schüler 2", "Schüler 3"]; // Standardwerte
-        let riggedQueue = [];
+        // State Management (Ausschließlich im Arbeitsspeicher / RAM)
+        let loadedFileName = "";
+        let allStudents = [];      // Alle aus der Datei geladenen Namen: [{ name: "Max", present: true }]
+        let activeStudents = [];   // Nur die aktuell anwesenden Namen
+        let currentPot = [];       // Noch nicht gezogene Personen beim Einzel-Picker
+        let drawInterval = null;
 
-        // --- Initialisierung ---
-        // Beim Laden prüfen wir, ob schon was im Speicher (LocalStorage) ist
-        window.onload = function() {
-            const storedClass = localStorage.getItem('class_list');
-            if (storedClass) {
-                allStudents = JSON.parse(storedClass);
+        let secretOrderMap = {};
+        let secretGroupMap = {};
+        let drawTurn = 1;
+        let generatedGroupsCache = [];
+
+        // --- Custom Modal System ---
+        function customAlert(message) {
+            const modal = document.getElementById('custom-modal');
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('modal-buttons').innerHTML = `
+                <button onclick="closeModal()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold text-white transition-colors text-sm">OK</button>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function customConfirm(message, onConfirm) {
+            const modal = document.getElementById('custom-modal');
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('modal-buttons').innerHTML = `
+                <button onclick="closeModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-bold transition-colors text-sm">Abbrechen</button>
+                <button id="confirm-yes-btn" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold transition-colors text-sm">Bestätigen</button>
+            `;
+            document.getElementById('confirm-yes-btn').onclick = () => {
+                closeModal();
+                onConfirm();
+            };
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        function setContainerWidth(isWide) {
+            const container = document.getElementById('main-container');
+            if (isWide) {
+                container.classList.remove('max-w-xl');
+                container.classList.add('max-w-[95vw]', 'xl:max-w-7xl');
+            } else {
+                container.classList.add('max-w-xl');
+                container.classList.remove('max-w-[95vw]', 'xl:max-w-7xl');
             }
-        };
-
-        // --- Modal Funktionen ---
-        function openClassModal() {
-            document.getElementById('modal-class').style.display = 'flex';
-            // Textarea mit aktuellen Werten füllen (mit Zeilenumbruch verbunden)
-            document.getElementById('input-class-list').value = allStudents.join('\n');
         }
 
-        function openRiggedModal() {
-            document.getElementById('modal-rigged').style.display = 'flex';
-            // Queue anzeigen
-            document.getElementById('input-rigged-list').value = riggedQueue.join('\n');
+        function hideAllScreens() {
+            const screens = ['import-screen', 'attendance-screen', 'mode-screen', 'group-setup-screen', 'group-result-screen', 'picker-screen'];
+            screens.forEach(id => {
+                const el = document.getElementById(id);
+                el.classList.replace('flex', 'hidden');
+                el.classList.replace('block', 'hidden');
+            });
         }
 
-        function closeModals() {
-            document.getElementById('modal-class').style.display = 'none';
-            document.getElementById('modal-rigged').style.display = 'none';
+        function animateScreen(id, displayClass = 'block') {
+            const screen = document.getElementById(id);
+            screen.classList.remove('animate-fade-in');
+            void screen.offsetWidth; // Trigger Reflow für Re-Animation
+            screen.classList.add('animate-fade-in');
+            screen.classList.replace('hidden', displayClass);
         }
 
-        // --- Speichern Funktionen ---
+        function showImportScreen() {
+            hideAllScreens();
+            setContainerWidth(false);
+            animateScreen('import-screen');
+        }
+
+        // Drag & Drop Setup
+        const dropZone = document.getElementById('drop-zone');
         
-        function saveClassList() {
-            const rawText = document.getElementById('input-class-list').value;
-            // Splitten am Zeilenumbruch, Leerzeichen entfernen, leere Zeilen löschen
-            allStudents = rawText.split('\n').map(s => s.trim()).filter(s => s !== "");
-            
-            // Im Browser speichern damit es beim Neuladen noch da ist
-            localStorage.setItem('class_list', JSON.stringify(allStudents));
-            
-            closeModals();
-            alert(allStudents.length + " Schüler gespeichert!");
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropZone.classList.add('border-blue-500', 'bg-blue-100/50');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropZone.classList.remove('border-blue-500', 'bg-blue-100/50');
+            }, false);
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files && files.length > 0) {
+                processFile(files[0]);
+            }
+        });
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                processFile(file);
+            }
+            // Reset input value damit dieselbe Datei erneut ausgewählt werden kann
+            event.target.value = '';
         }
 
-        function saveRiggedList() {
-            const rawText = document.getElementById('input-rigged-list').value;
-            riggedQueue = rawText.split('\n').map(s => s.trim()).filter(s => s !== "");
+        function processFile(file) {
+            loadedFileName = file.name;
+            const reader = new FileReader();
             
-            closeModals();
-            // Kein Alert, damit Schüler nichts merken, falls der Beamer an ist
-            console.log("Geheime Liste aktualisiert: ", riggedQueue);
+            reader.onload = function(e) {
+                const text = e.target.result;
+                parseAndSetNames(text);
+            };
+
+            reader.readAsText(file, 'UTF-8');
         }
 
+        function toggleManualInput() {
+            const box = document.getElementById('manual-input-box');
+            const arrow = document.getElementById('manual-arrow');
+            box.classList.toggle('hidden');
+            arrow.classList.toggle('rotate-180');
+        }
 
-        // --- Die "Zufalls" Logik ---
+        function handleManualSubmit() {
+            const rawText = document.getElementById('manual-names-input').value;
+            loadedFileName = "Manuell eingegebene Liste";
+            parseAndSetNames(rawText);
+        }
 
-        function spin() {
-            if (allStudents.length === 0) {
-                alert("Bitte erst eine Klassenliste anlegen!");
+        function parseAndSetNames(text) {
+            const lines = text.split(/\r?\n/)
+                              .map(line => line.trim())
+                              .filter(line => line.length > 0);
+
+            if (lines.length === 0) {
+                customAlert("Es wurden keine gültigen Namen in der Datei/Eingabe gefunden!");
                 return;
             }
 
-            const nameDisplay = document.getElementById('current-name');
-            const btn = document.getElementById('spin-btn');
+            allStudents = lines.map(name => ({ name: name, present: true }));
+            showAttendanceScreen();
+        }
+
+        function showAttendanceScreen() {
+            hideAllScreens();
+            setContainerWidth(false);
             
-            // UI vorbereiten
-            btn.disabled = true;
-            nameDisplay.style.color = "#333"; // Farbe zurücksetzen
-            nameDisplay.classList.remove('highlight');
+            document.getElementById('class-file-title').innerText = loadedFileName;
+            renderAttendanceList();
+            animateScreen('attendance-screen');
+        }
+
+        function renderAttendanceList() {
+            const container = document.getElementById('attendance-list');
+            container.innerHTML = '';
+
+            allStudents.forEach((student, index) => {
+                const row = document.createElement('label');
+                row.className = `flex items-center justify-between p-2.5 rounded-lg border cursor-pointer transition-colors ${
+                    student.present ? 'bg-white border-slate-200 hover:bg-slate-50' : 'bg-slate-100 border-slate-200 text-slate-400 opacity-60'
+                }`;
+
+                row.innerHTML = `
+                    <span class="font-medium text-sm ${student.present ? 'text-slate-800' : 'line-through'}">${student.name}</span>
+                    <input type="checkbox" ${student.present ? 'checked' : ''} onchange="toggleStudentAttendance(${index})" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 cursor-pointer">
+                `;
+
+                container.appendChild(row);
+            });
+
+            updateAttendanceCounter();
+        }
+
+        function toggleStudentAttendance(index) {
+            allStudents[index].present = !allStudents[index].present;
+            renderAttendanceList();
+        }
+
+        function setAllAttendance(status) {
+            allStudents.forEach(s => s.present = status);
+            renderAttendanceList();
+        }
+
+        function updateAttendanceCounter() {
+            const presentCount = allStudents.filter(s => s.present).length;
+            document.getElementById('attendance-count').innerText = `${presentCount} / ${allStudents.length} anwesend`;
+        }
+
+        function confirmAttendanceAndProceed() {
+            activeStudents = allStudents.filter(s => s.present).map(s => s.name);
+
+            if (activeStudents.length === 0) {
+                customAlert("Bitte wähle mindestens eine anwesende Person aus!");
+                return;
+            }
+
+            showModeScreen();
+        }
+
+        function showModeScreen() {
+            hideAllScreens();
+            setContainerWidth(false);
+            document.getElementById('mode-active-info').innerText = `Aktuell ${activeStudents.length} anwesende Personen geladen`;
+            animateScreen('mode-screen');
+        }
+
+        function showGroupSetup() {
+            hideAllScreens();
+            setContainerWidth(false);
+            animateScreen('group-setup-screen');
+        }
+
+        function prepareGroups() {
+            const mode = document.querySelector('input[name="groupMode"]:checked').value;
+            const num = parseInt(document.getElementById('group-number').value);
             
-            let counter = 0;
-            let maxIterations = 25; // Anzahl der Namen die durchrattern
+            if (isNaN(num) || num <= 0) {
+                customAlert("Bitte eine gültige Zahl größer 0 eingeben.");
+                return;
+            }
+
+            let students = [...activeStudents];
             
-            // Animation Loop
-            let interval = setInterval(() => {
-                // Zeige IMMER einen zufälligen Namen aus der Gesamtliste für den Effekt
-                const randomName = allStudents[Math.floor(Math.random() * allStudents.length)];
-                nameDisplay.innerText = randomName;
-                
-                counter++;
-                // Ende der Animation
-                if (counter > maxIterations) {
-                    clearInterval(interval);
-                    selectWinner();
+            // Zufälliges Mischen (Fisher-Yates Shuffle)
+            for (let i = students.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [students[i], students[j]] = [students[j], students[i]];
+            }
+            
+            let numberOfGroups = mode === "numGroups" ? num : Math.ceil(students.length / num);
+            if (mode === "numGroups" && num > students.length) {
+                customAlert("Es können nicht mehr Gruppen als anwesende Personen erstellt werden.");
+                return;
+            }
+            if (mode === "groupSize" && num > students.length) {
+                customAlert("Die Gruppengröße kann nicht größer als die Gesamtzahl der Personen sein.");
+                return;
+            }
+            
+            let generatedGroups = Array.from({length: numberOfGroups}, () => []);
+            let groupLetterMap = {};
+            let currentGroupIdx = 0;
+            let unassignedStudents = [];
+
+            // Berücksichtigen der geheimen Gruppenzuordnung
+            students.forEach(student => {
+                const letter = secretGroupMap[student];
+                if (letter) {
+                    if (groupLetterMap[letter] === undefined) {
+                        groupLetterMap[letter] = currentGroupIdx % numberOfGroups;
+                        currentGroupIdx++;
+                    }
+                    generatedGroups[groupLetterMap[letter]].push(student);
+                } else {
+                    unassignedStudents.push(student);
                 }
-            }, 80); // Geschwindigkeit in ms
-        }
+            });
 
-        function selectWinner() {
-            const nameDisplay = document.getElementById('current-name');
-            const btn = document.getElementById('spin-btn');
+            // Restliche Personen gleichmäßig verteilen
+            unassignedStudents.forEach(student => {
+                let minSize = Math.min(...generatedGroups.map(g => g.length));
+                let availableGroups = generatedGroups.map((g, i) => ({size: g.length, index: i})).filter(g => g.size === minSize);
+                let targetGroup = availableGroups[Math.floor(Math.random() * availableGroups.length)].index;
+                generatedGroups[targetGroup].push(student);
+            });
             
-            let finalName = "";
-
-            // LOGIK: Ist die manipulierte Liste leer?
-            if (riggedQueue.length > 0) {
-                // Nein: Nimm den ersten von der geheimen Liste
-                finalName = riggedQueue.shift(); // .shift() nimmt das erste Element und löscht es aus dem Array
-            } else {
-                // Ja: Nimm einen echten Zufall aus der Klassenliste
-                finalName = allStudents[Math.floor(Math.random() * allStudents.length)];
-            }
-
-            nameDisplay.innerText = finalName;
-            nameDisplay.style.color = "#28a745"; // Grün machen
-            nameDisplay.classList.add('highlight');
-            btn.disabled = false;
+            generatedGroupsCache = generatedGroups;
+            showGroupResultScreenEmpty();
         }
 
-        // Schließen der Modals wenn man daneben klickt
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                closeModals();
+        function showGroupResultScreenEmpty() {
+            hideAllScreens();
+            setContainerWidth(true); 
+            animateScreen('group-result-screen', 'flex');
+            
+            const container = document.getElementById('groups-container');
+            container.innerHTML = '';
+            
+            generatedGroupsCache.forEach((group, index) => {
+                const box = document.createElement('div');
+                box.className = 'bg-white border-2 border-purple-100 rounded-xl p-4 shadow-sm h-fit';
+                box.innerHTML = `
+                    <h3 class="text-purple-700 font-bold border-b-2 border-purple-100 pb-2 mb-3 text-center text-lg">Gruppe ${index + 1}</h3>
+                    <ul id="group-list-${index}" class="space-y-2 text-center min-h-[2rem]"></ul>
+                `;
+                container.appendChild(box);
+            });
+            
+            const btn = document.getElementById('group-start-btn');
+            btn.innerText = "Start";
+            btn.disabled = false;
+            btn.onclick = startGroupAnimation;
+        }
+
+        function startGroupAnimation() {
+            const btn = document.getElementById('group-start-btn');
+            if (btn.innerText === "Neu auslosen") {
+                prepareGroups(); 
+                setTimeout(startGroupAnimation, 50); 
+                return; 
             }
+            
+            btn.innerText = "Auslosen läuft...";
+            btn.disabled = true;
+
+            let currentStudentIndex = 0;
+            let delay = 180; 
+            let distributionList = [];
+            
+            let maxLen = Math.max(...generatedGroupsCache.map(g => g.length));
+            for (let i = 0; i < maxLen; i++) {
+                for (let g = 0; g < generatedGroupsCache.length; g++) {
+                    if (generatedGroupsCache[g][i]) {
+                        distributionList.push({ name: generatedGroupsCache[g][i], targetGroup: g });
+                    }
+                }
+            }
+
+            function animateNext() {
+                if (currentStudentIndex >= distributionList.length) {
+                    btn.innerText = "Neu auslosen";
+                    btn.disabled = false;
+                    btn.onclick = startGroupAnimation;
+                    return; 
+                }
+                
+                const item = distributionList[currentStudentIndex];
+                const listUl = document.getElementById(`group-list-${item.targetGroup}`);
+                
+                if (listUl) {
+                    const li = document.createElement('li');
+                    li.className = 'bg-slate-50 text-slate-700 rounded-lg p-2 text-sm font-semibold animate-fade-in border border-slate-200 shadow-sm';
+                    li.innerText = item.name;
+                    listUl.appendChild(li);
+                }
+                
+                currentStudentIndex++;
+                setTimeout(animateNext, delay);
+                if(delay > 30) delay *= 0.92; 
+            }
+
+            setTimeout(animateNext, 250);
+        }
+
+        function startPicker() {
+            hideAllScreens();
+            setContainerWidth(false);
+            currentPot = [...activeStudents]; 
+            drawTurn = 1;
+            
+            animateScreen('picker-screen');
+            document.getElementById('picker-title').innerText = loadedFileName || "Zufallsauswahl";
+            resetUI();
+            updateStats();
+        }
+
+        function resetUI() {
+            const resultBox = document.getElementById('result-box');
+            resultBox.innerText = "?";
+            resultBox.classList.remove('text-amber-500', 'drop-shadow-md', 'scale-110');
+            resultBox.classList.add('text-slate-300');
+        }
+
+        function updateStats() {
+            const total = activeStudents.length;
+            const left = currentPot.length;
+            document.getElementById('picker-stats').innerText = `Noch ${left} von ${total} Personen im Topf`;
+            
+            const btn = document.getElementById('draw-btn');
+            if (left === 0) {
+                btn.disabled = true;
+                btn.innerHTML = "Alle wurden gezogen!";
+            } else {
+                btn.disabled = false;
+                btn.innerHTML = `<span class="text-2xl">🎲</span> Name ziehen!`;
+            }
+        }
+
+        function drawName() {
+            if (currentPot.length === 0) return;
+
+            const btn = document.getElementById('draw-btn');
+            const resultBox = document.getElementById('result-box');
+            
+            btn.disabled = true;
+            resultBox.classList.remove('text-amber-500', 'text-slate-300', 'scale-110');
+            resultBox.classList.add('text-slate-800');
+
+            let ticks = 0;
+            const maxTicks = 20; 
+            const speed = 60; 
+
+            drawInterval = setInterval(() => {
+                const randomIndex = Math.floor(Math.random() * currentPot.length);
+                resultBox.innerText = currentPot[randomIndex];
+                ticks++;
+
+                if (ticks >= maxTicks) {
+                    clearInterval(drawInterval);
+                    finishDraw();
+                }
+            }, speed);
+        }
+
+        function finishDraw() {
+            const resultBox = document.getElementById('result-box');
+            
+            let candidates = currentPot.filter(s => {
+                const mapped = secretOrderMap[s];
+                if (mapped === drawTurn) return true;
+                if (mapped === -1 && currentPot.length === 1) return true; // -1 heißt zwingend der/die Letzte
+                if (mapped === undefined) return true; // Zufall
+                return false;
+            });
+            
+            const forcedCandidate = candidates.find(s => secretOrderMap[s] === drawTurn);
+            if (forcedCandidate) {
+                candidates = [forcedCandidate];
+            }
+            // Fallback, falls Vorauswahl zu Konflikten führt
+            if (candidates.length === 0) candidates = currentPot;
+
+            const winnerIndexInCandidates = Math.floor(Math.random() * candidates.length);
+            const winner = candidates[winnerIndexInCandidates];
+            
+            const winnerIndex = currentPot.indexOf(winner);
+            currentPot.splice(winnerIndex, 1);
+            
+            drawTurn++;
+
+            resultBox.innerText = winner;
+            resultBox.classList.replace('text-slate-800', 'text-amber-500');
+            
+            resultBox.style.transform = 'scale(1.1)';
+            resultBox.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            setTimeout(() => {
+                resultBox.style.transform = 'scale(1)';
+            }, 300);
+            
+            updateStats();
+        }
+
+        function resetPot() {
+            customConfirm("Möchtest du den Topf wieder auffüllen? Alle anwesenden Namen können dann wieder drankommen.", () => {
+                currentPot = [...activeStudents];
+                drawTurn = 1;
+                resetUI();
+                updateStats();
+            });
+        }
+
+        // --- Geheime Funktionen ---
+
+        function openSecretPickerModal() {
+            const list = document.getElementById('secret-list');
+            list.innerHTML = '';
+            document.getElementById('secret-title').innerText = 'Geheime Reihenfolge (Zahl eintragen)';
+            
+            activeStudents.forEach((student, idx) => {
+                const val = secretOrderMap[student] !== undefined ? secretOrderMap[student] : '';
+                list.innerHTML += `
+                    <div class="flex items-center justify-between p-2 bg-slate-50 border border-slate-200 rounded-lg">
+                        <input type="number" id="sec-ord-${idx}" value="${val}" class="w-16 p-1 border border-slate-300 rounded text-center text-sm mr-3 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-200" placeholder="-">
+                        <span class="font-medium text-sm flex-grow text-slate-700">${student}</span>
+                    </div>
+                `;
+            });
+            document.getElementById('secret-save-btn').onclick = () => saveSecretPicker();
+            document.getElementById('secret-modal').classList.remove('hidden');
+        }
+
+        function saveSecretPicker() {
+            secretOrderMap = {};
+            activeStudents.forEach((student, idx) => {
+                const val = document.getElementById(`sec-ord-${idx}`).value;
+                if (val !== '') {
+                    secretOrderMap[student] = parseInt(val);
+                }
+            });
+            closeSecretModal();
+        }
+
+        function openSecretGroupModal() {
+            const list = document.getElementById('secret-list');
+            list.innerHTML = '';
+            document.getElementById('secret-title').innerText = 'Geheime Gruppen (Buchstabe eintragen)';
+            
+            activeStudents.forEach((student, idx) => {
+                const val = secretGroupMap[student] || '';
+                list.innerHTML += `
+                    <div class="flex items-center justify-between p-2 bg-slate-50 border border-slate-200 rounded-lg">
+                        <input type="text" id="sec-grp-${idx}" value="${val}" class="w-16 p-1 border border-slate-300 rounded text-center text-sm mr-3 uppercase font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-200" placeholder="-">
+                        <span class="font-medium text-sm flex-grow text-slate-700">${student}</span>
+                    </div>
+                `;
+            });
+            document.getElementById('secret-save-btn').onclick = () => saveSecretGroup();
+            document.getElementById('secret-modal').classList.remove('hidden');
+        }
+
+        function saveSecretGroup() {
+            secretGroupMap = {};
+            activeStudents.forEach((student, idx) => {
+                const val = document.getElementById(`sec-grp-${idx}`).value.trim().toUpperCase();
+                if (val !== '') {
+                    secretGroupMap[student] = val;
+                }
+            });
+            closeSecretModal();
+        }
+
+        function closeSecretModal() {
+            document.getElementById('secret-modal').classList.add('hidden');
         }
     </script>
 </body>
