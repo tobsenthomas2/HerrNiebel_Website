@@ -126,6 +126,26 @@
                   ]
                 }
               ]
+            },
+            {
+              "id": "sg",
+              "title": "SG - System- und Gerätetechnik",
+              "description": "System- und Gerätetechnik, Bauelemente und Schaltungsanalyse",
+              "icon": "🔌",
+              "folder": "SG",
+              "children": [
+                {
+                  "id": "halbleiter",
+                  "title": "Halbleiter",
+                  "description": "LUMIATECH Halbleiterportal – Dioden, LEDs, Datenblätter & Schaltungslabor",
+                  "icon": "💎",
+                  "folder": "halbleiter",
+                  "tags": [
+                    "Theorie",
+                    "Simulation"
+                  ]
+                }
+              ]
             }
           ]
         },

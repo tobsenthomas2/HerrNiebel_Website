@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMIATECH SpiceBench | Interaktives Halbleiter-Schaltungslabor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lt_bg: '#0b1120',
+                        lt_surface: '#111827',
+                        lt_card: '#1e293b',
+                        lt_cyan: '#06b6d4',
+                        lt_blue: '#3b82f6',
+                        lt_amber: '#f59e0b',
+                        lt_emerald: '#10b981'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-lt_bg text-slate-200 antialiased selection:bg-lt_cyan selection:text-slate-950">
+
+    <!-- Top B2B Info Bar -->
+    <div class="bg-slate-950 border-b border-slate-800/80 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap justify-between items-center gap-2">
+            <div>
+                <i class="fa-solid fa-flask text-lt_cyan mr-1.5"></i>LUMIATECH SpiceBench v3.4 · <strong>Interaktives Applikations- &amp; Netzwerklabor (U<sub>F,Si</sub> = 0,7 V konstant)</strong>
+            </div>
+            <div class="font-mono text-slate-400">
+                Referenz-Widerstände: <strong class="text-white">500 Ω</strong> | Prüfspannung: <strong class="text-lt_cyan">2,0 V DC</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-nav border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-lt_cyan to-lt_blue flex items-center justify-center text-slate-950 font-extrabold text-lg">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <div>
+                        <span class="text-white font-extrabold text-xl tracking-wider block leading-none">LUMIA<span class="text-lt_cyan">TECH</span></span>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400">Semiconductor &amp; Optoelectronics</span>
+                    </div>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="text-slate-300 hover:text-white hover:bg-slate-800/70 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-atom text-lt_cyan"></i> Unternehmen &amp; Werkstoffe
+                    </a>
+                    <a href="dioden.html" class="text-slate-300 hover:text-white hover:bg-slate-800/70 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-lt_amber"></i> Silizium-Dioden (BAY-Serie)
+                    </a>
+                    <a href="leds.html" class="text-slate-300 hover:text-white hover:bg-slate-800/70 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-lt_emerald"></i> Optoelektronik &amp; LEDs
+                    </a>
+                    <a href="schaltungslabor.html" class="nav-pill-active px-3.5 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-wave-square text-purple-400"></i> Schaltungslabor
+                    </a>
+                </div>
+
+                <a href="index.html#downloads" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-pdf text-lt_cyan"></i> <span class="hidden sm:inline">Alle PDFs</span>
+                </a>
+            </div>
+            <div class="flex md:hidden overflow-x-auto py-2 gap-2 border-t border-slate-800/80 text-xs">
+                <a href="index.html" class="bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md whitespace-nowrap">Werkstoffe</a>
+                <a href="dioden.html" class="bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md whitespace-nowrap">Dioden (BAY44)</a>
+                <a href="leds.html" class="bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md whitespace-nowrap">LED-Technik (L-7113)</a>
+                <a href="schaltungslabor.html" class="nav-pill-active px-3 py-1.5 rounded-md font-semibold whitespace-nowrap">Schaltungslabor</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="wafer-bg border-b border-slate-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-lt_cyan text-xs font-mono mb-3">
+                        LUMIATECH SPICEBENCH · SCHALTUNGSANALYSE &amp; PRÜFSTAND
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">
+                        Interaktives Dioden- &amp; Widerstands-Netzwerklabor
+                    </h1>
+                    <p class="text-slate-300 text-sm sm:text-base max-w-3xl">
+                        In industriellen Steuerungen arbeiten Silizium-Dioden (Durchlassspannung konstant angenommen mit <strong>U<sub>F</sub> = 0,7 V</strong>) in kombinierten Reihen- und Parallelschaltungen mit Verbrauchern (hier <strong>500 Ω</strong>). Wählen Sie eine Referenzschaltung zur Live-Messung aller Teilspannungen und Teilströme.
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 bg-slate-900 p-3 rounded-xl border border-slate-700 self-start">
+                    <span class="text-xs font-mono text-slate-300">Messwerte &amp; Rechenweg:</span>
+                    <button onclick="toggleTelemetryVisibility()" id="btnToggleTelemetry" class="px-3.5 py-2 rounded-lg text-xs font-mono font-bold bg-emerald-500 text-slate-950 transition-all">
+                        <i class="fa-solid fa-eye mr-1"></i> Eingeblendet (Live-Messung)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+
+        <!-- Circuit Selector Tabs (Circuits 6a, 6b, 7a, 7b, 7c, 7d, 7e, 7f) -->
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-2xl">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-mono uppercase text-lt_cyan font-bold">Referenz-Topologien an G1 = 2 V DC</span>
+                    <h2 class="text-xl font-bold text-white">Wählen Sie die zu untersuchende Schaltungstopologie:</h2>
+                </div>
+                <span class="text-xs font-mono text-slate-400">Annahme: U<sub>F,Si</sub> = 0,7 V (leitend) | I<sub>R</sub> = 0 A (sperrend)</span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 mb-8" id="circuitButtons">
+                <button onclick="selectCircuit('6a')" id="btn-c-6a" class="p-3 rounded-xl border text-left font-mono transition-all bg-cyan-500/20 border-lt_cyan text-white">
+                    <div class="text-xs font-bold text-lt_cyan">Typ 6a</div>
+                    <div class="text-[11px] text-slate-300 mt-0.5">Reihe (leitend)</div>
+                </button>
+                <button onclick="selectCircuit('6b')" id="btn-c-6b" class="p-3 rounded-xl border text-left font-mono transition-all bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600">
+                    <div class="text-xs font-bold text-lt_amber">Typ 6b</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">Parallel + Sperr</div>
+                </button>
+                <button onclick="selectCircuit('7a')" id="btn-c-7a" class="p-3 rounded-xl border text-left font-mono transition-all bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600">
+                    <div class="text-xs font-bold text-lt_emerald">Typ 7a</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">(R1||R2) + R3 ↓</div>
+                </button>
+                <button onclick="selectCircuit('7b')" id="btn-c-7b" class="p-3 rounded-xl border text-left font-mono transition-all bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600">
+                    <div class="text-xs font-bold text-lt_emerald">Typ 7b</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">R2 + (R1 || R3 ↓)</div>
+                </button>
+                <button onclick="selectCircuit('7c')" id="btn-c-7c" class="p-3 rounded-xl border text-left font-mono transition-all bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600">
+                    <div class="text-xs font-bold text-rose-400">Typ 7c</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">(R1||R2)+(R3||R4↑)</div>
+                </button>
+                <button onclick="selectCircuit('7d')" id="btn-c-7d" class="p-3 rounded-xl border text-left font-mono transition-all bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600">
+                    <div class="text-xs font-bold text-lt_cyan">Typ 7d</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">(R1||R2)+(R3||R4↓)</div>
+                </button>
+                <button onclick="selectCircuit('7e')" id="btn-c-7e" class="p-3 rounded-xl border text-left font-mono transition-all bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600">
+                    <div class="text-xs font-bold text-purple-400">Typ 7e</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">Brücke (R4↑ R5↑)</div>
+                </button>
+                <button onclick="selectCircuit('7f')" id="btn-c-7f" class="p-3 rounded-xl border text-left font-mono transition-all bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600">
+                    <div class="text-xs font-bold text-purple-400">Typ 7f</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">Brücke (R4↑ R5↓)</div>
+                </button>
+            </div>
+
+            <!-- Active Circuit Workspace -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left: Interactive SVG Circuit Diagram with Voltage & Current Arrows -->
+                <div class="lg:col-span-7 bg-slate-950 border border-slate-800 rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <span id="circuitCodeBadge" class="px-2.5 py-0.5 rounded bg-cyan-500/20 text-lt_cyan font-mono text-xs font-bold">Referenzschaltung 6a</span>
+                            <h3 id="circuitTitle" class="text-lg font-bold text-white mt-1">Reihenschaltung aus Widerstand R1 (500 Ω) und leitender Diode R2</h3>
+                        </div>
+                        <label class="flex items-center gap-2 text-xs font-mono text-slate-300 cursor-pointer">
+                            <input type="checkbox" id="chkArrows" checked onchange="renderActiveCircuit()" class="rounded accent-cyan-400">
+                            Zählpfeile (U / I) anzeigen
+                        </label>
+                    </div>
+
+                    <div class="bg-[#070b14] rounded-xl border border-slate-800 p-4 flex justify-center">
+                        <svg id="circuitSvg" viewBox="0 0 540 340" class="w-full max-w-[520px] h-auto font-sans"></svg>
+                    </div>
+                </div>
+
+                <!-- Right: Complete Telemetry & Step-by-Step Calculation -->
+                <div class="lg:col-span-5 space-y-5">
+                    <div id="telemetryHiddenNotice" class="hidden bg-slate-950 border-2 border-dashed border-slate-700 rounded-2xl p-8 text-center space-y-4">
+                        <i class="fa-solid fa-user-Secret fa-calculator text-3xl text-lt_cyan"></i>
+                        <h4 class="text-lg font-bold text-white">Selbsttest-Modus aktiv</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Berechnen Sie zunächst alle Teilspannungen und Teilströme der ausgewählten Schaltung selbst. Klicken Sie anschließend unten, um die Multimeter-Messwerte und den vollständigen Lösungsweg einzublenden.
+                        </p>
+                        <button onclick="toggleTelemetryVisibility()" class="bg-lt_cyan hover:bg-cyan-400 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-lg">
+                            Messwerte &amp; Rechenweg jetzt aufdecken
+                        </button>
+                    </div>
+
+                    <div id="telemetryContent" class="space-y-4">
+                        <!-- Diode State Box -->
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                            <div class="text-xs font-mono uppercase text-slate-400 mb-1">1. Schaltzustand der Diode(n)</div>
+                            <div id="calcDiodeState" class="text-sm font-bold text-lt_emerald"></div>
+                        </div>
+
+                        <!-- Voltages & Currents Table -->
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                            <div class="text-xs font-mono uppercase text-slate-400 mb-3">2. Gemessene Bauteil-Spannungen &amp; Ströme</div>
+                            <div id="calcMetricsGrid" class="grid grid-cols-2 gap-2.5 font-mono text-xs"></div>
+                        </div>
+
+                        <!-- Step-by-Step Mathematical Derivation -->
+                        <div class="bg-slate-950 border-l-4 border-lt_cyan border border-slate-800 rounded-xl p-5">
+                            <div class="text-xs font-mono uppercase text-lt_cyan font-bold mb-2">3. Vollständiger Rechenweg (Maschen- &amp; Knotenregel)</div>
+                            <div id="calcStepsList" class="space-y-2 font-mono text-xs text-slate-200 leading-relaxed"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete Overview Matrix of All 8 Network Topologies (Quick Reference) -->
+        <section class="bg-slate-900 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-xl">
+            <div class="mb-6">
+                <span class="text-xs font-mono uppercase text-lt_amber">Komplett-Referenz · Alle 8 Netzwerkschaltungen auf einen Blick</span>
+                <h2 class="text-2xl font-extrabold text-white mt-1">Zusammenfassung aller Berechnungsergebnisse (G1 = 2 V, R = 500 Ω)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-mono">
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                    <div class="text-lt_cyan font-bold text-sm border-b border-slate-800 pb-1">Schaltung 6a</div>
+                    <div class="text-emerald-400">R2 (Diode) leitet: U<sub>R2</sub> = 0,7 V</div>
+                    <div>U<sub>R1</sub> = 2 V − 0,7 V = <strong>1,3 V</strong></div>
+                    <div>I = U<sub>R1</sub> / R1 = 1,3 V / 500 Ω = <strong>2,6 mA</strong></div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                    <div class="text-lt_amber font-bold text-sm border-b border-slate-800 pb-1">Schaltung 6b</div>
+                    <div class="text-rose-400">R3 (Diode) sperrt: I = 0 A</div>
+                    <div>U<sub>R1</sub> = U<sub>R2</sub> = <strong>0 V</strong></div>
+                    <div>U<sub>R3</sub> = <strong>2 V</strong> (volle Quellspannung)</div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                    <div class="text-lt_emerald font-bold text-sm border-b border-slate-800 pb-1">Schaltung 7a</div>
+                    <div class="text-emerald-400">R3 (Diode) leitet: U<sub>R3</sub> = 0,7 V</div>
+                    <div>U<sub>R1</sub> = U<sub>R2</sub> = 2 V − 0,7 V = <strong>1,3 V</strong></div>
+                    <div>R<sub>12</sub> = 250 Ω &rarr; I<sub>ges</sub> = I<sub>R3</sub> = <strong>5,2 mA</strong></div>
+                    <div>I<sub>R1</sub> = I<sub>R2</sub> = <strong>2,6 mA</strong></div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                    <div class="text-lt_emerald font-bold text-sm border-b border-slate-800 pb-1">Schaltung 7b</div>
+                    <div class="text-emerald-400">R3 leitet: U<sub>R3</sub> = U<sub>R1</sub> = 0,7 V</div>
+                    <div>I<sub>R1</sub> = 0,7 V / 500 Ω = <strong>1,4 mA</strong></div>
+                    <div>U<sub>R2</sub> = 2 V − 0,7 V = <strong>1,3 V</strong></div>
+                    <div>I<sub>R2</sub> = 1,3 V / 500 Ω = <strong>2,6 mA</strong></div>
+                    <div>I<sub>R3</sub> = I<sub>R2</sub> − I<sub>R1</sub> = <strong>1,2 mA</strong></div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                    <div class="text-rose-400 font-bold text-sm border-b border-slate-800 pb-1">Schaltung 7c</div>
+                    <div class="text-rose-400">R4 (Diode) sperrt: I<sub>R4</sub> = 0</div>
+                    <div>R<sub>12</sub> = 250 Ω; R<sub>ges</sub> = R<sub>12</sub> + R3 = 750 Ω</div>
+                    <div>I<sub>ges</sub> = I<sub>R3</sub> = 2 V / 750 Ω = <strong>2,67 mA</strong></div>
+                    <div>U<sub>R3</sub> = U<sub>R4</sub> = 2,67 mA · 500 Ω = <strong>1,33 V</strong></div>
+                    <div>U<sub>R1</sub> = U<sub>R2</sub> = <strong>0,67 V</strong> | I<sub>R1</sub> = I<sub>R2</sub> = <strong>1,33 mA</strong></div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                    <div class="text-lt_cyan font-bold text-sm border-b border-slate-800 pb-1">Schaltung 7d</div>
+                    <div class="text-emerald-400">R4 leitet: U<sub>R4</sub> = U<sub>R3</sub> = 0,7 V</div>
+                    <div>I<sub>R3</sub> = 0,7 V / 500 Ω = <strong>1,4 mA</strong></div>
+                    <div>U<sub>R1</sub> = U<sub>R2</sub> = 2 V − 0,7 V = <strong>1,3 V</strong></div>
+                    <div>I<sub>R1</sub> = I<sub>R2</sub> = <strong>2,6 mA</strong> | I<sub>ges</sub> = <strong>5,2 mA</strong></div>
+                    <div>I<sub>R4</sub> = 5,2 mA − 1,4 mA = <strong>3,8 mA</strong></div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                    <div class="text-purple-400 font-bold text-sm border-b border-slate-800 pb-1">Schaltung 7e</div>
+                    <div class="text-rose-400">R4 und R5 sperren:</div>
+                    <div>I<sub>R1</sub> = I<sub>R4</sub> = I<sub>R5</sub> = 0; U<sub>R1</sub> = 0 V</div>
+                    <div>&rarr; Reihenschaltung aus R2 und R3 (1000 Ω)</div>
+                    <div>I<sub>R2</sub> = I<sub>R3</sub> = 2 V / 1000 Ω = <strong>2 mA</strong></div>
+                    <div>U<sub>R2</sub> = U<sub>R3</sub> = <strong>1 V</strong> | U<sub>R4</sub> = U<sub>R5</sub> = <strong>1 V</strong></div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-1.5">
+                    <div class="text-purple-400 font-bold text-sm border-b border-slate-800 pb-1">Schaltung 7f</div>
+                    <div class="text-rose-400">R4 sperrt: I<sub>R4</sub> = I<sub>R2</sub> = 0; U<sub>R2</sub> = 0 V</div>
+                    <div class="text-emerald-400">R5 leitet: U<sub>R5</sub> = U<sub>R1</sub> = 0,7 V</div>
+                    <div>I<sub>R1</sub> = 0,7 V / 500 Ω = <strong>1,4 mA</strong></div>
+                    <div>U<sub>R3</sub> = <strong>1,3 V</strong>; I<sub>R3</sub> = <strong>2,6 mA</strong></div>
+                    <div>I<sub>R5</sub> = 2,6 mA − 1,4 mA = <strong>1,2 mA</strong> | U<sub>R4</sub> = <strong>1,3 V</strong></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-10 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-wave-square text-lt_cyan text-base"></i>
+                <span class="text-slate-300 font-bold">LUMIATECH Semiconductor GmbH</span>
+                <span>· SpiceBench Schaltungslabor</span>
+            </div>
+            <div class="flex gap-4">
+                <a href="index.html" class="hover:text-slate-300">Startseite</a>
+                <a href="dioden.html" class="hover:text-slate-300">Silizium-Dioden</a>
+                <a href="leds.html" class="hover:text-slate-300">Optoelektronik &amp; LEDs</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentCircuitId = '6a';
+        let showTelemetry = true;
+
+        const circuitsDB = {
+            '6a': {
+                badge: 'Referenzschaltung 6a',
+                title: 'Reihenschaltung aus Widerstand R1 (500 Ω) und leitender Diode R2',
+                diodeState: 'Diode R2 ist in Durchlassrichtung geschaltet und leitet: U_R2 = 0,7 V',
+                metrics: [
+                    { label: 'U_R2 (Diode)', val: '0,7 V', color: 'text-lt_emerald' },
+                    { label: 'U_R1 (Widerstand)', val: '1,3 V', color: 'text-lt_cyan' },
+                    { label: 'Gesamtstrom I', val: '2,6 mA', color: 'text-lt_amber' },
+                    { label: 'Quellspannung G1', val: '2,0 V', color: 'text-white' }
+                ],
+                steps: [
+                    '1. R2 (Diode) leitet in Durchlassrichtung: <strong>U<sub>R2</sub> = 0,7 V</strong>',
+                    '2. Maschenregel für R1: <strong>U<sub>R1</sub> = 2 V − 0,7 V = 1,3 V</strong>',
+                    '3. Strom durch die Reihenschaltung: <strong>I = U<sub>R1</sub> / R1 = 1,3 V / 500 Ω = 2,6 mA</strong>'
+                ]
+            },
+            '6b': {
+                badge: 'Referenzschaltung 6b',
+                title: 'Parallelschaltung (R1 || R2) in Reihe mit sperrender Diode R3',
+                diodeState: 'Diode R3 ist in Sperrrichtung eingebaut und sperrt vollständig: I = 0 A',
+                metrics: [
+                    { label: 'Gesamtstrom I', val: '0 A (0 mA)', color: 'text-rose-400' },
+                    { label: 'U_R1 = U_R2', val: '0 V', color: 'text-slate-300' },
+                    { label: 'U_R3 (Sperrspannung)', val: '2,0 V', color: 'text-lt_amber' },
+                    { label: 'Quellspannung G1', val: '2,0 V', color: 'text-white' }
+                ],
+                steps: [
+                    '1. R3 (Diode) ist entgegen der technischen Stromrichtung gepolt und <strong>sperrt: I = 0 A</strong>',
+                    '2. Da kein Strom durch R1 und R2 fließt, fällt dort keine Spannung ab: <strong>U<sub>R1</sub> = U<sub>R2</sub> = 0 V</strong>',
+                    '3. Die gesamte Quellspannung liegt als Sperrspannung an der Diode R3: <strong>U<sub>R3</sub> = 2 V</strong>'
+                ]
+            },
+            '7a': {
+                badge: 'Referenzschaltung 7a',
+                title: 'Parallelschaltung (R1 || R2) in Reihe mit leitender Diode R3',
+                diodeState: 'Diode R3 leitet in Durchlassrichtung: U_R3 = 0,7 V',
+                metrics: [
+                    { label: 'U_R3 (Diode)', val: '0,7 V', color: 'text-lt_emerald' },
+                    { label: 'U_R1 = U_R2', val: '1,3 V', color: 'text-lt_cyan' },
+                    { label: 'I_ges = I_R3', val: '5,2 mA', color: 'text-lt_amber' },
+                    { label: 'I_R1 = I_R2', val: '2,6 mA', color: 'text-white' }
+                ],
+                steps: [
+                    '1. R3 (Diode) leitet: <strong>U<sub>R3</sub> = 0,7 V</strong>',
+                    '2. Spannung an der oberen Parallelschaltung: <strong>U<sub>R1</sub> = U<sub>R2</sub> = 2 V − 0,7 V = 1,3 V</strong>',
+                    '3. Ersatzwiderstand oben: <strong>R<sub>12</sub> = 500 Ω || 500 Ω = 250 Ω</strong>',
+                    '4. Gesamtstrom: <strong>I<sub>ges</sub> = I<sub>R3</sub> = 1,3 V / 250 Ω = 5,2 mA</strong>',
+                    '5. Teilströme: <strong>I<sub>R1</sub> = I<sub>R2</sub> = 1,3 V / 500 Ω = 2,6 mA</strong>'
+                ]
+            },
+            '7b': {
+                badge: 'Referenzschaltung 7b',
+                title: 'Vorwiderstand R2 in Reihe mit Parallelschaltung (R1 || leitende Diode R3)',
+                diodeState: 'Diode R3 leitet und klemmt die Spannung an R1 fest auf U_R3 = U_R1 = 0,7 V!',
+                metrics: [
+                    { label: 'U_R3 = U_R1', val: '0,7 V', color: 'text-lt_emerald' },
+                    { label: 'U_R2 (oben)', val: '1,3 V', color: 'text-lt_cyan' },
+                    { label: 'I_R2 (Gesamt) / I_R1', val: '2,6 mA / 1,4 mA', color: 'text-white' },
+                    { label: 'Diodenstrom I_R3', val: '1,2 mA', color: 'text-lt_amber' }
+                ],
+                steps: [
+                    '1. R3 (Diode) leitet und bestimmt die Spannung der unteren Parallelschaltung: <strong>U<sub>R3</sub> = U<sub>R1</sub> = 0,7 V</strong>',
+                    '2. Teilstrom durch R1: <strong>I<sub>R1</sub> = 0,7 V / 500 Ω = 1,4 mA</strong>',
+                    '3. Restspannung an R2: <strong>U<sub>R2</sub> = 2 V − 0,7 V = 1,3 V</strong>',
+                    '4. Gesamtstrom durch R2: <strong>I<sub>R2</sub> = 1,3 V / 500 Ω = 2,6 mA</strong>',
+                    '5. Knotenregel für Diode R3: <strong>I<sub>R3</sub> = I<sub>R2</sub> − I<sub>R1</sub> = 2,6 mA − 1,4 mA = 1,2 mA</strong>'
+                ]
+            },
+            '7c': {
+                badge: 'Referenzschaltung 7c',
+                title: 'Oben (R1 || R2), unten (R3 || sperrende Diode R4)',
+                diodeState: 'Diode R4 ist in Sperrrichtung eingebaut und sperrt: I_R4 = 0 mA',
+                metrics: [
+                    { label: 'I_R4 (Diode)', val: '0 mA (sperrt)', color: 'text-rose-400' },
+                    { label: 'I_ges = I_R3', val: '2,67 mA', color: 'text-lt_amber' },
+                    { label: 'U_R3 = U_R4', val: '1,33 V', color: 'text-lt_cyan' },
+                    { label: 'U_R1 = U_R2 | I_R1 = I_R2', val: '0,67 V | 1,33 mA', color: 'text-white' }
+                ],
+                steps: [
+                    '1. R4 (Diode) sperrt: <strong>I<sub>R4</sub> = 0</strong> (kann für den Stromfluss weggedacht werden)',
+                    '2. Ersatzwiderstände: <strong>R<sub>12</sub> = 250 Ω</strong>; <strong>R<sub>ges</sub> = R<sub>12</sub> + R3 = 250 Ω + 500 Ω = 750 Ω</strong>',
+                    '3. Gesamtstrom: <strong>I<sub>ges</sub> = I<sub>R3</sub> = 2 V / 750 Ω = 2,67 mA</strong>',
+                    '4. Spannung unten: <strong>U<sub>R3</sub> = U<sub>R4</sub> = 2,67 mA · 500 Ω = 1,33 V</strong>',
+                    '5. Spannung &amp; Teilströme oben: <strong>U<sub>R1</sub> = U<sub>R2</sub> = 2 V − 1,33 V = 0,67 V</strong>; <strong>I<sub>R1</sub> = I<sub>R2</sub> = 1,33 mA</strong>'
+                ]
+            },
+            '7d': {
+                badge: 'Referenzschaltung 7d',
+                title: 'Oben (R1 || R2), unten (R3 || leitende Diode R4)',
+                diodeState: 'Diode R4 leitet und klemmt die untere Parallelschaltung auf U_R4 = U_R3 = 0,7 V',
+                metrics: [
+                    { label: 'U_R4 = U_R3', val: '0,7 V', color: 'text-lt_emerald' },
+                    { label: 'U_R1 = U_R2', val: '1,3 V', color: 'text-lt_cyan' },
+                    { label: 'I_ges | I_R1 = I_R2', val: '5,2 mA | 2,6 mA', color: 'text-white' },
+                    { label: 'I_R3 | I_R4 (Diode)', val: '1,4 mA | 3,8 mA', color: 'text-lt_amber' }
+                ],
+                steps: [
+                    '1. R4 (Diode) leitet: <strong>U<sub>R4</sub> = U<sub>R3</sub> = 0,7 V</strong>',
+                    '2. Strom durch R3: <strong>I<sub>R3</sub> = 0,7 V / 500 Ω = 1,4 mA</strong>',
+                    '3. Spannung oben: <strong>U<sub>R1</sub> = U<sub>R2</sub> = 2 V − 0,7 V = 1,3 V</strong>',
+                    '4. Ströme oben: <strong>I<sub>R1</sub> = I<sub>R2</sub> = 1,3 V / 500 Ω = 2,6 mA</strong> &rarr; <strong>I<sub>ges</sub> = 5,2 mA</strong>',
+                    '5. Strom durch Diode R4: <strong>I<sub>R4</sub> = I<sub>ges</sub> − I<sub>R3</sub> = 5,2 mA − 1,4 mA = 3,8 mA</strong>'
+                ]
+            },
+            '7e': {
+                badge: 'Referenzschaltung 7e',
+                title: 'Vernetzte Schaltung mit zwei sperrenden Dioden (R4 ↑ und R5 ↑)',
+                diodeState: 'Beide Dioden R4 und R5 sind in Sperrrichtung gepolt und sperren!',
+                metrics: [
+                    { label: 'I_R1 = I_R4 = I_R5', val: '0 mA', color: 'text-rose-400' },
+                    { label: 'U_R1', val: '0 V', color: 'text-slate-400' },
+                    { label: 'I_R2 = I_R3', val: '2,0 mA', color: 'text-lt_amber' },
+                    { label: 'U_R2 = U_R3 = U_R4 = U_R5', val: '1,0 V', color: 'text-lt_cyan' }
+                ],
+                steps: [
+                    '1. R4 und R5 (Dioden) sperren: <strong>I<sub>R1</sub> = I<sub>R4</sub> = I<sub>R5</sub> = 0</strong>; damit auch <strong>U<sub>R1</sub> = 0 V</strong>',
+                    '2. Der Strom fließt ausschließlich über die <strong>Reihenschaltung aus R2 und R3</strong> (R<sub>ges</sub> = 1000 Ω)',
+                    '3. Stromstärke: <strong>I<sub>R2</sub> = I<sub>R3</sub> = 2 V / 1000 Ω = 2 mA</strong>',
+                    '4. Teilspannungen: <strong>U<sub>R2</sub> = U<sub>R3</sub> = 1 V</strong>; Sperrspannungen <strong>U<sub>R4</sub> = U<sub>R5</sub> = 1 V</strong>'
+                ]
+            },
+            '7f': {
+                badge: 'Referenzschaltung 7f',
+                title: 'Vernetzte Schaltung mit sperrender Diode R4 (↑) und leitender Diode R5 (↓)',
+                diodeState: 'R4 sperrt (I_R4 = I_R2 = 0), R5 leitet (U_R5 = U_R1 = 0,7 V) – analog zu Schaltung 7b!',
+                metrics: [
+                    { label: 'I_R4 = I_R2 | U_R2', val: '0 mA | 0 V', color: 'text-rose-400' },
+                    { label: 'U_R5 = U_R1 | I_R1', val: '0,7 V | 1,4 mA', color: 'text-lt_emerald' },
+                    { label: 'U_R3 | I_R3 (oben rechts)', val: '1,3 V | 2,6 mA', color: 'text-lt_cyan' },
+                    { label: 'I_R5 (Diode) | U_R4 (Sperr)', val: '1,2 mA | 1,3 V', color: 'text-lt_amber' }
+                ],
+                steps: [
+                    '1. R4 (Diode oben links) sperrt: <strong>I<sub>R4</sub> = I<sub>R2</sub> = 0</strong> und <strong>U<sub>R2</sub> = 0 V</strong> (Zweig fällt weg &rarr; wie 7b!)',
+                    '2. R5 (Diode unten rechts) leitet: <strong>U<sub>R5</sub> = U<sub>R1</sub> = 0,7 V</strong>',
+                    '3. Teilstrom durch R1: <strong>I<sub>R1</sub> = 0,7 V / 500 Ω = 1,4 mA</strong>',
+                    '4. Zweig oben rechts (R3): <strong>U<sub>R3</sub> = 2 V − 0,7 V = 1,3 V</strong>; <strong>I<sub>R3</sub> = 1,3 V / 500 Ω = 2,6 mA</strong>',
+                    '5. Diodenstrom R5: <strong>I<sub>R5</sub> = 2,6 mA − 1,4 mA = 1,2 mA</strong> | Sperrspannung an R4: <strong>U<sub>R4</sub> = 1,3 V</strong>'
+                ]
+            }
+        };
+
+        function toggleTelemetryVisibility() {
+            showTelemetry = !showTelemetry;
+            const btn = document.getElementById('btnToggleTelemetry');
+            const notice = document.getElementById('telemetryHiddenNotice');
+            const content = document.getElementById('telemetryContent');
+
+            if (showTelemetry) {
+                btn.innerHTML = '<i class="fa-solid fa-eye mr-1"></i> Eingeblendet (Live-Messung)';
+                btn.className = 'px-3.5 py-2 rounded-lg text-xs font-mono font-bold bg-emerald-500 text-slate-950 transition-all';
+                notice.classList.add('hidden');
+                content.classList.remove('hidden');
+            } else {
+                btn.innerHTML = '<i class="fa-solid fa-eye-slash mr-1"></i> Ausgeblendet (Selbsttest)';
+                btn.className = 'px-3.5 py-2 rounded-lg text-xs font-mono font-bold bg-slate-800 border border-slate-600 text-slate-200 transition-all';
+                notice.classList.remove('hidden');
+                content.classList.add('hidden');
+            }
+            renderActiveCircuit();
+        }
+
+        function selectCircuit(id) {
+            currentCircuitId = id;
+            ['6a', '6b', '7a', '7b', '7c', '7d', '7e', '7f'].forEach(cid => {
+                const b = document.getElementById('btn-c-' + cid);
+                if (cid === id) {
+                    b.className = 'p-3 rounded-xl border text-left font-mono transition-all bg-cyan-500/20 border-lt_cyan text-white shadow-lg shadow-cyan-950/50';
+                } else {
+                    b.className = 'p-3 rounded-xl border text-left font-mono transition-all bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600';
+                }
+            });
+
+            const c = circuitsDB[id];
+            document.getElementById('circuitCodeBadge').textContent = c.badge;
+            document.getElementById('circuitTitle').textContent = c.title;
+            document.getElementById('calcDiodeState').textContent = c.diodeState;
+
+            const grid = document.getElementById('calcMetricsGrid');
+            grid.innerHTML = c.metrics.map(m => `
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                    <div class="text-slate-400 text-[10px]">${m.label}</div>
+                    <div class="${m.color} font-bold text-sm mt-0.5">${m.val}</div>
+                </div>
+            `).join('');
+
+            const steps = document.getElementById('calcStepsList');
+            steps.innerHTML = c.steps.map(s => `<div>• ${s}</div>`).join('');
+
+            renderActiveCircuit();
+        }
+
+        // Helper functions for drawing SVG circuit elements
+        function drawResistor(x, y, label, sub, uVal, showA) {
+            let arrow = '';
+            if (showA && uVal) {
+                arrow = `<line x1="${x+22}" y1="${y-18}" x2="${x+22}" y2="${y+18}" stroke="#38bdf8" stroke-width="1.8"/>
+                         <polygon points="${x+22},${y+21} ${x+18},${y+13} ${x+26},${y+13}" fill="#38bdf8"/>
+                         <text x="${x+28}" y="${y+4}" fill="#38bdf8" font-size="10" font-family="monospace" font-weight="bold">${uVal}</text>`;
+            }
+            return `
+                <rect x="${x-11}" y="${y-22}" width="22" height="44" fill="#1e293b" stroke="#e2e8f0" stroke-width="2"/>
+                <text x="${x-16}" y="${y-4}" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="end">${label}</text>
+                <text x="${x-16}" y="${y+10}" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="end">${sub}</text>
+                ${arrow}
+            `;
+        }
+
+        function drawDiode(x, y, dir, label, uVal, showA) {
+            const isFwd = dir === 'down';
+            const color = isFwd ? '#10b981' : '#f43f5e';
+            let sym = '';
+            if (isFwd) {
+                sym = `<polygon points="${x-12},${y-14} ${x+12},${y-14} ${x},${y+12}" fill="rgba(16,185,129,0.15)" stroke="${color}" stroke-width="2"/>
+                       <line x1="${x-12}" y1="${y+12}" x2="${x+12}" y2="${y+12}" stroke="${color}" stroke-width="2.8"/>`;
+            } else {
+                sym = `<polygon points="${x-12},${y+14} ${x+12},${y+14} ${x},${y-12}" fill="rgba(244,63,94,0.15)" stroke="${color}" stroke-width="2"/>
+                       <line x1="${x-12}" y1="${y-12}" x2="${x+12}" y2="${y-12}" stroke="${color}" stroke-width="2.8"/>`;
+            }
+            let arrow = '';
+            if (showA && uVal) {
+                arrow = `<line x1="${x+20}" y1="${y-15}" x2="${x+20}" y2="${y+15}" stroke="#fbbf24" stroke-width="1.8"/>
+                         <polygon points="${x+20},${y+18} ${x+16},${y+10} ${x+24},${y+10}" fill="#fbbf24"/>
+                         <text x="${x+26}" y="${y+4}" fill="#fbbf24" font-size="10" font-family="monospace" font-weight="bold">${uVal}</text>`;
+            }
+            return `
+                ${sym}
+                <text x="${x-16}" y="${y+4}" fill="${color}" font-size="11" font-weight="bold" text-anchor="end">${label}</text>
+                ${arrow}
+            `;
+        }
+
+        function renderActiveCircuit() {
+            const svg = document.getElementById('circuitSvg');
+            const showA = document.getElementById('chkArrows').checked && showTelemetry;
+
+            // Common DC 2V source on left (x=80, top=40, bottom=300)
+            let base = `
+                <line x1="80" y1="40" x2="80" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                <circle cx="80" cy="170" r="24" fill="#0f172a" stroke="#e2e8f0" stroke-width="2.2"/>
+                <text x="45" y="165" fill="#e2e8f0" font-size="12" font-weight="bold" text-anchor="end">-G1</text>
+                <text x="45" y="182" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="end">2V</text>
+                <text x="92" y="140" fill="#ef4444" font-size="13" font-weight="bold">+</text>
+                <text x="92" y="208" fill="#38bdf8" font-size="14" font-weight="bold">−</text>
+                <!-- Ground symbol at bottom -->
+                <line x1="230" y1="300" x2="230" y2="315" stroke="#e2e8f0" stroke-width="2.2"/>
+                <line x1="216" y1="315" x2="244" y2="315" stroke="#e2e8f0" stroke-width="3"/>
+            `;
+
+            if (currentCircuitId === '6a') {
+                base += `
+                    <line x1="80" y1="40" x2="360" y2="40" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="80" y1="300" x2="360" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="360" y1="40" x2="360" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    ${drawResistor(360, 110, '-R1', '500Ω', '1,3 V', showA)}
+                    ${drawDiode(360, 225, 'down', '-R2', '0,7 V', showA)}
+                    ${showA ? '<text x="220" y="30" fill="#10b981" font-size="12" font-family="monospace" font-weight="bold" text-anchor="middle">I = 2,6 mA &rarr;</text>' : ''}
+                `;
+            } else if (currentCircuitId === '6b') {
+                base += `
+                    <line x1="80" y1="40" x2="420" y2="40" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="80" y1="300" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="40" x2="290" y2="175" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="420" y1="40" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="175" x2="420" y2="175" stroke="#e2e8f0" stroke-width="2.2"/>
+                    ${drawResistor(290, 110, '-R1', '500Ω', '0 V', showA)}
+                    ${drawResistor(420, 110, '-R2', '500Ω', '0 V', showA)}
+                    ${drawDiode(420, 240, 'up', '-R3', '2,0 V (Sperr)', showA)}
+                    ${showA ? '<text x="200" y="30" fill="#f43f5e" font-size="12" font-family="monospace" font-weight="bold" text-anchor="middle">I = 0 A (R3 sperrt)</text>' : ''}
+                `;
+            } else if (currentCircuitId === '7a') {
+                base += `
+                    <line x1="80" y1="40" x2="420" y2="40" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="80" y1="300" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="40" x2="290" y2="175" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="420" y1="40" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="175" x2="420" y2="175" stroke="#e2e8f0" stroke-width="2.2"/>
+                    ${drawResistor(290, 110, '-R1', '500Ω', '1,3 V (2,6mA)', showA)}
+                    ${drawResistor(420, 110, '-R2', '500Ω', '1,3 V (2,6mA)', showA)}
+                    ${drawDiode(420, 240, 'down', '-R3', '0,7 V (5,2mA)', showA)}
+                    ${showA ? '<text x="195" y="30" fill="#10b981" font-size="12" font-family="monospace" font-weight="bold" text-anchor="middle">I_ges = 5,2 mA &rarr;</text>' : ''}
+                `;
+            } else if (currentCircuitId === '7b') {
+                base += `
+                    <line x1="80" y1="40" x2="420" y2="40" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="80" y1="300" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="420" y1="40" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="175" x2="420" y2="175" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="175" x2="290" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    ${drawResistor(420, 105, '-R2', '500Ω', '1,3 V (2,6mA)', showA)}
+                    ${drawResistor(290, 240, '-R1', '500Ω', '0,7 V (1,4mA)', showA)}
+                    ${drawDiode(420, 240, 'down', '-R3', '0,7 V (1,2mA)', showA)}
+                `;
+            } else if (currentCircuitId === '7c') {
+                base += `
+                    <line x1="80" y1="40" x2="420" y2="40" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="80" y1="300" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="40" x2="290" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="420" y1="40" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="170" x2="420" y2="170" stroke="#e2e8f0" stroke-width="2.2"/>
+                    ${drawResistor(290, 105, '-R1', '500Ω', '0,67 V', showA)}
+                    ${drawResistor(420, 105, '-R2', '500Ω', '0,67 V', showA)}
+                    ${drawResistor(290, 235, '-R3', '500Ω', '1,33 V', showA)}
+                    ${drawDiode(420, 235, 'up', '-R4', '0 mA (sperrt)', showA)}
+                    ${showA ? '<text x="190" y="30" fill="#fbbf24" font-size="11" font-family="monospace" font-weight="bold" text-anchor="middle">I_ges = 2,67 mA &rarr;</text>' : ''}
+                `;
+            } else if (currentCircuitId === '7d') {
+                base += `
+                    <line x1="80" y1="40" x2="420" y2="40" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="80" y1="300" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="40" x2="290" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="420" y1="40" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="170" x2="420" y2="170" stroke="#e2e8f0" stroke-width="2.2"/>
+                    ${drawResistor(290, 105, '-R1', '500Ω', '1,3 V (2,6mA)', showA)}
+                    ${drawResistor(420, 105, '-R2', '500Ω', '1,3 V (2,6mA)', showA)}
+                    ${drawResistor(290, 235, '-R3', '500Ω', '0,7 V (1,4mA)', showA)}
+                    ${drawDiode(420, 235, 'down', '-R4', '0,7 V (3,8mA)', showA)}
+                    ${showA ? '<text x="190" y="30" fill="#10b981" font-size="11" font-family="monospace" font-weight="bold" text-anchor="middle">I_ges = 5,2 mA &rarr;</text>' : ''}
+                `;
+            } else if (currentCircuitId === '7e') {
+                base += `
+                    <line x1="80" y1="40" x2="420" y2="40" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="80" y1="300" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="40" x2="290" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="420" y1="40" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="190" x2="420" y2="190" stroke="#e2e8f0" stroke-width="2.2"/>
+                    ${drawDiode(290, 75, 'up', '-R4', '1 V (sperrt)', showA)}
+                    ${drawResistor(290, 140, '-R1', '500Ω', '0 V', showA)}
+                    ${drawResistor(420, 115, '-R2', '500Ω', '1 V (2mA)', showA)}
+                    ${drawResistor(290, 245, '-R3', '500Ω', '1 V (2mA)', showA)}
+                    ${drawDiode(420, 245, 'up', '-R5', '1 V (sperrt)', showA)}
+                `;
+            } else if (currentCircuitId === '7f') {
+                base += `
+                    <line x1="80" y1="40" x2="420" y2="40" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="80" y1="300" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="40" x2="290" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="420" y1="40" x2="420" y2="300" stroke="#e2e8f0" stroke-width="2.2"/>
+                    <line x1="290" y1="190" x2="420" y2="190" stroke="#e2e8f0" stroke-width="2.2"/>
+                    ${drawDiode(290, 75, 'up', '-R4', '1,3 V (sperrt)', showA)}
+                    ${drawResistor(290, 140, '-R2', '500Ω', '0 V', showA)}
+                    ${drawResistor(420, 115, '-R3', '500Ω', '1,3 V (2,6mA)', showA)}
+                    ${drawResistor(290, 245, '-R1', '500Ω', '0,7 V (1,4mA)', showA)}
+                    ${drawDiode(420, 245, 'down', '-R5', '0,7 V (1,2mA)', showA)}
+                `;
+            }
+
+            svg.innerHTML = base;
+        }
+
+        // Init
+        selectCircuit('6a');
+    </script>
+</body>
+</html>

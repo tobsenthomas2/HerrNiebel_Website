@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optoelektronik &amp; Industrie-LEDs Serie L-7113 | LUMIATECH Semiconductor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lt_bg: '#0b1120',
+                        lt_surface: '#111827',
+                        lt_card: '#1e293b',
+                        lt_cyan: '#06b6d4',
+                        lt_blue: '#3b82f6',
+                        lt_amber: '#f59e0b',
+                        lt_emerald: '#10b981'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-lt_bg text-slate-200 antialiased selection:bg-lt_emerald selection:text-slate-950">
+
+    <!-- Top B2B Info Bar -->
+    <div class="bg-slate-950 border-b border-slate-800/80 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap justify-between items-center gap-2">
+            <div>
+                <i class="fa-solid fa-lightbulb text-lt_emerald mr-1.5"></i>Produktbereich: <strong>Industrielle 5-mm-Leuchtdioden (T-1 3/4) · Serie L-7113SURDK / L-7113SGD / L-7113MBTL</strong>
+            </div>
+            <div class="flex items-center gap-3 font-mono">
+                <a href="datenblaetter/Kingbright_L-7113SURDK_Rot.pdf" download class="text-red-400 hover:underline"><i class="fa-solid fa-file-pdf mr-1"></i>Rot PDF</a>
+                <span>·</span>
+                <a href="datenblaetter/Kingbright_L-7113SGD_Gruen.pdf" download class="text-lt_emerald hover:underline"><i class="fa-solid fa-file-pdf mr-1"></i>Grün PDF</a>
+                <span>·</span>
+                <a href="datenblaetter/Kingbright_L-7113MBTL_Blau.pdf" download class="text-blue-400 hover:underline"><i class="fa-solid fa-file-pdf mr-1"></i>Blau PDF</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-nav border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-lt_cyan to-lt_blue flex items-center justify-center text-slate-950 font-extrabold text-lg">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <div>
+                        <span class="text-white font-extrabold text-xl tracking-wider block leading-none">LUMIA<span class="text-lt_cyan">TECH</span></span>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400">Semiconductor &amp; Optoelectronics</span>
+                    </div>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="text-slate-300 hover:text-white hover:bg-slate-800/70 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-atom text-lt_cyan"></i> Unternehmen &amp; Werkstoffe
+                    </a>
+                    <a href="dioden.html" class="text-slate-300 hover:text-white hover:bg-slate-800/70 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-lt_amber"></i> Silizium-Dioden (BAY-Serie)
+                    </a>
+                    <a href="leds.html" class="nav-pill-active px-3.5 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-lt_emerald"></i> Optoelektronik &amp; LEDs
+                    </a>
+                    <a href="schaltungslabor.html" class="text-slate-300 hover:text-white hover:bg-slate-800/70 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-wave-square text-purple-400"></i> Schaltungslabor
+                    </a>
+                </div>
+
+                <a href="#datenblaetter-led" class="bg-lt_emerald hover:bg-emerald-400 text-slate-950 px-3.5 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">LED-Datenblätter</span>
+                </a>
+            </div>
+            <div class="flex md:hidden overflow-x-auto py-2 gap-2 border-t border-slate-800/80 text-xs">
+                <a href="index.html" class="bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md whitespace-nowrap">Werkstoffe</a>
+                <a href="dioden.html" class="bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md whitespace-nowrap">Dioden (BAY44)</a>
+                <a href="leds.html" class="nav-pill-active px-3 py-1.5 rounded-md font-semibold whitespace-nowrap">LED-Technik (L-7113)</a>
+                <a href="schaltungslabor.html" class="bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md whitespace-nowrap">Schaltungslabor</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="wafer-bg border-b border-slate-800 py-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-lt_emerald text-xs font-mono mb-4">
+                        LUMIATECH OPTOELECTRONICS · SERIE L-7113 (5 MM SOLID STATE LAMPS)
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+                        Industrie-Leuchtdioden (LED) &amp; <span class="text-lt_emerald">Signalsäulen-Technik</span>
+                    </h1>
+                    <p class="text-slate-300 text-lg leading-relaxed">
+                        Höchste Ausfallsicherheit für 12 V DC Maschinen-Signalsäulen: Von Aufbau, Kathoden-Erkennung und Halbleiterwerkstoffen bis zur Vorwiderstands-Dimensionierung nach E12-Reihe und grafischer Arbeitspunktbestimmung.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs font-mono">
+                    <a href="#signalsaeule" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3 py-2 rounded-lg text-slate-200">1. Signalsäulen-Retrofit</a>
+                    <a href="#aufbau-led" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3 py-2 rounded-lg text-slate-200">2. Aufbau &amp; Werkstoffe</a>
+                    <a href="#kennlinien-vergleich" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3 py-2 rounded-lg text-slate-200">3. Kennlinien &amp; Schaltplan</a>
+                    <a href="#vorwiderstand" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3 py-2 rounded-lg text-slate-200">4. Vorwiderstand (E12)</a>
+                    <a href="#arbeitspunkt-led" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3 py-2 rounded-lg text-slate-200">5. Widerstandsgerade</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-20">
+
+        <!-- SECTION 1: Applikationsbericht 12 V DC Maschinen-Signalsäule & Vorteile (Worksheet Page 1 & Page 6) -->
+        <section id="signalsaeule">
+            <div class="mb-8">
+                <span class="text-xs font-mono uppercase tracking-widest text-lt_emerald">Kapitel 01 · Industrielle Praxis-Applikation</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Umrüstung einer 12 V DC Fertigungs-Signalsäule auf LUMIATECH LEDs</h2>
+                <p class="text-slate-400 mt-1">
+                    Warum die Umrüstung von herkömmlichen 12-V-Glühlampen auf 5-mm-LEDs der Serie L-7113 ungeplante Anlagenstillstände verhindert.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Left: Interactive Signal Tower Visualizer -->
+                <div class="lg:col-span-5 bg-slate-900 border border-slate-700 rounded-2xl p-6 flex flex-col justify-between shadow-xl">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                            <span class="text-xs font-mono uppercase text-lt_cyan font-bold">Live-Demonstrator · 12 V DC Signalsäule</span>
+                            <span class="text-xs font-mono text-slate-400">-G1 = 12 V DC</span>
+                        </div>
+                        <p class="text-xs text-slate-300 mb-4">
+                            Testen Sie die drei Betriebszustände der Fertigungsanlage über die Steuerkontakte <code>-K1</code>, <code>-K2</code> und <code>-K3</code>:
+                        </p>
+
+                        <div class="grid grid-cols-12 gap-4 items-center bg-slate-950 rounded-xl p-4 border border-slate-800">
+                            <!-- Signal Tower Graphic -->
+                            <div class="col-span-5 flex flex-col items-center">
+                                <div class="w-20 bg-slate-800 border-2 border-slate-600 rounded-t-xl p-1.5 space-y-1.5 shadow-inner">
+                                    <div id="towerRed" class="h-11 rounded-md bg-red-600 border border-red-400 shadow-[0_0_16px_rgba(239,68,68,0.8)] transition-all flex items-center justify-center text-[10px] font-mono font-bold text-white">ROT (-P1)</div>
+                                    <div id="towerGreen" class="h-11 rounded-md bg-emerald-600 border border-emerald-400 shadow-[0_0_16px_rgba(16,185,129,0.8)] transition-all flex items-center justify-center text-[10px] font-mono font-bold text-white">GRÜN (-P2)</div>
+                                    <div id="towerBlue" class="h-11 rounded-md bg-blue-600 border border-blue-400 shadow-[0_0_16px_rgba(59,130,246,0.8)] transition-all flex items-center justify-center text-[10px] font-mono font-bold text-white">BLAU (-P3)</div>
+                                </div>
+                                <div class="w-8 h-8 bg-slate-700 border-x border-slate-600"></div>
+                                <div class="w-24 h-3 bg-slate-600 rounded-full"></div>
+                            </div>
+
+                            <!-- Controls & Meaning -->
+                            <div class="col-span-7 space-y-2.5">
+                                <button onclick="toggleTowerLight('red')" id="btnTowerRed" class="w-full text-left p-2.5 rounded-lg border border-red-500/60 bg-red-500/15 hover:bg-red-500/25 transition-all flex items-center justify-between">
+                                    <div>
+                                        <div class="text-xs font-bold text-red-400">-K1 · Rot (L-7113SURDK)</div>
+                                        <div class="text-[11px] text-slate-300">Zustand: <strong>Störung</strong></div>
+                                    </div>
+                                    <span id="stateRed" class="text-[10px] font-mono px-2 py-0.5 rounded bg-red-500 text-white font-bold">EIN</span>
+                                </button>
+
+                                <button onclick="toggleTowerLight('green')" id="btnTowerGreen" class="w-full text-left p-2.5 rounded-lg border border-emerald-500/60 bg-emerald-500/15 hover:bg-emerald-500/25 transition-all flex items-center justify-between">
+                                    <div>
+                                        <div class="text-xs font-bold text-lt_emerald">-K2 · Grün (L-7113SGD)</div>
+                                        <div class="text-[11px] text-slate-300">Zustand: <strong>Anlage läuft</strong></div>
+                                    </div>
+                                    <span id="stateGreen" class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500 text-slate-950 font-bold">EIN</span>
+                                </button>
+
+                                <button onclick="toggleTowerLight('blue')" id="btnTowerBlue" class="w-full text-left p-2.5 rounded-lg border border-blue-500/60 bg-blue-500/15 hover:bg-blue-500/25 transition-all flex items-center justify-between">
+                                    <div>
+                                        <div class="text-xs font-bold text-blue-400">-K3 · Blau (L-7113MBTL)</div>
+                                        <div class="text-[11px] text-slate-300">Zustand: <strong>Eingriff durch Bediener nötig</strong></div>
+                                    </div>
+                                    <span id="stateBlue" class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500 text-white font-bold">EIN</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Energy Saving Comparison Box (Worksheet Page 6 "Schon fertig? 2.") -->
+                    <div class="mt-4 bg-slate-950 border border-emerald-500/30 rounded-xl p-4">
+                        <div class="text-xs font-mono text-lt_emerald font-bold uppercase mb-1"><i class="fa-solid fa-leaf mr-1"></i>Energiebilanz je Signalleuchte an 12 V DC</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Ersatz einer herkömmlichen <strong>12-V / 3-W-Glühlampe</strong> durch eine LUMIATECH LED mit Vorwiderstand (Betriebsstrom <code>I<sub>F</sub> = 18 mA = 0,018 A</code>):
+                        </p>
+                        <div class="mt-2 font-mono text-xs bg-slate-900 p-2.5 rounded border border-slate-800 text-white">
+                            P<sub>LED+RV</sub> = 12 V · 0,018 A ≈ <strong class="text-lt_emerald">0,22 W</strong> &rarr; <strong class="text-lt_amber">Ersparnis ≈ 2,8 W je Leuchte (≈ 93 %)!</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Key Technical Answers (Worksheet Page 1 Aufgabe 1a, 1b, 1c) -->
+                <div class="lg:col-span-7 flex flex-col justify-between space-y-4">
+                    <div class="bg-lt_card border border-slate-700 rounded-2xl p-6">
+                        <span class="text-xs font-mono uppercase text-lt_emerald font-bold">Vorteile im Industrieeinsatz</span>
+                        <h3 class="text-xl font-bold text-white mt-1 mb-4">Warum ist der Umstieg auf LED-Technik bei Signalsäulen so sinnvoll?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                                <div class="text-lt_emerald font-bold text-sm mb-1"><i class="fa-solid fa-clock-rotate-left mr-1.5"></i>1. Hohe Lebensdauer</div>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    <strong>Längere Lebensdauer (mehrere 10 000 h)</strong> &rarr; deutlich <strong>weniger Ausfälle</strong> im Dauerbetrieb, Störungen werden sofort erkannt.
+                                </p>
+                            </div>
+                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                                <div class="text-lt_cyan font-bold text-sm mb-1"><i class="fa-solid fa-bolt-lightning mr-1.5"></i>2. Energie &amp; Wärme</div>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    <strong>Bis zu 90 % (bzw. 93 %) weniger Energieverbrauch</strong> und <strong>kaum Wärmeentwicklung</strong> im geschlossenen Leuchtengehäuse.
+                                </p>
+                            </div>
+                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                                <div class="text-lt_amber font-bold text-sm mb-1"><i class="fa-solid fa-gem mr-1.5"></i>3. Bauform &amp; Farbe</div>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    Mechanisch <strong>robust</strong> (vibrationsfest), <strong>kompakt</strong> und die <strong>Farbe entsteht direkt aus dem Halbleiter</strong>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-lt_card border-l-4 border-lt_cyan border border-slate-700 rounded-xl p-5">
+                            <div class="text-xs font-mono uppercase text-lt_cyan font-bold mb-1">Betriebsart (Polung)</div>
+                            <h4 class="text-base font-bold text-white mb-2">Durchlass- oder Sperrrichtung?</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Eine LED wird zum Leuchten immer in <strong>Durchlassrichtung</strong> betrieben:<br>
+                                <span class="inline-block mt-1 font-mono text-xs bg-slate-900 px-2.5 py-1 rounded border border-slate-700 text-lt_cyan font-bold">Anode an Plus (+), Kathode an Minus (−)</span>
+                            </p>
+                        </div>
+
+                        <div class="bg-lt_card border-l-4 border-lt_amber border border-slate-700 rounded-xl p-5">
+                            <div class="text-xs font-mono uppercase text-lt_amber font-bold mb-1">Zwingende Schutzbeschaltung</div>
+                            <h4 class="text-base font-bold text-white mb-2">Wozu braucht eine LED einen Vorwiderstand?</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Der Vorwiderstand <strong>begrenzt den Strom durch die LED, damit sie nicht überlastet und zerstört wird</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Aufbau einer LED, Kathoden-Erkennung, Funktionsweise & Halbleiterwerkstoffe (Worksheet Page 2) -->
+        <section id="aufbau-led">
+            <div class="mb-8">
+                <span class="text-xs font-mono uppercase tracking-widest text-lt_cyan">Kapitel 02 · Bauteilanatomie &amp; Halbleiterkristalle</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Aufbau einer 5-mm-LED, Kathoden-Erkennung &amp; Farberzeugung</h2>
+                <p class="text-slate-400 mt-1">
+                    Mechanischer Aufbau einer T-1 3/4 (5 mm) Leuchtdiode, sichere Anschlussbestimmung und physikalische Grundlagen der Elektrolumineszenz.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-10">
+                <!-- Left: Detailed Cross-Section SVG matching Worksheet Page 2 ("Aufbau einer LED") -->
+                <div class="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-xl">
+                    <h3 class="text-lg font-bold text-white mb-1">Schnittmodell einer 5-mm-Leuchtdiode (T-1 3/4)</h3>
+                    <p class="text-xs text-slate-400 mb-4">Alle 6 konstruktiven Bauteile im Überblick: LED-Chip, Reflektor, Kunststofflinse, Anschlussdraht, Kathode und Anode.</p>
+
+                    <div class="bg-slate-950 rounded-xl border border-slate-800 p-4">
+                        <svg viewBox="0 0 520 330" class="w-full h-auto font-sans">
+                            <!-- Plastic Lens Dome (Kunststofflinse) -->
+                            <path d="M195,190 L195,88 A65,65 0 0,1 325,88 L325,190 Z" fill="rgba(239,68,68,0.18)" stroke="#f87171" stroke-width="2.5"/>
+                            <!-- Bottom Rim with flat edge on left (Kathode) -->
+                            <path d="M195,190 L195,212 L338,212 L338,190 Z" fill="rgba(239,68,68,0.28)" stroke="#f87171" stroke-width="2.5"/>
+                            <!-- Flat edge highlight on left -->
+                            <line x1="195" y1="185" x2="195" y2="215" stroke="#fbbf24" stroke-width="4"/>
+
+                            <!-- Left LeadFrame (Kathode: larger inner electrode with reflector cup, shorter leg!) -->
+                            <path d="M235,285 L235,140 L218,120 L262,120 L250,140 L250,285 Z" fill="#94a3b8" stroke="#e2e8f0" stroke-width="1.5"/>
+                            <!-- Reflector cup (Reflektor) -->
+                            <polygon points="222,120 258,120 250,134 230,134" fill="#cbd5e1" stroke="#38bdf8" stroke-width="2"/>
+                            <!-- LED-Chip inside reflector -->
+                            <rect x="234" y="112" width="12" height="8" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5"/>
+
+                            <!-- Right LeadFrame (Anode: smaller inner electrode, longer leg!) -->
+                            <path d="M282,312 L282,135 L294,135 L294,312 Z" fill="#94a3b8" stroke="#e2e8f0" stroke-width="1.5"/>
+
+                            <!-- Bond Wire (Anschlussdraht) from LED-Chip to Anode post -->
+                            <path d="M244,112 Q268,82 288,135" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+
+                            <!-- Labels Left -->
+                            <!-- LED-Chip -->
+                            <text x="30" y="68" fill="#fbbf24" font-size="14" font-weight="bold">LED-Chip</text>
+                            <line x1="30" y1="74" x2="145" y2="74" stroke="#fbbf24" stroke-width="1.5"/>
+                            <line x1="145" y1="74" x2="234" y2="114" stroke="#cbd5e1" stroke-width="1.8"/>
+
+                            <!-- Reflektor -->
+                            <text x="30" y="118" fill="#38bdf8" font-size="14" font-weight="bold">Reflektor</text>
+                            <line x1="30" y1="124" x2="145" y2="124" stroke="#38bdf8" stroke-width="1.5"/>
+                            <line x1="145" y1="124" x2="225" y2="126" stroke="#cbd5e1" stroke-width="1.8"/>
+
+                            <!-- Kathode -->
+                            <text x="30" y="255" fill="#f43f5e" font-size="15" font-weight="bold">Kathode (K, −)</text>
+                            <text x="30" y="272" fill="#94a3b8" font-size="11">(kürzeres Bein, abgeflacht)</text>
+                            <line x1="30" y1="259" x2="232" y2="259" stroke="#f43f5e" stroke-width="1.8"/>
+
+                            <!-- Labels Right -->
+                            <!-- Kunststofflinse -->
+                            <text x="370" y="55" fill="#f87171" font-size="14" font-weight="bold">Kunststofflinse</text>
+                            <line x1="370" y1="61" x2="495" y2="61" stroke="#f87171" stroke-width="1.5"/>
+                            <line x1="370" y1="61" x2="310" y2="82" stroke="#cbd5e1" stroke-width="1.8"/>
+
+                            <!-- Anschlussdraht -->
+                            <text x="370" y="138" fill="#fbbf24" font-size="14" font-weight="bold">Anschlussdraht</text>
+                            <line x1="370" y1="144" x2="495" y2="144" stroke="#fbbf24" stroke-width="1.5"/>
+                            <line x1="370" y1="144" x2="275" y2="108" stroke="#cbd5e1" stroke-width="1.8"/>
+
+                            <!-- Anode -->
+                            <text x="370" y="255" fill="#10b981" font-size="15" font-weight="bold">Anode (A, +)</text>
+                            <text x="370" y="272" fill="#94a3b8" font-size="11">(längeres Anschlussbein)</text>
+                            <line x1="296" y1="259" x2="490" y2="259" stroke="#10b981" stroke-width="1.8"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Right: Kathode Erkennung + Schaltzeichen + Funktionsweise (Worksheet Page 2) -->
+                <div class="lg:col-span-6 space-y-6">
+                    <!-- Top Row: Kathode Check & Schaltzeichen -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-lt_card border border-slate-700 rounded-xl p-5">
+                            <span class="text-xs font-mono uppercase text-rose-400 font-bold">Praxis-Checkliste</span>
+                            <h3 class="text-base font-bold text-white mt-1 mb-3">So erkennst du die Kathode (−):</h3>
+                            <div class="space-y-2.5 text-sm">
+                                <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded border border-slate-800">
+                                    <span class="text-slate-400">Anschlussbein:</span>
+                                    <strong class="text-rose-400 font-mono">kürzer</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded border border-slate-800">
+                                    <span class="text-slate-400">Gehäuserand:</span>
+                                    <strong class="text-rose-400 font-mono">abgeflacht</strong>
+                                </div>
+                                <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded border border-slate-800">
+                                    <span class="text-slate-400">Elektrode innen:</span>
+                                    <strong class="text-rose-400 font-mono">meist größer</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-lt_card border border-slate-700 rounded-xl p-5 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-mono uppercase text-lt_emerald font-bold">DIN EN 60617</span>
+                                <h3 class="text-base font-bold text-white mt-1 mb-2">Schaltzeichen der LED</h3>
+                            </div>
+                            <div class="bg-slate-950 rounded-lg p-3 border border-slate-800 flex justify-center">
+                                <svg viewBox="0 0 220 95" class="w-full max-w-[200px]">
+                                    <line x1="20" y1="58" x2="200" y2="58" stroke="#e2e8f0" stroke-width="2.5"/>
+                                    <polygon points="85,36 85,80 130,58" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+                                    <line x1="130" y1="34" x2="130" y2="82" stroke="#ef4444" stroke-width="3"/>
+                                    <!-- Two radiation arrows pointing up-right -->
+                                    <line x1="100" y1="30" x2="120" y2="10" stroke="#ef4444" stroke-width="2"/>
+                                    <polygon points="122,8 113,12 118,17" fill="#ef4444"/>
+                                    <line x1="116" y1="34" x2="136" y2="14" stroke="#ef4444" stroke-width="2"/>
+                                    <polygon points="138,12 129,16 134,21" fill="#ef4444"/>
+                                    <!-- A and K -->
+                                    <text x="45" y="50" fill="#10b981" font-size="16" font-weight="bold">A</text>
+                                    <text x="165" y="50" fill="#f43f5e" font-size="16" font-weight="bold">K</text>
+                                </svg>
+                            </div>
+                            <div class="text-[11px] text-slate-400 text-center mt-2">
+                                <strong>A</strong> = Anode (+) &nbsp;|&nbsp; <strong>K</strong> = Kathode (−)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Funktionsweise und Farben (All 8 exact statements from Worksheet Page 2) -->
+                    <div class="bg-slate-900 border border-slate-700 rounded-2xl p-6">
+                        <span class="text-xs font-mono uppercase text-lt_cyan font-bold">Physik der Elektrolumineszenz</span>
+                        <h3 class="text-lg font-bold text-white mt-1 mb-4">Funktionsweise und Farben im Überblick</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-300">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-lt_emerald mt-1"></i>
+                                <span><strong>LED</strong> (lichtemittierende Diode) ist die Abkürzung für <strong class="text-white">Light Emitting Diode</strong>.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-lt_emerald mt-1"></i>
+                                <span>Eine LED besteht wie eine klassische Diode aus einem <strong class="text-lt_cyan">PN-Übergang</strong> und wird zum Leuchten in <strong class="text-lt_emerald">Durchlassrichtung</strong> betrieben.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-lt_emerald mt-1"></i>
+                                <span>Am PN-Übergang <strong class="text-white">rekombinieren</strong> Elektronen und Löcher; die dabei frei werdende Energie wird direkt abgegeben als <strong class="text-lt_amber">Licht (Photonen)</strong>.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-lt_emerald mt-1"></i>
+                                <span>Die Wellenlänge (λ) und damit die Farbe des Lichts hängt ab vom <strong class="text-lt_cyan">Halbleiterwerkstoff</strong> (und dessen Dotierung).</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-triangle-exclamation text-rose-400 mt-1"></i>
+                                <span>In Sperrrichtung verträgt eine LED meist nur <strong class="text-rose-400">ca. 5 V</strong> (<code>U<sub>R,max</sub> = 5 V</code>). Wird eine LED verpolt angeschlossen, kann sie <strong class="text-rose-400">zerstört werden</strong>!</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table: Halbleiterwerkstoffe für Leuchtdioden (Worksheet Page 2 Bottom) -->
+            <div class="bg-slate-900 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-xl">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Halbleiterwerkstoffe für Leuchtdioden (Auswahl)</h3>
+                        <p class="text-xs text-slate-400">Richtwerte nach Europa-Lehrmittel – für konkrete Schaltungsberechnungen gelten die Werte aus dem Datenblatt der verwendeten LED.</p>
+                    </div>
+                    <div class="bg-slate-950 border border-cyan-500/40 rounded-xl px-4 py-2.5 text-xs font-mono text-slate-200">
+                        Merksatz: Je <strong>kürzer</strong> die Wellenlänge λ, desto <strong class="text-lt_cyan uppercase">größer</strong> ist die Durchlass- bzw. Flussspannung U<sub>F</sub>.
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-700 text-xs font-mono uppercase text-slate-400 bg-slate-950/60">
+                                <th class="py-3 px-4">Werkstoff und Dotierung</th>
+                                <th class="py-3 px-4">Farbe, Bereich</th>
+                                <th class="py-3 px-4">Wellenlänge λ in nm</th>
+                                <th class="py-3 px-4">Durchlassspannung U<sub>F</sub> (Richtwert)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 font-mono text-xs sm:text-sm">
+                            <tr class="hover:bg-slate-800/50">
+                                <td class="py-2.5 px-4 font-bold text-white">GaAsSi</td>
+                                <td class="py-2.5 px-4 text-rose-300">infrarot</td>
+                                <td class="py-2.5 px-4">930 nm</td>
+                                <td class="py-2.5 px-4 font-bold text-slate-200">1,2 V</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/50">
+                                <td class="py-2.5 px-4 font-bold text-white">GaAsP (bzw. AlGaInP)</td>
+                                <td class="py-2.5 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-red-500 mr-2"></span><strong class="text-red-400">rot</strong></td>
+                                <td class="py-2.5 px-4">655 nm (Datos L-7113: 630/645 nm)</td>
+                                <td class="py-2.5 px-4 font-bold text-red-400">1,6 V (Datenblatt @ 20mA: 1,95 V)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/50">
+                                <td class="py-2.5 px-4 font-bold text-white">GaAsPN</td>
+                                <td class="py-2.5 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-orange-500 mr-2"></span><span class="text-orange-400">orange</span></td>
+                                <td class="py-2.5 px-4">625 nm</td>
+                                <td class="py-2.5 px-4 font-bold text-orange-400">1,6 V</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/50">
+                                <td class="py-2.5 px-4 font-bold text-white">GaAsPN</td>
+                                <td class="py-2.5 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-400 mr-2"></span><span class="text-yellow-300">gelb</span></td>
+                                <td class="py-2.5 px-4">590 nm</td>
+                                <td class="py-2.5 px-4 font-bold text-yellow-300">1,8 V</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/50">
+                                <td class="py-2.5 px-4 font-bold text-white">GaPN (bzw. GaP)</td>
+                                <td class="py-2.5 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 mr-2"></span><strong class="text-lt_emerald">grün</strong></td>
+                                <td class="py-2.5 px-4">555 nm (Datenblatt L-7113: 565/568 nm)</td>
+                                <td class="py-2.5 px-4 font-bold text-lt_emerald">1,8 V (Datenblatt @ 20mA: 2,2 V)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/50">
+                                <td class="py-2.5 px-4 font-bold text-white">InGaN (bzw. GaN auf SiC)</td>
+                                <td class="py-2.5 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-blue-500 mr-2"></span><strong class="text-blue-400">blau</strong></td>
+                                <td class="py-2.5 px-4">465 nm (Datenblatt L-7113: 466/430 nm)</td>
+                                <td class="py-2.5 px-4 font-bold text-blue-400">3 V (Datenblatt @ 20mA: 3,8 V)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/50">
+                                <td class="py-2.5 px-4 font-bold text-white">GaN / InGaN</td>
+                                <td class="py-2.5 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-white mr-2"></span><strong class="text-white">weiß*</strong></td>
+                                <td class="py-2.5 px-4">– (Mischspektrum)</td>
+                                <td class="py-2.5 px-4 font-bold text-white">3,5 V</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-slate-400 mt-3">
+                    * <strong>Weißes LED-Licht</strong> entsteht durch additive Farbmischung von Rot, Grün und Blau (RGB) oder durch Bedampfen eines blauen LED-Chips mit einer gelben Phosphor-Leuchtstoffschicht.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Kennlinien im Vergleich & Aktualisierter Schaltplan der Signalsäule (Worksheet Page 3) -->
+        <section id="kennlinien-vergleich">
+            <div class="mb-8">
+                <span class="text-xs font-mono uppercase tracking-widest text-lt_emerald">Kapitel 03 · Kennlinienvergleich &amp; Schaltungsdokumentation</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Kennlinien im Vergleich (Si-Diode vs. LEDs) &amp; Schaltplan Signalsäule</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left: Kennlinien im Vergleich (Worksheet Page 3 Top) -->
+                <div class="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-xl">
+                    <h3 class="text-lg font-bold text-white mb-1">Durchlasskennlinien bei I<sub>F</sub> = 20 mA im Vergleich</h3>
+                    <p class="text-xs text-slate-400 mb-4">Ablesen der Durchlassspannung (Flussspannung) U<sub>F</sub> beim Bemessungsstrom I<sub>F</sub> = 20 mA:</p>
+
+                    <div class="bg-slate-950 rounded-xl border border-slate-800 p-3 mb-4">
+                        <svg viewBox="0 0 460 280" class="w-full h-auto font-sans">
+                            <!-- Grid -->
+                            <g stroke="#1e293b" stroke-width="1">
+                                <line x1="45" y1="30" x2="435" y2="30"/><line x1="45" y1="65" x2="435" y2="65"/>
+                                <line x1="45" y1="100" x2="435" y2="100"/><line x1="45" y1="135" x2="435" y2="135"/>
+                                <line x1="45" y1="170" x2="435" y2="170"/><line x1="45" y1="205" x2="435" y2="205"/>
+                                <!-- X grid every 0.5V: x = 45 + U*85 -->
+                                <line x1="87.5" y1="30" x2="87.5" y2="240"/><line x1="130" y1="30" x2="130" y2="240"/>
+                                <line x1="172.5" y1="30" x2="172.5" y2="240"/><line x1="215" y1="30" x2="215" y2="240"/>
+                                <line x1="257.5" y1="30" x2="257.5" y2="240"/><line x1="300" y1="30" x2="300" y2="240"/>
+                                <line x1="342.5" y1="30" x2="342.5" y2="240"/><line x1="385" y1="30" x2="385" y2="240"/>
+                                <line x1="427.5" y1="30" x2="427.5" y2="240"/>
+                            </g>
+                            <!-- Axes -->
+                            <line x1="45" y1="240" x2="440" y2="240" stroke="#cbd5e1" stroke-width="2"/>
+                            <line x1="45" y1="240" x2="45" y2="25" stroke="#cbd5e1" stroke-width="2"/>
+                            <text x="15" y="135" fill="#cbd5e1" font-size="11" font-weight="bold" transform="rotate(-90 15,135)" text-anchor="middle">I_F in mA</text>
+                            <text x="240" y="272" fill="#cbd5e1" font-size="11" font-weight="bold" text-anchor="middle">U_F in V</text>
+
+                            <!-- Y ticks (0..30 mA -> y = 240 - I*7) -->
+                            <text x="38" y="244" fill="#94a3b8" font-size="10" text-anchor="end">0</text>
+                            <text x="38" y="209" fill="#94a3b8" font-size="10" text-anchor="end">5</text>
+                            <text x="38" y="174" fill="#94a3b8" font-size="10" text-anchor="end">10</text>
+                            <text x="38" y="139" fill="#94a3b8" font-size="10" text-anchor="end">15</text>
+                            <text x="38" y="104" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="end">20</text>
+                            <text x="38" y="69" fill="#94a3b8" font-size="10" text-anchor="end">25</text>
+                            <text x="38" y="34" fill="#94a3b8" font-size="10" text-anchor="end">30</text>
+
+                            <!-- X ticks (0.0 .. 4.5 V) -->
+                            <text x="45" y="255" fill="#94a3b8" font-size="10" text-anchor="middle">0.0</text>
+                            <text x="87.5" y="255" fill="#94a3b8" font-size="10" text-anchor="middle">0.5</text>
+                            <text x="130" y="255" fill="#94a3b8" font-size="10" text-anchor="middle">1.0</text>
+                            <text x="172.5" y="255" fill="#94a3b8" font-size="10" text-anchor="middle">1.5</text>
+                            <text x="215" y="255" fill="#94a3b8" font-size="10" text-anchor="middle">2.0</text>
+                            <text x="257.5" y="255" fill="#94a3b8" font-size="10" text-anchor="middle">2.5</text>
+                            <text x="300" y="255" fill="#94a3b8" font-size="10" text-anchor="middle">3.0</text>
+                            <text x="342.5" y="255" fill="#94a3b8" font-size="10" text-anchor="middle">3.5</text>
+                            <text x="385" y="255" fill="#94a3b8" font-size="10" text-anchor="middle">4.0</text>
+                            <text x="427.5" y="255" fill="#94a3b8" font-size="10" text-anchor="middle">4.5</text>
+
+                            <!-- Horizontal 20 mA Line (y=100) -->
+                            <line x1="45" y1="100" x2="368" y2="100" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+                            <!-- 1. Si-Diode (UF=0.7V @ 20mA -> x=104.5, y=100) -->
+                            <path d="M45,240 L85,240 Q98,238 104.5,100 L108,30" fill="none" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <line x1="104.5" y1="100" x2="104.5" y2="240" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3,3"/>
+                            <circle cx="104.5" cy="100" r="4.5" fill="#cbd5e1"/>
+                            <text x="80" y="48" fill="#cbd5e1" font-size="10" font-weight="bold">Si-Diode</text>
+
+                            <!-- 2. LED rot (UF=1.95V @ 20mA -> x=210.75, y=100) -->
+                            <path d="M45,240 L175,240 Q198,238 210.75,100 L217,30" fill="none" stroke="#ef4444" stroke-width="2.8"/>
+                            <line x1="210.75" y1="100" x2="210.75" y2="240" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="3,3"/>
+                            <circle cx="210.75" cy="100" r="4.5" fill="#ef4444"/>
+                            <text x="186" y="48" fill="#ef4444" font-size="10" font-weight="bold">LED rot</text>
+
+                            <!-- 3. LED grün (UF=2.2V @ 20mA -> x=232, y=100) -->
+                            <path d="M45,240 L192,240 Q218,238 232,100 L242,30" fill="none" stroke="#10b981" stroke-width="2.8" stroke-dasharray="7,3"/>
+                            <line x1="232" y1="100" x2="232" y2="240" stroke="#10b981" stroke-width="1.2" stroke-dasharray="3,3"/>
+                            <circle cx="232" cy="100" r="4.5" fill="#10b981"/>
+                            <text x="272" y="48" fill="#10b981" font-size="10" font-weight="bold">LED grün</text>
+
+                            <!-- 4. LED blau (UF=3.8V @ 20mA -> x=368, y=100) -->
+                            <path d="M45,240 L308,240 Q346,238 368,100 L380,30" fill="none" stroke="#3b82f6" stroke-width="2.8" stroke-dasharray="9,3,2,3"/>
+                            <line x1="368" y1="100" x2="368" y2="240" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="3,3"/>
+                            <circle cx="368" cy="100" r="4.5" fill="#3b82f6"/>
+                            <text x="335" y="150" fill="#3b82f6" font-size="10" font-weight="bold">LED blau</text>
+                        </svg>
+                    </div>
+
+                    <!-- Ablesewerte bei IF = 20 mA -->
+                    <div class="grid grid-cols-4 gap-2 text-center font-mono text-xs mb-4">
+                        <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                            <div class="text-slate-400">Si-Diode</div>
+                            <div class="text-white font-bold text-sm mt-0.5">0,7 V</div>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-lg border border-red-500/30">
+                            <div class="text-red-400">LED rot</div>
+                            <div class="text-white font-bold text-sm mt-0.5">1,95 V</div>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-lg border border-emerald-500/30">
+                            <div class="text-lt_emerald">LED grün</div>
+                            <div class="text-white font-bold text-sm mt-0.5">2,2 V</div>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-lg border border-blue-500/30">
+                            <div class="text-blue-400">LED blau</div>
+                            <div class="text-white font-bold text-sm mt-0.5">3,8 V</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 rounded-xl p-4 border border-slate-800 space-y-2 text-xs text-slate-300">
+                        <div><strong class="text-lt_cyan">Kennlinien-Vergleich:</strong> LEDs brauchen eine <strong>höhere Durchlassspannung als die Si-Diode</strong> – je kürzer die Wellenlänge (rot &rarr; grün &rarr; blau), desto höher. Ab <code>U<sub>F</sub></code> steigt der Strom bei allen <strong>sehr steil</strong> an.</div>
+                        <div><strong class="text-rose-400">Warum nie ohne Vorwiderstand an 12 V?</strong> Wegen der steilen Kennlinie führt schon eine kleine Spannungserhöhung zu einem sehr großen Strom. Ohne Strombegrenzung durch <code>R<sub>V</sub></code> würde die LED sofort zerstört.</div>
+                    </div>
+                </div>
+
+                <!-- Right: Aktualisierter Schaltplan der Signalsäule (Worksheet Page 3 Aufgabe 2) -->
+                <div class="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-lg font-bold text-white">Aktualisierter Schaltplan der 12 V DC Signalsäule</h3>
+                        <span class="px-2.5 py-0.5 rounded bg-emerald-500/15 text-lt_emerald font-mono text-xs font-bold">Mit Zählpfeilen</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4">
+                        Betriebssicherer Ersatz der Glühlampen durch LEDs (<code>-P1</code> rot, <code>-P2</code> grün, <code>-P3</code> blau) mit eigenen Vorwiderständen (<code>-R1</code>, <code>-R2</code>, <code>-R3</code>) und eingetragenen Zählpfeilen <code>U<sub>b</sub></code>, <code>U<sub>RV</sub></code>, <code>U<sub>F</sub></code> und <code>I<sub>F</sub></code>:
+                    </p>
+
+                    <div class="bg-slate-950 rounded-xl border border-slate-800 p-4">
+                        <svg viewBox="0 0 500 310" class="w-full h-auto font-sans">
+                            <!-- Top & Bottom Rails -->
+                            <line x1="65" y1="35" x2="430" y2="35" stroke="#e2e8f0" stroke-width="2.2"/>
+                            <line x1="65" y1="275" x2="430" y2="275" stroke="#e2e8f0" stroke-width="2.2"/>
+                            <line x1="65" y1="35" x2="65" y2="275" stroke="#e2e8f0" stroke-width="2.2"/>
+
+                            <!-- Connection dots -->
+                            <circle cx="195" cy="35" r="3.5" fill="#e2e8f0"/><circle cx="195" cy="275" r="3.5" fill="#e2e8f0"/>
+                            <circle cx="312" cy="35" r="3.5" fill="#e2e8f0"/><circle cx="312" cy="275" r="3.5" fill="#e2e8f0"/>
+
+                            <!-- -G1 12V DC Source -->
+                            <circle cx="65" cy="155" r="22" fill="#0f172a" stroke="#e2e8f0" stroke-width="2.2"/>
+                            <text x="32" y="150" fill="#e2e8f0" font-size="12" font-weight="bold" text-anchor="end">-G1</text>
+                            <text x="32" y="166" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="end">12 V</text>
+                            <!-- Ub arrow -->
+                            <line x1="102" y1="125" x2="102" y2="185" stroke="#ef4444" stroke-width="2.2"/>
+                            <polygon points="102,190 97,180 107,180" fill="#ef4444"/>
+                            <text x="118" y="160" fill="#ef4444" font-size="13" font-weight="bold">U_b</text>
+
+                            <!-- Branch 1: -K1, -R1, -P1 (rot) + Zählpfeile URV, UF, IF -->
+                            <line x1="195" y1="35" x2="195" y2="55" stroke="#e2e8f0" stroke-width="2"/>
+                            <line x1="195" y1="85" x2="182" y2="57" stroke="#e2e8f0" stroke-width="2"/>
+                            <text x="206" y="74" fill="#cbd5e1" font-size="12" font-weight="bold">-K1</text>
+                            <line x1="195" y1="85" x2="195" y2="112" stroke="#e2e8f0" stroke-width="2"/>
+                            <!-- -R1 -->
+                            <rect x="185" y="112" width="20" height="44" fill="#1e293b" stroke="#e2e8f0" stroke-width="2"/>
+                            <text x="178" y="138" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="end">-R1</text>
+                            <!-- URV arrow -->
+                            <line x1="216" y1="115" x2="216" y2="152" stroke="#ef4444" stroke-width="2"/>
+                            <polygon points="216,156 212,147 220,147" fill="#ef4444"/>
+                            <text x="224" y="138" fill="#ef4444" font-size="12" font-weight="bold">U_RV</text>
+
+                            <line x1="195" y1="156" x2="195" y2="190" stroke="#e2e8f0" stroke-width="2"/>
+                            <!-- -P1 LED rot -->
+                            <polygon points="181,190 209,190 195,216" fill="none" stroke="#ef4444" stroke-width="2.2"/>
+                            <line x1="181" y1="216" x2="209" y2="216" stroke="#ef4444" stroke-width="2.5"/>
+                            <!-- LED Light Arrows -->
+                            <line x1="208" y1="196" x2="220" y2="184" stroke="#ef4444" stroke-width="1.6"/>
+                            <line x1="213" y1="203" x2="225" y2="191" stroke="#ef4444" stroke-width="1.6"/>
+                            <text x="175" y="200" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="end">-P1</text>
+                            <text x="175" y="215" fill="#ef4444" font-size="11" text-anchor="end">(rot)</text>
+                            <!-- UF arrow -->
+                            <line x1="232" y1="190" x2="232" y2="220" stroke="#ef4444" stroke-width="2"/>
+                            <polygon points="232,224 228,215 236,215" fill="#ef4444"/>
+                            <text x="240" y="212" fill="#ef4444" font-size="12" font-weight="bold">U_F</text>
+
+                            <line x1="195" y1="216" x2="195" y2="275" stroke="#e2e8f0" stroke-width="2"/>
+                            <!-- IF arrow on wire -->
+                            <polygon points="195,256 190,244 200,244" fill="#ef4444"/>
+                            <text x="205" y="256" fill="#ef4444" font-size="12" font-weight="bold">I_F</text>
+
+                            <!-- Branch 2: -K2, -R2, -P2 (grün) -->
+                            <line x1="312" y1="35" x2="312" y2="55" stroke="#e2e8f0" stroke-width="2"/>
+                            <line x1="312" y1="85" x2="299" y2="57" stroke="#e2e8f0" stroke-width="2"/>
+                            <text x="323" y="74" fill="#cbd5e1" font-size="12" font-weight="bold">-K2</text>
+                            <line x1="312" y1="85" x2="312" y2="112" stroke="#e2e8f0" stroke-width="2"/>
+                            <rect x="302" y="112" width="20" height="44" fill="#1e293b" stroke="#e2e8f0" stroke-width="2"/>
+                            <text x="295" y="138" fill="#10b981" font-size="12" font-weight="bold" text-anchor="end">-R2</text>
+                            <line x1="312" y1="156" x2="312" y2="190" stroke="#e2e8f0" stroke-width="2"/>
+                            <polygon points="298,190 326,190 312,216" fill="none" stroke="#10b981" stroke-width="2.2"/>
+                            <line x1="298" y1="216" x2="326" y2="216" stroke="#10b981" stroke-width="2.5"/>
+                            <line x1="325" y1="196" x2="337" y2="184" stroke="#10b981" stroke-width="1.6"/>
+                            <line x1="330" y1="203" x2="342" y2="191" stroke="#10b981" stroke-width="1.6"/>
+                            <text x="292" y="200" fill="#10b981" font-size="12" font-weight="bold" text-anchor="end">-P2</text>
+                            <text x="292" y="215" fill="#10b981" font-size="11" text-anchor="end">(grün)</text>
+                            <line x1="312" y1="216" x2="312" y2="275" stroke="#e2e8f0" stroke-width="2"/>
+
+                            <!-- Branch 3: -K3, -R3, -P3 (blau) -->
+                            <line x1="430" y1="35" x2="430" y2="55" stroke="#e2e8f0" stroke-width="2"/>
+                            <line x1="430" y1="85" x2="417" y2="57" stroke="#e2e8f0" stroke-width="2"/>
+                            <text x="441" y="74" fill="#cbd5e1" font-size="12" font-weight="bold">-K3</text>
+                            <line x1="430" y1="85" x2="430" y2="112" stroke="#e2e8f0" stroke-width="2"/>
+                            <rect x="420" y="112" width="20" height="44" fill="#1e293b" stroke="#e2e8f0" stroke-width="2"/>
+                            <text x="413" y="138" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="end">-R3</text>
+                            <line x1="430" y1="156" x2="430" y2="190" stroke="#e2e8f0" stroke-width="2"/>
+                            <polygon points="416,190 444,190 430,216" fill="none" stroke="#38bdf8" stroke-width="2.2"/>
+                            <line x1="416" y1="216" x2="444" y2="216" stroke="#38bdf8" stroke-width="2.5"/>
+                            <line x1="443" y1="196" x2="455" y2="184" stroke="#38bdf8" stroke-width="1.6"/>
+                            <line x1="448" y1="203" x2="460" y2="191" stroke="#38bdf8" stroke-width="1.6"/>
+                            <text x="410" y="200" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="end">-P3</text>
+                            <text x="410" y="215" fill="#38bdf8" font-size="11" text-anchor="end">(blau)</text>
+                            <line x1="430" y1="216" x2="430" y2="275" stroke="#e2e8f0" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="mt-3 bg-slate-950 rounded-lg p-3 border border-slate-800 text-xs text-slate-300">
+                        <strong class="text-lt_amber"><i class="fa-solid fa-shield-halved mr-1"></i>Tipp Verpolschutz für die Signalsäule:</strong> Eine zusätzliche <strong>Silizium-Diode in Reihe</strong> in der Zuleitung schützt alle LEDs vor einer Verpolung – sie sperrt im Fehlerfall und nimmt die volle Sperrspannung (12 V &gt; 5 V!) auf.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Grenzwerte laut Datenblatt & Vorwiderstandsberechnung nach E12-Reihe (Worksheet Page 4 Aufgabe 3) -->
+        <section id="vorwiderstand" class="bg-slate-900 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-8" id="datenblaetter-led">
+                <div>
+                    <span class="text-xs font-mono uppercase text-lt_emerald"><i class="fa-solid fa-calculator mr-1.5"></i>Kapitel 04 · Vorwiderstands-Dimensionierung (I<sub>F</sub> = 20 mA an U<sub>b</sub> = 12 V)</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Datenblatt-Grenzwerte &amp; Vorwiderstands-Auslegung nach E12-Reihe</h2>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <a href="datenblaetter/Kingbright_L-7113SURDK_Rot.pdf" download class="bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 text-red-300 text-xs font-mono font-bold px-3 py-2 rounded-lg"><i class="fa-solid fa-download mr-1"></i>L-7113SURDK (Rot)</a>
+                    <a href="datenblaetter/Kingbright_L-7113SGD_Gruen.pdf" download class="bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 text-lt_emerald text-xs font-mono font-bold px-3 py-2 rounded-lg"><i class="fa-solid fa-download mr-1"></i>L-7113SGD (Grün)</a>
+                    <a href="datenblaetter/Kingbright_L-7113MBTL_Blau.pdf" download class="bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/50 text-blue-300 text-xs font-mono font-bold px-3 py-2 rounded-lg"><i class="fa-solid fa-download mr-1"></i>L-7113MBTL (Blau)</a>
+                </div>
+            </div>
+
+            <!-- Grenzwerte laut Datenblatt (Auszug) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                <div class="lg:col-span-6 bg-slate-950 border border-slate-800 rounded-xl p-5">
+                    <h3 class="text-base font-bold text-white mb-3">1. Grenzwerte laut LUMIATECH / Kingbright Datenblatt (Auszug)</h3>
+                    <table class="w-full text-xs sm:text-sm font-mono text-left border-collapse mb-4">
+                        <thead>
+                            <tr class="border-b border-slate-800 text-slate-400">
+                                <th class="py-2">Grenzwert</th>
+                                <th class="py-2 text-red-400">LED rot</th>
+                                <th class="py-2 text-lt_emerald">LED grün</th>
+                                <th class="py-2 text-blue-400">LED blau</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/70">
+                            <tr>
+                                <td class="py-2.5 text-slate-300">max. Durchlassstrom I<sub>F,max</sub></td>
+                                <td class="py-2.5 font-bold text-white">30 mA</td>
+                                <td class="py-2.5 font-bold text-lt_amber">25 mA</td>
+                                <td class="py-2.5 font-bold text-white">30 mA</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2.5 text-slate-300">max. Sperrspannung U<sub>R,max</sub></td>
+                                <td class="py-2.5 font-bold text-white">5 V</td>
+                                <td class="py-2.5 font-bold text-white">5 V</td>
+                                <td class="py-2.5 font-bold text-white">5 V</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2.5 text-slate-300">Max. Verlustleistung P<sub>D</sub></td>
+                                <td class="py-2.5 text-slate-300">75 mW</td>
+                                <td class="py-2.5 text-slate-300">62,5 mW</td>
+                                <td class="py-2.5 text-slate-300">105 mW</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="bg-emerald-950/30 border border-emerald-500/40 rounded-lg p-3 text-xs text-slate-200">
+                        <strong class="text-lt_emerald">Prüfung Bemessungsstrom I<sub>F</sub> = 20 mA:</strong> Zulässig für alle drei LEDs? <strong>Ja!</strong> 20 mA liegt bei allen drei LEDs sicher unter dem maximalen Durchlassstrom (25 mA bei Grün bzw. 30 mA bei Rot und Blau).
+                    </div>
+                </div>
+
+                <!-- Formeln & E12-Reihe -->
+                <div class="lg:col-span-6 bg-slate-950 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-white mb-3">2. Berechnungsformeln &amp; Auswahl aus der E12-Normreihe</h3>
+                        <div class="grid grid-cols-3 gap-2 font-mono text-xs text-center mb-4">
+                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                                <div class="text-slate-400 text-[10px]">Spannung am R<sub>V</sub></div>
+                                <div class="text-lt_cyan font-bold mt-1">U<sub>RV</sub> = U<sub>b</sub> − U<sub>F</sub></div>
+                            </div>
+                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                                <div class="text-slate-400 text-[10px]">Vorwiderstand</div>
+                                <div class="text-lt_emerald font-bold mt-1">R<sub>V</sub> = U<sub>RV</sub> / I<sub>F</sub></div>
+                            </div>
+                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                                <div class="text-slate-400 text-[10px]">Leistung am R<sub>V</sub></div>
+                                <div class="text-lt_amber font-bold mt-1">P<sub>RV</sub> = U<sub>RV</sub> · I<sub>F</sub></div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 p-3.5 rounded-lg border border-slate-800 text-xs space-y-1.5">
+                            <div class="text-slate-300 font-semibold">Normwerte der E12-Reihe (× 10<sup>n</sup> Ω):</div>
+                            <div class="font-mono text-lt_amber font-bold tracking-wider">
+                                1,0 – 1,2 – 1,5 – 1,8 – 2,2 – 2,7 – 3,3 – 3,9 – 4,7 – 5,6 – 6,8 – 8,2
+                            </div>
+                            <div class="text-slate-400 text-[11px]">
+                                <strong>Auswahlregel:</strong> Wähle aus der E12-Reihe stets den <strong>nächstgrößeren Normwert</strong>, damit der zulässige Strom <code>I<sub>F</sub></code> nicht überschritten wird!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete Calculation Table (Exact match to Worksheet Page 4 Aufgabe 3b & 3c) -->
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-5 overflow-x-auto">
+                <h3 class="text-base font-bold text-white mb-4">3. Vollständige Auslegungstabelle für U<sub>b</sub> = 12 V und Sollstrom I<sub>F</sub> = 20 mA (0,02 A)</h3>
+                <table class="w-full text-xs sm:text-sm font-mono text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-700 text-slate-400 bg-slate-900/70">
+                            <th class="py-3 px-4">Berechnungsgröße</th>
+                            <th class="py-3 px-4 text-red-400">LED rot (L-7113SURDK)</th>
+                            <th class="py-3 px-4 text-lt_emerald">LED grün (L-7113SGD)</th>
+                            <th class="py-3 px-4 text-blue-400">LED blau (L-7113MBTL)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800">
+                        <tr>
+                            <td class="py-2.5 px-4 text-slate-300">U<sub>F</sub> bei 20 mA (laut Datenblatt)</td>
+                            <td class="py-2.5 px-4 font-bold text-white">1,95 V</td>
+                            <td class="py-2.5 px-4 font-bold text-white">2,2 V</td>
+                            <td class="py-2.5 px-4 font-bold text-white">3,8 V</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2.5 px-4 text-slate-300">U<sub>RV</sub> = U<sub>b</sub> − U<sub>F</sub> (bei U<sub>b</sub> = 12 V)</td>
+                            <td class="py-2.5 px-4 text-lt_cyan font-bold">10,05 V</td>
+                            <td class="py-2.5 px-4 text-lt_cyan font-bold">9,80 V</td>
+                            <td class="py-2.5 px-4 text-lt_cyan font-bold">8,20 V</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2.5 px-4 text-slate-300">R<sub>V</sub> = U<sub>RV</sub> / I<sub>F</sub> (rechnerisch bei 20 mA)</td>
+                            <td class="py-2.5 px-4 text-white">502,5 Ω</td>
+                            <td class="py-2.5 px-4 text-white">490 Ω</td>
+                            <td class="py-2.5 px-4 text-white">410 Ω</td>
+                        </tr>
+                        <tr class="bg-emerald-950/20">
+                            <td class="py-2.5 px-4 text-lt_emerald font-bold">R<sub>V</sub> aus der E12-Reihe (nächstgrößerer Wert)</td>
+                            <td class="py-2.5 px-4 font-extrabold text-lt_emerald">560 Ω</td>
+                            <td class="py-2.5 px-4 font-extrabold text-lt_emerald">560 Ω</td>
+                            <td class="py-2.5 px-4 font-extrabold text-lt_emerald">470 Ω</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2.5 px-4 text-slate-300">I<sub>F</sub> mit Normwert (I<sub>F</sub> = U<sub>RV</sub> / R<sub>V,E12</sub>)</td>
+                            <td class="py-2.5 px-4 text-white font-bold">17,9 mA</td>
+                            <td class="py-2.5 px-4 text-white font-bold">17,5 mA</td>
+                            <td class="py-2.5 px-4 text-white font-bold">17,4 mA</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2.5 px-4 text-slate-300">Verlustleistung P<sub>RV</sub> = U<sub>RV</sub> · I<sub>F</sub></td>
+                            <td class="py-2.5 px-4 text-lt_amber font-bold">0,18 W</td>
+                            <td class="py-2.5 px-4 text-lt_amber font-bold">0,17 W</td>
+                            <td class="py-2.5 px-4 text-lt_amber font-bold">0,14 W</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mt-4 bg-slate-900 border border-slate-800 rounded-lg p-3.5 text-xs text-slate-300 flex flex-wrap items-center justify-between gap-2">
+                    <span><strong class="text-lt_amber">Prüfung Widerstandsbauform (0,25 W Belastbarkeit):</strong> Reicht ein Standardwiderstand mit <code>0,25 W</code> (250 mW) Belastbarkeit aus?</span>
+                    <span class="font-mono font-bold text-lt_emerald">Ja, denn P<sub>RV</sub> ≤ 0,18 W &lt; 0,25 W!</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Interaktiver Simulator Grafische Arbeitspunktbestimmung (Worksheet Pages 5 & 6: Aufgaben 4 & 5) -->
+        <section id="arbeitspunkt-led" class="bg-slate-900 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-8">
+                <div>
+                    <span class="text-xs font-mono uppercase text-lt_cyan"><i class="fa-solid fa-chart-line mr-1.5"></i>Kapitel 05 · Interaktiver Widerstandsgeraden-Analysator</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Grafische Arbeitspunktbestimmung &amp; Einheitswiderstands-Prüfung</h2>
+                    <p class="text-sm text-slate-400">
+                        Bestimmen Sie den Arbeitspunkt <code>AP(U<sub>F</sub> / I<sub>F</sub>)</code> über die Widerstandsgerade zwischen <code>P1(U<sub>b</sub> / 0 mA)</code> und <code>P2(0 V / I<sub>K</sub>)</code>.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="setLoadlinePreset(300)" class="px-3 py-2 rounded-lg text-xs font-mono font-bold bg-rose-500/20 border border-rose-400 text-rose-300 hover:bg-rose-500/30">
+                        Alte Testschaltung: 300 Ω (Ausfall!)
+                    </button>
+                    <button onclick="setLoadlinePreset(560)" class="px-3 py-2 rounded-lg text-xs font-mono font-bold bg-emerald-500/20 border border-emerald-400 text-lt_emerald hover:bg-emerald-500/30">
+                        Normwert Rot: 560 Ω
+                    </button>
+                    <button onclick="setLoadlinePreset(220)" class="px-3 py-2 rounded-lg text-xs font-mono font-bold bg-slate-800 border border-slate-700 text-slate-300 hover:border-rose-400">
+                        Vergleich: 220 Ω
+                    </button>
+                    <button onclick="setLoadlinePreset(470)" class="px-3 py-2 rounded-lg text-xs font-mono font-bold bg-cyan-500/20 border border-lt_cyan text-white">
+                        Empfehlung alle 3 LEDs: 470 Ω
+                    </button>
+                    <button onclick="setLoadlinePreset(1000)" class="px-3 py-2 rounded-lg text-xs font-mono font-bold bg-slate-800 border border-slate-700 text-slate-300 hover:border-lt_amber">
+                        Vergleich: 1 kΩ (1000 Ω)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4 Steps of Graphical Operating Point Determination (Worksheet Page 5 Aufgabe 4a) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                    <div class="text-xs font-mono text-lt_cyan font-bold">Schritt 1 · Leerlaufpunkt P1</div>
+                    <div class="text-sm font-bold text-white mt-1">P1 (12 V / 0 mA) einzeichnen</div>
+                    <p class="text-xs text-slate-400 mt-1">Wenn kein Strom fließt (I = 0 mA), liegt die volle Betriebsspannung U<sub>b</sub> = 12 V an.</p>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                    <div class="text-xs font-mono text-lt_cyan font-bold">Schritt 2 · Kurzschlusspunkt P2</div>
+                    <div class="text-sm font-bold text-white mt-1">P2 (0 V / I<sub>K</sub> = U<sub>b</sub>/R<sub>V</sub>) einzeichnen</div>
+                    <p class="text-xs text-slate-400 mt-1">Bei 300 Ω: P2(0 V / 40 mA). Bei 560 Ω: P2(0 V / 21,4 mA). Bei 470 Ω: P2(0 V / 25,5 mA).</p>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                    <div class="text-xs font-mono text-lt_cyan font-bold">Schritt 3 · Widerstandsgerade</div>
+                    <div class="text-sm font-bold text-white mt-1">P1 und P2 geradlinig verbinden</div>
+                    <p class="text-xs text-slate-400 mt-1">Die Gerade beschreibt alle möglichen Strom-Spannungs-Paare des Vorwiderstands R<sub>V</sub>.</p>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                    <div class="text-xs font-mono text-lt_emerald font-bold">Schritt 4 · Arbeitspunkt AP</div>
+                    <div class="text-sm font-bold text-white mt-1">Schnittpunkt mit Kennlinie = AP</div>
+                    <p class="text-xs text-slate-400 mt-1">Am Schnittpunkt gelten beide Kennlinien gleichzeitig: Ablesen von U<sub>F</sub> und I<sub>F</sub>!</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Interactive Canvas for Load Line + 3 LED Curves -->
+                <div class="lg:col-span-7 bg-slate-950 border border-slate-800 rounded-xl p-4">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-3">
+                        <div class="text-xs font-mono">
+                            <span class="text-slate-400">Gewählter Vorwiderstand R<sub>V</sub>:</span>
+                            <strong id="rvCurrentLabel" class="text-lt_cyan text-sm ml-1">470 Ω</strong>
+                            <span id="ikCurrentLabel" class="text-slate-400 ml-2">(P2: I<sub>K</sub> = 25,5 mA)</span>
+                        </div>
+                        <input type="range" id="rvSlider" min="200" max="1000" step="10" value="470" class="w-44" oninput="setLoadlinePreset(this.value)">
+                    </div>
+
+                    <canvas id="loadlineCanvas" width="660" height="410" class="w-full h-auto bg-[#070b14] rounded-lg border border-slate-800"></canvas>
+
+                    <div class="grid grid-cols-3 gap-2 mt-3 text-center font-mono text-xs">
+                        <div id="apCardRed" class="bg-slate-900 p-2.5 rounded border border-slate-800">
+                            <div class="text-red-400 font-bold">AP LED rot (max. 30 mA)</div>
+                            <div id="apTxtRed" class="text-white mt-0.5">U_F = 1,96 V | I_F ≈ 21 mA</div>
+                        </div>
+                        <div id="apCardGreen" class="bg-slate-900 p-2.5 rounded border border-slate-800">
+                            <div class="text-lt_emerald font-bold">AP LED grün (max. 25 mA)</div>
+                            <div id="apTxtGreen" class="text-white mt-0.5">U_F = 2,21 V | I_F ≈ 21 mA</div>
+                        </div>
+                        <div id="apCardBlue" class="bg-slate-900 p-2.5 rounded border border-slate-800">
+                            <div class="text-blue-400 font-bold">AP LED blau (max. 30 mA)</div>
+                            <div id="apTxtBlue" class="text-white mt-0.5">U_F = 3,80 V | I_F ≈ 18 mA</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Detailed Evaluation of Case 1 (300Ω vs 560Ω) & Case 2 (220Ω, 470Ω, 1kΩ) -->
+                <div class="lg:col-span-5 space-y-5">
+                    <!-- Auswertung 1: Alte Testschaltung 300 Ohm vs. 560 Ohm (Worksheet Page 5 Aufgabe 4) -->
+                    <div class="bg-slate-950 border-l-4 border-rose-500 border border-slate-800 rounded-xl p-5 space-y-2.5">
+                        <div class="text-xs font-mono uppercase text-rose-400 font-bold">Fehleranalyse Testschaltung (Rote LED an 12 V)</div>
+                        <h3 class="text-base font-bold text-white">Warum fiel die rote LED mit R<sub>V</sub> = 300 Ω regelmäßig aus?</h3>
+                        <ul class="text-xs text-slate-300 space-y-1.5 font-mono">
+                            <li>• <strong>Mit R<sub>V</sub> = 300 Ω:</strong> P1(12 V / 0 mA), P2(0 V / 40,0 mA) &rarr; <strong class="text-rose-400">AP: U<sub>F</sub> = 2,05 V; I<sub>F</sub> ≈ 33 mA (33,2 mA)</strong>.</li>
+                            <li>• <strong>Begründung:</strong> Im Arbeitspunkt fließen <strong>ca. 33 mA &gt; I<sub>F,max</sub> = 30 mA</strong> &rarr; die LED wird überlastet und fällt aus (Vorwiderstand zu klein!).</li>
+                            <li>• <strong>Mit R<sub>V</sub> = 560 Ω:</strong> P1(12 V / 0 mA), P2(0 V / 21,4 mA) &rarr; <strong class="text-lt_emerald">Neuer AP: U<sub>F</sub> = 1,93 V; I<sub>F</sub> = 18 mA</strong> (sicherer Betrieb!).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Auswertung 2: Einheits-Vorwiderstand 220 Ω, 470 Ω, 1 kΩ (Worksheet Page 6 Aufgabe 5) -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-5">
+                        <div class="text-xs font-mono uppercase text-lt_cyan font-bold mb-1">Lager-Optimierung: Ein Widerstand für alle 3 LEDs</div>
+                        <h3 class="text-base font-bold text-white mb-3">Vergleich 220 Ω, 470 Ω und 1 kΩ an U<sub>b</sub> = 12 V</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs font-mono text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-slate-800 text-slate-400">
+                                        <th class="py-2">R<sub>V</sub></th>
+                                        <th class="py-2">P2: I<sub>K</sub></th>
+                                        <th class="py-2 text-red-400">I<sub>F</sub> rot</th>
+                                        <th class="py-2 text-lt_emerald">I<sub>F</sub> grün</th>
+                                        <th class="py-2 text-blue-400">I<sub>F</sub> blau</th>
+                                        <th class="py-2">zulässig für</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-800/80">
+                                    <tr>
+                                        <td class="py-2 font-bold text-white">220 Ω</td>
+                                        <td class="py-2">54,5 mA</td>
+                                        <td class="py-2 text-rose-400">ca. 45 mA</td>
+                                        <td class="py-2 text-rose-400">ca. 43 mA</td>
+                                        <td class="py-2 text-rose-400">ca. 36 mA</td>
+                                        <td class="py-2 font-bold text-rose-400">keine LED</td>
+                                    </tr>
+                                    <tr class="bg-emerald-950/25">
+                                        <td class="py-2 font-extrabold text-lt_emerald">470 Ω</td>
+                                        <td class="py-2 font-bold">25,5 mA</td>
+                                        <td class="py-2 text-white">ca. 21 mA</td>
+                                        <td class="py-2 text-white">ca. 21 mA</td>
+                                        <td class="py-2 text-white">ca. 18 mA</td>
+                                        <td class="py-2 font-bold text-lt_emerald">alle LEDs</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 font-bold text-white">1 kΩ</td>
+                                        <td class="py-2">12 mA</td>
+                                        <td class="py-2 text-slate-400">ca. 10 mA</td>
+                                        <td class="py-2 text-slate-400">ca. 10 mA</td>
+                                        <td class="py-2 text-slate-400">ca. 8 mA</td>
+                                        <td class="py-2 text-lt_amber">alle (sehr dunkel)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+                            <strong class="text-lt_emerald">Technische Empfehlung (470 Ω):</strong> Mit <strong>470 Ω</strong> bleiben <strong>alle drei LEDs unter ihrem maximalen Grenzwert</strong> (30 mA bzw. 25 mA) und leuchten gleichzeitig hell genug (ca. 18–21 mA). <code>220 Ω</code> überlastet alle LEDs, und mit <code>1 kΩ</code> leuchten sie nur noch schwach (ca. 8–10 mA).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-10 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-lightbulb text-lt_emerald text-base"></i>
+                <span class="text-slate-300 font-bold">LUMIATECH Semiconductor GmbH</span>
+                <span>· Optoelektronik &amp; Signalsäulen-Technik</span>
+            </div>
+            <div class="flex gap-4">
+                <a href="dioden.html" class="text-lt_amber hover:underline font-semibold">&larr; Zurück zu Silizium-Dioden</a>
+                <a href="schaltungslabor.html" class="text-lt_cyan hover:underline font-semibold">Weiter zum Schaltungslabor &rarr;</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Signal Tower Interactive Toggle
+        const towerState = { red: true, green: true, blue: true };
+        function toggleTowerLight(color) {
+            towerState[color] = !towerState[color];
+            const on = towerState[color];
+            if (color === 'red') {
+                const el = document.getElementById('towerRed');
+                const st = document.getElementById('stateRed');
+                el.className = on
+                    ? 'h-11 rounded-md bg-red-600 border border-red-400 shadow-[0_0_16px_rgba(239,68,68,0.8)] transition-all flex items-center justify-center text-[10px] font-mono font-bold text-white'
+                    : 'h-11 rounded-md bg-slate-900 border border-slate-700 text-slate-600 transition-all flex items-center justify-center text-[10px] font-mono';
+                st.textContent = on ? 'EIN' : 'AUS';
+                st.className = on ? 'text-[10px] font-mono px-2 py-0.5 rounded bg-red-500 text-white font-bold' : 'text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400';
+            } else if (color === 'green') {
+                const el = document.getElementById('towerGreen');
+                const st = document.getElementById('stateGreen');
+                el.className = on
+                    ? 'h-11 rounded-md bg-emerald-600 border border-emerald-400 shadow-[0_0_16px_rgba(16,185,129,0.8)] transition-all flex items-center justify-center text-[10px] font-mono font-bold text-white'
+                    : 'h-11 rounded-md bg-slate-900 border border-slate-700 text-slate-600 transition-all flex items-center justify-center text-[10px] font-mono';
+                st.textContent = on ? 'EIN' : 'AUS';
+                st.className = on ? 'text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500 text-slate-950 font-bold' : 'text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400';
+            } else if (color === 'blue') {
+                const el = document.getElementById('towerBlue');
+                const st = document.getElementById('stateBlue');
+                el.className = on
+                    ? 'h-11 rounded-md bg-blue-600 border border-blue-400 shadow-[0_0_16px_rgba(59,130,246,0.8)] transition-all flex items-center justify-center text-[10px] font-mono font-bold text-white'
+                    : 'h-11 rounded-md bg-slate-900 border border-slate-700 text-slate-600 transition-all flex items-center justify-center text-[10px] font-mono';
+                st.textContent = on ? 'EIN' : 'AUS';
+                st.className = on ? 'text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500 text-white font-bold' : 'text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400';
+            }
+        }
+
+        // 2. Graphical Load Line Simulator (Canvas)
+        const llCanvas = document.getElementById('loadlineCanvas');
+        const llCtx = llCanvas.getContext('2d');
+
+        // Piecewise realistic LED I(U) functions matching the worksheet curves accurately:
+        // Red: U_th ~ 1.75V, U_F(18mA)=1.93V, U_F(20mA)=1.95V, U_F(33.2mA)=2.05V, U_F(45mA)=2.14V
+        function ledCurrentRed(u) {
+            if (u < 1.65) return 0;
+            return Math.pow((u - 1.65) / 0.30, 2.15) * 20;
+        }
+        // Green: U_th ~ 1.85V, U_F(20mA)=2.20V, I_Fmax = 25mA
+        function ledCurrentGreen(u) {
+            if (u < 1.80) return 0;
+            return Math.pow((u - 1.80) / 0.40, 2.1) * 20;
+        }
+        // Blue: U_th ~ 3.0V, U_F(20mA)=3.80V, I_Fmax = 30mA
+        function ledCurrentBlue(u) {
+            if (u < 2.95) return 0;
+            return Math.pow((u - 2.95) / 0.85, 2.15) * 20;
+        }
+
+        function findIntersection(curveFn, ub, rv) {
+            // Solve curveFn(u) = (ub - u) / rv * 1000
+            let low = 0, high = ub;
+            for (let iter = 0; iter < 40; iter++) {
+                const mid = (low + high) / 2;
+                const iLed = curveFn(mid);
+                const iLine = ((ub - mid) / rv) * 1000;
+                if (iLed < iLine) low = mid;
+                else high = mid;
+            }
+            const uAp = (low + high) / 2;
+            const iAp = ((ub - uAp) / rv) * 1000;
+            return { u: uAp, i: iAp };
+        }
+
+        function setLoadlinePreset(rvVal) {
+            const rv = parseFloat(rvVal);
+            document.getElementById('rvSlider').value = rv;
+            const ub = 12.0;
+            const ik = (ub / rv) * 1000;
+
+            document.getElementById('rvCurrentLabel').textContent = rv + ' Ω';
+            document.getElementById('ikCurrentLabel').textContent = `(P2: I_K = ${ik.toFixed(1).replace('.', ',')} mA)`;
+
+            drawLoadlineGraph(rv, ub, ik);
+        }
+
+        function drawLoadlineGraph(rv, ub, ik) {
+            llCtx.clearRect(0, 0, llCanvas.width, llCanvas.height);
+
+            const padL = 52, padR = 28, padT = 24, padB = 42;
+            const plotW = llCanvas.width - padL - padR;
+            const plotH = llCanvas.height - padT - padB;
+            const maxU = 12.5;
+            const maxI = 60;
+
+            const toX = u => padL + (u / maxU) * plotW;
+            const toY = i => padT + plotH - (i / maxI) * plotH;
+
+            // Grid
+            llCtx.strokeStyle = '#1e293b';
+            llCtx.lineWidth = 1;
+            for (let u = 0; u <= 12; u += 1) {
+                const x = toX(u);
+                llCtx.beginPath(); llCtx.moveTo(x, padT); llCtx.lineTo(x, padT + plotH); llCtx.stroke();
+                llCtx.fillStyle = '#94a3b8';
+                llCtx.font = '11px monospace';
+                llCtx.textAlign = 'center';
+                llCtx.fillText(u.toString(), x, padT + plotH + 16);
+            }
+            for (let i = 0; i <= 60; i += 5) {
+                const y = toY(i);
+                llCtx.beginPath(); llCtx.moveTo(padL, y); llCtx.lineTo(padL + plotW, y); llCtx.stroke();
+                if (i % 10 === 0 || i === 25 || i === 30) {
+                    llCtx.fillStyle = (i === 30) ? '#f87171' : '#94a3b8';
+                    llCtx.font = '11px monospace';
+                    llCtx.textAlign = 'right';
+                    llCtx.fillText(i.toString(), padL - 8, y + 4);
+                }
+            }
+
+            // Axes
+            llCtx.strokeStyle = '#cbd5e1';
+            llCtx.lineWidth = 2;
+            llCtx.beginPath();
+            llCtx.moveTo(padL, padT);
+            llCtx.lineTo(padL, padT + plotH);
+            llCtx.lineTo(padL + plotW, padT + plotH);
+            llCtx.stroke();
+
+            llCtx.fillStyle = '#e2e8f0';
+            llCtx.font = 'bold 12px sans-serif';
+            llCtx.textAlign = 'center';
+            llCtx.fillText('U in V', padL + plotW / 2, llCanvas.height - 6);
+            llCtx.save();
+            llCtx.translate(15, padT + plotH / 2);
+            llCtx.rotate(-Math.PI / 2);
+            llCtx.fillText('I in mA', 0, 0);
+            llCtx.restore();
+
+            // Max current limit line at 30 mA (Red/Blue) and 25 mA (Green)
+            llCtx.strokeStyle = 'rgba(239, 68, 68, 0.45)';
+            llCtx.setLineDash([4, 4]);
+            llCtx.beginPath();
+            llCtx.moveTo(padL, toY(30));
+            llCtx.lineTo(padL + plotW, toY(30));
+            llCtx.stroke();
+            llCtx.fillStyle = '#f87171';
+            llCtx.font = '10px monospace';
+            llCtx.textAlign = 'right';
+            llCtx.fillText('I_F,max (Rot/Blau) = 30 mA', padL + plotW - 6, toY(30) - 5);
+            llCtx.setLineDash([]);
+
+            // Draw the 3 LED curves (solid below max limit, dotted above max limit!)
+            const curves = [
+                { fn: ledCurrentRed, color: '#ef4444', maxI: 30, label: 'rot' },
+                { fn: ledCurrentGreen, color: '#10b981', maxI: 25, label: 'grün' },
+                { fn: ledCurrentBlue, color: '#3b82f6', maxI: 30, label: 'blau' }
+            ];
+
+            curves.forEach(c => {
+                // Solid part up to c.maxI
+                llCtx.strokeStyle = c.color;
+                llCtx.lineWidth = 2.6;
+                llCtx.setLineDash([]);
+                llCtx.beginPath();
+                let started = false;
+                for (let u = 0; u <= 5.0; u += 0.02) {
+                    const i = c.fn(u);
+                    if (i > c.maxI) break;
+                    const x = toX(u), y = toY(i);
+                    if (!started) { llCtx.moveTo(x, y); started = true; }
+                    else llCtx.lineTo(x, y);
+                }
+                llCtx.stroke();
+
+                // Dotted part above c.maxI
+                llCtx.setLineDash([3, 3]);
+                llCtx.beginPath();
+                started = false;
+                for (let u = 1.5; u <= 5.0; u += 0.02) {
+                    const i = c.fn(u);
+                    if (i < c.maxI) continue;
+                    if (i > 58) break;
+                    const x = toX(u), y = toY(i);
+                    if (!started) { llCtx.moveTo(x, y); started = true; }
+                    else llCtx.lineTo(x, y);
+                }
+                llCtx.stroke();
+                llCtx.setLineDash([]);
+            });
+
+            // Draw Load Line (Widerstandsgerade) from P1(12V, 0mA) to P2(0V, I_K)
+            llCtx.strokeStyle = '#fbbf24';
+            llCtx.lineWidth = 2.5;
+            llCtx.beginPath();
+            llCtx.moveTo(toX(0), toY(ik));
+            llCtx.lineTo(toX(ub), toY(0));
+            llCtx.stroke();
+
+            // Mark P1 and P2
+            llCtx.fillStyle = '#fbbf24';
+            llCtx.beginPath(); llCtx.arc(toX(ub), toY(0), 5, 0, Math.PI * 2); llCtx.fill();
+            llCtx.textAlign = 'right';
+            llCtx.font = 'bold 11px monospace';
+            llCtx.fillText('P1 (12V / 0mA)', toX(ub) - 6, toY(0) - 8);
+
+            if (ik <= 60) {
+                llCtx.beginPath(); llCtx.arc(toX(0), toY(ik), 5, 0, Math.PI * 2); llCtx.fill();
+                llCtx.textAlign = 'left';
+                llCtx.fillText(`P2 (0V / ${ik.toFixed(1).replace('.', ',')}mA)`, toX(0) + 8, toY(ik) - 6);
+            }
+
+            // Compute and mark Operating Points (AP)
+            const apRed = findIntersection(ledCurrentRed, ub, rv);
+            const apGreen = findIntersection(ledCurrentGreen, ub, rv);
+            const apBlue = findIntersection(ledCurrentBlue, ub, rv);
+
+            [
+                { ap: apRed, color: '#ef4444', max: 30, txtId: 'apTxtRed', cardId: 'apCardRed' },
+                { ap: apGreen, color: '#10b981', max: 25, txtId: 'apTxtGreen', cardId: 'apCardGreen' },
+                { ap: apBlue, color: '#3b82f6', max: 30, txtId: 'apTxtBlue', cardId: 'apCardBlue' }
+            ].forEach(item => {
+                const x = toX(item.ap.u);
+                const y = toY(item.ap.i);
+                llCtx.fillStyle = item.color;
+                llCtx.strokeStyle = '#ffffff';
+                llCtx.lineWidth = 2;
+                llCtx.beginPath();
+                llCtx.arc(x, y, 6, 0, Math.PI * 2);
+                llCtx.fill();
+                llCtx.stroke();
+
+                const overloaded = item.ap.i > item.max;
+                const status = overloaded ? ' (ÜBERLAST!)' : ' (OK)';
+                document.getElementById(item.txtId).textContent = `U_F = ${item.ap.u.toFixed(2).replace('.', ',')} V | I_F ≈ ${item.ap.i.toFixed(1).replace('.', ',')} mA${status}`;
+                document.getElementById(item.txtId).className = overloaded ? 'text-rose-400 font-bold mt-0.5' : 'text-white mt-0.5';
+            });
+        }
+
+        // Init loadline graph with 470 Ohm
+        setLoadlinePreset(470);
+    </script>
+</body>
+</html>
