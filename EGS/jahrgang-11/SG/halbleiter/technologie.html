@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Halbleitertechnik verstehen | LUMIATECH Semiconductor</title>
+  <meta name="description" content="Leiter, Halbleiter und Nichtleiter, Dotierung und PN-Übergang – das Grundlagenwissen hinter unseren Dioden und LEDs, mit interaktiven Simulationen.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/config.js"></script>
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/physics.js"></script>
+  <script defer src="assets/js/plot.js"></script>
+  <script defer src="assets/js/sim-leitfaehigkeit.js"></script>
+  <script defer src="assets/js/sim-dotierung.js"></script>
+  <script defer src="assets/js/sim-pn.js"></script>
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main id="main">
+    <div class="page-head">
+      <div class="container">
+        <nav class="crumbs" aria-label="Brotkrumen"><a href="index.html">Start</a><span aria-hidden="true">/</span><span>Technologie</span></nav>
+        <h1>Halbleitertechnik verstehen</h1>
+        <p class="lead">Was im Kristall passiert, entscheidet über jede Kennlinie im Datenblatt. Hier erklären wir die Grundlagen, auf denen unsere Dioden und LEDs aufbauen – zum Lesen und zum Ausprobieren.</p>
+      </div>
+    </div>
+
+    <div class="container section--tight">
+      <div class="doc">
+        <aside class="toc" data-toc="#doc-body" aria-label="Inhaltsverzeichnis"></aside>
+        <div class="doc__body" id="doc-body">
+
+          <section id="leitfaehigkeit">
+            <h2>Halbleiter? Leiter? Nichtleiter?</h2>
+            <p class="intro">Die elektrische Leitfähigkeit gibt an, wie gut ein Stoff elektrischen Strom leitet. Entscheidend ist die Zahl der beweglichen Ladungsträger: Je mehr davon vorhanden sind, desto höher ist die Leitfähigkeit.</p>
+
+            <div class="grid grid-3 mt-2">
+              <div class="tile">
+                <h3>Leiter</h3>
+                <p>Metalle besitzen eine <strong>hohe</strong> Leitfähigkeit. In ihnen bewegen sich sehr viele freie Elektronen.</p>
+                <ul class="chips mt-0" style="margin-top:.8rem"><li>Kupfer</li><li>Eisen</li><li>Aluminium</li></ul>
+              </div>
+              <div class="tile">
+                <h3>Halbleiter</h3>
+                <p>Halbleiter besitzen eine <strong>mittlere</strong> Leitfähigkeit, die sich durch Wärme, Licht und Dotierung gezielt verändern lässt.</p>
+                <ul class="chips" style="margin-top:.8rem"><li>Silizium</li><li>Germanium</li><li>Galliumarsenid</li></ul>
+              </div>
+              <div class="tile">
+                <h3>Nichtleiter</h3>
+                <p>Isolatoren besitzen eine <strong>sehr geringe</strong> Leitfähigkeit. Fast alle Elektronen sind fest gebunden.</p>
+                <ul class="chips" style="margin-top:.8rem"><li>Keramik</li><li>Kunststoffe</li><li>Glas</li></ul>
+              </div>
+            </div>
+
+            <div data-sim="ladungstraeger" data-title="Werkstoffprobe im Messaufbau" data-hint="Legen Sie eine Spannung an und vergleichen Sie die Ströme."></div>
+
+            <figure class="figure mt-2">
+              <div class="figure__frame"><div data-chart="leitfaehigkeit"></div></div>
+              <figcaption>Leitfähigkeit ausgewählter Werkstoffe. Die Skala ist logarithmisch – jede Zehnerpotenz ist gleich breit. Zwischen Kupfer und Kunststoff liegen über 20 Zehnerpotenzen.</figcaption>
+            </figure>
+          </section>
+
+          <section id="kristall">
+            <h2>Silizium: Kristall, Eigenleitung und Dotierung</h2>
+            <p class="intro">Silizium hat vier Außenelektronen. Im Kristall bildet jedes Atom mit seinen vier Nachbarn feste Elektronenpaarbindungen. Reines Silizium leitet deshalb nur schwach.</p>
+            <p>Erst gezielte Fremdatome machen Silizium für Bauteile nutzbar. Diesen Vorgang nennen wir <strong>Dotierung</strong>. Schon ein Fremdatom auf eine Million Siliziumatome erhöht die Leitfähigkeit um ein Vielfaches.</p>
+
+            <div data-sim="dotierung" data-title="Kristallgitter im Modell" data-hint="Wählen Sie den Kristall und beobachten Sie die Ladungsträger."></div>
+
+            <div class="table-wrap">
+              <table class="spec">
+                <caption>N-Leiter und P-Leiter im Vergleich</caption>
+                <thead><tr><th></th><th>N-Leiter</th><th>P-Leiter</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Fremdatom (Beispiel)</th><td>Phosphor, 5 Außenelektronen</td><td>Bor, 3 Außenelektronen</td></tr>
+                  <tr><th scope="row">bewegliche Ladungsträger</th><td>freie Elektronen (negativ)</td><td>Löcher (wirken positiv)</td></tr>
+                  <tr><th scope="row">ortsfest zurück bleibt</th><td>positives Ion</td><td>negatives Ion</td></tr>
+                  <tr><th scope="row">nach außen</th><td colspan="2">elektrisch neutral – jede bewegliche Ladung hat ihr Gegenstück im Ion</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="pn-uebergang">
+            <h2>Der PN-Übergang</h2>
+            <p class="intro">Grenzen ein P-Leiter und ein N-Leiter in einem Kristall aneinander, entsteht der PN-Übergang – das Herz jeder Diode und jeder LED.</p>
+            <p>An der Grenzfläche wandern freie Elektronen aus dem N-Leiter in den P-Leiter und füllen dort Löcher. Zurück bleiben nur die ortsfesten Ionen: negative Ionen auf der P-Seite, positive Ionen auf der N-Seite. Diese Zone ohne freie Ladungsträger heißt <strong>Sperrschicht</strong> oder Raumladungszone (RLZ). Ihr elektrisches Feld verhindert, dass weitere Ladungsträger hinüberwandern.</p>
+
+            <div data-sim="pn" data-mode="diode" data-title="PN-Übergang im Stromkreis" data-hint="Wählen Sie die Polung und erhöhen Sie die Spannung langsam."></div>
+
+            <div class="table-wrap">
+              <table class="spec">
+                <caption>Durchlass- und Sperrrichtung</caption>
+                <thead><tr><th></th><th>Durchlassrichtung</th><th>Sperrrichtung</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Polung</th><td>Plus an P (Anode), Minus an N (Kathode)</td><td>Minus an P (Anode), Plus an N (Kathode)</td></tr>
+                  <tr><th scope="row">Ladungsträger</th><td>werden in Richtung Sperrschicht gedrückt</td><td>werden aus der Sperrschicht gezogen</td></tr>
+                  <tr><th scope="row">Sperrschicht</th><td>wird schmaler, Elektronen und Löcher rekombinieren</td><td>wird breiter</td></tr>
+                  <tr><th scope="row">Strom</th><td>fließt, sobald die Schleusenspannung erreicht ist (Si ≈ 0,7 V)</td><td>praktisch kein Strom (nur winziger Sperrstrom)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="note">
+              <div class="note__title">Merkregel aus dem Labor</div>
+              <p>Der Strom fließt in Pfeilrichtung des Schaltzeichens: von der Anode zur Kathode. Liegt das Plus an der Anode, leitet die Diode.</p>
+            </div>
+          </section>
+
+          <section id="bauteile">
+            <h2>Vom PN-Übergang zum Bauteil</h2>
+            <p class="intro">Aus demselben Prinzip entstehen ganz unterschiedliche Bauteile. Welcher Halbleiterwerkstoff verwendet wird, bestimmt ihre Eigenschaften.</p>
+            <div class="grid grid-2">
+              <article class="product">
+                <div class="product__visual"><div data-art="diode" data-dims="false" style="width:100%;max-width:380px"></div></div>
+                <div class="product__body">
+                  <h3>Silizium-Diode</h3>
+                  <p>Lässt Strom nur in eine Richtung durch. Einsatz als Gleichrichter, Verpolschutz oder Freilaufdiode.</p>
+                  <div class="btn-row"><a class="btn btn--ghost" href="dioden.html">Dioden BAY 44/45/46</a></div>
+                </div>
+              </article>
+              <article class="product">
+                <div class="product__visual" style="display:flex;justify-content:center;gap:4px"><div data-art="led" data-color="blue" style="width:84px"></div><div data-art="led" data-color="green" style="width:84px"></div></div>
+                <div class="product__body">
+                  <h3>Leuchtdiode (LED)</h3>
+                  <p>Wandelt die Energie der Rekombination in Licht um. Die Farbe hängt vom Halbleiterwerkstoff ab.</p>
+                  <div class="btn-row"><a class="btn btn--ghost" href="leds.html">LEDs L-7113</a></div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script defer src="assets/js/illustrations.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Applikation: LEDs richtig betreiben | LUMIATECH Semiconductor</title>
+  <meta name="description" content="Vorwiderstand berechnen, Arbeitspunkt grafisch bestimmen und Signalsäulen auf LEDs umrüsten – die Applikationsschrift von LUMIATECH mit interaktiven Werkzeugen.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/products.css">
+  <script defer src="assets/js/config.js"></script>
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/physics.js"></script>
+  <script defer src="assets/js/plot.js"></script>
+  <script defer src="assets/js/illustrations.js"></script>
+  <script defer src="assets/js/sim-arbeitspunkt.js"></script>
+  <script defer src="assets/js/sim-signalsaeule.js"></script>
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main id="main">
+    <div class="page-head">
+      <div class="container">
+        <nav class="crumbs" aria-label="Brotkrumen"><a href="index.html">Start</a><span aria-hidden="true">/</span><span>Applikationen</span><span aria-hidden="true">/</span><span>LEDs richtig betreiben</span></nav>
+        <h1>LEDs richtig betreiben</h1>
+        <p class="lead">Applikationsschrift AN-L02 aus unserem Labor: Vorwiderstand auslegen, Arbeitspunkt prüfen und Signalsäulen sicher von Glühlampen auf LEDs umrüsten.</p>
+      </div>
+    </div>
+
+    <div class="container section--tight">
+      <div class="doc">
+        <aside class="toc" data-toc="#doc-body" aria-label="Inhaltsverzeichnis"></aside>
+        <div class="doc__body" id="doc-body">
+
+          <section id="vorwiderstand" data-toc-label="Warum ein Vorwiderstand?">
+            <h2>Warum jede LED einen Vorwiderstand braucht</h2>
+            <p class="intro">Oberhalb der Durchlassspannung steigt der Strom einer LED extrem steil an. Eine LED direkt an 12 V würde in Sekundenbruchteilen zerstört.</p>
+            <div class="split split--top mt-2">
+              <div>
+                <p>Der <strong>Vorwiderstand R<sub>V</sub></strong> wird in Reihe zur LED geschaltet. Er begrenzt den Strom auf einen Wert, den die LED dauerhaft verträgt, und nimmt die überschüssige Spannung auf.</p>
+                <p>Für die Masche gilt:</p>
+                <div class="formula">U<sub>b</sub> = U<sub>RV</sub> + U<sub>F</sub></div>
+                <p>Durch Vorwiderstand und LED fließt derselbe Strom I<sub>F</sub>. Die Spannungspfeile zeigen jeweils von Plus nach Minus, der Strompfeil in technischer Stromrichtung.</p>
+              </div>
+              <figure class="figure">
+                <div class="figure__frame"><svg viewBox="0 0 420 310" role="img" aria-label="Grundschaltung: Spannungsquelle G1, Vorwiderstand R V und LED V1 in Reihe, mit Zählpfeilen für U b, U RV, U F und I F"><path d="M90 141 V60 H300 V95 M300 155 V188 M300 222 V275 H90 V189" fill="none" stroke="#17202b" stroke-width="2.5"/><circle cx="90" cy="165" r="24" fill="#fff" stroke="#17202b" stroke-width="2.5"/><line x1="90" y1="141" x2="90" y2="189" stroke="#17202b" stroke-width="2"/><text x="112" y="140" font-size="16" font-weight="800" fill="#d3262b">+</text><text x="112" y="200" font-size="18" font-weight="800" fill="#1f5bd8">–</text><text x="128" y="170" font-size="13" font-weight="700" fill="#17202b">G1</text><rect x="289" y="95" width="22" height="60" fill="#fff" stroke="#17202b" stroke-width="2.5"/><text x="278" y="130" text-anchor="end" font-size="14" font-weight="700" fill="#17202b">R<tspan baseline-shift="sub" font-size="10">V</tspan></text><path d="M285 188 h30 l-15 30z" fill="#fff" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/><line x1="284" y1="220" x2="316" y2="220" stroke="#17202b" stroke-width="3.5"/><path d="M262 196 l-16 -12 M268 210 l-16 -12" stroke="#17202b" stroke-width="2"/><path d="M244 182 l3 8 l5 -5z M250 196 l3 8 l5 -5z" fill="#17202b"/><text x="278" y="244" text-anchor="end" font-size="14" font-weight="700" fill="#17202b">V1</text><line x1="40" y1="128" x2="40" y2="195" stroke="#c42b2b" stroke-width="2.5"/><path d="M40 204 l-6 -11 h12z" fill="#c42b2b"/><text x="30" y="171.0" text-anchor="end" font-size="16" font-weight="700" fill="#c42b2b">U<tspan baseline-shift="sub" font-size="11">b</tspan></text><line x1="340" y1="98" x2="340" y2="145" stroke="#c42b2b" stroke-width="2.5"/><path d="M340 154 l-6 -11 h12z" fill="#c42b2b"/><text x="352" y="131.0" text-anchor="start" font-size="16" font-weight="700" fill="#c42b2b">U<tspan baseline-shift="sub" font-size="11">RV</tspan></text><line x1="340" y1="188" x2="340" y2="215" stroke="#c42b2b" stroke-width="2.5"/><path d="M340 224 l-6 -11 h12z" fill="#c42b2b"/><text x="352" y="211.0" text-anchor="start" font-size="16" font-weight="700" fill="#c42b2b">U<tspan baseline-shift="sub" font-size="11">F</tspan></text><line x1="300" y1="238" x2="300" y2="256" stroke="#c42b2b" stroke-width="3"/><path d="M300 266 l-6 -12 h12z" fill="#c42b2b"/><text x="312" y="262" font-size="16" font-weight="700" fill="#c42b2b">I<tspan baseline-shift="sub" font-size="11">F</tspan></text></svg></div>
+                <figcaption>Grundschaltung: LED mit Vorwiderstand und Zählpfeilen</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section id="berechnung" data-toc-label="Vorwiderstand berechnen">
+            <h2>Vorwiderstand berechnen</h2>
+            <p class="intro">Mit drei Formeln und dem Datenblatt ist der Vorwiderstand in wenigen Minuten ausgelegt.</p>
+            <div class="formula-list">
+              <div class="formula">U<sub>RV</sub> = U<sub>b</sub> − U<sub>F</sub></div>
+              <div class="formula">R<sub>V</sub> = U<sub>RV</sub> / I<sub>F</sub></div>
+              <div class="formula">P<sub>RV</sub> = U<sub>RV</sub> · I<sub>F</sub></div>
+            </div>
+            <ol class="steps mt-2">
+              <li><div><h3>Strom festlegen und prüfen</h3><p>Wählen Sie den Betriebsstrom I<sub>F</sub> (üblich: 20 mA) und prüfen Sie, ob er unter I<sub>F,max</sub> aus dem Datenblatt liegt.</p></div></li>
+              <li><div><h3>Durchlassspannung ablesen</h3><p>U<sub>F</sub> bei diesem Strom steht im Datenblatt (Typwert) – nicht in allgemeinen Tabellen.</p></div></li>
+              <li><div><h3>Widerstand berechnen</h3><p>Aus der Spannung am Vorwiderstand und dem Strom ergibt sich R<sub>V</sub>.</p></div></li>
+              <li><div><h3>Normwert wählen</h3><p>Nehmen Sie aus der E12-Reihe den nächstgrößeren Wert. So wird der Strom etwas kleiner und I<sub>F</sub> nicht überschritten.</p></div></li>
+              <li><div><h3>Strom und Leistung nachrechnen</h3><p>Mit dem Normwert den tatsächlichen Strom und die Verlustleistung im Widerstand bestimmen. Danach die Belastbarkeit wählen (0,25 W, 0,5 W, 1 W).</p></div></li>
+            </ol>
+
+            <div class="e12 mt-2">
+              <p class="ctl__title">Normreihe E12 (Werte × 10<sup>n</sup> Ω)</p>
+              <ul><li>1,0</li><li>1,2</li><li>1,5</li><li>1,8</li><li>2,2</li><li>2,7</li><li>3,3</li><li>3,9</li><li>4,7</li><li>5,6</li><li>6,8</li><li>8,2</li></ul>
+            </div>
+
+            <h3 class="mt-3">Rechenbeispiel: grüne Statusanzeige an 24 V</h3>
+            <p>Eine LED L-7113SGD (grün) soll in einem Schaltschrank an U<sub>b</sub> = 24 V DC mit I<sub>F</sub> = 20 mA leuchten. Laut Datenblatt: U<sub>F</sub> = 2,2 V bei 20 mA, I<sub>F,max</sub> = 25 mA.</p>
+            <div class="calc">
+              <div class="row"><span>Strom zulässig?</span><span>20 mA ≤ 25 mA <span class="res">✓</span></span></div>
+              <div class="row"><span>Spannung am Vorwiderstand</span><span>U<sub>RV</sub> = 24 V − 2,2 V = 21,8 V</span></div>
+              <div class="row"><span>Rechnerischer Widerstand</span><span>R<sub>V</sub> = 21,8 V / 0,02 A = 1.090 Ω</span></div>
+              <div class="row"><span>Normwert E12</span><span class="res">1,2 kΩ</span></div>
+              <div class="row"><span>Strom mit Normwert</span><span>I<sub>F</sub> = 21,8 V / 1.200 Ω ≈ 18,2 mA</span></div>
+              <div class="row"><span>Leistung im Widerstand</span><span>P<sub>RV</sub> = 21,8 V · 0,0182 A ≈ 0,40 W</span></div>
+              <div class="row"><span>Ergebnis</span><span class="res">1,2 kΩ mit 0,5 W – ein 0,25-W-Widerstand würde überlastet</span></div>
+            </div>
+            <div class="note">
+              <div class="note__title">Praxistipp</div>
+              <p>Je höher die Betriebsspannung, desto mehr Leistung verheizt der Vorwiderstand. Prüfen Sie die Belastbarkeit deshalb immer mit – besonders bei 24-V-Anlagen.</p>
+            </div>
+          </section>
+
+          <section id="arbeitspunkt" data-toc-label="Arbeitspunkt grafisch">
+            <h2>Arbeitspunkt grafisch bestimmen</h2>
+            <p class="intro">Die Rechnung nimmt eine feste Durchlassspannung an. Genauer wird es mit der echten Kennlinie: Der Arbeitspunkt liegt dort, wo sich LED-Kennlinie und Widerstandsgerade schneiden.</p>
+            <ol class="steps">
+              <li><div><h3>P1 eintragen: (U<sub>b</sub> | 0)</h3><p>Fließt kein Strom, liegt die gesamte Betriebsspannung an der LED.</p></div></li>
+              <li><div><h3>P2 eintragen: (0 | U<sub>b</sub> / R<sub>V</sub>)</h3><p>Wäre die LED überbrückt, flösse der Kurzschlussstrom I<sub>K</sub> = U<sub>b</sub> / R<sub>V</sub>.</p></div></li>
+              <li><div><h3>P1 und P2 verbinden</h3><p>Die Verbindungslinie heißt Widerstandsgerade.</p></div></li>
+              <li><div><h3>Schnittpunkt ablesen</h3><p>Der Schnittpunkt mit der Kennlinie ist der Arbeitspunkt. Dort lesen Sie U<sub>F</sub> und I<sub>F</sub> ab – und vergleichen I<sub>F</sub> mit I<sub>F,max</sub>.</p></div></li>
+            </ol>
+            <div data-sim="arbeitspunkt" data-title="Arbeitspunkt-Werkzeug" data-hint="LED, Betriebsspannung und Vorwiderstand wählen. Gepunktete Kennlinienabschnitte liegen über I&lt;sub&gt;F,max&lt;/sub&gt;."></div>
+            <p class="table-note">Kennlinien typisch bei 25 °C aus dem Bauteilmodell unseres Labors. Den Arbeitspunkt lesen Sie wie auf Millimeterpapier an den Achsen ab.</p>
+          </section>
+
+          <section id="gemeinsam" data-toc-label="Ein Widerstand für alle?">
+            <h2>Ein Vorwiderstand für alle Farben?</h2>
+            <p class="intro">Viele Instandhalter möchten nur eine Widerstandsgröße auf Lager halten. Das ist möglich – aber nicht mit jedem Wert.</p>
+            <p>Jede Farbe hat eine andere Durchlassspannung. Mit demselben Vorwiderstand stellen sich deshalb unterschiedliche Ströme ein. Prüfen Sie für jede LED einzeln, ob ihr Strom unter dem jeweiligen I<sub>F,max</sub> bleibt – und ob sie noch hell genug leuchtet. Wählen Sie im Arbeitspunkt-Werkzeug „Alle drei“: Dann sehen Sie eine Widerstandsgerade mit drei Arbeitspunkten.</p>
+            <div class="grid grid-3">
+              <div class="tile"><h3>Zu klein</h3><p>Mindestens eine LED wird überlastet und fällt früher oder später aus.</p></div>
+              <div class="tile"><h3>Passend</h3><p>Alle LEDs bleiben unter ihrem Grenzwert und leuchten nahe am Nennstrom.</p></div>
+              <div class="tile"><h3>Zu groß</h3><p>Sicher, aber die Leuchten sind zu dunkel, um Störungen zuverlässig zu melden.</p></div>
+            </div>
+          </section>
+
+          <section id="signalsaeule" data-toc-label="Signalsäulen-Retrofit">
+            <h2>Signalsäulen-Retrofit</h2>
+            <p class="intro">Rot meldet eine Störung, Grün „Anlage läuft“, Blau „Eingriff durch den Bediener nötig“. Mit unserem Konfigurator prüfen Sie Ihre Auslegung, bevor Sie die Säule umbauen.</p>
+            <div data-sim="signalsaeule" data-title="Retrofit-Konfigurator Signalsäule" data-hint="Bestücken Sie jede Leuchte mit einem Vorwiderstand."></div>
+          </section>
+
+          <section id="verpolung" data-toc-label="Schutz vor Verpolung">
+            <h2>LEDs vor Verpolung schützen</h2>
+            <p class="intro">In Sperrrichtung halten LEDs nur etwa 5 V aus. Wird eine Signalsäule an 12 V oder 24 V verpolt angeschlossen, sind die LEDs in Gefahr.</p>
+            <p>Abhilfe schafft eine Silizium-Diode in Reihe, zum Beispiel aus unserer <a href="dioden.html">Serie BAY 44</a> mit 50 V Sperrspannung. Bei richtiger Polung leitet sie, bei Verpolung sperrt sie und nimmt die Sperrspannung auf – die LEDs bleiben geschützt. Berücksichtigen Sie beim Vorwiderstand dann die zusätzlichen 0,7 V an der Schutzdiode.</p>
+            <a class="btn btn--ghost" href="dioden-applikation.html#verpolschutz">Zur Applikation Verpolschutz</a>
+          </section>
+
+          <section id="energie" data-toc-label="Energie sparen">
+            <h2>So viel Energie sparen Sie</h2>
+            <p class="intro">Die Leistung einer Leuchte berechnen Sie mit P = U · I. Bei der LED zählt der Strom durch LED und Vorwiderstand zusammen.</p>
+            <div class="calc">
+              <div class="row"><span>Glühlampe 24 V / 5 W</span><span>P = 5 W</span></div>
+              <div class="row"><span>LED mit 1,2 kΩ an 24 V</span><span>P = 24 V · 0,0182 A ≈ 0,44 W</span></div>
+              <div class="row"><span>Ersparnis je Leuchte</span><span class="res">≈ 4,56 W, also rund 91 %</span></div>
+            </div>
+            <p class="mt-2">Bei einer Anlage im Dreischichtbetrieb summiert sich das schnell – und weil LEDs kaum Wärme abgeben, altern auch die umliegenden Bauteile langsamer.</p>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

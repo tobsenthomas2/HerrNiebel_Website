@@ -1,0 +1,63 @@
+/* Startseite – nur hier benötigte Stile */
+.hero { padding-block: clamp(36px, 6vw, 80px) 0; position: relative; overflow: hidden; }
+.hero__grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.hero h1 { font-size: clamp(2.3rem, 4.6vw, 3.9rem); font-stretch: 120%; font-weight: 780; letter-spacing: -0.02em; line-height: 1.04; max-width: 17ch; margin-bottom: .45em; }
+.hero__lead { font-size: var(--fs-md); color: var(--ink-2); line-height: 1.5; max-width: 52ch; margin-bottom: 1.6rem; }
+.hero__facts { margin-top: clamp(40px, 6vw, 72px); }
+
+.hero__product { margin: 0; }
+.hero__sheet {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 8px; align-items: center;
+  border: 1px solid var(--line); border-radius: var(--radius-s); padding: 18px 18px 10px;
+  background-color: #fff;
+  background-image:
+    linear-gradient(to right, rgba(23, 32, 43, .055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 32, 43, .055) 1px, transparent 1px),
+    linear-gradient(to right, rgba(23, 32, 43, .025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 32, 43, .025) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+}
+.hero__sheet::after {
+  content: "Maßzeichnung in mm"; position: absolute; right: 12px; bottom: 8px; font-size: var(--fs-xs); color: var(--ink-3);
+}
+.hero__led { max-width: 300px; justify-self: center; width: 100%; }
+.hero__led svg { width: 100%; height: auto; overflow: visible; }
+.hero__led .led-glow { transition: opacity .5s ease; }
+.hero__specs { display: grid; gap: 14px; align-self: center; padding-bottom: 28px; }
+.hero__specs div { border-top: 2px solid var(--ink); padding-top: 6px; }
+.hero__specs span { display: block; font-size: var(--fs-xs); color: var(--ink-3); }
+.hero__specs strong { font-size: 1.02rem; font-weight: 720; font-stretch: 105%; }
+.hero__switch { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin-top: 14px; }
+.hero__switch figcaption { font-size: var(--fs-sm); color: var(--ink-2); font-weight: 600; }
+
+@media (max-width: 960px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero h1 { max-width: 18ch; }
+}
+@media (max-width: 520px) {
+  .hero__sheet { grid-template-columns: 1fr; }
+  .hero__led { max-width: 220px; }
+  .hero__specs { grid-template-columns: 1fr 1fr; padding-bottom: 24px; }
+}
+
+.product__visual--leds { display: flex; justify-content: center; gap: 4px; align-items: end; }
+.product-art { width: 100%; }
+.product__visual--leds .product-art { width: 92px; }
+.product-art--diode { max-width: 420px; }
+
+.steps--compact { margin-top: 1.5rem; }
+.steps--compact > li { padding: 14px 0; }
+
+.retrofit-visual { display: grid; grid-template-columns: minmax(0, 220px) auto; gap: 24px; align-items: center; justify-content: center; }
+.tower-art { width: 100%; }
+.tower-legend { list-style: none; padding: 0; margin: 0; display: grid; gap: 22px; color: var(--on-dark); font-weight: 600; }
+.tower-legend li { margin: 0; display: flex; align-items: center; gap: 8px; }
+
+.mini-circuit { width: 100%; max-width: 440px; margin-inline: auto; }
+
+.timeline--short li:last-child { margin-bottom: 0; }
+
+.band-litho { background: var(--litho); padding-block: clamp(36px, 5vw, 56px); }
+.band-litho__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 40px; }
+.band-litho h2 { margin-bottom: .2em; }
+.band-litho p { margin: 0; color: #3a3000; }

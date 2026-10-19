@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Applikation: Verpolschutz und Diodenschaltungen | LUMIATECH Semiconductor</title>
+  <meta name="description" content="So schützen Sie Gleichstrommotoren mit einer Diode vor Verpolung, wählen die passende Diode aus und berechnen Schaltungen mit Dioden.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/products.css">
+  <script defer src="assets/js/config.js"></script>
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/physics.js"></script>
+  <script defer src="assets/js/sim-verpolschutz.js"></script>
+  <script defer src="assets/js/sim-schaltung.js"></script>
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main id="main">
+    <div class="page-head">
+      <div class="container">
+        <nav class="crumbs" aria-label="Brotkrumen"><a href="index.html">Start</a><span aria-hidden="true">/</span><span>Applikationen</span><span aria-hidden="true">/</span><span>Verpolschutz &amp; Diodenschaltungen</span></nav>
+        <h1>Verpolschutz und Diodenschaltungen</h1>
+        <p class="lead">Applikationsschrift AN-D01 aus unserem Labor: wie eine einzelne Diode Antriebe vor vertauschten Anschlüssen schützt – und wie Sie Schaltungen mit Dioden sicher berechnen.</p>
+      </div>
+    </div>
+
+    <div class="container section--tight">
+      <div class="doc">
+        <aside class="toc" data-toc="#doc-body" aria-label="Inhaltsverzeichnis"></aside>
+        <div class="doc__body" id="doc-body">
+
+          <section id="verpolschutz" data-toc-label="Verpolschutz">
+            <h2>Verpolschutz für Gleichstrommotoren</h2>
+            <p class="intro">Ein Gleichstrommotor dreht je nach Polung rechts- oder linksherum. Wird ein Antrieb versehentlich verpolt angeschlossen, läuft das Förderband rückwärts, eine Pumpe saugt statt zu fördern – und Bauteile werden beschädigt.</p>
+            <p>Die Lösung ist eine Diode, die nur bei richtiger Polung leitet. Bei vertauschten Anschlüssen sperrt sie und nimmt die gesamte Spannung auf. Der Motor bleibt stehen, nichts geht kaputt. Probieren Sie aus, wo die Diode sitzen muss und wie herum sie eingebaut wird.</p>
+
+            <div data-sim="verpolschutz" data-title="Förderband-Antrieb mit Verpolschutz" data-hint="Wählen Sie Anschluss und Schutzdiode. Drehen Sie die Diode auch einmal um."></div>
+
+            <div class="table-wrap">
+              <table class="spec">
+                <caption>Zwei Varianten im Vergleich</caption>
+                <thead><tr><th>Variante</th><th>Vorteile</th><th>Nachteile</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Diode in Reihe</th><td>Einfach und zuverlässig. Nach dem richtigen Anschließen läuft alles sofort wieder.</td><td>An der Diode fallen ständig etwa 0,7 V ab, sie erwärmt sich. Sie muss den vollen Motorstrom tragen.</td></tr>
+                  <tr><th scope="row">Diode parallel mit Sicherung</th><td>Kein Spannungsverlust im Normalbetrieb.</td><td>Bei Verpolung löst die Sicherung aus und muss ersetzt werden. Die Diode muss den Kurzschlussstrom kurzzeitig aushalten.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="auswahl" data-toc-label="Diode auswählen">
+            <h2>Die passende Diode auswählen</h2>
+            <p class="intro">Ob eine Diode für Ihre Schaltung taugt, entscheiden die Grenzwerte im Datenblatt. Rechnen Sie dafür vereinfacht mit einer konstanten Durchlassspannung von 0,7 V.</p>
+            <ol class="steps">
+              <li><div><h3>Strom berechnen und mit I<sub>F</sub> vergleichen</h3><p>Der Strom durch Motor und Diode ergibt sich aus der Restspannung am Motor und seinem Widerstand.</p></div></li>
+              <li><div><h3>Sperrspannung mit U<sub>R</sub> vergleichen</h3><p>Bei Verpolung liegt die volle Versorgungsspannung in Sperrrichtung an der Diode.</p></div></li>
+              <li><div><h3>Verlustleistung mit P<sub>tot</sub> vergleichen</h3><p>P = U<sub>F</sub> · I<sub>F</sub> – diese Leistung wird in der Diode in Wärme umgesetzt.</p></div></li>
+              <li><div><h3>Reserve prüfen</h3><p>Liegt ein Wert knapp am Grenzwert, wählen Sie eine stärkere Diode. Toleranzen, Anlaufströme und Wärme verkleinern die Reserve im Betrieb.</p></div></li>
+            </ol>
+
+            <h3 class="mt-2">Rechenbeispiel: Stellmotor an 9 V</h3>
+            <p>Ein Stellmotor mit einem Widerstand von 60 Ω wird an 9 V betrieben und soll mit einer BAY 44 geschützt werden (U<sub>R</sub> = 50 V, I<sub>F</sub> = 250 mA, P<sub>tot</sub> = 250 mW).</p>
+            <div class="calc">
+              <div class="row"><span>Spannung am Motor</span><span>U<sub>M</sub> = 9 V – 0,7 V = 8,3 V</span></div>
+              <div class="row"><span>Strom</span><span>I = U<sub>M</sub> / R<sub>M</sub> = 8,3 V / 60 Ω ≈ 138 mA <span class="res">≤ 250 mA ✓</span></span></div>
+              <div class="row"><span>Sperrspannung bei Verpolung</span><span>9 V <span class="res">≤ 50 V ✓</span></span></div>
+              <div class="row"><span>Verlustleistung</span><span>P = 0,7 V · 0,138 A ≈ 0,10 W <span class="res">≤ 0,25 W ✓</span></span></div>
+              <div class="row"><span>Ergebnis</span><span class="res">BAY 44 geeignet, Stromreserve rund 45 %</span></div>
+            </div>
+            <p class="mt-2">Alle Grenzwerte finden Sie auf der <a href="dioden.html#kenndaten">Produktseite</a> und im <a href="datenblaetter/LUMIATECH_BAY44_BAY45_BAY46.pdf" download>Datenblatt (PDF)</a>.</p>
+          </section>
+
+          <section id="schaltungen" data-toc-label="Diodenschaltungen berechnen">
+            <h2>Schaltungen mit Dioden berechnen</h2>
+            <p class="intro">Dioden stecken nicht nur im Verpolschutz. In vielen Schaltungen müssen Sie bestimmen, welche Spannungen anliegen und welche Ströme fließen. Die Widerstände stehen dabei stellvertretend für Verbraucher.</p>
+            <ol class="steps">
+              <li><div><h3>Jede Diode prüfen: leitet sie oder sperrt sie?</h3><p>Liegt das höhere Potenzial an der Anode, leitet sie. Liegt es an der Kathode, sperrt sie.</p></div></li>
+              <li><div><h3>Leitende Si-Diode: U = 0,7 V</h3><p>Die Durchlassspannung wird vereinfacht als konstant angenommen.</p></div></li>
+              <li><div><h3>Sperrende Diode: I = 0</h3><p>Sie wirkt wie eine unterbrochene Leitung und nimmt die anliegende Spannung auf.</p></div></li>
+              <li><div><h3>Restliche Größen berechnen</h3><p>Spannungen mit der Maschenregel, Ströme mit dem ohmschen Gesetz und der Knotenregel.</p></div></li>
+            </ol>
+
+            <div class="grid grid-2 mt-2">
+              <figure class="figure">
+                <div class="figure__frame"><svg viewBox="0 0 520 290" role="img" aria-label="Beispiel 1: Quelle 5 V, Widerstand 1 Kiloohm und Diode in Durchlassrichtung">
+<path d="M80 60 H420 V240 H80 Z" fill="none" stroke="#17202b" stroke-width="2.5"/>
+<rect x="76" y="126" width="8" height="48" fill="#fff"/><circle cx="80" cy="150" r="24" fill="#fff" stroke="#17202b" stroke-width="2.5"/><line x1="80" y1="126" x2="80" y2="174" stroke="#17202b" stroke-width="2"/>
+<text x="112" y="136" font-size="16" font-weight="800" fill="#d3262b">+</text><text x="112" y="174" font-size="18" font-weight="800" fill="#1f5bd8">–</text>
+<text x="48" y="146" text-anchor="end" font-size="13" font-weight="700" fill="#17202b">G1</text><text x="48" y="162" text-anchor="end" font-size="12" fill="#4a5563">5 V</text>
+<rect x="208" y="49" width="64" height="22" fill="#fff" stroke="#17202b" stroke-width="2.5"/><text x="240" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#17202b">R1  1 kΩ</text>
+<rect x="416" y="128" width="8" height="44" fill="#fff"/><path d="M405 128 h30 l-15 30z" fill="#fff" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/><line x1="404" y1="159" x2="436" y2="159" stroke="#17202b" stroke-width="3.5"/>
+<text x="446" y="146" font-size="13" font-weight="700" fill="#17202b">V1</text><text x="446" y="162" font-size="12" fill="#4a5563">Si</text>
+<path d="M230 92 h40" stroke="#e0a100" stroke-width="2.5"/><path d="M278 92 l-10 -5 v10z" fill="#e0a100"/><text x="250" y="114" text-anchor="middle" font-size="12" font-weight="700" fill="#8a6400">I</text>
+</svg></div>
+                <figcaption><strong>Beispiel 1:</strong> V1 leitet, also U<sub>V1</sub> = 0,7 V. U<sub>R1</sub> = 5 V – 0,7 V = 4,3 V und I = 4,3 V / 1 kΩ = 4,3 mA.</figcaption>
+              </figure>
+              <figure class="figure">
+                <div class="figure__frame"><svg viewBox="0 0 520 290" role="img" aria-label="Beispiel 2: Quelle 5 V, Widerstand 1 Kiloohm und Diode in Sperrrichtung">
+<path d="M80 60 H420 V240 H80 Z" fill="none" stroke="#17202b" stroke-width="2.5"/>
+<rect x="76" y="126" width="8" height="48" fill="#fff"/><circle cx="80" cy="150" r="24" fill="#fff" stroke="#17202b" stroke-width="2.5"/><line x1="80" y1="126" x2="80" y2="174" stroke="#17202b" stroke-width="2"/>
+<text x="112" y="136" font-size="16" font-weight="800" fill="#d3262b">+</text><text x="112" y="174" font-size="18" font-weight="800" fill="#1f5bd8">–</text>
+<text x="48" y="146" text-anchor="end" font-size="13" font-weight="700" fill="#17202b">G1</text><text x="48" y="162" text-anchor="end" font-size="12" fill="#4a5563">5 V</text>
+<rect x="208" y="49" width="64" height="22" fill="#fff" stroke="#17202b" stroke-width="2.5"/><text x="240" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#17202b">R1  1 kΩ</text>
+<rect x="416" y="128" width="8" height="44" fill="#fff"/><path d="M405 172 h30 l-15 -30z" fill="#fff" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/><line x1="404" y1="141" x2="436" y2="141" stroke="#17202b" stroke-width="3.5"/>
+<text x="446" y="146" font-size="13" font-weight="700" fill="#17202b">V1</text><text x="446" y="162" font-size="12" fill="#4a5563">Si</text>
+<text x="250" y="110" text-anchor="middle" font-size="12" font-weight="700" fill="#6b7684">I = 0</text>
+</svg></div>
+                <figcaption><strong>Beispiel 2:</strong> V1 sperrt, also I = 0. Dann ist U<sub>R1</sub> = 0 V und an der Diode liegt die volle Spannung U<sub>V1</sub> = 5 V.</figcaption>
+              </figure>
+            </div>
+
+            <div data-sim="schaltung" data-title="Schaltungs-Check" data-hint="Drehen Sie die Dioden um und beobachten Sie, welche leitet."></div>
+          </section>
+
+          <section id="widerstand" data-toc-label="Die Diode als Widerstand">
+            <h2>Die Diode als Widerstand</h2>
+            <p class="intro">Eine Diode verhält sich wie ein Widerstand, dessen Wert vom Arbeitspunkt abhängt.</p>
+            <p>Lesen Sie aus der Kennlinie Spannung und Strom am Arbeitspunkt ab, erhalten Sie mit dem ohmschen Gesetz ihren Widerstand in genau diesem Punkt. Beispiel: Bei U<sub>F</sub> = 0,65 V und I<sub>F</sub> = 10 mA ist R = 0,65 V / 0,01 A = 65 Ω.</p>
+            <div class="grid grid-2">
+              <div class="tile"><h3>Leitende Diode</h3><p>Kleiner Widerstand, der mit steigendem Strom weiter sinkt.</p></div>
+              <div class="tile"><h3>Sperrende Diode</h3><p>Sehr großer Widerstand. In der Rechnung setzen Sie R → ∞, es fließt kein Strom.</p></div>
+            </div>
+            <div class="note note--plain">
+              <div class="note__title">Weiterlesen</div>
+              <p>Wie Sie einen Arbeitspunkt grafisch aus Kennlinie und Widerstandsgerade bestimmen, zeigt unsere <a href="led-applikation.html#arbeitspunkt">LED-Applikation</a>.</p>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

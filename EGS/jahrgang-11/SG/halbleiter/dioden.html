@@ -1,1175 +1,189 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silizium-Dioden Serie BAY 44 / 45 / 46 | LUMIATECH Semiconductor</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        lt_bg: '#0b1120',
-                        lt_surface: '#111827',
-                        lt_card: '#1e293b',
-                        lt_cyan: '#06b6d4',
-                        lt_blue: '#3b82f6',
-                        lt_amber: '#f59e0b',
-                        lt_emerald: '#10b981'
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Silizium-Dioden BAY 44, BAY 45, BAY 46 | LUMIATECH Semiconductor</title>
+  <meta name="description" content="Universelle Silizium-Dioden im Glasgehäuse DO-7: Aufbau, Polung, Kennlinie, Kenndaten und Datenblatt der Serie BAY 44, BAY 45 und BAY 46.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/products.css">
+  <script defer src="assets/js/config.js"></script>
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/physics.js"></script>
+  <script defer src="assets/js/plot.js"></script>
+  <script defer src="assets/js/illustrations.js"></script>
+  <script defer src="assets/js/sim-polung.js"></script>
+  <script defer src="assets/js/sim-kennlinie.js"></script>
 </head>
-<body class="bg-lt_bg text-slate-200 antialiased selection:bg-lt_amber selection:text-slate-950">
+<body>
+  <header id="site-header"></header>
 
-    <!-- Top B2B Info Bar -->
-    <div class="bg-slate-950 border-b border-slate-800/80 text-xs text-slate-400">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap justify-between items-center gap-2">
-            <div>
-                <i class="fa-solid fa-microchip text-lt_amber mr-1.5"></i>Produktbereich: <strong>Diskrete Silizium-Gleichrichter &amp; Schaltdioden (DO-7 · DIN 41880)</strong>
-            </div>
-            <div class="flex items-center gap-4 font-mono">
-                <a href="datenblaetter/BAY44_BAY45_BAY46_Datenblatt.pdf" download class="text-lt_amber hover:underline"><i class="fa-solid fa-file-pdf mr-1"></i>Datenblatt BAY 44/45/46 (PDF)</a>
-            </div>
+  <main id="main">
+    <div class="page-head">
+      <div class="container page-head__grid">
+        <div>
+          <nav class="crumbs" aria-label="Brotkrumen"><a href="index.html">Start</a><span aria-hidden="true">/</span><span>Produkte</span><span aria-hidden="true">/</span><span>Silizium-Dioden</span></nav>
+          <h1>Silizium-Dioden BAY&nbsp;44, BAY&nbsp;45, BAY&nbsp;46</h1>
+          <p class="lead">Universelle Dioden im Glasgehäuse DO-7 für Geräte mit hohen Betriebstemperaturen und wenig Platz. Bewährt als Verpolschutz, Gleichrichter und Schutzbeschaltung.</p>
+          <div class="btn-row mt-2">
+            <a class="btn" href="datenblaetter/LUMIATECH_BAY44_BAY45_BAY46.pdf" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Datenblatt BAY 44/45/46 (PDF)</a>
+            <a class="btn btn--ghost" href="dioden-applikation.html">Applikation Verpolschutz</a>
+          </div>
         </div>
+        <div class="head-art"><div data-art="diode"></div></div>
+      </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 glass-nav border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <a href="index.html" class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-lt_cyan to-lt_blue flex items-center justify-center text-slate-950 font-extrabold text-lg">
-                        <i class="fa-solid fa-microchip"></i>
-                    </div>
-                    <div>
-                        <span class="text-white font-extrabold text-xl tracking-wider block leading-none">LUMIA<span class="text-lt_cyan">TECH</span></span>
-                        <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400">Semiconductor &amp; Optoelectronics</span>
-                    </div>
-                </a>
+    <div class="container section--tight">
+      <div class="doc">
+        <aside class="toc" data-toc="#doc-body" aria-label="Inhaltsverzeichnis"></aside>
+        <div class="doc__body" id="doc-body">
 
-                <div class="hidden md:flex items-center space-x-2">
-                    <a href="index.html" class="text-slate-300 hover:text-white hover:bg-slate-800/70 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-atom text-lt_cyan"></i> Unternehmen &amp; Werkstoffe
-                    </a>
-                    <a href="dioden.html" class="nav-pill-active px-3.5 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-bolt text-lt_amber"></i> Silizium-Dioden (BAY-Serie)
-                    </a>
-                    <a href="leds.html" class="text-slate-300 hover:text-white hover:bg-slate-800/70 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-lightbulb text-lt_emerald"></i> Optoelektronik &amp; LEDs
-                    </a>
-                    <a href="schaltungslabor.html" class="text-slate-300 hover:text-white hover:bg-slate-800/70 px-3.5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-wave-square text-purple-400"></i> Schaltungslabor
-                    </a>
+          <section id="aufbau" data-toc-label="Aufbau">
+            <h2>Aufbau einer Halbleiterdiode</h2>
+            <p class="intro">Im Inneren jeder BAY-Diode sitzt ein winziger Siliziumkristall mit einem PN-Übergang: Eine Seite ist P-dotiert, die andere N-dotiert. Dazwischen liegt die Sperrschicht.</p>
+            <div class="hotspot-layout">
+              <figure class="figure">
+                <div class="figure__frame">
+                  <div class="hotspots" data-hotspots="#pn-info">
+                    <svg viewBox="0 0 640 250" class="pn-figure" role="img" aria-label="Aufbau einer Halbleiterdiode: P-Leiter mit negativen Ionen und Löchern, Sperrschicht in der Mitte, N-Leiter mit positiven Ionen und Elektronen"><rect x="20" y="20" width="250" height="200" fill="#fdf1f0"/><rect x="370" y="20" width="250" height="200" fill="#eef3fd"/><rect x="270" y="20" width="100" height="200" fill="#fff6d6"/><line x1="270" y1="20" x2="270" y2="220" stroke="#6b7684" stroke-dasharray="5 5"/><line x1="370" y1="20" x2="370" y2="220" stroke="#6b7684" stroke-dasharray="5 5"/><rect x="20" y="20" width="600" height="200" fill="none" stroke="#17202b" stroke-width="1.6"/><circle cx="45" cy="50" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M39 50h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="62" cy="35" r="7.5" fill="#d3262b"/><path d="M58 35h8M62 31v8" stroke="#fff" stroke-width="1.8"/><circle cx="45" cy="95" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M39 95h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="63" cy="109" r="7.5" fill="#d3262b"/><path d="M59 109h8M63 105v8" stroke="#fff" stroke-width="1.8"/><circle cx="45" cy="140" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M39 140h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="28" cy="156" r="7.5" fill="#d3262b"/><path d="M24 156h8M28 152v8" stroke="#fff" stroke-width="1.8"/><circle cx="45" cy="185" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M39 185h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="61" cy="171" r="7.5" fill="#d3262b"/><path d="M57 171h8M61 167v8" stroke="#fff" stroke-width="1.8"/><circle cx="95" cy="50" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M89 50h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="113" cy="64" r="7.5" fill="#d3262b"/><path d="M109 64h8M113 60v8" stroke="#fff" stroke-width="1.8"/><circle cx="95" cy="95" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M89 95h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="95" cy="140" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M89 140h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="111" cy="126" r="7.5" fill="#d3262b"/><path d="M107 126h8M111 122v8" stroke="#fff" stroke-width="1.8"/><circle cx="95" cy="185" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M89 185h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="79" cy="170" r="7.5" fill="#d3262b"/><path d="M75 170h8M79 166v8" stroke="#fff" stroke-width="1.8"/><circle cx="145" cy="50" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M139 50h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="128" cy="66" r="7.5" fill="#d3262b"/><path d="M124 66h8M128 62v8" stroke="#fff" stroke-width="1.8"/><circle cx="145" cy="95" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M139 95h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="161" cy="81" r="7.5" fill="#d3262b"/><path d="M157 81h8M161 77v8" stroke="#fff" stroke-width="1.8"/><circle cx="145" cy="140" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M139 140h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="129" cy="125" r="7.5" fill="#d3262b"/><path d="M125 125h8M129 121v8" stroke="#fff" stroke-width="1.8"/><circle cx="145" cy="185" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M139 185h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="162" cy="170" r="7.5" fill="#d3262b"/><path d="M158 170h8M162 166v8" stroke="#fff" stroke-width="1.8"/><circle cx="195" cy="50" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M189 50h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="211" cy="36" r="7.5" fill="#d3262b"/><path d="M207 36h8M211 32v8" stroke="#fff" stroke-width="1.8"/><circle cx="195" cy="95" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M189 95h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="179" cy="80" r="7.5" fill="#d3262b"/><path d="M175 80h8M179 76v8" stroke="#fff" stroke-width="1.8"/><circle cx="195" cy="140" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M189 140h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="212" cy="125" r="7.5" fill="#d3262b"/><path d="M208 125h8M212 121v8" stroke="#fff" stroke-width="1.8"/><circle cx="195" cy="185" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M189 185h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="213" cy="199" r="7.5" fill="#d3262b"/><path d="M209 199h8M213 195v8" stroke="#fff" stroke-width="1.8"/><circle cx="245" cy="50" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M239 50h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="229" cy="35" r="7.5" fill="#d3262b"/><path d="M225 35h8M229 31v8" stroke="#fff" stroke-width="1.8"/><circle cx="245" cy="95" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M239 95h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="262" cy="80" r="7.5" fill="#d3262b"/><path d="M258 80h8M262 76v8" stroke="#fff" stroke-width="1.8"/><circle cx="245" cy="140" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M239 140h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="263" cy="154" r="7.5" fill="#d3262b"/><path d="M259 154h8M263 150v8" stroke="#fff" stroke-width="1.8"/><circle cx="245" cy="185" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M239 185h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="228" cy="201" r="7.5" fill="#d3262b"/><path d="M224 201h8M228 197v8" stroke="#fff" stroke-width="1.8"/><circle cx="295" cy="50" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M289 50h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="345" cy="50" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M339 50h12M345 44v12" stroke="#d3262b" stroke-width="2"/><circle cx="295" cy="95" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M289 95h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="345" cy="95" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M339 95h12M345 89v12" stroke="#d3262b" stroke-width="2"/><circle cx="295" cy="140" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M289 140h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="345" cy="140" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M339 140h12M345 134v12" stroke="#d3262b" stroke-width="2"/><circle cx="295" cy="185" r="12" fill="#fff" stroke="#1f5bd8" stroke-width="1.8"/><path d="M289 185h12" stroke="#1f5bd8" stroke-width="2"/><circle cx="345" cy="185" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M339 185h12M345 179v12" stroke="#d3262b" stroke-width="2"/><circle cx="395" cy="50" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M389 50h12M395 44v12" stroke="#d3262b" stroke-width="2"/><circle cx="413" cy="64" r="7.5" fill="#1f5bd8"/><path d="M409 64h8" stroke="#fff" stroke-width="1.8"/><circle cx="395" cy="95" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M389 95h12M395 89v12" stroke="#d3262b" stroke-width="2"/><circle cx="411" cy="81" r="7.5" fill="#1f5bd8"/><path d="M407 81h8" stroke="#fff" stroke-width="1.8"/><circle cx="395" cy="140" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M389 140h12M395 134v12" stroke="#d3262b" stroke-width="2"/><circle cx="412" cy="125" r="7.5" fill="#1f5bd8"/><path d="M408 125h8" stroke="#fff" stroke-width="1.8"/><circle cx="395" cy="185" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M389 185h12M395 179v12" stroke="#d3262b" stroke-width="2"/><circle cx="378" cy="201" r="7.5" fill="#1f5bd8"/><path d="M374 201h8" stroke="#fff" stroke-width="1.8"/><circle cx="445" cy="50" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M439 50h12M445 44v12" stroke="#d3262b" stroke-width="2"/><circle cx="428" cy="66" r="7.5" fill="#1f5bd8"/><path d="M424 66h8" stroke="#fff" stroke-width="1.8"/><circle cx="445" cy="95" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M439 95h12M445 89v12" stroke="#d3262b" stroke-width="2"/><circle cx="445" cy="140" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M439 140h12M445 134v12" stroke="#d3262b" stroke-width="2"/><circle cx="463" cy="154" r="7.5" fill="#1f5bd8"/><path d="M459 154h8" stroke="#fff" stroke-width="1.8"/><circle cx="445" cy="185" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M439 185h12M445 179v12" stroke="#d3262b" stroke-width="2"/><circle cx="461" cy="171" r="7.5" fill="#1f5bd8"/><path d="M457 171h8" stroke="#fff" stroke-width="1.8"/><circle cx="495" cy="50" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M489 50h12M495 44v12" stroke="#d3262b" stroke-width="2"/><circle cx="511" cy="36" r="7.5" fill="#1f5bd8"/><path d="M507 36h8" stroke="#fff" stroke-width="1.8"/><circle cx="495" cy="95" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M489 95h12M495 89v12" stroke="#d3262b" stroke-width="2"/><circle cx="512" cy="80" r="7.5" fill="#1f5bd8"/><path d="M508 80h8" stroke="#fff" stroke-width="1.8"/><circle cx="495" cy="140" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M489 140h12M495 134v12" stroke="#d3262b" stroke-width="2"/><circle cx="478" cy="156" r="7.5" fill="#1f5bd8"/><path d="M474 156h8" stroke="#fff" stroke-width="1.8"/><circle cx="495" cy="185" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M489 185h12M495 179v12" stroke="#d3262b" stroke-width="2"/><circle cx="479" cy="170" r="7.5" fill="#1f5bd8"/><path d="M475 170h8" stroke="#fff" stroke-width="1.8"/><circle cx="545" cy="50" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M539 50h12M545 44v12" stroke="#d3262b" stroke-width="2"/><circle cx="529" cy="35" r="7.5" fill="#1f5bd8"/><path d="M525 35h8" stroke="#fff" stroke-width="1.8"/><circle cx="545" cy="95" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M539 95h12M545 89v12" stroke="#d3262b" stroke-width="2"/><circle cx="563" cy="109" r="7.5" fill="#1f5bd8"/><path d="M559 109h8" stroke="#fff" stroke-width="1.8"/><circle cx="545" cy="140" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M539 140h12M545 134v12" stroke="#d3262b" stroke-width="2"/><circle cx="561" cy="126" r="7.5" fill="#1f5bd8"/><path d="M557 126h8" stroke="#fff" stroke-width="1.8"/><circle cx="545" cy="185" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M539 185h12M545 179v12" stroke="#d3262b" stroke-width="2"/><circle cx="562" cy="170" r="7.5" fill="#1f5bd8"/><path d="M558 170h8" stroke="#fff" stroke-width="1.8"/><circle cx="595" cy="50" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M589 50h12M595 44v12" stroke="#d3262b" stroke-width="2"/><circle cx="578" cy="35" r="7.5" fill="#1f5bd8"/><path d="M574 35h8" stroke="#fff" stroke-width="1.8"/><circle cx="595" cy="95" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M589 95h12M595 89v12" stroke="#d3262b" stroke-width="2"/><circle cx="578" cy="111" r="7.5" fill="#1f5bd8"/><path d="M574 111h8" stroke="#fff" stroke-width="1.8"/><circle cx="595" cy="140" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M589 140h12M595 134v12" stroke="#d3262b" stroke-width="2"/><circle cx="579" cy="125" r="7.5" fill="#1f5bd8"/><path d="M575 125h8" stroke="#fff" stroke-width="1.8"/><circle cx="595" cy="185" r="12" fill="#fff" stroke="#d3262b" stroke-width="1.8"/><path d="M589 185h12M595 179v12" stroke="#d3262b" stroke-width="2"/><circle cx="577" cy="199" r="7.5" fill="#1f5bd8"/><path d="M573 199h8" stroke="#fff" stroke-width="1.8"/><text x="145" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#17202b">P</text><text x="495" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#17202b">N</text></svg>
+                    <button class="hotspot" style="left:14.84%;top:38%" data-info="hs-nion" aria-label="Markierung 1">1</button>
+                    <button class="hotspot" style="left:33.1%;top:50%" data-info="hs-loch" aria-label="Markierung 2">2</button>
+                    <button class="hotspot" style="left:50%;top:47.2%" data-info="hs-rlz" aria-label="Markierung 3">3</button>
+                    <button class="hotspot" style="left:69.5%;top:38%" data-info="hs-pion" aria-label="Markierung 4">4</button>
+                    <button class="hotspot" style="left:87.66%;top:50.4%" data-info="hs-el" aria-label="Markierung 5">5</button>
+                    <button class="hotspot" style="left:22.66%;top:94.4%" data-info="hs-p" aria-label="Markierung 6">6</button>
+                    <button class="hotspot" style="left:77.3%;top:94.4%" data-info="hs-n" aria-label="Markierung 7">7</button>
+                  </div>
                 </div>
+                <figcaption>PN-Übergang im Modell, ohne äußere Spannung. Tippen Sie auf die Nummern.</figcaption>
+              </figure>
+              <div class="hotspot-info" id="pn-info" aria-live="polite">
+                <strong>Was steckt im Kristall?</strong>
+                <p>Wählen Sie eine Nummer in der Abbildung, um den Fachbegriff und seine Bedeutung zu sehen.</p>
+              </div>
+            </div>
+            <template id="hs-nion"><strong>1 · Negatives Ion</strong><p>Fremdatom im P-Leiter (zum Beispiel Bor), das ein zusätzliches Elektron eingebaut hat. Es ist fest im Kristallgitter verankert und kann sich nicht bewegen.</p></template>
+            <template id="hs-loch"><strong>2 · Loch</strong><p>Eine Fehlstelle in der Elektronenpaarbindung. Löcher sind die beweglichen, positiv wirkenden Ladungsträger im P-Leiter.</p></template>
+            <template id="hs-rlz"><strong>3 · Sperrschicht</strong><p>Grenzzone zwischen P- und N-Leiter ohne freie Ladungsträger. Hier bleiben nur ortsfeste Ionen zurück. Fachbegriff: Raumladungszone (RLZ).</p></template>
+            <template id="hs-pion"><strong>4 · Positives Ion</strong><p>Fremdatom im N-Leiter (zum Beispiel Phosphor), das sein fünftes Elektron abgegeben hat. Es bleibt ortsfest im Gitter.</p></template>
+            <template id="hs-el"><strong>5 · Elektron</strong><p>Freies, bewegliches Elektron – der negative Ladungsträger im N-Leiter.</p></template>
+            <template id="hs-p"><strong>6 · P-Leiter</strong><p>Mit Bor dotiertes Silizium. Bewegliche Ladungsträger sind Löcher. Dieser Bereich ist mit der Anode verbunden.</p></template>
+            <template id="hs-n"><strong>7 · N-Leiter</strong><p>Mit Phosphor dotiertes Silizium. Bewegliche Ladungsträger sind Elektronen. Dieser Bereich ist mit der Kathode verbunden.</p></template>
+            <p class="mt-2">Wie die Sperrschicht entsteht und wie sie sich unter Spannung verändert, zeigt unser <a href="technologie.html#pn-uebergang">Simulator zum PN-Übergang</a>.</p>
+          </section>
 
-                <a href="datenblaetter/BAY44_BAY45_BAY46_Datenblatt.pdf" download class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-3.5 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">BAY 44 PDF</span>
-                </a>
+          <section id="anschluesse" data-toc-label="Schaltzeichen &amp; Anschlüsse">
+            <h2>Schaltzeichen, Anode und Kathode</h2>
+            <p class="intro">Eine Diode hat zwei Anschlüsse: Die <strong>Anode (A)</strong> führt zum P-Leiter, die <strong>Kathode (K)</strong> zum N-Leiter. Im Schaltzeichen zeigt das Dreieck in Stromrichtung, der Querstrich markiert die Kathode.</p>
+            <div class="grid grid-2 mt-2">
+              <figure class="figure">
+                <div class="figure__frame center"><div data-art="sym-diode" class="sym-art"></div></div>
+                <figcaption>Schaltzeichen nach DIN EN 60617: Dreieck = Anode, Querstrich = Kathode</figcaption>
+              </figure>
+              <figure class="figure">
+                <div class="figure__frame"><div data-art="diode"></div></div>
+                <figcaption>Bauteil im Gehäuse DO-7: Der Farbring kennzeichnet die Kathode. Maße in mm.</figcaption>
+              </figure>
             </div>
-            <div class="flex md:hidden overflow-x-auto py-2 gap-2 border-t border-slate-800/80 text-xs">
-                <a href="index.html" class="bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md whitespace-nowrap">Werkstoffe</a>
-                <a href="dioden.html" class="nav-pill-active px-3 py-1.5 rounded-md font-semibold whitespace-nowrap">Dioden (BAY44)</a>
-                <a href="leds.html" class="bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md whitespace-nowrap">LED-Technik (L-7113)</a>
-                <a href="schaltungslabor.html" class="bg-slate-900 text-slate-300 px-3 py-1.5 rounded-md whitespace-nowrap">Schaltungslabor</a>
+            <div class="note">
+              <div class="note__title">Kathode erkennen</div>
+              <p>Am Bauteil zeigt der <strong>Ring</strong> auf dem Gehäuse die Kathode an – genau wie der Querstrich im Schaltzeichen. Beim Bestücken einfach Ring auf Strich legen.</p>
             </div>
+          </section>
+
+          <section id="polung" data-toc-label="Durchlass &amp; Sperrrichtung">
+            <h2>Durchlass- und Sperrrichtung</h2>
+            <p class="intro">Ob eine Diode leitet, hängt allein von der Polung ab.</p>
+            <div class="grid grid-2 polung-cards">
+              <div class="tile">
+                <h3>Durchlassrichtung</h3>
+                <p><span class="pol pol--plus">+</span> an der Anode, <span class="pol pol--minus">–</span> an der Kathode. Ab der Schleusenspannung (bei Silizium etwa 0,7 V) fließt Strom.</p>
+              </div>
+              <div class="tile">
+                <h3>Sperrrichtung</h3>
+                <p><span class="pol pol--minus">–</span> an der Anode, <span class="pol pol--plus">+</span> an der Kathode. Die Sperrschicht wird breiter, es fließt praktisch kein Strom.</p>
+              </div>
+            </div>
+            <div data-sim="polung" data-title="Prüfaufbau: Quelle, Diode, Lampe" data-hint="Polen Sie die Quelle um oder drehen Sie die Diode."></div>
+          </section>
+
+          <section id="kennlinie" data-toc-label="Kennlinie">
+            <h2>Die Kennlinie der BAY&nbsp;44</h2>
+            <p class="intro">Die Strom-Spannungs-Kennlinie zeigt auf einen Blick, wie sich die Diode verhält. Rechts oben liegt der Durchlassbereich, links unten der Sperrbereich – mit unterschiedlichen Maßstäben, damit beide Bereiche lesbar sind.</p>
+            <p>Im Durchlassbereich fließt bis etwa 0,6 V kaum Strom. Danach steigt er steil an: Eine kleine Spannungsänderung bewirkt eine große Stromänderung. Im Sperrbereich fließt nur ein Sperrstrom von wenigen Nanoampere – bis die Durchbruchspannung erreicht ist.</p>
+            <div data-sim="kennlinie" data-title="Kennlinien-Explorer BAY 44" data-hint="Verschieben Sie den Arbeitspunkt und tippen Sie auf die Nummern."></div>
+            <p class="table-note">Kennlinie typisch bei 25 °C, aus dem Bauteilmodell unseres Applikationslabors. Verbindlich sind die Werte im Datenblatt.</p>
+          </section>
+
+          <section id="kenndaten" data-toc-label="Kenndaten &amp; Datenblatt">
+            <h2>Kenndaten und Datenblatt</h2>
+            <p class="intro">Im Datenblatt unterscheiden wir <strong>Grenzwerte</strong>, die nie überschritten werden dürfen, und <strong>Kennwerte</strong>, die das typische Verhalten beschreiben.</p>
+            <div class="table-wrap">
+              <table class="spec">
+                <caption>Grenzwerte bei T<sub>amb</sub> = 25 °C</caption>
+                <thead><tr><th>Parameter</th><th>Zeichen</th><th class="num">BAY 44</th><th class="num">BAY 45</th><th class="num">BAY 46</th><th>Einheit</th></tr></thead>
+                <tbody>
+                  <tr><td>Sperrspannung</td><td class="sym">U<sub>R</sub></td><td class="num">50</td><td class="num">150</td><td class="num">300</td><td>V</td></tr>
+                  <tr><td>Spitzensperrspannung</td><td class="sym">U<sub>RM</sub></td><td class="num">50</td><td class="num">150</td><td class="num">300</td><td>V</td></tr>
+                  <tr><td>Durchlassstrom (Drahtlänge 4 mm)</td><td class="sym">I<sub>F</sub></td><td class="num" colspan="3">250</td><td>mA</td></tr>
+                  <tr><td>Spitzendurchlassstrom (t = 10 µs)</td><td class="sym">I<sub>FM</sub></td><td class="num" colspan="3">30</td><td>A</td></tr>
+                  <tr><td>Sperrschichttemperatur</td><td class="sym">T<sub>j</sub></td><td class="num" colspan="3">150</td><td>°C</td></tr>
+                  <tr><td>Umgebungstemperatur</td><td class="sym">T<sub>amb</sub></td><td class="num" colspan="3">–55 … +125</td><td>°C</td></tr>
+                  <tr><td>Gesamtverlustleistung</td><td class="sym">P<sub>tot</sub></td><td class="num" colspan="3">250</td><td>mW</td></tr>
+                  <tr><td>Wärmewiderstand Sperrschicht–Umgebung</td><td class="sym">R<sub>thJA</sub></td><td class="num" colspan="3">&lt; 380</td><td>K/W</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-wrap mt-2">
+              <table class="spec">
+                <caption>Kennwerte</caption>
+                <thead><tr><th>Parameter</th><th>Bedingung</th><th>Zeichen</th><th class="num">typ.</th><th class="num">max.</th><th>Einheit</th></tr></thead>
+                <tbody>
+                  <tr><td>Durchlassspannung</td><td>I<sub>F</sub> = 100 mA, 25 °C</td><td class="sym">U<sub>F</sub></td><td class="num">0,97</td><td class="num">1,1</td><td>V</td></tr>
+                  <tr><td>Durchlassspannung</td><td>I<sub>F</sub> = 100 mA, 100 °C</td><td class="sym">U<sub>F</sub></td><td class="num">0,9</td><td class="num">–</td><td>V</td></tr>
+                  <tr><td>Sperrstrom</td><td>U<sub>R</sub> = U<sub>RM</sub>, 25 °C</td><td class="sym">I<sub>R</sub></td><td class="num">0,02</td><td class="num">0,2</td><td>µA</td></tr>
+                  <tr><td>Sperrstrom</td><td>U<sub>R</sub> = U<sub>RM</sub>, 100 °C</td><td class="sym">I<sub>R</sub></td><td class="num">0,4</td><td class="num">10</td><td>µA</td></tr>
+                  <tr><td>Sperrschichtkapazität</td><td>U<sub>R</sub> = 0 V, f = 1 MHz</td><td class="sym">C<sub>D</sub></td><td class="num">7</td><td class="num">–</td><td>pF</td></tr>
+                  <tr><td>Sperrverzögerungszeit</td><td>Umschalten von I<sub>F</sub> = 5 mA auf I<sub>R</sub> = 2 mA</td><td class="sym">t<sub>rr</sub></td><td class="num">4,5</td><td class="num">–</td><td>µs</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="note note--plain">
+              <div class="note__title">Faustregel für die Auswahl</div>
+              <p>Prüfen Sie immer drei Grenzwerte gegen Ihre Schaltung: Fließt höchstens I<sub>F</sub>? Liegt in Sperrrichtung höchstens U<sub>R</sub> an? Bleibt die Verlustleistung P = U<sub>F</sub> · I<sub>F</sub> unter P<sub>tot</sub>? Planen Sie dabei eine Reserve ein.</p>
+            </div>
+            <div class="dl-item">
+              <svg class="dl-item__icon" viewBox="0 0 56 64" aria-hidden="true"><path d="M4 2h34l14 14v46H4z" fill="#fff" stroke="#17202b" stroke-width="2"/><path d="M38 2v14h14" fill="none" stroke="#17202b" stroke-width="2"/><rect x="10" y="34" width="36" height="16" rx="2" fill="#c42b2b"/><text x="28" y="46" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">PDF</text></svg>
+              <div><h3>Datenblatt BAY 44, BAY 45, BAY 46</h3><p>Grenzwerte, Kennwerte, Kennlinien und Maßzeichnung, 4 Seiten, 119 KB</p></div>
+              <a class="btn" href="datenblaetter/LUMIATECH_BAY44_BAY45_BAY46.pdf" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Herunterladen</a>
+            </div>
+          </section>
+
+          <section id="bestellen" data-toc-label="Typen &amp; Bestellung">
+            <h2>Typen und Bestellangaben</h2>
+            <div class="table-wrap">
+              <table class="spec">
+                <thead><tr><th>Typ</th><th>Artikelnummer</th><th class="num">U<sub>R</sub></th><th class="num">I<sub>F</sub></th><th>Gehäuse</th><th>Verpackung</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>BAY 44</strong></td><td>LT-D-044</td><td class="num">50 V</td><td class="num">250 mA</td><td>DO-7, Glas</td><td>Gurt, 1.000 Stück</td></tr>
+                  <tr><td><strong>BAY 45</strong></td><td>LT-D-045</td><td class="num">150 V</td><td class="num">250 mA</td><td>DO-7, Glas</td><td>Gurt, 1.000 Stück</td></tr>
+                  <tr><td><strong>BAY 46</strong></td><td>LT-D-046</td><td class="num">300 V</td><td class="num">250 mA</td><td>DO-7, Glas</td><td>Gurt, 1.000 Stück</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="grid grid-2 mt-2">
+              <a class="teaser" href="dioden-applikation.html#verpolschutz"><strong>Applikation: Verpolschutz</strong><span>So schützen Sie Motoren und Elektronik vor vertauschten Anschlüssen.</span></a>
+              <a class="teaser" href="dioden-applikation.html#schaltungen"><strong>Applikation: Diodenschaltungen berechnen</strong><span>Leitet die Diode oder sperrt sie? Mit Schaltungs-Check.</span></a>
+            </div>
+          </section>
+
         </div>
-    </nav>
-
-    <!-- Page Header -->
-    <header class="wafer-bg border-b border-slate-800 py-14">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                <div class="max-w-3xl">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-lt_amber text-xs font-mono mb-4">
-                        PRODUKTSERIE BAY 44 · BAY 45 · BAY 46 | TECHNISCHES KOMPENDIUM
-                    </div>
-                    <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-                        Silizium-Halbleiterdioden &amp; <span class="text-lt_amber">PN-Übergang</span>
-                    </h1>
-                    <p class="text-slate-300 text-lg leading-relaxed">
-                        Vom dotierten Siliziumkristall über die Vorgänge in der Raumladungszone (RLZ) bis zur Kennlinienanalyse und Verpolschutz-Dimensionierung für Gleichstromantriebe.
-                    </p>
-                </div>
-                <div class="flex flex-wrap gap-2 text-xs font-mono">
-                    <a href="#aufbau" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3.5 py-2.5 rounded-lg text-slate-200">1. Aufbau &amp; Kennzeichnung</a>
-                    <a href="#pn-simulator" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3.5 py-2.5 rounded-lg text-slate-200">2. PN-Übergang (RLZ)</a>
-                    <a href="#kennlinie" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3.5 py-2.5 rounded-lg text-slate-200">3. Kennlinie BAY 44</a>
-                    <a href="#verpolschutz" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3.5 py-2.5 rounded-lg text-slate-200">4. Verpolschutz &amp; Datenblatt</a>
-                    <a href="#arbeitspunkt" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3.5 py-2.5 rounded-lg text-slate-200">5. Schaltungsanalyse</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-20">
-
-        <!-- SECTION 1: Aufbau einer Halbleiterdiode & Kennzeichnung (Worksheet Page 1) -->
-        <section id="aufbau">
-            <div class="mb-8">
-                <span class="text-xs font-mono uppercase tracking-widest text-lt_amber">Kapitel 01 · Kristallstruktur &amp; Gehäuse</span>
-                <h2 class="text-3xl font-extrabold text-white mt-1">Aufbau einer Halbleiterdiode, Schaltzeichen &amp; Polung</h2>
-                <p class="text-slate-400 mt-1">
-                    Eine Halbleiterdiode entsteht durch das Zusammenfügen einer <strong>p-dotierten</strong> und einer <strong>n-dotierten</strong> Siliziumschicht. An der Grenzfläche bildet sich durch Diffusion die <strong>Sperrschicht (Raumladungszone, RLZ)</strong>.
-                </p>
-            </div>
-
-            <!-- Detailed SVG Diagram matching Worksheet Page 1 ("Aufbau einer Halbleiterdiode") -->
-            <div class="bg-slate-900 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-xl mb-10">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-800 pb-4">
-                    <div>
-                        <h3 class="text-xl font-bold text-white">Kristallmodell des PN-Übergangs (Ruhezustand ohne äußere Spannung)</h3>
-                        <p class="text-xs text-slate-400">Vollständige Zuordnung aller 7 Strukturbegriffe: P-Leiter, Sperrschicht, N-Leiter, ortsfeste Ionen und bewegliche Ladungsträger.</p>
-                    </div>
-                    <span class="px-3 py-1 rounded bg-slate-800 text-lt_cyan font-mono text-xs border border-slate-700">DIN-Fachmodell Halbleiterphysik</span>
-                </div>
-
-                <div class="bg-slate-950 rounded-xl border border-slate-800 p-4 overflow-x-auto">
-                    <svg viewBox="0 0 860 320" class="w-full min-w-[680px] h-auto font-sans">
-                        <!-- Top Labels -->
-                        <!-- negatives Ion -->
-                        <text x="125" y="28" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">negatives Ion</text>
-                        <line x1="65" y1="34" x2="185" y2="34" stroke="#38bdf8" stroke-width="1.5"/>
-                        <line x1="125" y1="34" x2="180" y2="92" stroke="#94a3b8" stroke-width="1.8"/>
-
-                        <!-- Loch -->
-                        <text x="295" y="28" fill="#f87171" font-size="14" font-weight="bold" text-anchor="middle">Loch (Defektelektron)</text>
-                        <line x1="225" y1="34" x2="365" y2="34" stroke="#f87171" stroke-width="1.5"/>
-                        <line x1="295" y1="34" x2="292" y2="108" stroke="#94a3b8" stroke-width="1.8"/>
-
-                        <!-- positives Ion -->
-                        <text x="510" y="28" fill="#fbbf24" font-size="14" font-weight="bold" text-anchor="middle">positives Ion</text>
-                        <line x1="445" y1="34" x2="575" y2="34" stroke="#fbbf24" stroke-width="1.5"/>
-                        <line x1="510" y1="34" x2="495" y2="92" stroke="#94a3b8" stroke-width="1.8"/>
-
-                        <!-- Elektron -->
-                        <text x="705" y="28" fill="#34d399" font-size="14" font-weight="bold" text-anchor="middle">Elektron (frei beweglich)</text>
-                        <line x1="620" y1="34" x2="790" y2="34" stroke="#34d399" stroke-width="1.5"/>
-                        <line x1="705" y1="34" x2="648" y2="96" stroke="#94a3b8" stroke-width="1.8"/>
-
-                        <!-- Main Semiconductor Crystal Box -->
-                        <rect x="140" y="70" width="580" height="160" fill="#0f172a" stroke="#e2e8f0" stroke-width="2.5" rx="4"/>
-                        <!-- Depletion zone boundaries (dashed) -->
-                        <line x1="355" y1="70" x2="355" y2="230" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,5"/>
-                        <line x1="505" y1="70" x2="505" y2="230" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,5"/>
-                        <!-- Center metallurgical junction -->
-                        <line x1="430" y1="70" x2="430" y2="230" stroke="#f59e0b" stroke-width="2"/>
-
-                        <!-- Highlight Depletion Region -->
-                        <rect x="355" y="72" width="150" height="156" fill="rgba(245, 158, 11, 0.07)"/>
-
-                        <!-- P-Side Fixed Negative Ions (4 columns x 3 rows on left + 2 columns in RLZ) -->
-                        <g stroke="#38bdf8" stroke-width="1.8" fill="#0b1120">
-                            <!-- Col 1 (x=175) -->
-                            <circle cx="175" cy="100" r="13"/><circle cx="175" cy="150" r="13"/><circle cx="175" cy="200" r="13"/>
-                            <!-- Col 2 (x=230) -->
-                            <circle cx="230" cy="100" r="13"/><circle cx="230" cy="150" r="13"/><circle cx="230" cy="200" r="13"/>
-                            <!-- Col 3 (x=285) -->
-                            <circle cx="285" cy="100" r="13"/><circle cx="285" cy="150" r="13"/><circle cx="285" cy="200" r="13"/>
-                            <!-- Col 4 (x=335) -->
-                            <circle cx="335" cy="100" r="13"/><circle cx="335" cy="150" r="13"/><circle cx="335" cy="200" r="13"/>
-                            <!-- Col 5 in RLZ (x=390) -->
-                            <circle cx="390" cy="100" r="13"/><circle cx="390" cy="150" r="13"/><circle cx="390" cy="200" r="13"/>
-                        </g>
-                        <g fill="#38bdf8" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">
-                            <text x="175" y="105">−</text><text x="175" y="155">−</text><text x="175" y="205">−</text>
-                            <text x="230" y="105">−</text><text x="230" y="155">−</text><text x="230" y="205">−</text>
-                            <text x="285" y="105">−</text><text x="285" y="155">−</text><text x="285" y="205">−</text>
-                            <text x="335" y="105">−</text><text x="335" y="155">−</text><text x="335" y="205">−</text>
-                            <text x="390" y="105">−</text><text x="390" y="155">−</text><text x="390" y="205">−</text>
-                        </g>
-
-                        <!-- Mobile Holes (+) in P-Region (none in RLZ!) -->
-                        <g fill="#ef4444" stroke="#fca5a5" stroke-width="1">
-                            <circle cx="195" cy="85" r="7"/><circle cx="255" cy="122" r="7"/><circle cx="292" cy="112" r="7"/>
-                            <circle cx="198" cy="175" r="7"/><circle cx="252" cy="178" r="7"/><circle cx="312" cy="135" r="7"/>
-                            <circle cx="315" cy="182" r="7"/><circle cx="162" cy="128" r="7"/><circle cx="215" cy="212" r="7"/>
-                        </g>
-                        <g fill="#ffffff" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">
-                            <text x="195" y="89">+</text><text x="255" y="126">+</text><text x="292" y="116">+</text>
-                            <text x="198" y="179">+</text><text x="252" y="182">+</text><text x="312" y="139">+</text>
-                            <text x="315" y="186">+</text><text x="162" y="132">+</text><text x="215" y="216">+</text>
-                        </g>
-
-                        <!-- N-Side Fixed Positive Ions (1 col in RLZ + 4 cols in N-Region) -->
-                        <g stroke="#fbbf24" stroke-width="1.8" fill="#0b1120">
-                            <!-- Col 1 in RLZ (x=470) -->
-                            <circle cx="470" cy="100" r="13"/><circle cx="470" cy="150" r="13"/><circle cx="470" cy="200" r="13"/>
-                            <!-- Col 2 (x=530) -->
-                            <circle cx="530" cy="100" r="13"/><circle cx="530" cy="150" r="13"/><circle cx="530" cy="200" r="13"/>
-                            <!-- Col 3 (x=585) -->
-                            <circle cx="585" cy="100" r="13"/><circle cx="585" cy="150" r="13"/><circle cx="585" cy="200" r="13"/>
-                            <!-- Col 4 (x=640) -->
-                            <circle cx="640" cy="100" r="13"/><circle cx="640" cy="150" r="13"/><circle cx="640" cy="200" r="13"/>
-                            <!-- Col 5 (x=690) -->
-                            <circle cx="690" cy="100" r="13"/><circle cx="690" cy="150" r="13"/><circle cx="690" cy="200" r="13"/>
-                        </g>
-                        <g fill="#fbbf24" font-family="monospace" font-size="15" font-weight="bold" text-anchor="middle">
-                            <text x="470" y="105">+</text><text x="470" y="155">+</text><text x="470" y="205">+</text>
-                            <text x="530" y="105">+</text><text x="530" y="155">+</text><text x="530" y="205">+</text>
-                            <text x="585" y="105">+</text><text x="585" y="155">+</text><text x="585" y="205">+</text>
-                            <text x="640" y="105">+</text><text x="640" y="155">+</text><text x="640" y="205">+</text>
-                            <text x="690" y="105">+</text><text x="690" y="155">+</text><text x="690" y="205">+</text>
-                        </g>
-
-                        <!-- Mobile Electrons (-) in N-Region (none in RLZ!) -->
-                        <g fill="#10b981" stroke="#6ee7b7" stroke-width="1">
-                            <circle cx="552" cy="88" r="7"/><circle cx="612" cy="122" r="7"/><circle cx="648" cy="96" r="7"/>
-                            <circle cx="555" cy="175" r="7"/><circle cx="610" cy="182" r="7"/><circle cx="668" cy="132" r="7"/>
-                            <circle cx="665" cy="182" r="7"/><circle cx="520" cy="128" r="7"/><circle cx="578" cy="212" r="7"/>
-                        </g>
-                        <g fill="#ffffff" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">
-                            <text x="552" y="92">−</text><text x="612" y="126">−</text><text x="648" y="100">−</text>
-                            <text x="555" y="179">−</text><text x="610" y="186">−</text><text x="668" y="136">−</text>
-                            <text x="665" y="186">−</text><text x="520" y="132">−</text><text x="578" y="216">−</text>
-                        </g>
-
-                        <!-- Bottom Curly Brackets / Region Labels -->
-                        <!-- P-Leiter -->
-                        <path d="M142,240 L142,252 L248,252 L248,262 L248,252 L352,252 L352,240" fill="none" stroke="#f87171" stroke-width="2"/>
-                        <text x="248" y="286" fill="#f87171" font-size="16" font-weight="bold" text-anchor="middle">P-Leiter</text>
-                        <text x="248" y="304" fill="#94a3b8" font-size="11" text-anchor="middle">(Anode A · Elektronenmangel / Löcher)</text>
-
-                        <!-- Sperrschicht -->
-                        <path d="M358,240 L358,252 L430,252 L430,262 L430,252 L502,252 L502,240" fill="none" stroke="#f59e0b" stroke-width="2"/>
-                        <text x="430" y="286" fill="#f59e0b" font-size="16" font-weight="bold" text-anchor="middle">Sperrschicht (RLZ)</text>
-                        <text x="430" y="304" fill="#94a3b8" font-size="11" text-anchor="middle">(Raumladungszone · verarmt an freien Ladungsträgern)</text>
-
-                        <!-- N-Leiter -->
-                        <path d="M508,240 L508,252 L614,252 L614,262 L614,252 L718,252 L718,240" fill="none" stroke="#34d399" stroke-width="2"/>
-                        <text x="614" y="286" fill="#34d399" font-size="16" font-weight="bold" text-anchor="middle">N-Leiter</text>
-                        <text x="614" y="304" fill="#94a3b8" font-size="11" text-anchor="middle">(Kathode K · Elektronenüberschuss)</text>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- Schaltzeichen, Kennzeichnung & Durchlass-/Sperrrichtung (Worksheet Page 1 Bottom) -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Card 1: Schaltzeichen -->
-                <div class="bg-lt_card border border-slate-700 rounded-2xl p-6 flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-mono uppercase text-lt_cyan">DIN EN 60617</span>
-                        <h3 class="text-xl font-bold text-white mt-1 mb-4">Schaltzeichen der Diode</h3>
-                        <div class="bg-slate-950 rounded-xl p-5 border border-slate-800 flex justify-center mb-4">
-                            <svg viewBox="0 0 280 120" class="w-full max-w-[260px]">
-                                <line x1="25" y1="50" x2="255" y2="50" stroke="#e2e8f0" stroke-width="3"/>
-                                <polygon points="105,22 105,78 165,50" fill="none" stroke="#e2e8f0" stroke-width="3"/>
-                                <line x1="165" y1="20" x2="165" y2="80" stroke="#f59e0b" stroke-width="4"/>
-                                <!-- Pointers -->
-                                <line x1="75" y1="92" x2="112" y2="62" stroke="#38bdf8" stroke-width="1.8"/>
-                                <text x="70" y="108" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Anode (A)</text>
-                                <line x1="205" y1="92" x2="168" y2="65" stroke="#f59e0b" stroke-width="1.8"/>
-                                <text x="208" y="108" fill="#f59e0b" font-size="14" font-weight="bold" text-anchor="middle">Kathode (K)</text>
-                            </svg>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400">
-                        Das Dreieck symbolisiert die technische Stromrichtung (von <strong>Anode A</strong> nach <strong>Kathode K</strong>), der senkrechte Balken markiert die Sperrkante (Kathode).
-                    </p>
-                </div>
-
-                <!-- Card 2: Reales Bauteil & Kennzeichnung -->
-                <div class="bg-lt_card border border-slate-700 rounded-2xl p-6 flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-mono uppercase text-lt_amber">Gehäusekennung DO-7</span>
-                        <h3 class="text-xl font-bold text-white mt-1 mb-4">Kennzeichnung am Bauteil</h3>
-                        <div class="bg-slate-950 rounded-xl p-5 border border-slate-800 flex justify-center mb-4">
-                            <svg viewBox="0 0 280 120" class="w-full max-w-[260px]">
-                                <!-- Axial leads -->
-                                <line x1="20" y1="55" x2="80" y2="55" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
-                                <line x1="200" y1="55" x2="260" y2="55" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
-                                <!-- Cylinder body -->
-                                <rect x="80" y="34" width="120" height="42" rx="6" fill="#64748b" stroke="#94a3b8" stroke-width="2"/>
-                                <!-- Cathode Ring -->
-                                <rect x="166" y="34" width="18" height="42" fill="#f8fafc"/>
-                                <!-- Ring pointer -->
-                                <text x="215" y="22" fill="#f59e0b" font-size="14" font-weight="bold" text-anchor="middle">Ring</text>
-                                <line x1="195" y1="22" x2="177" y2="33" stroke="#f59e0b" stroke-width="2"/>
-                                <!-- A / K labels -->
-                                <text x="65" y="108" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Anode (A)</text>
-                                <line x1="65" y1="90" x2="90" y2="76" stroke="#38bdf8" stroke-width="1.8"/>
-                                <text x="210" y="108" fill="#f59e0b" font-size="14" font-weight="bold" text-anchor="middle">Kathode (K)</text>
-                                <line x1="210" y1="90" x2="180" y2="76" stroke="#f59e0b" stroke-width="1.8"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400">
-                        Am realen Diodengehäuse (z. B. BAY 44) ist die <strong>Kathode (K)</strong> eindeutig durch einen aufgedruckten <strong>Farbring (Ring)</strong> gekennzeichnet.
-                    </p>
-                </div>
-
-                <!-- Card 3: Polung Durchlass- vs. Sperrrichtung -->
-                <div class="bg-lt_card border border-slate-700 rounded-2xl p-6 flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-mono uppercase text-lt_emerald">Anschluss-Regel</span>
-                        <h3 class="text-xl font-bold text-white mt-1 mb-4">Durchlass- &amp; Sperrrichtung</h3>
-                        <div class="space-y-4">
-                            <!-- (1) Durchlassrichtung -->
-                            <div class="bg-slate-950 rounded-xl p-3.5 border border-emerald-500/40">
-                                <div class="text-xs font-bold text-lt_emerald mb-2">(1) Durchlassrichtung (Diode leitet):</div>
-                                <div class="flex items-center justify-between px-2">
-                                    <span class="w-9 h-9 rounded-lg bg-rose-500/20 border-2 border-rose-500 text-rose-400 font-mono font-extrabold text-lg flex items-center justify-center">+</span>
-                                    <svg viewBox="0 0 120 40" class="w-28 h-9">
-                                        <line x1="5" y1="20" x2="115" y2="20" stroke="#e2e8f0" stroke-width="2.5"/>
-                                        <polygon points="45,8 45,32 75,20" fill="none" stroke="#10b981" stroke-width="2.5"/>
-                                        <line x1="75" y1="7" x2="75" y2="33" stroke="#10b981" stroke-width="3"/>
-                                        <text x="40" y="38" fill="#94a3b8" font-size="9">A</text>
-                                        <text x="80" y="38" fill="#94a3b8" font-size="9">K</text>
-                                    </svg>
-                                    <span class="w-9 h-9 rounded-lg bg-blue-500/20 border-2 border-blue-500 text-blue-400 font-mono font-extrabold text-lg flex items-center justify-center">−</span>
-                                </div>
-                                <div class="text-[11px] text-slate-400 mt-1 text-center">Pluspol (+) an Anode (A), Minuspol (−) an Kathode (K)</div>
-                            </div>
-
-                            <!-- (2) Sperrrichtung -->
-                            <div class="bg-slate-950 rounded-xl p-3.5 border border-rose-500/40">
-                                <div class="text-xs font-bold text-rose-400 mb-2">(2) Sperrrichtung (Diode sperrt):</div>
-                                <div class="flex items-center justify-between px-2">
-                                    <span class="w-9 h-9 rounded-lg bg-blue-500/20 border-2 border-blue-500 text-blue-400 font-mono font-extrabold text-lg flex items-center justify-center">−</span>
-                                    <svg viewBox="0 0 120 40" class="w-28 h-9">
-                                        <line x1="5" y1="20" x2="115" y2="20" stroke="#e2e8f0" stroke-width="2.5"/>
-                                        <polygon points="45,8 45,32 75,20" fill="none" stroke="#f43f5e" stroke-width="2.5"/>
-                                        <line x1="75" y1="7" x2="75" y2="33" stroke="#f43f5e" stroke-width="3"/>
-                                        <text x="40" y="38" fill="#94a3b8" font-size="9">A</text>
-                                        <text x="80" y="38" fill="#94a3b8" font-size="9">K</text>
-                                    </svg>
-                                    <span class="w-9 h-9 rounded-lg bg-rose-500/20 border-2 border-rose-500 text-rose-400 font-mono font-extrabold text-lg flex items-center justify-center">+</span>
-                                </div>
-                                <div class="text-[11px] text-slate-400 mt-1 text-center">Minuspol (−) an Anode (A), Pluspol (+) an Kathode (K)</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 2: Vorgänge am PN-Übergang (Worksheet Page 2 & Page 3 Aufgabe 1) -->
-        <section id="pn-simulator" class="bg-slate-900 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-2xl">
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-8">
-                <div>
-                    <span class="text-xs font-mono uppercase text-lt_cyan"><i class="fa-solid fa-microscope mr-1.5"></i>Kapitel 02 · Interaktives PN-Mikroskop</span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Vorgänge am PN-Übergang in Durchlass- &amp; Sperrrichtung</h2>
-                    <p class="text-sm text-slate-400">Analysieren Sie Schritt für Schritt, wie sich die Raumladungszone (RLZ) bei äußerer Beschaltung verändert.</p>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <button onclick="setPnStep('fwd1')" id="btn-pn-fwd1" class="px-3.5 py-2 rounded-lg text-xs font-bold font-mono border bg-emerald-500/20 border-emerald-400 text-white">
-                        Durchlass · Schritt 1
-                    </button>
-                    <button onclick="setPnStep('fwd2')" id="btn-pn-fwd2" class="px-3.5 py-2 rounded-lg text-xs font-bold font-mono border bg-slate-800 border-slate-700 text-slate-300">
-                        Durchlass · Schritt 2
-                    </button>
-                    <button onclick="setPnStep('rev1')" id="btn-pn-rev1" class="px-3.5 py-2 rounded-lg text-xs font-bold font-mono border bg-slate-800 border-slate-700 text-slate-300">
-                        Sperrrichtung · Schritt 1
-                    </button>
-                    <button onclick="setPnStep('rev2')" id="btn-pn-rev2" class="px-3.5 py-2 rounded-lg text-xs font-bold font-mono border bg-slate-800 border-slate-700 text-slate-300">
-                        Sperrrichtung · Schritt 2
-                    </button>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-10">
-                <!-- Left explanation box -->
-                <div class="lg:col-span-4 space-y-4">
-                    <div id="pnStepCard" class="bg-slate-950 border-l-4 border-lt_emerald rounded-r-xl p-5 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span id="pnModeBadge" class="px-2.5 py-0.5 rounded bg-emerald-500/20 text-lt_emerald font-mono text-xs font-bold">Durchlassrichtung (+ an A, − an K)</span>
-                            <span id="pnStepNum" class="font-mono text-xs text-slate-400">Schritt 1 / 2</span>
-                        </div>
-                        <h3 id="pnStepTitle" class="text-lg font-bold text-white">1. Ladungsträger werden in Richtung RLZ „gedrückt“</h3>
-                        <p id="pnStepDesc" class="text-sm text-slate-300 leading-relaxed">
-                            Der Pluspol (+) der Spannungsquelle stößt die positiven Löcher im P-Leiter ab, der Minuspol (−) stößt die negativen Elektronen im N-Leiter ab. Beide Ladungsträgerarten werden zur Raumladungszone (RLZ) gedrückt.
-                        </p>
-                    </div>
-
-                    <!-- Summary Table of all 4 steps (Worksheet Page 2) -->
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3 text-xs">
-                        <div class="font-mono uppercase text-slate-400 font-bold border-b border-slate-800 pb-1.5">Übersicht: Alle 2×2 Schritte am PN-Übergang</div>
-                        <div>
-                            <div class="text-lt_emerald font-bold mb-1">Durchlassrichtung (+ an P/Anode, − an N/Kathode):</div>
-                            <ol class="list-decimal list-inside text-slate-300 space-y-1">
-                                <li>Ladungsträger werden in Richtung <strong>RLZ „gedrückt“</strong>.</li>
-                                <li><strong>RLZ wird kleiner</strong>, Ladungsträger <strong>rekombinieren an der Grenzfläche</strong> &rarr; <strong>PN-Übergang leitfähig</strong> (Lampe leuchtet).</li>
-                            </ol>
-                        </div>
-                        <div class="border-t border-slate-800 pt-2">
-                            <div class="text-rose-400 font-bold mb-1">Sperrrichtung (− an P/Anode, + an N/Kathode):</div>
-                            <ol class="list-decimal list-inside text-slate-300 space-y-1">
-                                <li>Ladungsträger werden aus der <strong>RLZ „gezogen“</strong> (zu den äußeren Polen).</li>
-                                <li><strong>RLZ vergrößert sich</strong> &rarr; <strong>PN-Übergang sperrt</strong> (kein Stromfluss).</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right interactive SVG of PN junction with lamp and voltage source -->
-                <div class="lg:col-span-8">
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
-                        <svg id="pnSimSvg" viewBox="0 0 680 290" class="w-full h-auto"></svg>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Block Schematics (Worksheet Page 3 Aufgabe 1: Durchlassrichtung vs. Sperrrichtung mit P, N, Sperrschicht, A, K, IF, IR, UF, UR) -->
-            <div class="border-t border-slate-800 pt-8">
-                <h3 class="text-lg font-bold text-white mb-2">Schaltplan-Darstellung mit PN-Blockmodell (Forward vs. Reverse)</h3>
-                <p class="text-xs text-slate-400 mb-6">Gegenüberstellung der Polung, Zählpfeile und Ausdehnung der Sperrschicht im Prüfstromkreis mit Vorwiderstand <code>-R1</code>:</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Forward Block Diagram -->
-                    <div class="bg-slate-950 border border-emerald-500/30 rounded-xl p-5">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-sm font-bold text-lt_emerald">Durchlassrichtung (Forward Bias)</span>
-                            <span class="text-xs font-mono text-slate-400">Sperrschicht abgebaut · I<sub>F</sub> fließt</span>
-                        </div>
-                        <svg viewBox="0 0 360 220" class="w-full max-w-[340px] mx-auto">
-                            <!-- Wires -->
-                            <polyline points="55,125 55,25 185,25 185,50" fill="none" stroke="#e2e8f0" stroke-width="2"/>
-                            <polyline points="185,170 185,195 55,195 55,155" fill="none" stroke="#e2e8f0" stroke-width="2"/>
-                            <!-- Resistor -R1 -->
-                            <rect x="45" y="65" width="20" height="45" fill="#1e293b" stroke="#e2e8f0" stroke-width="2"/>
-                            <text x="38" y="92" fill="#94a3b8" font-size="11" font-family="monospace" text-anchor="end">-R1</text>
-                            <!-- DC Source (+ top, - bottom) -->
-                            <line x1="35" y1="135" x2="75" y2="135" stroke="#e2e8f0" stroke-width="2"/>
-                            <line x1="45" y1="148" x2="65" y2="148" stroke="#e2e8f0" stroke-width="3.5"/>
-                            <text x="30" y="132" fill="#ef4444" font-size="13" font-weight="bold">+</text>
-                            <text x="30" y="156" fill="#38bdf8" font-size="14" font-weight="bold">−</text>
-                            <!-- Current arrow IF -->
-                            <line x1="100" y1="25" x2="140" y2="25" stroke="#ef4444" stroke-width="3"/>
-                            <polygon points="145,25 133,19 133,31" fill="#ef4444"/>
-                            <text x="120" y="45" fill="#ef4444" font-size="14" font-weight="bold" text-anchor="middle">I_F</text>
-                            <!-- PN Block -->
-                            <rect x="145" y="50" width="80" height="60" fill="rgba(239,68,68,0.12)" stroke="#e2e8f0" stroke-width="2"/>
-                            <rect x="145" y="110" width="80" height="60" fill="rgba(59,130,246,0.12)" stroke="#e2e8f0" stroke-width="2"/>
-                            <text x="185" y="88" fill="#ef4444" font-size="24" font-weight="bold" text-anchor="middle">P</text>
-                            <text x="185" y="148" fill="#38bdf8" font-size="24" font-weight="bold" text-anchor="middle">N</text>
-                            <!-- A and K labels -->
-                            <text x="205" y="42" fill="#ffffff" font-size="16" font-weight="bold">A</text>
-                            <text x="205" y="192" fill="#ffffff" font-size="16" font-weight="bold">K</text>
-                            <!-- Voltage Arrow UF (Forward) -->
-                            <path d="M245,55 Q260,110 245,165" fill="none" stroke="#38bdf8" stroke-width="2.2"/>
-                            <polygon points="245,168 241,156 252,159" fill="#38bdf8"/>
-                            <text x="295" y="102" fill="#38bdf8" font-size="15" font-weight="bold" text-anchor="middle">U_F</text>
-                            <text x="295" y="122" fill="#94a3b8" font-size="13" text-anchor="middle">(Forward)</text>
-                        </svg>
-                    </div>
-
-                    <!-- Reverse Block Diagram -->
-                    <div class="bg-slate-950 border border-rose-500/30 rounded-xl p-5">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-sm font-bold text-rose-400">Sperrrichtung (Reverse Bias)</span>
-                            <span class="text-xs font-mono text-slate-400">Breite Sperrschicht · I<sub>R</sub> ≈ 0</span>
-                        </div>
-                        <svg viewBox="0 0 360 220" class="w-full max-w-[340px] mx-auto">
-                            <!-- Wires -->
-                            <polyline points="55,125 55,25 185,25 185,50" fill="none" stroke="#e2e8f0" stroke-width="2"/>
-                            <polyline points="185,170 185,195 55,195 55,155" fill="none" stroke="#e2e8f0" stroke-width="2"/>
-                            <!-- Resistor -R1 -->
-                            <rect x="45" y="65" width="20" height="45" fill="#1e293b" stroke="#e2e8f0" stroke-width="2"/>
-                            <text x="38" y="92" fill="#94a3b8" font-size="11" font-family="monospace" text-anchor="end">-R1</text>
-                            <!-- DC Source (+ top, - bottom, connected to K on top and A on bottom!) -->
-                            <line x1="35" y1="135" x2="75" y2="135" stroke="#e2e8f0" stroke-width="2"/>
-                            <line x1="45" y1="148" x2="65" y2="148" stroke="#e2e8f0" stroke-width="3.5"/>
-                            <text x="30" y="132" fill="#ef4444" font-size="13" font-weight="bold">+</text>
-                            <text x="30" y="156" fill="#38bdf8" font-size="14" font-weight="bold">−</text>
-                            <!-- Current arrow IR -->
-                            <line x1="100" y1="25" x2="140" y2="25" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="3,2"/>
-                            <polygon points="145,25 133,19 133,31" fill="#ef4444"/>
-                            <text x="120" y="45" fill="#ef4444" font-size="14" font-weight="bold" text-anchor="middle">I_R</text>
-                            <!-- PN Block (N on top = K, P on bottom = A, green hatched Sperrschicht in middle) -->
-                            <rect x="145" y="50" width="80" height="46" fill="rgba(59,130,246,0.12)" stroke="#e2e8f0" stroke-width="2"/>
-                            <rect x="145" y="96" width="80" height="28" fill="rgba(16,185,129,0.28)" stroke="#10b981" stroke-width="2"/>
-                            <rect x="145" y="124" width="80" height="46" fill="rgba(239,68,68,0.12)" stroke="#e2e8f0" stroke-width="2"/>
-                            <text x="185" y="80" fill="#38bdf8" font-size="22" font-weight="bold" text-anchor="middle">N</text>
-                            <text x="185" y="114" fill="#34d399" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">Sperrschicht</text>
-                            <text x="185" y="155" fill="#ef4444" font-size="22" font-weight="bold" text-anchor="middle">P</text>
-                            <!-- K and A labels -->
-                            <text x="205" y="42" fill="#ffffff" font-size="16" font-weight="bold">K</text>
-                            <text x="205" y="192" fill="#ffffff" font-size="16" font-weight="bold">A</text>
-                            <!-- Voltage Arrow UR (Reverse) -->
-                            <path d="M245,55 Q260,110 245,165" fill="none" stroke="#38bdf8" stroke-width="2.2"/>
-                            <polygon points="245,168 241,156 252,159" fill="#38bdf8"/>
-                            <text x="295" y="102" fill="#38bdf8" font-size="15" font-weight="bold" text-anchor="middle">U_R</text>
-                            <text x="295" y="122" fill="#94a3b8" font-size="13" text-anchor="middle">(Reverse)</text>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: Kennlinie der Silizium-Diode BAY 44 (Worksheet Page 3 Aufgabe 2) -->
-        <section id="kennlinie">
-            <div class="mb-8">
-                <span class="text-xs font-mono uppercase tracking-widest text-lt_amber">Kapitel 03 · Elektrische Charakteristik</span>
-                <h2 class="text-3xl font-extrabold text-white mt-1">Strom-Spannungs-Kennlinie der Silizium-Diode BAY 44</h2>
-                <p class="text-slate-400 mt-1">
-                    4-Quadranten-Darstellung von Durchlassbereich (rechts oben) und Sperrbereich (links unten) mit allen wichtigen Kenngrößen.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <!-- Interactive 4-Quadrant Curve SVG (Matching Worksheet Page 3 Aufgabe 2) -->
-                <div class="lg:col-span-7 bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-xl">
-                    <div class="flex flex-wrap justify-between items-center gap-2 mb-4">
-                        <span class="text-xs font-mono text-lt_amber uppercase font-bold">Kennlinie Silizium-Diode BAY 44</span>
-                        <div class="flex items-center gap-3 text-xs font-mono">
-                            <label class="text-slate-400">Prüfspannung einstellen:</label>
-                            <input type="range" id="bayVoltageSlider" min="-75" max="0.82" step="0.02" value="0.7" class="w-36" oninput="updateBayCurvePoint()">
-                            <span id="bayPointBadge" class="px-2.5 py-1 rounded bg-emerald-500/20 text-lt_emerald font-bold">U_F = 0,70 V | I_F = 25 mA</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-950 rounded-xl border border-slate-800 p-3">
-                        <svg viewBox="0 0 650 430" class="w-full h-auto font-sans">
-                            <!-- Grid lines -->
-                            <g stroke="#1e293b" stroke-width="1">
-                                <line x1="40" y1="60" x2="620" y2="60"/><line x1="40" y1="115" x2="620" y2="115"/>
-                                <line x1="40" y1="170" x2="620" y2="170"/><line x1="40" y1="280" x2="620" y2="280"/>
-                                <line x1="40" y1="335" x2="620" y2="335"/><line x1="40" y1="390" x2="620" y2="390"/>
-                                <line x1="100" y1="25" x2="100" y2="405"/><line x1="170" y1="25" x2="170" y2="405"/>
-                                <line x1="240" y1="25" x2="240" y2="405"/><line x1="400" y1="25" x2="400" y2="405"/>
-                                <line x1="470" y1="25" x2="470" y2="405"/><line x1="540" y1="25" x2="540" y2="405"/>
-                            </g>
-
-                            <!-- Coordinate Axes (Origin at 330, 225) -->
-                            <line x1="35" y1="225" x2="625" y2="225" stroke="#cbd5e1" stroke-width="2"/>
-                            <line x1="330" y1="20" x2="330" y2="410" stroke="#cbd5e1" stroke-width="2"/>
-                            <!-- Axis Arrows -->
-                            <polygon points="628,225 618,220 618,230" fill="#cbd5e1"/>
-                            <polygon points="32,225 42,220 42,230" fill="#cbd5e1"/>
-                            <polygon points="330,17 325,27 335,27" fill="#cbd5e1"/>
-                            <polygon points="330,413 325,403 335,403" fill="#cbd5e1"/>
-
-                            <!-- Axis Labels -->
-                            <text x="318" y="32" fill="#e2e8f0" font-size="12" font-weight="bold" text-anchor="end">I_F in mA</text>
-                            <text x="318" y="408" fill="#e2e8f0" font-size="12" font-weight="bold" text-anchor="end">I_R in mA</text>
-                            <text x="620" y="246" fill="#e2e8f0" font-size="12" font-weight="bold" text-anchor="end">U_F in V</text>
-                            <text x="45" y="246" fill="#e2e8f0" font-size="12" font-weight="bold">U_R in V</text>
-
-                            <!-- Forward Voltage ticks (0.2, 0.4, 0.6, 0.8 V -> x = 330 + U_F*350) -->
-                            <text x="400" y="242" fill="#94a3b8" font-size="11" text-anchor="middle">0.2</text>
-                            <text x="470" y="242" fill="#94a3b8" font-size="11" text-anchor="middle">0.4</text>
-                            <text x="540" y="242" fill="#94a3b8" font-size="11" text-anchor="middle">0.6</text>
-                            <text x="610" y="242" fill="#94a3b8" font-size="11" text-anchor="middle">0.8</text>
-
-                            <!-- Reverse Voltage ticks (20, 40, 60, 80 V -> x = 330 - U_R*3.5) -->
-                            <text x="260" y="242" fill="#94a3b8" font-size="11" text-anchor="middle">20</text>
-                            <text x="190" y="242" fill="#94a3b8" font-size="11" text-anchor="middle">40</text>
-                            <text x="120" y="242" fill="#94a3b8" font-size="11" text-anchor="middle">60</text>
-                            <text x="50" y="242" fill="#94a3b8" font-size="11" text-anchor="middle">80</text>
-
-                            <!-- IF ticks (25, 50 mA) -->
-                            <text x="322" y="174" fill="#94a3b8" font-size="11" text-anchor="end">25</text>
-                            <text x="322" y="119" fill="#94a3b8" font-size="11" text-anchor="end">50</text>
-
-                            <!-- IR ticks (1..5 mA) -->
-                            <text x="322" y="260" fill="#94a3b8" font-size="10" text-anchor="end">1</text>
-                            <text x="322" y="295" fill="#94a3b8" font-size="10" text-anchor="end">2</text>
-                            <text x="322" y="330" fill="#94a3b8" font-size="10" text-anchor="end">3</text>
-                            <text x="322" y="365" fill="#94a3b8" font-size="10" text-anchor="end">4</text>
-                            <text x="322" y="398" fill="#94a3b8" font-size="10" text-anchor="end">5</text>
-
-                            <!-- Characteristic Curve Path (Forward + Reverse + Breakdown) -->
-                            <!-- Forward curve: stays near 0 up to 0.5V (505), bends up at 0.65V (557), shoots up to 0.78V (603, y=30) -->
-                            <path d="M 330,225 L 490,225 Q 545,225 562,195 Q 580,150 598,35" fill="none" stroke="#ef4444" stroke-width="3.5"/>
-                            <!-- Reverse curve: stays near 0 from 330 down to UR=50V (155), then bends sharply down at UR=60..70V (breakdown) -->
-                            <path d="M 330,225 L 155,226 Q 125,228 112,265" fill="none" stroke="#ef4444" stroke-width="3"/>
-                            <path d="M 112,265 Q 98,315 90,398" fill="none" stroke="#ef4444" stroke-width="3" stroke-dasharray="6,5"/>
-
-                            <!-- Annotations matching Worksheet Page 3 Aufgabe 2 -->
-                            <!-- 1. Durchlassrichtung -->
-                            <text x="465" y="76" fill="#10b981" font-size="15" font-weight="bold" text-anchor="middle">Durchlassrichtung</text>
-                            <line x1="395" y1="82" x2="535" y2="82" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,3"/>
-
-                            <!-- 2. Schleusen-/Durchlassspannung -->
-                            <text x="465" y="328" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Schleusen-/Durchlassspannung</text>
-                            <line x1="360" y1="334" x2="570" y2="334" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
-                            <line x1="515" y1="312" x2="558" y2="230" stroke="#38bdf8" stroke-width="1.8"/>
-                            <polygon points="560,226 551,233 559,237" fill="#38bdf8"/>
-
-                            <!-- 3. Max. Sperrspannung (50 V for BAY44) -->
-                            <text x="155" y="182" fill="#fbbf24" font-size="14" font-weight="bold" text-anchor="middle">Max. Sperrspannung (50 V)</text>
-                            <line x1="75" y1="188" x2="235" y2="188" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,3"/>
-                            <line x1="140" y1="192" x2="155" y2="222" stroke="#fbbf24" stroke-width="1.8"/>
-                            <polygon points="156,225 148,217 156,214" fill="#fbbf24"/>
-
-                            <!-- 4. Durchbruchspannung -->
-                            <text x="225" y="294" fill="#f43f5e" font-size="14" font-weight="bold" text-anchor="middle">Durchbruchspannung</text>
-                            <line x1="150" y1="300" x2="300" y2="300" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="3,3"/>
-                            <line x1="150" y1="292" x2="112" y2="282" stroke="#f43f5e" stroke-width="1.8"/>
-                            <polygon points="108,281 118,279 116,287" fill="#f43f5e"/>
-
-                            <!-- 5. Sperrrichtung -->
-                            <text x="210" y="368" fill="#cbd5e1" font-size="15" font-weight="bold" text-anchor="middle">Sperrrichtung</text>
-                            <line x1="145" y1="374" x2="275" y2="374" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3"/>
-
-                            <!-- Interactive Operating Point Dot -->
-                            <circle id="bayCursorDot" cx="566" cy="170" r="7" fill="#10b981" stroke="#ffffff" stroke-width="2"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Right Column: The 4 Exact Definitions from Worksheet Page 3 -->
-                <div class="lg:col-span-5 space-y-4">
-                    <div class="bg-lt_card border-l-4 border-lt_cyan border border-slate-700 rounded-xl p-5">
-                        <div class="text-xs font-mono uppercase text-lt_cyan mb-1">Kenngröße 1 · Durchlassbereich</div>
-                        <h3 class="text-lg font-bold text-white mb-1">Schleusenspannung / Durchlassspannung (U<sub>F</sub>)</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed">
-                            Angelegte Mindestspannung in Durchlassrichtung, damit ein nennenswerter Strom fließt (bei Silizium-Dioden ca. <strong>0,6 V bis 0,7 V</strong>).
-                        </p>
-                    </div>
-
-                    <div class="bg-lt_card border-l-4 border-lt_emerald border border-slate-700 rounded-xl p-5">
-                        <div class="text-xs font-mono uppercase text-lt_emerald mb-1">Kenngröße 2 · Belastungsgrenze</div>
-                        <h3 class="text-lg font-bold text-white mb-1">Max. Durchlassstrom (I<sub>F</sub>)</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed">
-                            Maximaler Stromfluss in Durchlassrichtung, ohne dass die Diode beschädigt wird (bei der Serie BAY 44 / 45 / 46: <strong>I<sub>F</sub> = 250 mA</strong>).
-                        </p>
-                    </div>
-
-                    <div class="bg-lt_card border-l-4 border-lt_amber border border-slate-700 rounded-xl p-5">
-                        <div class="text-xs font-mono uppercase text-lt_amber mb-1">Kenngröße 3 · Sperrbereich</div>
-                        <h3 class="text-lg font-bold text-white mb-1">Max. Sperrspannung (U<sub>R</sub>)</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed">
-                            Maximale Spannung, die in Sperrrichtung angelegt werden darf, ohne einen Durchbruch zu riskieren (BAY 44: <strong>50 V</strong>, BAY 45: <strong>150 V</strong>, BAY 46: <strong>300 V</strong>).
-                        </p>
-                    </div>
-
-                    <div class="bg-lt_card border-l-4 border-rose-500 border border-slate-700 rounded-xl p-5">
-                        <div class="text-xs font-mono uppercase text-rose-400 mb-1">Kenngröße 4 · Zerstörungsgrenze</div>
-                        <h3 class="text-lg font-bold text-white mb-1">Durchbruchspannung</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed">
-                            Ab dieser Spannung leitet die Diode in Sperrrichtung stark (Lawinen-/Zener-Durchbruch). <strong>Ohne Strombegrenzung wird sie durch Überhitzung zerstört.</strong>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: Datenblatt BAY 44/45/46 & Praxis-Check Verpolschutz DC-Motor (Worksheet Page 4 Aufgaben 3 & 4) -->
-        <section id="verpolschutz" class="bg-slate-900 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-2xl">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-8">
-                <div>
-                    <span class="text-xs font-mono uppercase text-lt_amber"><i class="fa-solid fa-shield-halved mr-1.5"></i>Kapitel 04 · Applikations-Engineering &amp; Datenblatt</span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Verpolschutz eines DC-Motors &amp; Eignungsprüfung BAY 44</h2>
-                    <p class="text-sm text-slate-400">Schaltplan-Entwurf zum Verpolschutz eines Gleichstrommotors und rechnerischer Datenblatt-Abgleich.</p>
-                </div>
-                <a href="datenblaetter/BAY44_BAY45_BAY46_Datenblatt.pdf" download class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl flex items-center gap-2 self-start">
-                    <i class="fa-solid fa-file-pdf"></i> Original-Datenblatt BAY 44 / 45 / 46 herunterladen
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <!-- Left: Interactive DC Motor Reverse Polarity Protection Circuit -->
-                <div class="lg:col-span-6 bg-slate-950 border border-slate-800 rounded-xl p-5">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-base font-bold text-white">Schaltplan: DC-Motor mit Verpolschutzdiode</h3>
-                        <button onclick="toggleMotorPolarity()" id="btnMotorPol" class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-emerald-500/20 border border-emerald-400 text-lt_emerald hover:bg-emerald-500/30 transition-all">
-                            <i class="fa-solid fa-rotate mr-1"></i> Polung umkehren (Test)
-                        </button>
-                    </div>
-
-                    <svg id="motorCircuitSvg" viewBox="0 0 460 250" class="w-full h-auto bg-[#070b14] rounded-lg border border-slate-800 p-2">
-                        <!-- Circuit paths -->
-                        <line x1="70" y1="50" x2="380" y2="50" stroke="#e2e8f0" stroke-width="2.5"/>
-                        <line x1="70" y1="200" x2="380" y2="200" stroke="#e2e8f0" stroke-width="2.5"/>
-                        <line x1="70" y1="50" x2="70" y2="200" stroke="#e2e8f0" stroke-width="2.5"/>
-                        <line x1="280" y1="50" x2="280" y2="200" stroke="#e2e8f0" stroke-width="2.5"/>
-                        <line x1="380" y1="50" x2="380" y2="200" stroke="#e2e8f0" stroke-width="2.5"/>
-
-                        <!-- DC 2V Source -->
-                        <circle cx="70" cy="125" r="26" fill="#0f172a" stroke="#e2e8f0" stroke-width="2.5"/>
-                        <text x="26" y="120" fill="#e2e8f0" font-size="13" font-weight="bold" text-anchor="end">DC</text>
-                        <text x="26" y="136" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="end">2V</text>
-                        <text id="polTopTxt" x="82" y="92" fill="#ef4444" font-size="15" font-weight="bold">+</text>
-                        <text id="polBotTxt" x="82" y="168" fill="#38bdf8" font-size="16" font-weight="bold">−</text>
-
-                        <!-- Protection Diode in top wire (Anode left, Cathode right) -->
-                        <polygon id="motorDiodeTri" points="160,32 160,68 195,50" fill="rgba(245,158,11,0.2)" stroke="#f59e0b" stroke-width="2.5"/>
-                        <line x1="195" y1="30" x2="195" y2="70" stroke="#f59e0b" stroke-width="3.5"/>
-                        <text x="177" y="24" fill="#f59e0b" font-size="11" font-family="monospace" text-anchor="middle">BAY 44 (U_F = 0,7 V)</text>
-
-                        <!-- Voltmeter V -->
-                        <circle cx="280" cy="125" r="24" fill="#0f172a" stroke="#38bdf8" stroke-width="2.5"/>
-                        <text x="280" y="132" fill="#38bdf8" font-size="20" font-weight="bold" text-anchor="middle">V</text>
-                        <text id="voltmeterTxt" x="280" y="168" fill="#38bdf8" font-size="11" font-family="monospace" font-weight="bold" text-anchor="middle">U_M = 1,3 V</text>
-
-                        <!-- DC Motor M -->
-                        <circle cx="380" cy="125" r="28" fill="#0f172a" stroke="#10b981" stroke-width="2.5" id="motorCircle"/>
-                        <text x="380" y="133" fill="#ffffff" font-size="22" font-weight="bold" text-anchor="middle">M</text>
-                        <text x="415" y="128" fill="#94a3b8" font-size="11" font-family="monospace">5 Ω</text>
-
-                        <!-- Current Label -->
-                        <text id="motorCurrTxt" x="177" y="92" fill="#ef4444" font-size="12" font-family="monospace" font-weight="bold" text-anchor="middle">I = 260 mA &gt; I_F (250 mA)!</text>
-                    </svg>
-
-                    <div id="motorStatusBanner" class="mt-4 bg-rose-950/50 border border-rose-500/40 rounded-lg p-3.5 text-xs text-slate-200 leading-relaxed">
-                        <strong class="text-rose-400"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Achtung Überlastung bei 2 V / 5 Ω:</strong> Die Diode lässt den Strom in Durchlassrichtung zwar zum Motor fließen (Motor dreht mit <code>U_M = 1,3 V</code>), aber mit <strong>I = 260 mA</strong> wird der maximal zulässige Durchlassstrom der BAY 44 (<strong>I<sub>F</sub> = 250 mA</strong>) überschritten!
-                    </div>
-                </div>
-
-                <!-- Right: Datasheet Table & Full Calculation (Worksheet Page 4 Aufgabe 4) -->
-                <div class="lg:col-span-6 space-y-5">
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-5">
-                        <h3 class="text-base font-bold text-white mb-3">Auszug Original-Datenblatt: Serie BAY 44, BAY 45, BAY 46 (T<sub>amb</sub> = 25 °C)</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-xs font-mono text-left border-collapse">
-                                <thead>
-                                    <tr class="border-b border-slate-800 text-slate-400">
-                                        <th class="py-2 pr-2">Kenngröße (Parameter)</th>
-                                        <th class="py-2 px-2">Symbol</th>
-                                        <th class="py-2 px-2 text-lt_amber">BAY 44</th>
-                                        <th class="py-2 px-2">BAY 45</th>
-                                        <th class="py-2 pl-2">BAY 46</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-800/70 text-slate-200">
-                                    <tr>
-                                        <td class="py-2 pr-2">Max. Sperrspannung (Reverse voltage)</td>
-                                        <td class="py-2 px-2 text-slate-400">U<sub>R</sub> / V<sub>RM</sub></td>
-                                        <td class="py-2 px-2 font-bold text-lt_amber">50 V</td>
-                                        <td class="py-2 px-2">150 V</td>
-                                        <td class="py-2 pl-2">300 V</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-2 pr-2">Max. Durchlassstrom (Forward current)</td>
-                                        <td class="py-2 px-2 text-slate-400">I<sub>F</sub></td>
-                                        <td class="py-2 px-2 font-bold text-rose-400" colspan="3">250 mA (für alle 3 Typen)</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-2 pr-2">Verlustleistung (Total power dissipation)</td>
-                                        <td class="py-2 px-2 text-slate-400">P<sub>tot</sub></td>
-                                        <td class="py-2 px-2 font-bold text-white" colspan="3">250 mW</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-2 pr-2">Durchlassspannung bei I<sub>F</sub> = 100 mA</td>
-                                        <td class="py-2 px-2 text-slate-400">U<sub>F</sub> (V<sub>F</sub>)</td>
-                                        <td class="py-2 px-2" colspan="3">0,97 V (&lt; 1,1 V) · Richtwert: 0,7 V</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-2 pr-2">Sperrstrom (Reverse current @ 25 °C)</td>
-                                        <td class="py-2 px-2 text-slate-400">I<sub>R</sub></td>
-                                        <td class="py-2 px-2" colspan="3">0,02 µA (&lt; 0,2 µA)</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Step-by-step calculation box (Exact match to Worksheet Page 4 Aufgabe 4) -->
-                    <div class="bg-slate-950 border-l-4 border-rose-500 border border-slate-800 rounded-xl p-5 space-y-2.5 text-sm">
-                        <div class="text-xs font-mono uppercase text-rose-400 font-bold">Dimensionierungs-Nachweis: Ist die BAY 44 für den 2-V / 5-Ω-Motor geeignet?</div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs bg-slate-900 p-3.5 rounded-lg border border-slate-800">
-                            <div>
-                                <div class="text-slate-400">1. Spannung am Motor U<sub>M</sub>:</div>
-                                <div class="text-white font-bold mt-0.5">U<sub>M</sub> = 2 V − 0,7 V = 1,3 V</div>
-                            </div>
-                            <div>
-                                <div class="text-slate-400">2. Strom im Stromkreis I:</div>
-                                <div class="text-rose-400 font-bold mt-0.5">I = (2 V − 0,7 V) / 5 Ω = 260 mA</div>
-                            </div>
-                            <div>
-                                <div class="text-slate-400">3. Verlustleistung Diode P:</div>
-                                <div class="text-white font-bold mt-0.5">P = 0,7 V · 0,26 A ≈ 0,18 W (180 mW)</div>
-                            </div>
-                            <div>
-                                <div class="text-slate-400">4. Abgleich mit Grenzwert I<sub>F</sub>:</div>
-                                <div class="text-rose-400 font-bold mt-0.5">260 mA &gt; I<sub>F</sub> = 250 mA!</div>
-                            </div>
-                        </div>
-                        <p class="text-xs text-slate-300 leading-relaxed pt-1">
-                            <strong class="text-rose-400">Ergebnis &amp; Begründung:</strong> <strong>Nein, die Diode BAY 44 ist nicht geeignet!</strong> Obwohl die Verlustleistung (<code>0,18 W &lt; 0,25 W</code>) noch unter <code>P<sub>tot</sub></code> liegt, wird der <strong>zulässige maximale Durchlassstrom (250 mA) mit 260 mA überschritten</strong> – es bleibt keinerlei Sicherheitsreserve. (Empfehlung: 1-A-Gleichrichterdiode wie 1N4001 einsetzen).
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 5: Arbeiten mit einer Diodenkennlinie (Worksheet Page 5 Aufgabe 5) -->
-        <section id="arbeitspunkt" class="bg-slate-900 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-2xl">
-            <div class="mb-6 border-b border-slate-800 pb-4">
-                <span class="text-xs font-mono uppercase text-lt_cyan">Kapitel 05 · Applikations-Messung an 4,5 V DC</span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Arbeiten mit einer Diodenkennlinie im Zweikanal-Versuch</h2>
-                <p class="text-sm text-slate-400">
-                    Bestimmung von Teilströmen, Vorwiderstand <code>R<sub>1</sub></code> und Gleichstromwiderständen einer leitenden (<code>R<sub>3</sub></code>) sowie sperrenden Diode (<code>R<sub>4</sub></code>) bei <code>U = 4,5 V</code>.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <!-- Left: Abb. 1 Kennlinie & Abb. 2 Schaltskizze -->
-                <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <!-- Abb. 1: Diodenkennlinie -->
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
-                        <div class="text-xs font-mono text-lt_cyan font-bold mb-2">Abb. 1: Diodenkennlinie (Durchlass)</div>
-                        <svg viewBox="0 0 240 210" class="w-full h-auto">
-                            <!-- Grid -->
-                            <g stroke="#1e293b" stroke-width="1">
-                                <line x1="35" y1="30" x2="215" y2="30"/><line x1="35" y1="65" x2="215" y2="65"/>
-                                <line x1="35" y1="100" x2="215" y2="100"/><line x1="35" y1="135" x2="215" y2="135"/>
-                                <line x1="60" y1="20" x2="60" y2="170"/><line x1="85" y1="20" x2="85" y2="170"/>
-                                <line x1="110" y1="20" x2="110" y2="170"/><line x1="135" y1="20" x2="135" y2="170"/>
-                                <line x1="160" y1="20" x2="160" y2="170"/><line x1="185" y1="20" x2="185" y2="170"/>
-                                <line x1="210" y1="20" x2="210" y2="170"/>
-                            </g>
-                            <!-- Axes -->
-                            <line x1="35" y1="170" x2="225" y2="170" stroke="#e2e8f0" stroke-width="1.8"/>
-                            <line x1="35" y1="170" x2="35" y2="15" stroke="#e2e8f0" stroke-width="1.8"/>
-                            <text x="42" y="18" fill="#e2e8f0" font-size="10" font-weight="bold">I in mA</text>
-                            <text x="222" y="186" fill="#e2e8f0" font-size="10" font-weight="bold" text-anchor="end">U in V</text>
-                            <!-- Y labels (10, 20, 30, 40 mA) -->
-                            <text x="30" y="138" fill="#94a3b8" font-size="9" text-anchor="end">10</text>
-                            <text x="30" y="103" fill="#94a3b8" font-size="9" text-anchor="end">20</text>
-                            <text x="30" y="68" fill="#10b981" font-size="9" font-weight="bold" text-anchor="end">30</text>
-                            <text x="30" y="33" fill="#94a3b8" font-size="9" text-anchor="end">40</text>
-                            <!-- X labels (0.1 .. 0.7 V) -->
-                            <text x="85" y="183" fill="#94a3b8" font-size="8" text-anchor="middle">0,2</text>
-                            <text x="135" y="183" fill="#94a3b8" font-size="8" text-anchor="middle">0,4</text>
-                            <text x="185" y="183" fill="#94a3b8" font-size="8" text-anchor="middle">0,6</text>
-                            <text x="210" y="183" fill="#10b981" font-size="9" font-weight="bold" text-anchor="middle">0,7</text>
-                            <!-- Curve passing through (0.7 V -> x=210, 30 mA -> y=65) -->
-                            <path d="M35,170 L95,170 Q155,168 185,128 Q202,95 218,22" fill="none" stroke="#ef4444" stroke-width="2.5"/>
-                            <!-- Reading lines at 30 mA / 0,70 V -->
-                            <line x1="35" y1="65" x2="210" y2="65" stroke="#10b981" stroke-width="1.2" stroke-dasharray="3,2"/>
-                            <line x1="210" y1="65" x2="210" y2="170" stroke="#10b981" stroke-width="1.2" stroke-dasharray="3,2"/>
-                            <circle cx="210" cy="65" r="4" fill="#10b981"/>
-                        </svg>
-                    </div>
-
-                    <!-- Abb. 2: Schaltskizze zum Versuch -->
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
-                        <div class="text-xs font-mono text-lt_amber font-bold mb-2">Abb. 2: Schaltskizze (U = 4,5 V)</div>
-                        <svg viewBox="0 0 240 210" class="w-full h-auto">
-                            <!-- Main loop -->
-                            <line x1="45" y1="35" x2="205" y2="35" stroke="#e2e8f0" stroke-width="2"/>
-                            <line x1="45" y1="185" x2="205" y2="185" stroke="#e2e8f0" stroke-width="2"/>
-                            <line x1="45" y1="35" x2="45" y2="185" stroke="#e2e8f0" stroke-width="2"/>
-                            <line x1="135" y1="35" x2="135" y2="185" stroke="#e2e8f0" stroke-width="2"/>
-                            <line x1="205" y1="35" x2="205" y2="185" stroke="#e2e8f0" stroke-width="2"/>
-                            <!-- Battery 4,5V -->
-                            <rect x="35" y="102" width="20" height="12" fill="#070b14"/>
-                            <line x1="30" y1="102" x2="60" y2="102" stroke="#e2e8f0" stroke-width="2"/>
-                            <line x1="37" y1="114" x2="53" y2="114" stroke="#e2e8f0" stroke-width="3.5"/>
-                            <text x="26" y="112" fill="#38bdf8" font-size="9" font-family="monospace" text-anchor="end">4,5V</text>
-                            <!-- Ammeter 30mA -->
-                            <circle cx="90" cy="35" r="14" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
-                            <line x1="80" y1="45" x2="100" y2="25" stroke="#10b981" stroke-width="1.8"/>
-                            <text x="90" y="16" fill="#10b981" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">30 mA</text>
-                            <!-- R1 and R2 -->
-                            <rect x="125" y="65" width="20" height="38" fill="#1e293b" stroke="#e2e8f0" stroke-width="1.8"/>
-                            <text x="118" y="88" fill="#e2e8f0" font-size="10" text-anchor="end">R1</text>
-                            <rect x="195" y="65" width="20" height="38" fill="#1e293b" stroke="#e2e8f0" stroke-width="1.8"/>
-                            <text x="220" y="88" fill="#e2e8f0" font-size="10">R2</text>
-                            <!-- Diode R3 (Forward, pointing down) -->
-                            <polygon points="123,132 147,132 135,156" fill="none" stroke="#10b981" stroke-width="2"/>
-                            <line x1="123" y1="156" x2="147" y2="156" stroke="#10b981" stroke-width="2.5"/>
-                            <text x="118" y="148" fill="#10b981" font-size="10" font-weight="bold" text-anchor="end">R3</text>
-                            <!-- Diode R4 (Reverse, pointing up) -->
-                            <polygon points="193,156 217,156 205,132" fill="none" stroke="#f43f5e" stroke-width="2"/>
-                            <line x1="193" y1="132" x2="217" y2="132" stroke="#f43f5e" stroke-width="2.5"/>
-                            <text x="222" y="148" fill="#f43f5e" font-size="10" font-weight="bold">R4</text>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Right: Complete 3-part solution (a, b, c) -->
-                <div class="lg:col-span-6 space-y-4">
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
-                        <div class="text-xs font-mono text-lt_emerald font-bold uppercase mb-1">a) Stromverteilung durch die Dioden R<sub>3</sub> und R<sub>4</sub></div>
-                        <p class="text-sm text-slate-300">
-                            Die Diode <strong>R<sub>4</sub> ist in Sperrrichtung</strong> eingebaut und sperrt vollständig. Daher fließt der gesamte vom Messgerät angezeigte Strom (30 mA) durch den linken Zweig über die leitende Diode <strong>R<sub>3</sub></strong>:
-                        </p>
-                        <div class="mt-2 font-mono text-xs bg-slate-900 px-3 py-2 rounded border border-slate-800 text-lt_emerald font-bold">
-                            I<sub>1</sub> (durch R<sub>3</sub>) = 30 mA &nbsp;&nbsp;|&nbsp;&nbsp; I<sub>2</sub> (durch R<sub>4</sub>) = 0 mA
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
-                        <div class="text-xs font-mono text-lt_cyan font-bold uppercase mb-1">b) Teilspannung U<sub>1</sub> und Widerstandswert R<sub>1</sub></div>
-                        <p class="text-sm text-slate-300">
-                            Aus der Kennlinie (Abb. 1) liest man bei <code>I<sub>1</sub> = 30 mA</code> an der Diode <code>R<sub>3</sub></code> eine Flussspannung von <strong>U<sub>R3</sub> = 0,70 V</strong> ab:
-                        </p>
-                        <div class="mt-2 font-mono text-xs bg-slate-900 px-3 py-2 rounded border border-slate-800 space-y-1 text-white">
-                            <div>U<sub>1</sub> = U − U<sub>R3</sub> = 4,5 V − 0,70 V = <strong class="text-lt_cyan">3,8 V</strong></div>
-                            <div>R<sub>1</sub> = U<sub>1</sub> / I<sub>1</sub> = 3,8 V / (30 · 10<sup>−3</sup> A) = 126,7 Ω <strong class="text-lt_cyan">≈ 130 Ω</strong></div>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
-                        <div class="text-xs font-mono text-lt_amber font-bold uppercase mb-1">c) Gleichstrom-Widerstandswerte beider Dioden im Betriebspunkt</div>
-                        <div class="mt-1 font-mono text-xs bg-slate-900 px-3 py-2 rounded border border-slate-800 space-y-1 text-white">
-                            <div>Leitende Diode R<sub>3</sub>: R<sub>3</sub> = U<sub>R3</sub> / I<sub>1</sub> = 0,70 V / (30 · 10<sup>−3</sup> A) <strong class="text-lt_amber">≈ 23 Ω</strong></div>
-                            <div>Sperrende Diode R<sub>4</sub>: <strong class="text-rose-400">R<sub>4</sub> = ∞ (unendlich, da R<sub>4</sub> sperrt)</strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-800 py-10 text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-2.5">
-                <i class="fa-solid fa-microchip text-lt_amber text-base"></i>
-                <span class="text-slate-300 font-bold">LUMIATECH Semiconductor GmbH</span>
-                <span>· Produktbereich Silizium-Dioden</span>
-            </div>
-            <div class="flex gap-4">
-                <a href="leds.html" class="text-lt_emerald hover:underline font-semibold">Weiter zu Optoelektronik &amp; LEDs &rarr;</a>
-                <a href="schaltungslabor.html" class="text-lt_cyan hover:underline font-semibold">Zum Schaltungslabor &rarr;</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Interactive Scripts for Dioden Page -->
-    <script>
-        // 1. PN-Junction 2x2 Step Microscope
-        const pnStepData = {
-            fwd1: {
-                badge: 'Durchlassrichtung (+ an A, − an K)',
-                badgeClass: 'px-2.5 py-0.5 rounded bg-emerald-500/20 text-lt_emerald font-mono text-xs font-bold',
-                borderClass: 'bg-slate-950 border-l-4 border-lt_emerald rounded-r-xl p-5 space-y-3',
-                stepNum: 'Schritt 1 / 2',
-                title: '1. Ladungsträger werden in Richtung RLZ „gedrückt“',
-                desc: 'Pluspol (+) an der Anode (P) und Minuspol (−) an der Kathode (N): Gleichnamige Ladungen stoßen sich ab. Die beweglichen Löcher (+) und Elektronen (−) werden von außen in Richtung Raumladungszone (RLZ) gedrückt.',
-                rlzHalfWidth: 48,
-                lampOn: false,
-                polLeft: '+',
-                polRight: '−',
-                arrowDir: 'inward'
-            },
-            fwd2: {
-                badge: 'Durchlassrichtung (+ an A, − an K)',
-                badgeClass: 'px-2.5 py-0.5 rounded bg-emerald-500/20 text-lt_emerald font-mono text-xs font-bold',
-                borderClass: 'bg-slate-950 border-l-4 border-lt_emerald rounded-r-xl p-5 space-y-3',
-                stepNum: 'Schritt 2 / 2',
-                title: '2. RLZ wird kleiner → Rekombination → PN-Übergang leitfähig',
-                desc: 'Die Raumladungszone (RLZ) wird abgebaut. An der Grenzfläche rekombinieren Elektronen und Löcher fortlaufend. Der PN-Übergang wird leitfähig – es fließt ein dauerhafter Durchlassstrom und die Kontrolllampe leuchtet!',
-                rlzHalfWidth: 16,
-                lampOn: true,
-                polLeft: '+',
-                polRight: '−',
-                arrowDir: 'recombine'
-            },
-            rev1: {
-                badge: 'Sperrrichtung (− an A, + an K)',
-                badgeClass: 'px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 font-mono text-xs font-bold',
-                borderClass: 'bg-slate-950 border-l-4 border-rose-500 rounded-r-xl p-5 space-y-3',
-                stepNum: 'Schritt 1 / 2',
-                title: '1. Ladungsträger werden aus der RLZ „gezogen“',
-                desc: 'Minuspol (−) an der Anode (P) und Pluspol (+) an der Kathode (N): Ungleichnamige Ladungen ziehen sich an. Die beweglichen Löcher (+) im P-Leiter und Elektronen (−) im N-Leiter werden nach außen von der Grenzfläche weggezogen.',
-                rlzHalfWidth: 68,
-                lampOn: false,
-                polLeft: '−',
-                polRight: '+',
-                arrowDir: 'outward'
-            },
-            rev2: {
-                badge: 'Sperrrichtung (− an A, + an K)',
-                badgeClass: 'px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 font-mono text-xs font-bold',
-                borderClass: 'bg-slate-950 border-l-4 border-rose-500 rounded-r-xl p-5 space-y-3',
-                stepNum: 'Schritt 2 / 2',
-                title: '2. RLZ vergrößert sich → PN-Übergang sperrt',
-                desc: 'Durch den Abzug der freien Ladungsträger vergrößert sich die Raumladungszone (Sperrschicht) stark. Es sind keine beweglichen Ladungsträger mehr am Übergang vorhanden – der PN-Übergang sperrt, die Lampe bleibt dunkel.',
-                rlzHalfWidth: 115,
-                lampOn: false,
-                polLeft: '−',
-                polRight: '+',
-                arrowDir: 'blocked'
-            }
-        };
-
-        function setPnStep(stepKey) {
-            ['fwd1', 'fwd2', 'rev1', 'rev2'].forEach(k => {
-                const b = document.getElementById('btn-pn-' + k);
-                if (k === stepKey) {
-                    const isRev = k.startsWith('rev');
-                    b.className = `px-3.5 py-2 rounded-lg text-xs font-bold font-mono border ${isRev ? 'bg-rose-500/20 border-rose-400' : 'bg-emerald-500/20 border-emerald-400'} text-white`;
-                } else {
-                    b.className = 'px-3.5 py-2 rounded-lg text-xs font-bold font-mono border bg-slate-800 border-slate-700 text-slate-300';
-                }
-            });
-
-            const d = pnStepData[stepKey];
-            document.getElementById('pnModeBadge').textContent = d.badge;
-            document.getElementById('pnModeBadge').className = d.badgeClass;
-            document.getElementById('pnStepCard').className = d.borderClass;
-            document.getElementById('pnStepNum').textContent = d.stepNum;
-            document.getElementById('pnStepTitle').textContent = d.title;
-            document.getElementById('pnStepDesc').textContent = d.desc;
-
-            renderPnSvg(d);
-        }
-
-        function renderPnSvg(d) {
-            const svg = document.getElementById('pnSimSvg');
-            const cx = 340;
-            const leftBoundary = cx - d.rlzHalfWidth;
-            const rightBoundary = cx + d.rlzHalfWidth;
-
-            const lampFill = d.lampOn ? '#fbbf24' : '#0f172a';
-            const lampStroke = d.lampOn ? '#f59e0b' : '#94a3b8';
-
-            let carrierMarkup = '';
-            // Draw 6 columns of fixed ions on P side and 6 columns on N side
-            const pCols = [135, 170, 205, 240, 275, 310];
-            const nCols = [370, 405, 440, 475, 510, 545];
-            const rows = [145, 185, 225];
-
-            pCols.forEach(x => {
-                rows.forEach(y => {
-                    carrierMarkup += `<circle cx="${x}" cy="${y}" r="11" fill="#0b1120" stroke="#38bdf8" stroke-width="1.5"/>
-                                      <text x="${x}" y="${y+4}" fill="#38bdf8" font-size="13" font-family="monospace" font-weight="bold" text-anchor="middle">−</text>`;
-                    // Add mobile hole if outside RLZ
-                    if (x < leftBoundary) {
-                        const hx = x + 10;
-                        const hy = y - 8;
-                        carrierMarkup += `<circle cx="${hx}" cy="${hy}" r="6" fill="#ef4444"/>
-                                          <text x="${hx}" y="${hy+3.5}" fill="#fff" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">+</text>`;
-                        if (d.arrowDir === 'inward') {
-                            carrierMarkup += `<line x1="${hx+6}" y1="${hy}" x2="${hx+22}" y2="${hy}" stroke="#f59e0b" stroke-width="2"/>`;
-                        } else if (d.arrowDir === 'outward') {
-                            carrierMarkup += `<line x1="${hx-6}" y1="${hy}" x2="${hx-22}" y2="${hy}" stroke="#f59e0b" stroke-width="2"/>`;
-                        }
-                    }
-                });
-            });
-
-            nCols.forEach(x => {
-                rows.forEach(y => {
-                    carrierMarkup += `<circle cx="${x}" cy="${y}" r="11" fill="#0b1120" stroke="#fbbf24" stroke-width="1.5"/>
-                                      <text x="${x}" y="${y+4}" fill="#fbbf24" font-size="13" font-family="monospace" font-weight="bold" text-anchor="middle">+</text>`;
-                    // Add mobile electron if outside RLZ
-                    if (x > rightBoundary) {
-                        const ex = x - 10;
-                        const ey = y - 8;
-                        carrierMarkup += `<circle cx="${ex}" cy="${ey}" r="6" fill="#10b981"/>
-                                          <text x="${ex}" y="${ey+3.5}" fill="#fff" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">−</text>`;
-                        if (d.arrowDir === 'inward') {
-                            carrierMarkup += `<line x1="${ex-6}" y1="${ey}" x2="${ex-22}" y2="${ey}" stroke="#f59e0b" stroke-width="2"/>`;
-                        } else if (d.arrowDir === 'outward') {
-                            carrierMarkup += `<line x1="${ex+6}" y1="${ey}" x2="${ex+22}" y2="${ey}" stroke="#f59e0b" stroke-width="2"/>`;
-                        }
-                    }
-                });
-            });
-
-            if (d.arrowDir === 'recombine') {
-                carrierMarkup += `<ellipse cx="${cx}" cy="185" rx="22" ry="52" fill="rgba(16,185,129,0.22)" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2"/>
-                                  <text x="${cx}" y="272" fill="#10b981" font-size="12" font-weight="bold" text-anchor="middle">Rekombination an der Grenzfläche → Strom fließt!</text>`;
-            } else if (d.arrowDir === 'blocked') {
-                carrierMarkup += `<text x="${cx}" y="272" fill="#f43f5e" font-size="12" font-weight="bold" text-anchor="middle">Breite Raumladungszone (RLZ) → PN-Übergang sperrt!</text>`;
-            }
-
-            svg.innerHTML = `
-                <!-- External Circuit Wire -->
-                <polyline points="110,185 55,185 55,48 625,48 625,185 570,185" fill="none" stroke="${d.lampOn ? '#10b981' : '#94a3b8'}" stroke-width="2.5"/>
-                <!-- Indicator Lamp -->
-                <circle cx="235" cy="48" r="20" fill="${lampFill}" stroke="${lampStroke}" stroke-width="2.5"/>
-                <line x1="221" y1="34" x2="249" y2="62" stroke="${lampStroke}" stroke-width="2"/>
-                <line x1="249" y1="34" x2="221" y2="62" stroke="${lampStroke}" stroke-width="2"/>
-                <text x="235" y="18" fill="${d.lampOn ? '#fbbf24' : '#64748b'}" font-size="11" font-family="monospace" font-weight="bold" text-anchor="middle">${d.lampOn ? 'LAMPE LEUCHTET' : 'LAMPE AUS'}</text>
-
-                <!-- DC Voltage Source Symbol -->
-                <circle cx="430" cy="48" r="22" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
-                <line x1="414" y1="43" x2="446" y2="43" stroke="#e2e8f0" stroke-width="2"/>
-                <line x1="416" y1="53" x2="444" y2="53" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="5,3"/>
-                <text x="392" y="34" fill="${d.polLeft === '+' ? '#ef4444' : '#38bdf8'}" font-size="22" font-weight="bold" text-anchor="middle">${d.polLeft}</text>
-                <text x="468" y="34" fill="${d.polRight === '+' ? '#ef4444' : '#38bdf8'}" font-size="22" font-weight="bold" text-anchor="middle">${d.polRight}</text>
-
-                <!-- Semiconductor Crystal Body -->
-                <rect x="110" y="115" width="460" height="135" fill="#0f172a" stroke="#e2e8f0" stroke-width="2.5" rx="4"/>
-                <!-- RLZ Zone shading -->
-                <rect x="${leftBoundary}" y="117" width="${d.rlzHalfWidth * 2}" height="131" fill="rgba(245, 158, 11, 0.12)"/>
-                <line x1="${leftBoundary}" y1="115" x2="${leftBoundary}" y2="250" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,4"/>
-                <line x1="${rightBoundary}" y1="115" x2="${rightBoundary}" y2="250" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,4"/>
-                <line x1="${cx}" y1="115" x2="${cx}" y2="250" stroke="#cbd5e1" stroke-width="1.5"/>
-
-                ${carrierMarkup}
-            `;
-        }
-
-        // 2. Interactive BAY 44 4-Quadrant Curve Slider
-        function updateBayCurvePoint() {
-            const val = parseFloat(document.getElementById('bayVoltageSlider').value);
-            const dot = document.getElementById('bayCursorDot');
-            const badge = document.getElementById('bayPointBadge');
-
-            if (val >= 0) {
-                const uF = val;
-                const x = 330 + (uF / 0.8) * 280;
-                let iF = 0;
-                if (uF > 0.5) {
-                    iF = Math.pow((uF - 0.5) / 0.28, 2.6) * 85;
-                }
-                const y = Math.max(30, 225 - (iF / 50) * 110);
-                dot.setAttribute('cx', x);
-                dot.setAttribute('cy', y);
-                dot.setAttribute('fill', '#10b981');
-                badge.textContent = `Durchlass: U_F = ${uF.toFixed(2).replace('.', ',')} V | I_F ≈ ${iF.toFixed(1).replace('.', ',')} mA`;
-                badge.className = 'px-2.5 py-1 rounded bg-emerald-500/20 text-lt_emerald font-bold';
-            } else {
-                const uR = Math.abs(val);
-                const x = 330 - (uR / 80) * 280;
-                let iR = 0.01;
-                if (uR > 50) {
-                    iR = Math.pow((uR - 50) / 22, 2.2) * 5;
-                }
-                const y = Math.min(398, 225 + (iR / 5) * 173);
-                dot.setAttribute('cx', x);
-                dot.setAttribute('cy', y);
-                dot.setAttribute('fill', uR > 50 ? '#ef4444' : '#f59e0b');
-                if (uR <= 50) {
-                    badge.textContent = `Sperrbereich: U_R = ${uR.toFixed(0)} V | I_R ≈ 0,02 µA (sperrt)`;
-                    badge.className = 'px-2.5 py-1 rounded bg-amber-500/20 text-lt_amber font-bold';
-                } else {
-                    badge.textContent = `DURCHBRUCH: U_R = ${uR.toFixed(0)} V > 50 V | I_R = ${iR.toFixed(1).replace('.', ',')} mA (Zerstörung!)`;
-                    badge.className = 'px-2.5 py-1 rounded bg-rose-500/20 text-rose-400 font-bold';
-                }
-            }
-        }
-
-        // 3. Motor Reverse Polarity Toggle
-        let motorForward = true;
-        function toggleMotorPolarity() {
-            motorForward = !motorForward;
-            const topTxt = document.getElementById('polTopTxt');
-            const botTxt = document.getElementById('polBotTxt');
-            const vmTxt = document.getElementById('voltmeterTxt');
-            const currTxt = document.getElementById('motorCurrTxt');
-            const banner = document.getElementById('motorStatusBanner');
-            const motorCircle = document.getElementById('motorCircle');
-
-            if (motorForward) {
-                topTxt.textContent = '+';
-                topTxt.setAttribute('fill', '#ef4444');
-                botTxt.textContent = '−';
-                botTxt.setAttribute('fill', '#38bdf8');
-                vmTxt.textContent = 'U_M = 1,3 V';
-                currTxt.textContent = 'I = 260 mA > I_F (250 mA)!';
-                currTxt.setAttribute('fill', '#ef4444');
-                motorCircle.setAttribute('stroke', '#10b981');
-                banner.innerHTML = '<strong class="text-rose-400"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Normalbetrieb (Durchlassrichtung):</strong> An der Diode fallen <code>0,7 V</code> ab, am Motor liegen <code>U_M = 1,3 V</code> an. Es fließen <code>I = (2 V − 0,7 V) / 5 Ω = 260 mA</code>. Da die BAY 44 nur für <code>I_F = 250 mA</code> zugelassen ist, wird sie überlastet!';
-            } else {
-                topTxt.textContent = '−';
-                topTxt.setAttribute('fill', '#38bdf8');
-                botTxt.textContent = '+';
-                botTxt.setAttribute('fill', '#ef4444');
-                vmTxt.textContent = 'U_M = 0,0 V';
-                currTxt.textContent = 'Diode sperrt: I = 0 mA (U_R = 2 V)';
-                currTxt.setAttribute('fill', '#10b981');
-                motorCircle.setAttribute('stroke', '#64748b');
-                banner.innerHTML = '<strong class="text-lt_emerald"><i class="fa-solid fa-shield-check mr-1"></i>Verpolungsfall (Sperrrichtung):</strong> Die Spannungsquelle wurde falsch herum angeschlossen! Die Schutzdiode sperrt (<code>I = 0 A</code>), nimmt die gesamten <code>2 V</code> als Sperrspannung auf und schützt den DC-Motor zuverlässig vor dem Rückwärtslauf.';
-            }
-        }
-
-        // Init
-        setPnStep('fwd1');
-        updateBayCurvePoint();
-    </script>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
 </body>
 </html>
