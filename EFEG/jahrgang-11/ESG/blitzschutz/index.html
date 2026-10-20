@@ -1,99 +1,104 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blitzschutz Simulationen</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a2e;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        h1 {
-            color: #f9a826;
-            text-shadow: 0 0 10px rgba(249, 168, 38, 0.5);
-            margin-bottom: 40px;
-            text-align: center;
-        }
-        .container {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-        }
-        .card {
-            background-color: #16213e;
-            border: 2px solid #0f3460;
-            border-radius: 12px;
-            width: 300px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(249, 168, 38, 0.2);
-            border-color: #f9a826;
-        }
-        .card h2 {
-            color: #e94560;
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
-        .card p {
-            color: #a0aab2;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        .icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-        .footer {
-            margin-top: 50px;
-            font-size: 0.9rem;
-            color: #7a7a7a;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Äußerer Blitzschutz – Simulationen</title>
+  <meta name="description" content="Simulationen zu den drei Planungsverfahren für Fangeinrichtungen nach DIN EN 62305-3: Blitzkugel-, Schutzwinkel- und Maschenverfahren.">
+  <link rel="stylesheet" href="assets/blitz.css">
+  <script defer src="assets/blitz.js"></script>
+  <style>
+    .methods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    @media (max-width: 900px) { .methods { grid-template-columns: 1fr; } }
+    .method { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; text-decoration: none; color: inherit; transition: border-color .15s, box-shadow .15s; }
+    .method:hover { border-color: var(--night); box-shadow: 0 10px 26px rgba(13,23,38,.12); }
+    .method svg { display: block; width: 100%; height: auto; background: #eaf1f9; border-bottom: 1px solid var(--line); }
+    .method div { padding: 18px 20px 20px; }
+    .method h2 { font-size: 1.3rem; margin-bottom: .3em; }
+    .method p { color: var(--ink-2); margin: 0 0 .8rem; }
+    .method span { font-weight: 700; text-decoration: underline; text-decoration-color: var(--bolt); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    .parts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 28px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    .parts > div { padding: 18px 20px; }
+    .parts > div + div { border-left: 1px solid var(--line); }
+    @media (max-width: 760px) { .parts { grid-template-columns: 1fr; } .parts > div + div { border-left: 0; border-top: 1px solid var(--line); } }
+    .parts h3 { margin-bottom: .3em; }
+    .parts p { margin: 0; color: var(--ink-2); font-size: .95rem; }
+    .older { margin-top: 28px; font-size: .9rem; color: var(--ink-3); }
+    .older a { color: var(--ink-2); }
+  </style>
 </head>
 <body>
+  <header class="top">
+    <div id="top-bar"></div>
+    <div class="container hero">
+      <h1>Äußerer Blitzschutz</h1>
+      <p>Fangeinrichtungen sollen den Blitz abfangen, bevor er in das Gebäude einschlägt. Wo sie sitzen müssen, bestimmen Sie mit einem der drei Verfahren nach DIN EN 62305-3. Probieren Sie alle drei aus.</p>
+    </div>
+  </header>
 
-    <h1>⚡ Blitzschutz Simulationen</h1>
-
-    <div class="container">
-        <a href="blitzkugekverfahren.html" class="card">
-            <div class="icon">🔮</div>
-            <h2>Blitzkugelverfahren</h2>
-            <p>Interaktive Simulation zum Blitzkugelverfahren. Berechne und visualisiere den Schutzbereich mit der rollenden Kugel.</p>
-        </a>
-
-        <a href="schutzwinkelverfahren.html" class="card">
-            <div class="icon">📐</div>
-            <h2>Schutzwinkelverfahren</h2>
-            <p>Interaktive Simulation zum Schutzwinkelverfahren. Bestimme den Schutzwinkel abhängig von der Höhe und Blitzschutzklasse.</p>
-        </a>
-
-        <a href="maschenverfahren.html" class="card">
-            <div class="icon">🕸️</div>
-            <h2>Maschenverfahren</h2>
-            <p>Interaktive Simulation zum Maschenverfahren. Berechne Maschenweite und Materialbedarf abhängig von der Blitzschutzklasse.</p>
-        </a>
+  <main class="container">
+    <div class="methods">
+      <a class="method" href="blitzkugel.html">
+        <svg viewBox="0 0 320 150" aria-hidden="true">
+          <rect x="0" y="128" width="320" height="22" fill="#e6dccb"/>
+          <path d="M40 128 C 70 128, 92 100, 100 70 L100 128 Z M230 128 C 200 128, 186 108, 180 95 L180 128 Z" fill="rgba(21,138,69,.25)"/>
+          <rect x="100" y="70" width="40" height="58" fill="#aab6c4" stroke="#2b3a4f" stroke-width="1.5"/>
+          <rect x="140" y="95" width="40" height="33" fill="#aab6c4" stroke="#2b3a4f" stroke-width="1.5"/>
+          <circle cx="132" cy="22" r="48" fill="rgba(47,111,219,.15)" stroke="#2f6fdb" stroke-width="2"/>
+          <path d="M100 70 h40" stroke="#c8372d" stroke-width="4"/>
+          <path d="M146 64 l-6 10 h5 l-3 9 l9 -12 h-5 z" fill="#f5b301" stroke="#7a5800"/>
+        </svg>
+        <div><h2>Blitzkugelverfahren</h2><p>Eine Kugel rollt über das Gebäude. Wo sie es berührt, braucht es eine Fangeinrichtung. Für jede Gebäudeform geeignet.</p><span>Simulation öffnen</span></div>
+      </a>
+      <a class="method" href="schutzwinkel.html">
+        <svg viewBox="0 0 320 150" aria-hidden="true">
+          <rect x="0" y="128" width="320" height="22" fill="#e6dccb"/>
+          <rect x="90" y="80" width="140" height="48" fill="#aab6c4" stroke="#2b3a4f" stroke-width="1.5"/>
+          <polygon points="160,26 112,80 208,80" fill="rgba(21,138,69,.25)" stroke="#158a45" stroke-width="1.5"/>
+          <rect x="128" y="68" width="22" height="12" fill="#8fd1a8" stroke="#0c5a2c" stroke-width="1.2"/>
+          <line x1="160" y1="26" x2="160" y2="80" stroke="#c8372d" stroke-width="4"/>
+          <path d="M160 46 A20 20 0 0 1 145 40" fill="none" stroke="#142032" stroke-width="1.5"/>
+          <text x="148" y="56" font-size="12" font-weight="800" fill="#142032">α</text>
+        </svg>
+        <div><h2>Schutzwinkelverfahren</h2><p>Eine Fangstange schützt einen Kegel. Der Schutzwinkel hängt von Höhe und Blitzschutzklasse ab. Gut für einfache Gebäude.</p><span>Simulation öffnen</span></div>
+      </a>
+      <a class="method" href="maschen.html">
+        <svg viewBox="0 0 320 150" aria-hidden="true">
+          <polygon points="60,110 180,130 270,96 150,78" fill="#d5dde7" stroke="#2b3a4f" stroke-width="1.5"/>
+          <g stroke="#e08a00" stroke-width="2.5" fill="none">
+            <polygon points="60,110 180,130 270,96 150,78"/>
+            <line x1="100" y1="116.7" x2="190" y2="84"/><line x1="140" y1="123.3" x2="230" y2="90"/>
+            <line x1="105" y1="94" x2="225" y2="113"/>
+          </g>
+          <circle cx="60" cy="110" r="5" fill="#c8372d"/><circle cx="180" cy="130" r="5" fill="#c8372d"/><circle cx="270" cy="96" r="5" fill="#c8372d"/>
+        </svg>
+        <div><h2>Maschenverfahren</h2><p>Ein Netz aus Fangleitungen auf dem Flachdach. Maschenweite, Leitungslänge und Ableitungen berechnen.</p><span>Simulation öffnen</span></div>
+      </a>
     </div>
 
-    <div class="footer">
-        &copy; Herr Niebel
+    <div class="parts">
+      <div><h3>Fangeinrichtung</h3><p>Fangstangen, Fangleitungen oder Maschen auf dem Dach nehmen den Blitz auf.</p></div>
+      <div><h3>Ableitung</h3><p>Leitungen an der Fassade führen den Blitzstrom auf kurzem Weg nach unten.</p></div>
+      <div><h3>Erdungsanlage</h3><p>Der Erder verteilt den Blitzstrom im Erdreich.</p></div>
     </div>
 
+    <div class="table-wrap" style="margin-top:28px">
+      <table class="data">
+        <caption class="visually-hidden">Kennwerte je Blitzschutzklasse</caption>
+        <thead><tr><th>Blitzschutzklasse</th><th>I</th><th>II</th><th>III</th><th>IV</th></tr></thead>
+        <tbody>
+          <tr><td>Blitzkugelradius</td><td>20 m</td><td>30 m</td><td>45 m</td><td>60 m</td></tr>
+          <tr><td>Maschenweite</td><td>5 × 5 m</td><td>10 × 10 m</td><td>15 × 15 m</td><td>20 × 20 m</td></tr>
+          <tr><td>Typ. Abstand der Ableitungen</td><td>10 m</td><td>10 m</td><td>15 m</td><td>20 m</td></tr>
+          <tr><td>Grenzhöhe Schutzwinkelverfahren</td><td>20 m</td><td>30 m</td><td>45 m</td><td>60 m</td></tr>
+          <tr><td>Kleinster erfasster Blitzstrom</td><td>3 kA</td><td>5 kA</td><td>10 kA</td><td>16 kA</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="older">Frühere 3D-Versionen: <a href="blitzkugekverfahren.html">Blitzkugelverfahren</a> · <a href="schutzwinkelverfahren.html">Schutzwinkelverfahren</a> · <a href="maschenverfahren.html">Maschenverfahren</a></p>
+  </main>
+
+  <footer id="foot"></footer>
 </body>
 </html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schutzwinkelverfahren – Simulation | Äußerer Blitzschutz</title>
+  <meta name="description" content="Interaktive Simulation zum Schutzwinkelverfahren nach DIN EN 62305-3: Schutzkegel einer Fangstange, Schutzwinkel abhängig von Höhe und Blitzschutzklasse.">
+  <link rel="stylesheet" href="assets/blitz.css">
+  <script defer src="assets/blitz.js"></script>
+  <script defer src="assets/sim-schutzwinkel.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div id="top-bar"></div>
+    <div class="container hero">
+      <div class="crumbs"><a href="index.html">Blitzschutz</a> / Schutzwinkelverfahren</div>
+      <h1>Schutzwinkelverfahren</h1>
+      <p>Eine Fangstange schützt einen kegelförmigen Raum. Wie weit der Kegel reicht, hängt vom Schutzwinkel α ab – und der wird kleiner, je höher die Stange über der Bezugsebene steht.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="sim" id="sim-schutzwinkel" aria-label="Simulation Schutzwinkelverfahren">
+      <div class="sim__stage"><span class="sim__hint"></span>
+        <div class="legend">
+          <span><i style="background:#c8372d;height:4px"></i>Fangstange</span>
+          <span><i style="background:rgba(21,138,69,.3);border:1px solid #158a45"></i>Schutzkegel</span>
+          <span><i style="border-top:2px dashed #2f6fdb;height:0"></i>Bezugsebene</span>
+          <span><i style="background:#f5b301;border-radius:50%;width:12px;height:12px"></i>Spitze ziehen</span>
+        </div>
+      </div>
+      <div class="sim__panel"></div>
+    </section>
+
+    <div class="text">
+      <div class="card card--accent">
+        <h2>So gehen Sie vor</h2>
+        <ol>
+          <li>Bezugsebene festlegen: die Fläche, auf der geschützt werden soll (Dachfläche oder Erdboden).</li>
+          <li>Höhe h der Stangenspitze über dieser Ebene bestimmen.</li>
+          <li>Schutzwinkel α im Diagramm für die Blitzschutzklasse ablesen.</li>
+          <li>Schutzradius berechnen und prüfen, ob alle Teile im Kegel liegen.</li>
+        </ol>
+        <div class="formula">r = h · tan α</div>
+      </div>
+      <div class="card">
+        <h2>Grenzen des Verfahrens</h2>
+        <ul>
+          <li>Unter 2 m Höhe bleibt der Winkel gleich wie bei 2 m.</li>
+          <li>Oberhalb der Grenzhöhe ist das Verfahren nicht anwendbar: Klasse I 20 m, II 30 m, III 45 m, IV 60 m.</li>
+          <li>Für große oder verwinkelte Gebäude eignen sich Blitzkugel- und Maschenverfahren besser.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <h2>Schutzwinkel α abhängig von der Höhe h</h2>
+      <p>Nach DIN EN 62305-3, Bild 1. Fahren Sie mit der Maus über das Diagramm, um die Werte abzulesen. Der gelbe Punkt zeigt die Einstellung der Simulation.</p>
+      <div class="chart" id="chart-schutzwinkel"></div>
+      <div class="legend" style="border:0;padding-inline:0">
+        <span><i style="border-top:3px solid #c8372d;height:0"></i>Klasse I</span>
+        <span><i style="border-top:3px dashed #e08a00;height:0"></i>Klasse II</span>
+        <span><i style="border-top:3px dotted #2f6fdb;height:0"></i>Klasse III</span>
+        <span><i style="border-top:3px dashed #158a45;height:0"></i>Klasse IV</span>
+      </div>
+      <div class="table-wrap" style="margin-top:12px">
+        <table class="data">
+          <caption class="visually-hidden">Ausgewählte Schutzwinkel</caption>
+          <thead><tr><th>Höhe h</th><th>2 m</th><th>5 m</th><th>10 m</th><th>15 m</th><th>20 m</th><th>30 m</th><th>45 m</th><th>60 m</th></tr></thead>
+          <tbody>
+            <tr><td>Klasse I</td><td>71°</td><td>59°</td><td>45°</td><td>34°</td><td>23°</td><td>–</td><td>–</td><td>–</td></tr>
+            <tr><td>Klasse II</td><td>74°</td><td>65°</td><td>54°</td><td>45°</td><td>37°</td><td>23°</td><td>–</td><td>–</td></tr>
+            <tr><td>Klasse III</td><td>77°</td><td>70°</td><td>61°</td><td>54°</td><td>48°</td><td>37°</td><td>23°</td><td>–</td></tr>
+            <tr><td>Klasse IV</td><td>79°</td><td>72°</td><td>65°</td><td>59°</td><td>54°</td><td>45°</td><td>34°</td><td>23°</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Tabellenwerte nach den Planungstabellen des VDE-Ausschusses Blitzschutz und Blitzforschung, abgeleitet aus DIN EN 62305-3 Bild 1. Zwischenwerte in der Simulation linear interpoliert.</p>
+    </div>
+  </main>
+
+  <footer id="foot"></footer>
+</body>
+</html>

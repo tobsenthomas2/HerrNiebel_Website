@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maschenverfahren – Simulation | Äußerer Blitzschutz</title>
+  <meta name="description" content="Interaktive Simulation zum Maschenverfahren nach DIN EN 62305-3: Maschennetz auf dem Flachdach planen, Fangleitungen und Ableitungen berechnen.">
+  <link rel="stylesheet" href="assets/blitz.css">
+  <script defer src="assets/blitz.js"></script>
+  <script defer src="assets/sim-maschen.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div id="top-bar"></div>
+    <div class="container hero">
+      <div class="crumbs"><a href="index.html">Blitzschutz</a> / Maschenverfahren</div>
+      <h1>Maschenverfahren</h1>
+      <p>Auf ebenen Dachflächen wird ein Netz aus Fangleitungen verlegt. Keine Masche darf größer sein als die Maschenweite der Blitzschutzklasse. Über die Ableitungen fließt der Blitzstrom zur Erdungsanlage.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="sim" id="sim-maschen" aria-label="Simulation Maschenverfahren">
+      <div class="sim__stage">
+        <div class="legend">
+          <span><i style="background:#e08a00;height:4px"></i>Fangleitung</span>
+          <span><i style="background:#c8372d;border-radius:50%;width:12px;height:12px"></i>Ableitung</span>
+          <span><i style="background:rgba(21,138,69,.25)"></i>eine Masche</span>
+          <span><i style="border-top:2px dashed #6b4f2a;height:0"></i>Erdung</span>
+        </div>
+      </div>
+      <div class="sim__panel"></div>
+    </section>
+
+    <div class="text">
+      <div class="card card--accent">
+        <h2>So wird gerechnet</h2>
+        <ol>
+          <li>Anzahl der Maschen je Seite: Seitenlänge durch Maschenweite teilen und aufrunden.</li>
+          <li>Fangleitungen: Es gibt (n<sub>x</sub> + 1) Leitungen der Länge b und (n<sub>y</sub> + 1) Leitungen der Länge a.</li>
+          <li>Ableitungen: Umfang durch typischen Abstand teilen und aufrunden – mindestens zwei.</li>
+        </ol>
+        <div class="formula">L<sub>F</sub> = (n<sub>x</sub> + 1) · b + (n<sub>y</sub> + 1) · a</div>
+      </div>
+      <div class="card">
+        <h2>Gut zu wissen</h2>
+        <ul>
+          <li>Fangleitungen gehören auf alle Dachkanten und Firste.</li>
+          <li>Ableitungen möglichst gleichmäßig verteilen und an den Gebäudeecken anordnen.</li>
+          <li>Dachaufbauten, die aus dem Netz herausragen, brauchen zusätzlich Fangstangen.</li>
+        </ul>
+      </div>
+      <div class="table-wrap">
+        <table class="data">
+          <caption class="visually-hidden">Kennwerte des Maschenverfahrens</caption>
+          <thead><tr><th>Klasse</th><th>I</th><th>II</th><th>III</th><th>IV</th></tr></thead>
+          <tbody>
+            <tr><td>Maschenweite</td><td>5 × 5 m</td><td>10 × 10 m</td><td>15 × 15 m</td><td>20 × 20 m</td></tr>
+            <tr><td>Typ. Abstand der Ableitungen</td><td>10 m</td><td>10 m</td><td>15 m</td><td>20 m</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer id="foot"></footer>
+</body>
+</html>

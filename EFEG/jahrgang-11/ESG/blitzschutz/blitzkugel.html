@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blitzkugelverfahren – Simulation | Äußerer Blitzschutz</title>
+  <meta name="description" content="Interaktive Simulation zum Blitzkugelverfahren nach DIN EN 62305-3: Kugel abrollen, einschlaggefährdete Stellen und Schutzraum erkennen, Eindringtiefe berechnen.">
+  <link rel="stylesheet" href="assets/blitz.css">
+  <script defer src="assets/blitz.js"></script>
+  <script defer src="assets/sim-blitzkugel.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div id="top-bar"></div>
+    <div class="container hero">
+      <div class="crumbs"><a href="index.html">Blitzschutz</a> / Blitzkugelverfahren</div>
+      <h1>Blitzkugelverfahren</h1>
+      <p>Eine gedachte Kugel rollt über das Gebäude. Überall, wo sie das Gebäude berührt, kann der Blitz einschlagen – dort braucht es eine Fangeinrichtung. Was die Kugel nicht erreicht, liegt im Schutzraum.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="sim" id="sim-blitzkugel" aria-label="Simulation Blitzkugelverfahren">
+      <div class="sim__stage"><span class="sim__hint"></span>
+        <div class="legend">
+      <span><i style="background:rgba(47,111,219,.25);border:2px solid #2f6fdb"></i>Blitzkugel</span>
+      <span><i style="background:#c8372d"></i>einschlaggefährdet</span>
+      <span><i style="background:rgba(21,138,69,.3);border:1px dashed #158a45"></i>Schutzraum</span>
+      <span><i style="background:#c8372d;height:4px"></i>Fangstange</span>
+      <span><i style="border-top:2px dotted #2f6fdb;height:0"></i>Bahn des Mittelpunkts</span>
+    </div>
+      </div>
+      <div class="sim__panel"></div>
+    </section>
+
+
+    <div class="text">
+      <div class="card card--accent">
+        <h2>So gehen Sie vor</h2>
+        <ol>
+          <li>Blitzschutzklasse festlegen – daraus ergibt sich der Kugelradius R.</li>
+          <li>Kugel gedanklich über das Gebäude und um es herum rollen, auch über Dachaufbauten.</li>
+          <li>Alle Berührungspunkte markieren: Hier sind Fangeinrichtungen nötig.</li>
+          <li>Fangeinrichtungen so anordnen, dass die Kugel nur noch sie berührt.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h2>Eindringtiefe</h2>
+        <p>Zwischen zwei Fangstangen oder Fangleitungen im Abstand d sinkt die Kugel um die Eindringtiefe p ein:</p>
+        <div class="formula">p = R − √(R² − (d/2)²)</div>
+        <p>Ragt ein Dachaufbau höher als die Fangstangen minus p, wird er von der Kugel berührt und ist nicht geschützt.</p>
+      </div>
+      <div class="card">
+        <h2>Warum wird R kleiner, je höher die Klasse?</h2>
+        <p>Der Radius entspricht der Enddurchschlagstrecke des Blitzes. Sie hängt vom Scheitelwert des Blitzstroms ab:</p>
+        <div class="formula">R = 10 · I<sup>0,65</sup> &nbsp;(R in m, I in kA)</div>
+        <p>Eine kleine Kugel erfasst auch schwache Blitze. Deshalb hat Klasse I mit 20 m den kleinsten Radius und den höchsten Schutz.</p>
+      </div>
+    </div>
+
+    <div class="text">
+      <div class="table-wrap">
+        <table class="data">
+          <caption class="visually-hidden">Kennwerte des Blitzkugelverfahrens</caption>
+          <thead><tr><th>Blitzschutzklasse</th><th>I</th><th>II</th><th>III</th><th>IV</th></tr></thead>
+          <tbody>
+            <tr><td>Blitzkugelradius R</td><td>20 m</td><td>30 m</td><td>45 m</td><td>60 m</td></tr>
+            <tr><td>Kleinster erfasster Blitzstrom</td><td>3 kA</td><td>5 kA</td><td>10 kA</td><td>16 kA</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h2>Merksätze</h2>
+        <ul>
+          <li>Das Blitzkugelverfahren ist für jede Gebäudeform geeignet.</li>
+          <li>Flachdächer werden von der Kugel immer berührt – sie brauchen Fangleitungen oder Fangstangen.</li>
+          <li>Ist ein Gebäude höher als R, kann der Blitz auch seitlich in die Fassade einschlagen.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer id="foot"></footer>
+</body>
+</html>

@@ -391,7 +391,7 @@
                 {
                   "id": "blitzschutz",
                   "title": "Blitzschutz",
-                  "description": "Simulationen zum Blitzkugel- & Schutzwinkelverfahren",
+                  "description": "Simulationen zum Blitzkugel-, Schutzwinkel- & Maschenverfahren",
                   "icon": "⚡",
                   "folder": "blitzschutz",
                   "tags": [
