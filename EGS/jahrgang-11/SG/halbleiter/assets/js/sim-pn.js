@@ -83,7 +83,7 @@
       H = Math.round(Math.max(300, Math.min(420, W * 0.56)));
       canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.height = H + "px";
       var x0 = Math.round(W * 0.07), x1 = Math.round(W * 0.93);
-      G = { x0: x0, x1: x1, xj: (x0 + x1) / 2, y0: Math.round(H * 0.34), y1: Math.round(H * 0.84), top: Math.round(H * 0.11) };
+      G = { x0: x0, x1: x1, xj: (x0 + x1) / 2, y0: Math.round(H * 0.37), y1: Math.round(H * 0.84), top: Math.round(H * 0.14) };
       G.half = (x1 - x0) / 2;
       G.r = LT.clamp(W / 70, 6, 10);
       G.w0 = G.half * 0.36;
@@ -254,27 +254,27 @@
       ctx.fillStyle = C.ink3; ctx.textAlign = "left"; ctx.fillText("Anode (A)", G.x0 - 7, G.y1 + 42);
       ctx.textAlign = "right"; ctx.fillText("Kathode (K)", G.x1 + 7, G.y1 + 42);
 
-      // Stromkreis
-      var lx = G.x0 - 3.5, rx = G.x1 + 3.5, ty = G.top, bx = G.xj;
+      // Stromkreis (Schaltzeichen nach DIN EN 60617, Kennzeichnung oberhalb)
+      var lx = G.x0 - 3.5, rx = G.x1 + 3.5, ty = G.top, bx = G.xj, R0 = 16;
       ctx.strokeStyle = C.ink; ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(lx, G.y0 - 4); ctx.lineTo(lx, ty); ctx.lineTo(bx - 16, ty);
-      ctx.moveTo(bx + 16, ty); ctx.lineTo(rx, ty); ctx.lineTo(rx, G.y0 - 4);
+      ctx.moveTo(lx, G.y0 - 4); ctx.lineTo(lx, ty); ctx.lineTo(rx, ty); ctx.lineTo(rx, G.y0 - 4);
       ctx.stroke();
-      // Quelle
-      var plus = st.mode === "rev" ? "right" : "left";
-      ctx.lineWidth = 3;
-      var longX = plus === "left" ? bx - 9 : bx + 9, shortX = plus === "left" ? bx + 9 : bx - 9;
-      ctx.beginPath(); ctx.moveTo(longX, ty - 20); ctx.lineTo(longX, ty + 20); ctx.stroke();
-      ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(shortX, ty - 10); ctx.lineTo(shortX, ty + 10); ctx.stroke();
-      ctx.font = "800 18px " + font; ctx.textAlign = "center";
+      function bmk(x, txt) { ctx.font = "750 13px " + font; ctx.fillStyle = C.ink; ctx.textAlign = "center"; ctx.fillText(txt, x, ty - R0 - 8); }
+      // Spannungsquelle -G1: Kreis mit Strich in Leitungsrichtung
+      ctx.beginPath(); ctx.arc(bx, ty, R0, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = C.ink; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(bx - R0, ty); ctx.lineTo(bx + R0, ty); ctx.stroke();
+      bmk(bx, "-G1");
       if (st.mode !== "none") {
-        ctx.fillStyle = C.hole; ctx.fillText("+", longX + (plus === "left" ? -14 : 14), ty - 10);
-        ctx.fillStyle = C.electron; ctx.fillText("–", shortX + (plus === "left" ? 14 : -14), ty - 8);
+        var plusLeft = st.mode !== "rev";
+        ctx.font = "800 16px " + font; ctx.textAlign = "center";
+        ctx.fillStyle = C.hole; ctx.fillText("+", bx + (plusLeft ? -11 : 11), ty + R0 + 15);
+        ctx.fillStyle = C.electron; ctx.fillText("–", bx + (plusLeft ? 11 : -11), ty + R0 + 15);
       }
-      ctx.font = "650 13px " + font; ctx.fillStyle = C.ink;
-      ctx.fillText(st.mode === "none" ? "U = 0 V" : "U = " + LT.num(U, st.mode === "rev" ? 1 : 2) + " V", bx, ty + 38);
-      // Lampe bzw. Vorwiderstand
+      ctx.font = "650 12.5px " + font; ctx.fillStyle = C.ink; ctx.textAlign = "center";
+      ctx.fillText(st.mode === "none" ? "U = 0 V" : "U = " + LT.num(U, st.mode === "rev" ? 1 : 2) + " V", bx, ty + R0 + 33);
+      // Meldeleuchte -P1 bzw. Vorwiderstand -R1
       var lampX = G.x0 + G.half * 0.45;
       if (!isLED) {
         if (rel > 0.02) {
@@ -285,9 +285,10 @@
         ctx.beginPath(); ctx.arc(lampX, ty, 14, 0, Math.PI * 2); ctx.fillStyle = rel > 0.02 ? "#fff6cf" : "#fff"; ctx.fill();
         ctx.lineWidth = 2; ctx.strokeStyle = C.ink; ctx.stroke();
         ctx.beginPath(); ctx.moveTo(lampX - 10, ty - 10); ctx.lineTo(lampX + 10, ty + 10); ctx.moveTo(lampX + 10, ty - 10); ctx.lineTo(lampX - 10, ty + 10); ctx.stroke();
+        bmk(lampX, "-P1");
       } else {
         ctx.fillStyle = "#fff"; ctx.fillRect(lampX - 22, ty - 8, 44, 16); ctx.lineWidth = 2; ctx.strokeStyle = C.ink; ctx.strokeRect(lampX - 22, ty - 8, 44, 16);
-        ctx.font = "600 12px " + font; ctx.fillStyle = C.ink; ctx.fillText("R", lampX, ty - 14);
+        bmk(lampX, "-R1");
         // Leuchten des Kristalls
         if (rel > 0.02) {
           var lg = ctx.createRadialGradient(G.xj, (G.y0 + G.y1) / 2, 4, G.xj, (G.y0 + G.y1) / 2, G.half);
@@ -297,7 +298,7 @@
       }
       // technische Stromrichtung im Leiter
       if (I > 2e-4 && st.mode === "fwd") {
-        var pts = [[bx - 16, ty], [lx, ty], [lx, G.y0 - 4], null, [rx, G.y0 - 4], [rx, ty], [bx + 16, ty]];
+        var pts = [[bx - R0, ty], [lx, ty], [lx, G.y0 - 4], null, [rx, G.y0 - 4], [rx, ty], [bx + R0, ty]];
         drawDots(ctx, pts, wirePhase);
       }
     }
@@ -333,19 +334,19 @@
         if (U < thr) {
           steps = ["Die Quelle drückt Löcher und Elektronen in Richtung Sperrschicht.",
                    "Die Sperrschicht wird schmaler. Unterhalb der Schleusenspannung fließt aber noch kaum Strom."];
-          LT.status(status, "warn", "Spannung unterhalb der Schleusenspannung", isLED ? "Die LED bleibt dunkel." : "Die Lampe bleibt aus.");
+          LT.status(status, "warn", "Spannung unterhalb der Schleusenspannung", isLED ? "Die LED bleibt dunkel." : "Die Leuchte -P1 bleibt aus.");
         } else {
           steps = ["Die Ladungsträger werden in Richtung Sperrschicht gedrückt.",
                    "Die Sperrschicht wird sehr schmal, Elektronen und Löcher rekombinieren an der Grenzfläche. Der PN-Übergang leitet." +
                    (isLED ? " Bei jeder Rekombination wird Energie als Licht frei." : "")];
-          LT.status(status, "ok", isLED ? "Die LED leuchtet" : "Der PN-Übergang leitet – die Lampe leuchtet", "Strom fließt in Durchlassrichtung.");
+          LT.status(status, "ok", isLED ? "Die LED leuchtet" : "Der PN-Übergang leitet – die Leuchte -P1 leuchtet", "Strom fließt in Durchlassrichtung.");
         }
       } else {
         title = "Sperrrichtung: Minus an P (Anode), Plus an N (Kathode)";
         steps = ["Die Quelle zieht Löcher und Elektronen von der Sperrschicht weg zu den Anschlüssen.",
                  "Die Sperrschicht wird breiter. Der PN-Übergang sperrt, es fließt praktisch kein Strom."];
         if (isLED && U > 5) LT.status(status, "bad", "Maximale Sperrspannung überschritten", "LEDs vertragen in Sperrrichtung meist nur etwa 5 V. Darüber kann die LED zerstört werden.");
-        else LT.status(status, "info", "Der PN-Übergang sperrt", isLED ? "Die LED bleibt dunkel." : "Die Lampe bleibt aus.");
+        else LT.status(status, "info", "Der PN-Übergang sperrt", isLED ? "Die LED bleibt dunkel." : "Die Leuchte -P1 bleibt aus.");
       }
       explain.innerHTML = "<strong>" + title + "</strong><ol>" + steps.map(function (s) { return "<li>" + s + "</li>"; }).join("") + "</ol>";
       canvas.setAttribute("aria-label", "PN-Übergang: " + title + ". " + steps.join(" "));

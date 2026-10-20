@@ -189,7 +189,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
 .site-header::before { content: ""; display: block; height: 4px; background: var(--litho); }
 .site-header__bar { display: flex; align-items: center; gap: 24px; height: var(--header-h); }
 .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); flex-shrink: 0; }
-.brand__glyph { width: 34px; height: 34px; }
+.brand__glyph { width: 38px; height: 38px; }
 .brand__name { font-weight: 820; font-stretch: 125%; font-size: 1.12rem; letter-spacing: .04em; line-height: 1; }
 .brand__claim { display: block; font-size: .72rem; font-weight: 500; letter-spacing: 0; color: var(--ink-3); margin-top: 4px; font-stretch: 100%; }
 
@@ -346,7 +346,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
 .timeline p { margin: 0; color: var(--ink-2); }
 
 /* Formeln */
-.formula { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .4rem .9rem; font-size: 1.15rem; padding: .7rem 1.1rem; background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--ink); border-radius: var(--radius-s); margin: .4rem 0 1rem; }
+.formula { display: inline-block; font-size: 1.15rem; padding: .7rem 1.1rem; background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--ink); border-radius: var(--radius-s); margin: .4rem 0 1rem; }
 .formula i { font-style: italic; }
 .formula-list { display: flex; flex-wrap: wrap; gap: 10px 14px; }
 .calc { background: var(--silicon); border-radius: var(--radius-m); padding: 1.1rem 1.3rem; font-size: var(--fs-sm); line-height: 1.8; max-width: 640px; }

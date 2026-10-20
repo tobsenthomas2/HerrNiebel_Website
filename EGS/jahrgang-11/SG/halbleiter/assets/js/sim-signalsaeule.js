@@ -47,9 +47,9 @@
       var opts = '<option value="">nicht bestückt</option><option value="0">ohne Widerstand (Brücke)</option>' +
         RS.map(function (r) { return '<option value="' + r + '">' + LT.fmtR(r) + "</option>"; }).join("");
       card.innerHTML =
-        '<div class="ss-card__head"><span class="swatch" style="background:' + m.dev.color + '"></span><strong>' + m.dev.short + "</strong><span class=\"muted\">" + m.label + "</span>" +
+        '<div class="ss-card__head"><span class="swatch" style="background:' + m.dev.color + '"></span><strong>-P' + (i + 1) + " " + m.dev.short + "</strong><span class=\"muted\">" + m.label + "</span>" +
         '<label class="switch switch--sm"><input type="checkbox" checked> Ein</label></div>' +
-        '<label class="ss-sel"><span>Vorwiderstand</span><select aria-label="Vorwiderstand ' + m.dev.short + '">' + opts + "</select></label>" +
+        '<label class="ss-sel"><span>Vorwiderstand -R' + (i + 1) + '</span><select aria-label="Vorwiderstand -R' + (i + 1) + '">' + opts + "</select></label>" +
         '<div class="ss-bar"><span>LED-Strom</span><div class="bar"><i></i><b title="I_F,max"></b></div><em></em></div>' +
         '<div class="ss-bar"><span>Belastung R</span><div class="bar"><i></i><b title="0,25 W"></b></div><em></em></div>' +
         '<div class="ss-msg"><div></div></div>';

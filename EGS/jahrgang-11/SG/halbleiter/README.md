@@ -27,7 +27,8 @@ assets/js/config.js        Einstellungen (siehe unten)
 assets/js/site.js          Kopfzeile, Navigation, Fußzeile, Inhaltsverzeichnis, Helfer
 assets/js/physics.js       Bauteilmodelle (Kennlinien von BAY 44 und den drei LEDs)
 assets/js/plot.js          Diagramm-Baukasten (SVG)
-assets/js/illustrations.js Zeichnungen: LED, Diode, Signalsäule, Schaltzeichen
+assets/js/symbols.js      Schaltzeichen (DIN EN 60617) und Betriebsmittelkennzeichnung (DIN EN 81346-2)
+assets/js/illustrations.js Produktzeichnungen: LED, Diode, Signalsäule
 assets/js/sim-*.js         je eine Simulation
 assets/fonts/              Schriften lokal (Archivo, griechische Zeichen aus IBM Plex Sans)
 datenblaetter/             PDF-Datenblätter
@@ -71,3 +72,9 @@ Ergebnisse nur grafisch bzw. qualitativ. `true`: zusätzlich alle berechneten Za
 1. Vorhandene Seite kopieren (z. B. `leds.html`) und Inhalt ersetzen.
 2. In `assets/js/site.js` im Array `NAV` eintragen – Kopf- und Fußzeile passen sich überall an.
 3. Abschnitte als `<section id="…">` mit `<h2>` anlegen; das Inhaltsverzeichnis entsteht automatisch.
+
+## Schaltpläne und Kennzeichnung
+
+Alle Schaltzeichen kommen aus `assets/js/symbols.js` (`LT.sym.diode`, `LT.sym.source`, …).
+Kennbuchstaben: -G Quelle, -R Widerstand und Diode, -P LED/Meldeleuchte, -M Motor, -F Sicherung.
+Die Kennzeichnung steht links neben senkrechten und oberhalb von waagerechten Bauteilen.

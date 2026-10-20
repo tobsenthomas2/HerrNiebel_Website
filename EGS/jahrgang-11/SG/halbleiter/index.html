@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="assets/css/home.css">
   <script defer src="assets/js/config.js"></script>
   <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/symbols.js"></script>
   <script defer src="assets/js/physics.js"></script>
   <script defer src="assets/js/illustrations.js"></script>
   <script defer src="assets/js/home.js"></script>
@@ -142,20 +143,7 @@
     <!-- Verpolschutz -->
     <section class="section" aria-labelledby="verpol-h">
       <div class="container split">
-        <div class="verpol-visual" aria-hidden="true">
-          <svg viewBox="0 0 420 260" class="mini-circuit">
-            <rect x="30" y="90" width="44" height="80" rx="6" fill="#eef1f4" stroke="#17202b" stroke-width="2"/>
-            <text x="52" y="120" text-anchor="middle" font-size="22" font-weight="800" fill="#17202b">+</text>
-            <text x="52" y="160" text-anchor="middle" font-size="26" font-weight="800" fill="#17202b">–</text>
-            <path d="M52 90 V40 H170 M230 40 H330 V100 M330 160 V220 H52 V170" fill="none" stroke="#17202b" stroke-width="3"/>
-            <path d="M175 18 v44 l40 -22z" fill="#ffc400" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/>
-            <line x1="217" y1="16" x2="217" y2="64" stroke="#17202b" stroke-width="4"/>
-            <circle cx="330" cy="130" r="32" fill="#fff" stroke="#17202b" stroke-width="3"/>
-            <text x="330" y="140" text-anchor="middle" font-size="28" font-weight="800" fill="#17202b">M</text>
-            <path d="M370 112 a26 26 0 0 1 0 36" fill="none" stroke="#14873d" stroke-width="3"/>
-            <path d="M370 150 l-8 -2 l6 -8z" fill="#14873d"/>
-          </svg>
-        </div>
+        <div class="verpol-visual"><div data-art="sch-verpol" class="mini-circuit"></div></div>
         <div>
           <h2 id="verpol-h">Verpolt angeschlossen – Motor dreht falsch herum</h2>
           <p>Wird ein Gleichstrommotor mit vertauschten Anschlüssen betrieben, dreht er in die falsche Richtung. Förderbänder laufen rückwärts, Dosierpumpen saugen statt zu fördern, Baugruppen werden beschädigt.</p>

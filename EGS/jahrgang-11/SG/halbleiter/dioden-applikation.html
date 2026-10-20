@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="assets/css/products.css">
   <script defer src="assets/js/config.js"></script>
   <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/symbols.js"></script>
   <script defer src="assets/js/physics.js"></script>
   <script defer src="assets/js/sim-verpolschutz.js"></script>
   <script defer src="assets/js/sim-schaltung.js"></script>
@@ -84,30 +85,12 @@
 
             <div class="grid grid-2 mt-2">
               <figure class="figure">
-                <div class="figure__frame"><svg viewBox="0 0 520 290" role="img" aria-label="Beispiel 1: Quelle 5 V, Widerstand 1 Kiloohm und Diode in Durchlassrichtung">
-<path d="M80 60 H420 V240 H80 Z" fill="none" stroke="#17202b" stroke-width="2.5"/>
-<rect x="76" y="126" width="8" height="48" fill="#fff"/><circle cx="80" cy="150" r="24" fill="#fff" stroke="#17202b" stroke-width="2.5"/><line x1="80" y1="126" x2="80" y2="174" stroke="#17202b" stroke-width="2"/>
-<text x="112" y="136" font-size="16" font-weight="800" fill="#d3262b">+</text><text x="112" y="174" font-size="18" font-weight="800" fill="#1f5bd8">–</text>
-<text x="48" y="146" text-anchor="end" font-size="13" font-weight="700" fill="#17202b">G1</text><text x="48" y="162" text-anchor="end" font-size="12" fill="#4a5563">5 V</text>
-<rect x="208" y="49" width="64" height="22" fill="#fff" stroke="#17202b" stroke-width="2.5"/><text x="240" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#17202b">R1  1 kΩ</text>
-<rect x="416" y="128" width="8" height="44" fill="#fff"/><path d="M405 128 h30 l-15 30z" fill="#fff" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/><line x1="404" y1="159" x2="436" y2="159" stroke="#17202b" stroke-width="3.5"/>
-<text x="446" y="146" font-size="13" font-weight="700" fill="#17202b">V1</text><text x="446" y="162" font-size="12" fill="#4a5563">Si</text>
-<path d="M230 92 h40" stroke="#e0a100" stroke-width="2.5"/><path d="M278 92 l-10 -5 v10z" fill="#e0a100"/><text x="250" y="114" text-anchor="middle" font-size="12" font-weight="700" fill="#8a6400">I</text>
-</svg></div>
-                <figcaption><strong>Beispiel 1:</strong> V1 leitet, also U<sub>V1</sub> = 0,7 V. U<sub>R1</sub> = 5 V – 0,7 V = 4,3 V und I = 4,3 V / 1 kΩ = 4,3 mA.</figcaption>
+                <div class="figure__frame"><div data-art="sch-beispiel" data-variant="fwd"></div></div>
+                <figcaption><strong>Beispiel 1:</strong> Die Diode -R2 leitet, also U<sub>R2</sub> = 0,7 V. Damit ist U<sub>R1</sub> = 5 V – 0,7 V = 4,3 V und I = 4,3 V / 1 kΩ = 4,3 mA.</figcaption>
               </figure>
               <figure class="figure">
-                <div class="figure__frame"><svg viewBox="0 0 520 290" role="img" aria-label="Beispiel 2: Quelle 5 V, Widerstand 1 Kiloohm und Diode in Sperrrichtung">
-<path d="M80 60 H420 V240 H80 Z" fill="none" stroke="#17202b" stroke-width="2.5"/>
-<rect x="76" y="126" width="8" height="48" fill="#fff"/><circle cx="80" cy="150" r="24" fill="#fff" stroke="#17202b" stroke-width="2.5"/><line x1="80" y1="126" x2="80" y2="174" stroke="#17202b" stroke-width="2"/>
-<text x="112" y="136" font-size="16" font-weight="800" fill="#d3262b">+</text><text x="112" y="174" font-size="18" font-weight="800" fill="#1f5bd8">–</text>
-<text x="48" y="146" text-anchor="end" font-size="13" font-weight="700" fill="#17202b">G1</text><text x="48" y="162" text-anchor="end" font-size="12" fill="#4a5563">5 V</text>
-<rect x="208" y="49" width="64" height="22" fill="#fff" stroke="#17202b" stroke-width="2.5"/><text x="240" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#17202b">R1  1 kΩ</text>
-<rect x="416" y="128" width="8" height="44" fill="#fff"/><path d="M405 172 h30 l-15 -30z" fill="#fff" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/><line x1="404" y1="141" x2="436" y2="141" stroke="#17202b" stroke-width="3.5"/>
-<text x="446" y="146" font-size="13" font-weight="700" fill="#17202b">V1</text><text x="446" y="162" font-size="12" fill="#4a5563">Si</text>
-<text x="250" y="110" text-anchor="middle" font-size="12" font-weight="700" fill="#6b7684">I = 0</text>
-</svg></div>
-                <figcaption><strong>Beispiel 2:</strong> V1 sperrt, also I = 0. Dann ist U<sub>R1</sub> = 0 V und an der Diode liegt die volle Spannung U<sub>V1</sub> = 5 V.</figcaption>
+                <div class="figure__frame"><div data-art="sch-beispiel" data-variant="rev"></div></div>
+                <figcaption><strong>Beispiel 2:</strong> Die Diode -R2 sperrt, also I = 0. Dann ist U<sub>R1</sub> = 0 V und an der Diode liegt die volle Spannung U<sub>R2</sub> = 5 V.</figcaption>
               </figure>
             </div>
 

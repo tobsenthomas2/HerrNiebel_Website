@@ -33,7 +33,7 @@
     ui.stage.appendChild(stage);
     var legend = document.createElement("p");
     legend.className = "table-note";
-    legend.innerHTML = "Netzteil 12 V DC, Sicherung F1, Gleichstrommotor M1 am Förderband. Gelbe Punkte: technische Stromrichtung. Auf schmalen Bildschirmen lässt sich der Schaltplan seitlich verschieben.";
+    legend.innerHTML = "-G1 Netzteil 12 V DC, -F1 Sicherung, -R1 Schutzdiode, -M1 Gleichstrommotor am Förderband. Gelbe Punkte: technische Stromrichtung. Auf schmalen Bildschirmen lässt sich der Schaltplan seitlich verschieben.";
     ui.stage.appendChild(legend);
 
     /** Schaltungszustand berechnen */
@@ -56,63 +56,42 @@
 
     var res = solve(), phase = 0, belt = 0;
 
-    function diodeSym(x, y, dir, active) {
-      // dir: "right" | "left" | "up" | "down" (Spitze des Dreiecks)
-      var f = active ? "#ffc400" : "#fff", d = "";
-      if (dir === "right") d = '<path d="M' + (x - 16) + " " + (y - 15) + " v30 l30 -15z" + '" fill="' + f + '" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/><line x1="' + (x + 15) + '" y1="' + (y - 16) + '" x2="' + (x + 15) + '" y2="' + (y + 16) + '" stroke="#17202b" stroke-width="3.5"/>';
-      if (dir === "left") d = '<path d="M' + (x + 16) + " " + (y - 15) + " v30 l-30 -15z" + '" fill="' + f + '" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/><line x1="' + (x - 15) + '" y1="' + (y - 16) + '" x2="' + (x - 15) + '" y2="' + (y + 16) + '" stroke="#17202b" stroke-width="3.5"/>';
-      if (dir === "up") d = '<path d="M' + (x - 15) + " " + (y + 16) + " h30 l-15 -30z" + '" fill="' + f + '" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/><line x1="' + (x - 16) + '" y1="' + (y - 15) + '" x2="' + (x + 16) + '" y2="' + (y - 15) + '" stroke="#17202b" stroke-width="3.5"/>';
-      if (dir === "down") d = '<path d="M' + (x - 15) + " " + (y - 16) + " h30 l-15 30z" + '" fill="' + f + '" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/><line x1="' + (x - 16) + '" y1="' + (y + 15) + '" x2="' + (x + 16) + '" y2="' + (y + 15) + '" stroke="#17202b" stroke-width="3.5"/>';
-      return d;
-    }
-
     function draw() {
       res = solve();
-      var s = st.pol, top = s > 0 ? "+" : "–", bot = s > 0 ? "–" : "+";
-      var h = '<svg viewBox="0 0 700 300" role="img" aria-label="Verpolschutz-Schaltung">';
-      h += '<defs><clipPath id="vp-belt"><rect x="540" y="96" width="140" height="40"/></clipPath></defs>';
-      // Netzteil
-      h += '<rect x="24" y="84" width="104" height="132" rx="8" fill="#eef1f4" stroke="#17202b" stroke-width="2"/>';
-      h += '<text x="76" y="140" text-anchor="middle" font-size="14" font-weight="750" fill="#17202b">Netzteil</text><text x="76" y="160" text-anchor="middle" font-size="13" fill="#4a5563">12 V DC</text>';
-      h += '<circle cx="128" cy="110" r="6" fill="' + (s > 0 ? "#d3262b" : "#1f5bd8") + '"/><circle cx="128" cy="190" r="6" fill="' + (s > 0 ? "#1f5bd8" : "#d3262b") + '"/>';
-      h += '<text x="108" y="114" text-anchor="middle" font-size="18" font-weight="800" fill="' + (s > 0 ? "#d3262b" : "#1f5bd8") + '">' + top + '</text>';
-      h += '<text x="108" y="196" text-anchor="middle" font-size="18" font-weight="800" fill="' + (s > 0 ? "#1f5bd8" : "#d3262b") + '">' + bot + "</text>";
-      if (s < 0) h += '<path d="M142 120 q16 30 0 60" fill="none" stroke="#c42b2b" stroke-width="2" stroke-dasharray="4 3"/><text x="150" y="154" font-size="12" font-weight="700" fill="#c42b2b">vertauscht</text>';
+      var S = LT.sym, s = st.pol, HL = "#fff3c4";
+      var h = '<svg viewBox="0 0 750 300" role="img" aria-label="Verpolschutz-Schaltung mit Spannungsquelle -G1, Sicherung -F1, Schutzdiode -R1 und Gleichstrommotor -M1">' + S.defs;
+      h += '<defs><clipPath id="vp-belt"><rect x="610" y="96" width="140" height="40"/></clipPath></defs>';
       // Leitungen
-      var wire = 'stroke="#17202b" stroke-width="3" fill="none"';
-      h += '<path d="M134 110 H170 M214 110 H' + (st.pos === "series" ? "268" : "470") + '" ' + wire + "/>";
-      if (st.pos === "series") h += '<path d="M318 110 H470" ' + wire + "/>";
-      h += '<path d="M470 110 V118 M470 182 V190 H134" ' + wire + "/>";
+      h += S.wire("M110 124 V60 H530 V120 M530 180 V240 H110 V176");
+      if (st.pos === "parallel") h += S.wire("M390 60 V240") + S.dot(390, 60) + S.dot(390, 240);
+      // Strompfad (technische Stromrichtung)
+      if (res.short) h += '<path class="flow ' + (s > 0 ? "flow--cw" : "flow--ccw") + '" d="M110 150 V60 H390 V240 H110 Z" fill="none" stroke="#c42b2b" stroke-width="4" stroke-dasharray="2 16" stroke-linecap="round"/>';
+      else if (res.dir !== 0) h += '<path class="flow ' + (s > 0 ? "flow--cw" : "flow--ccw") + '" d="M110 150 V60 H530 V240 H110 Z" fill="none" stroke="#e0a100" stroke-width="3.5" stroke-dasharray="2 16" stroke-linecap="round"/>';
+      // Quelle
+      h += S.source({ cx: 110, cy: 150, r: 26, plusFirst: s > 0 });
+      h += S.bmk({ x: 110, y: 150, gap: 38, name: "-G1", value: "12 V DC", extra: s < 0 ? "vertauscht" : null, extraColor: "#c42b2b" });
       // Sicherung
-      h += '<rect x="170" y="100" width="44" height="20" rx="3" fill="#fff" stroke="#17202b" stroke-width="2"/>';
-      if (res.short) h += '<path d="M176 104 l10 12 l8 -12 l8 12 l8 -12" fill="none" stroke="#c42b2b" stroke-width="2.4"/><text x="192" y="92" text-anchor="middle" font-size="12" font-weight="700" fill="#c42b2b">ausgelöst</text>';
-      else h += '<line x1="170" y1="110" x2="214" y2="110" stroke="#17202b" stroke-width="1.5"/>';
-      h += '<text x="192" y="140" text-anchor="middle" font-size="12" font-weight="650" fill="#6b7684">F1</text>';
+      h += S.fuse({ cx: 190, cy: 60, blown: res.short });
+      h += S.bmk({ x: 190, y: 60, side: "top", gap: 20, name: "-F1", extra: res.short ? "ausgelöst" : null, extraColor: "#c42b2b" });
       // Diode in Reihe
       if (st.pos === "series") {
-        h += '<line x1="268" y1="110" x2="277" y2="110" stroke="#17202b" stroke-width="3"/><line x1="309" y1="110" x2="318" y2="110" stroke="#17202b" stroke-width="3"/>';
-        h += diodeSym(293, 110, st.flip ? "left" : "right", res.dState === "leitet");
-        h += '<text x="293" y="82" text-anchor="middle" font-size="12" font-weight="650" fill="#6b7684">V1 ' + (res.dState) + "</text>";
+        var on1 = res.dState === "leitet";
+        h += S.diode({ cx: 300, cy: 60, s: 36, dir: st.flip ? "left" : "right", lead: 0, hl: on1 ? HL : null });
+        h += S.bmk({ x: 300, y: 60, side: "top", gap: 32, name: "-R1" });
+        h += '<text x="300" y="104" text-anchor="middle" font-size="12.5" font-weight="700" fill="' + (on1 ? "#0d5b2a" : "#6b7684") + '">' + res.dState + "</text>";
       }
-      // Diode parallel
+      // Diode parallel zum Motor
       if (st.pos === "parallel") {
-        h += '<path d="M390 110 V130 M390 170 V190" ' + wire + '/><circle cx="390" cy="110" r="4" fill="#17202b"/><circle cx="390" cy="190" r="4" fill="#17202b"/>';
-        h += diodeSym(390, 150, st.flip ? "down" : "up", res.dState === "leitet");
-        h += '<text x="412" y="154" font-size="12" font-weight="650" fill="#6b7684">V1 ' + res.dState + "</text>";
-      }
-      // Strompfad
-      if (res.short) {
-        h += '<path class="flow ' + (s > 0 ? "flow--cw" : "flow--ccw") + '" d="M134 110 H390 V190 H134" fill="none" stroke="#c42b2b" stroke-width="4" stroke-dasharray="2 16" stroke-linecap="round"/>';
-      } else if (res.dir !== 0) {
-        h += '<path class="flow ' + (s > 0 ? "flow--cw" : "flow--ccw") + '" d="M134 110 H470 V190 H134" fill="none" stroke="#e0a100" stroke-width="3.5" stroke-dasharray="2 16" stroke-linecap="round"/>';
+        var on2 = res.dState === "leitet";
+        h += S.diode({ cx: 390, cy: 150, s: 36, dir: st.flip ? "down" : "up", lead: 0, hl: on2 ? HL : null });
+        h += S.bmk({ x: 390, y: 150, gap: 38, name: "-R1", extra: res.dState, extraColor: on2 ? "#0d5b2a" : "#6b7684" });
       }
       // Motor
-      h += '<circle cx="470" cy="150" r="32" fill="#fff" stroke="#17202b" stroke-width="3"/><text x="470" y="160" text-anchor="middle" font-size="26" font-weight="800" fill="#17202b">M</text>';
-      h += '<text x="470" y="210" text-anchor="middle" font-size="12" font-weight="650" fill="#6b7684">M1</text>';
-      h += '<line x1="502" y1="150" x2="560" y2="150" stroke="#6b7684" stroke-width="4"/>';
-      // Förderband
-      h += '<g id="vp-rotor"></g>';
-      h += '<rect x="540" y="136" width="140" height="28" rx="14" fill="#2b3440"/><circle cx="554" cy="150" r="10" fill="#6b7684"/><circle cx="666" cy="150" r="10" fill="#6b7684"/>';
+      h += S.motor({ cx: 530, cy: 150, r: 30 });
+      h += S.bmk({ x: 530, y: 150, gap: 42, name: "-M1" });
+      // Welle und Förderband
+      h += '<line x1="560" y1="150" x2="624" y2="150" stroke="#6b7684" stroke-width="4"/>';
+      h += '<rect x="610" y="136" width="130" height="28" rx="14" fill="#2b3440"/><circle cx="624" cy="150" r="10" fill="#6b7684"/><circle cx="726" cy="150" r="10" fill="#6b7684"/>';
       h += '<g clip-path="url(#vp-belt)"><g id="vp-boxes"></g></g>';
       h += '<g id="vp-arrow"></g>';
       h += "</svg>";
@@ -126,14 +105,14 @@
       if (!boxesEl) return;
       var html = "";
       for (var i = 0; i < 4; i++) {
-        var x = 540 + ((i * 46 + belt) % 184 + 184) % 184 - 22;
+        var x = 610 + ((i * 46 + belt) % 184 + 184) % 184 - 22;
         html += '<rect x="' + x.toFixed(1) + '" y="104" width="30" height="30" rx="3" fill="#c8a165" stroke="#8a6a3a" stroke-width="1.5"/>';
       }
       boxesEl.innerHTML = html;
       var a = "";
-      if (res.dir > 0) a = '<path d="M580 186 h60" stroke="#14873d" stroke-width="3"/><path d="M648 186 l-10 -6 v12z" fill="#14873d"/><text x="610" y="210" text-anchor="middle" font-size="12" font-weight="700" fill="#14873d">vorwärts</text>';
-      else if (res.dir < 0) a = '<path d="M590 186 h60" stroke="#c42b2b" stroke-width="3"/><path d="M582 186 l10 -6 v12z" fill="#c42b2b"/><text x="618" y="210" text-anchor="middle" font-size="12" font-weight="700" fill="#c42b2b">rückwärts!</text>';
-      else a = '<text x="610" y="196" text-anchor="middle" font-size="12" font-weight="700" fill="#6b7684">steht</text>';
+      if (res.dir > 0) a = '<path d="M646 186 h60" stroke="#14873d" stroke-width="3"/><path d="M714 186 l-10 -6 v12z" fill="#14873d"/><text x="676" y="210" text-anchor="middle" font-size="12" font-weight="700" fill="#14873d">vorwärts</text>';
+      else if (res.dir < 0) a = '<path d="M656 186 h60" stroke="#c42b2b" stroke-width="3"/><path d="M648 186 l10 -6 v12z" fill="#c42b2b"/><text x="684" y="210" text-anchor="middle" font-size="12" font-weight="700" fill="#c42b2b">rückwärts!</text>';
+      else a = '<text x="676" y="196" text-anchor="middle" font-size="12" font-weight="700" fill="#6b7684">steht</text>';
       arrowEl.innerHTML = a;
     }
 
@@ -143,13 +122,13 @@
         if (s > 0) LT.status(status, "ok", "Motor läuft vorwärts", "Ohne Schutzdiode – solange niemand die Anschlüsse vertauscht.");
         else LT.status(status, "bad", "Motor dreht falsch herum", "Das Förderband läuft rückwärts. Ohne Schutz kann die Anlage beschädigt werden.");
       } else if (st.pos === "series") {
-        if (s > 0 && d === "leitet") LT.status(status, "ok", "Motor läuft vorwärts", "Die Diode leitet. An ihr fallen etwa 0,7 V ab.");
-        else if (s < 0 && d === "sperrt") LT.status(status, "ok", "Geschützt: Motor steht", "Die Diode sperrt und nimmt die Spannung auf. Nichts wird beschädigt.");
+        if (s > 0 && d === "leitet") LT.status(status, "ok", "Motor läuft vorwärts", "Die Diode -R1 leitet. An ihr fallen etwa 0,7 V ab.");
+        else if (s < 0 && d === "sperrt") LT.status(status, "ok", "Geschützt: Motor steht", "Die Diode -R1 sperrt und nimmt die Spannung auf. Nichts wird beschädigt.");
         else if (s > 0) LT.status(status, "warn", "Diode falsch herum eingebaut", "Sie sperrt schon im Normalbetrieb – der Motor läuft nie.");
         else LT.status(status, "bad", "Motor dreht falsch herum", "Die falsch eingebaute Diode leitet gerade bei Verpolung.");
       } else {
-        if (res.short && s < 0) LT.status(status, "warn", "Geschützt, aber Sicherung ausgelöst", "Die Diode leitet und schließt die Quelle kurz. Der Motor bleibt stehen, die Sicherung muss ersetzt werden.");
-        else if (res.short) LT.status(status, "bad", "Kurzschluss im Normalbetrieb", "Die Diode ist falsch herum eingebaut – die Sicherung löst sofort aus.");
+        if (res.short && s < 0) LT.status(status, "warn", "Geschützt, aber Sicherung ausgelöst", "Die Diode -R1 leitet und schließt die Quelle kurz. Der Motor bleibt stehen, die Sicherung -F1 muss ersetzt werden.");
+        else if (res.short) LT.status(status, "bad", "Kurzschluss im Normalbetrieb", "Die Diode -R1 ist falsch herum eingebaut – die Sicherung -F1 löst sofort aus.");
         else if (s > 0) LT.status(status, "ok", "Motor läuft vorwärts", "Die Diode sperrt im Normalbetrieb und verursacht keinen Spannungsverlust.");
         else LT.status(status, "bad", "Motor dreht falsch herum", "Die Diode sperrt auch bei Verpolung – sie ist falsch herum eingebaut.");
       }

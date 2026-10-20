@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="assets/css/products.css">
   <script defer src="assets/js/config.js"></script>
   <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/symbols.js"></script>
   <script defer src="assets/js/physics.js"></script>
   <script defer src="assets/js/plot.js"></script>
   <script defer src="assets/js/illustrations.js"></script>
@@ -38,14 +39,14 @@
             <p class="intro">Oberhalb der Durchlassspannung steigt der Strom einer LED extrem steil an. Eine LED direkt an 12 V würde in Sekundenbruchteilen zerstört.</p>
             <div class="split split--top mt-2">
               <div>
-                <p>Der <strong>Vorwiderstand R<sub>V</sub></strong> wird in Reihe zur LED geschaltet. Er begrenzt den Strom auf einen Wert, den die LED dauerhaft verträgt, und nimmt die überschüssige Spannung auf.</p>
+                <p>Der <strong>Vorwiderstand R<sub>V</sub></strong> (im Schaltplan -R1) wird in Reihe zur LED -P1 geschaltet. Er begrenzt den Strom auf einen Wert, den die LED dauerhaft verträgt, und nimmt die überschüssige Spannung auf.</p>
                 <p>Für die Masche gilt:</p>
                 <div class="formula">U<sub>b</sub> = U<sub>RV</sub> + U<sub>F</sub></div>
                 <p>Durch Vorwiderstand und LED fließt derselbe Strom I<sub>F</sub>. Die Spannungspfeile zeigen jeweils von Plus nach Minus, der Strompfeil in technischer Stromrichtung.</p>
               </div>
               <figure class="figure">
-                <div class="figure__frame"><svg viewBox="0 0 420 310" role="img" aria-label="Grundschaltung: Spannungsquelle G1, Vorwiderstand R V und LED V1 in Reihe, mit Zählpfeilen für U b, U RV, U F und I F"><path d="M90 141 V60 H300 V95 M300 155 V188 M300 222 V275 H90 V189" fill="none" stroke="#17202b" stroke-width="2.5"/><circle cx="90" cy="165" r="24" fill="#fff" stroke="#17202b" stroke-width="2.5"/><line x1="90" y1="141" x2="90" y2="189" stroke="#17202b" stroke-width="2"/><text x="112" y="140" font-size="16" font-weight="800" fill="#d3262b">+</text><text x="112" y="200" font-size="18" font-weight="800" fill="#1f5bd8">–</text><text x="128" y="170" font-size="13" font-weight="700" fill="#17202b">G1</text><rect x="289" y="95" width="22" height="60" fill="#fff" stroke="#17202b" stroke-width="2.5"/><text x="278" y="130" text-anchor="end" font-size="14" font-weight="700" fill="#17202b">R<tspan baseline-shift="sub" font-size="10">V</tspan></text><path d="M285 188 h30 l-15 30z" fill="#fff" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/><line x1="284" y1="220" x2="316" y2="220" stroke="#17202b" stroke-width="3.5"/><path d="M262 196 l-16 -12 M268 210 l-16 -12" stroke="#17202b" stroke-width="2"/><path d="M244 182 l3 8 l5 -5z M250 196 l3 8 l5 -5z" fill="#17202b"/><text x="278" y="244" text-anchor="end" font-size="14" font-weight="700" fill="#17202b">V1</text><line x1="40" y1="128" x2="40" y2="195" stroke="#c42b2b" stroke-width="2.5"/><path d="M40 204 l-6 -11 h12z" fill="#c42b2b"/><text x="30" y="171.0" text-anchor="end" font-size="16" font-weight="700" fill="#c42b2b">U<tspan baseline-shift="sub" font-size="11">b</tspan></text><line x1="340" y1="98" x2="340" y2="145" stroke="#c42b2b" stroke-width="2.5"/><path d="M340 154 l-6 -11 h12z" fill="#c42b2b"/><text x="352" y="131.0" text-anchor="start" font-size="16" font-weight="700" fill="#c42b2b">U<tspan baseline-shift="sub" font-size="11">RV</tspan></text><line x1="340" y1="188" x2="340" y2="215" stroke="#c42b2b" stroke-width="2.5"/><path d="M340 224 l-6 -11 h12z" fill="#c42b2b"/><text x="352" y="211.0" text-anchor="start" font-size="16" font-weight="700" fill="#c42b2b">U<tspan baseline-shift="sub" font-size="11">F</tspan></text><line x1="300" y1="238" x2="300" y2="256" stroke="#c42b2b" stroke-width="3"/><path d="M300 266 l-6 -12 h12z" fill="#c42b2b"/><text x="312" y="262" font-size="16" font-weight="700" fill="#c42b2b">I<tspan baseline-shift="sub" font-size="11">F</tspan></text></svg></div>
-                <figcaption>Grundschaltung: LED mit Vorwiderstand und Zählpfeilen</figcaption>
+                <div class="figure__frame"><div data-art="sch-grund-led"></div></div>
+                <figcaption>Grundschaltung: Spannungsquelle -G1, Vorwiderstand -R1 und LED -P1 mit Zählpfeilen</figcaption>
               </figure>
             </div>
           </section>

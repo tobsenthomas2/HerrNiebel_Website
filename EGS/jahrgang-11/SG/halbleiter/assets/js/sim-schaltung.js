@@ -12,39 +12,40 @@
   var UD = 0.7;
 
   /* Bauteile: V (Quelle), R (Widerstand), D (Diode). a/b = Knoten (0 = Masse).
-     Zeichnung: x1,y1,x2,y2 = Anschlusspunkte im SVG (Diode: a = Anode im Grundzustand). */
+     Diode: a = Anode im Grundzustand. Zeichnung: cx/cy = Mitte, alle Bauteile senkrecht,
+     Kennzeichnung links daneben (Dioden nach DIN EN 81346-2 ebenfalls -R). */
   var CIRCUITS = [
     {
       id: "reihe", name: "Reihenschaltung",
       parts: [
-        { t: "V", name: "G1", a: 1, b: 0, U: 5, x1: 70, y1: 70, x2: 70, y2: 230 },
-        { t: "R", name: "R1", a: 1, b: 2, R: 1000, x1: 70, y1: 70, x2: 420, y2: 70, at: 0.45 },
-        { t: "D", name: "V1", a: 2, b: 0, x1: 420, y1: 70, x2: 420, y2: 230 }
+        { t: "V", name: "-G1", a: 1, b: 0, U: 5, cx: 110, cy: 150 },
+        { t: "R", name: "-R1", a: 1, b: 2, R: 1000, cx: 380, cy: 105 },
+        { t: "D", name: "-R2", a: 2, b: 0, cx: 380, cy: 200 }
       ],
-      wires: ["M70 70 H420 V230 H70 Z"]
+      wires: ["M110 126 V50 H380 V250 H110 V174"]
     },
     {
-      id: "parallel", name: "Diode parallel zu R2",
+      id: "parallel", name: "Diode parallel zum Widerstand",
       parts: [
-        { t: "V", name: "G1", a: 1, b: 0, U: 9, x1: 70, y1: 70, x2: 70, y2: 230 },
-        { t: "R", name: "R1", a: 1, b: 2, R: 1000, x1: 70, y1: 70, x2: 300, y2: 70, at: 0.55 },
-        { t: "R", name: "R2", a: 2, b: 0, R: 2200, x1: 300, y1: 70, x2: 300, y2: 230 },
-        { t: "D", name: "V1", a: 2, b: 0, x1: 440, y1: 70, x2: 440, y2: 230 }
+        { t: "V", name: "-G1", a: 1, b: 0, U: 9, cx: 110, cy: 150 },
+        { t: "R", name: "-R1", a: 1, b: 2, R: 1000, cx: 300, cy: 98 },
+        { t: "R", name: "-R2", a: 2, b: 0, R: 2200, cx: 300, cy: 202 },
+        { t: "D", name: "-R3", a: 2, b: 0, cx: 440, cy: 202 }
       ],
-      wires: ["M70 70 H440 V230 H70 Z", "M300 70 V230"],
-      dots: [[300, 70], [300, 230]]
+      wires: ["M110 126 V50 H300 V250 H110 V174", "M300 150 H440 V250 H300"],
+      dots: [[300, 150], [300, 250]]
     },
     {
       id: "zweige", name: "Zwei Zweige",
       parts: [
-        { t: "V", name: "G1", a: 1, b: 0, U: 5, x1: 70, y1: 50, x2: 70, y2: 250 },
-        { t: "R", name: "R1", a: 1, b: 2, R: 470, x1: 260, y1: 50, x2: 260, y2: 150 },
-        { t: "D", name: "V1", a: 2, b: 0, x1: 260, y1: 150, x2: 260, y2: 250 },
-        { t: "R", name: "R2", a: 1, b: 3, R: 1000, x1: 440, y1: 50, x2: 440, y2: 150 },
-        { t: "D", name: "V2", a: 0, b: 3, x1: 440, y1: 250, x2: 440, y2: 150 }
+        { t: "V", name: "-G1", a: 1, b: 0, U: 5, cx: 110, cy: 150 },
+        { t: "R", name: "-R1", a: 1, b: 2, R: 470, cx: 290, cy: 105 },
+        { t: "D", name: "-R2", a: 2, b: 0, cx: 290, cy: 200 },
+        { t: "R", name: "-R3", a: 1, b: 3, R: 1000, cx: 450, cy: 105 },
+        { t: "D", name: "-R4", a: 0, b: 3, cx: 450, cy: 200 }
       ],
-      wires: ["M70 50 H440 V250 H70 Z", "M260 50 V250"],
-      dots: [[260, 50], [260, 250]]
+      wires: ["M110 126 V50 H450 V250 H110 V174", "M290 50 V250"],
+      dots: [[290, 50], [290, 250]]
     }
   ];
 
@@ -123,51 +124,29 @@
   }
   LT.solveDiodeCircuit = solve;
 
-  /* ---------- Zeichnen ---------- */
+  /* ---------- Zeichnen (Schaltzeichen aus symbols.js) ---------- */
+  function vals(res) { return LT.num(Math.abs(res.U), 2) + " V, " + LT.fmtI(Math.abs(res.I)); }
   function resistor(p, res, show) {
-    var vert = p.x1 === p.x2, at = p.at || 0.5;
-    var cx = p.x1 + (p.x2 - p.x1) * at, cy = p.y1 + (p.y2 - p.y1) * at;
     var active = res && Math.abs(res.I) > 1e-7;
-    var w = vert ? 22 : 64, h = vert ? 64 : 22;
-    var s = '<rect x="' + (cx - w / 2) + '" y="' + (cy - h / 2) + '" width="' + w + '" height="' + h + '" fill="' + (active ? "#fff3c4" : "#fff") + '" stroke="#17202b" stroke-width="2.5"/>';
-    var lx = vert ? cx + 20 : cx, ly = vert ? cy - 4 : cy - 20;
-    s += '<text x="' + lx + '" y="' + ly + '" text-anchor="' + (vert ? "start" : "middle") + '" font-size="13" font-weight="700" fill="#17202b">' + p.name + "</text>";
-    s += '<text x="' + lx + '" y="' + (ly + 15) + '" text-anchor="' + (vert ? "start" : "middle") + '" font-size="12" fill="#4a5563">' + LT.fmtR(p.R) + "</text>";
-    if (show && res) s += '<text x="' + lx + '" y="' + (ly + (vert ? 31 : -16)) + '" text-anchor="' + (vert ? "start" : "middle") + '" font-size="11.5" font-weight="650" fill="#8a6400">' + LT.num(Math.abs(res.U), 2) + " V | " + LT.fmtI(Math.abs(res.I)) + "</text>";
-    return s;
+    return LT.sym.resistor({ cx: p.cx, cy: p.cy, fill: active ? "#fff3c4" : "#fff" }) +
+      LT.sym.bmk({ x: p.cx, y: p.cy, gap: 20, name: p.name, value: LT.fmtR(p.R), extra: show && res ? vals(res) : null });
   }
   function diode(p, res, flipped, show) {
-    var cx = (p.x1 + p.x2) / 2, cy = (p.y1 + p.y2) / 2;
-    // Richtung Anode -> Kathode im Grundzustand
-    var dx = Math.sign(p.x2 - p.x1), dy = Math.sign(p.y2 - p.y1);
-    if (flipped) { dx = -dx; dy = -dy; }
-    var on = res && res.on, f = on ? "#ffc400" : "#fff";
+    var on = res && res.on;
+    // Grundzustand: Anode oben (Knoten a liegt oben) bzw. unten, wenn a = 0
+    var down = p.a !== 0;
+    if (flipped) down = !down;
     var s = '<g class="sc-diode" data-name="' + p.name + '" tabindex="0" role="button" aria-label="Diode ' + p.name + ' umdrehen, zurzeit ' + (on ? "leitend" : "sperrend") + '" style="cursor:pointer">';
-    s += '<rect x="' + (cx - 30) + '" y="' + (cy - 30) + '" width="60" height="60" fill="transparent"/>';
-    var tri, bar;
-    if (dy !== 0) {
-      tri = "M" + (cx - 15) + " " + (cy - 15 * dy) + " h30 L" + cx + " " + (cy + 15 * dy) + "z";
-      bar = '<line x1="' + (cx - 16) + '" y1="' + (cy + 15 * dy) + '" x2="' + (cx + 16) + '" y2="' + (cy + 15 * dy) + '" stroke="#17202b" stroke-width="3.5"/>';
-    } else {
-      tri = "M" + (cx - 15 * dx) + " " + (cy - 15) + " v30 L" + (cx + 15 * dx) + " " + cy + "z";
-      bar = '<line x1="' + (cx + 15 * dx) + '" y1="' + (cy - 16) + '" x2="' + (cx + 15 * dx) + '" y2="' + (cy + 16) + '" stroke="#17202b" stroke-width="3.5"/>';
-    }
-    s += '<path d="' + tri + '" fill="' + f + '" stroke="#17202b" stroke-width="2.5" stroke-linejoin="round"/>' + bar;
-    s += '<circle cx="' + (cx - 30) + '" cy="' + (cy - 26) + '" r="11" fill="#17202b"/><path d="M' + (cx - 35) + " " + (cy - 28) + "a5 5 0 1 1 1 5" + '" fill="none" stroke="#ffc400" stroke-width="1.8"/>';
+    s += '<rect x="' + (p.cx - 30) + '" y="' + (p.cy - 30) + '" width="60" height="60" fill="transparent"/>';
+    s += LT.sym.diode({ cx: p.cx, cy: p.cy, s: 34, dir: down ? "down" : "up", lead: 0, hl: on ? "#fff3c4" : null });
+    s += '<circle cx="' + (p.cx + 30) + '" cy="' + (p.cy - 20) + '" r="10" fill="#17202b"/><path d="M' + (p.cx + 25.5) + " " + (p.cy - 22) + "a4.6 4.6 0 1 1 1 4.6" + '" fill="none" stroke="#ffc400" stroke-width="1.8"/>';
     s += "</g>";
-    var tx = cx + 26, ty = cy - 2;
-    s += '<text x="' + tx + '" y="' + ty + '" font-size="13" font-weight="700" fill="#17202b">' + p.name + "</text>";
-    s += '<text x="' + tx + '" y="' + (ty + 16) + '" font-size="12.5" font-weight="700" fill="' + (on ? "#0d5b2a" : "#6b7684") + '">' + (on ? "leitet" : "sperrt") + "</text>";
-    if (show && res) s += '<text x="' + tx + '" y="' + (ty + 32) + '" font-size="11.5" font-weight="650" fill="#8a6400">' + LT.num(Math.abs(res.U), 2) + " V | " + LT.fmtI(Math.abs(res.I)) + "</text>";
+    s += LT.sym.bmk({ x: p.cx, y: p.cy, gap: 36, name: p.name, value: on ? "leitet" : "sperrt", extra: show && res ? vals(res) : null });
     return s;
   }
   function source(p, res, show) {
-    var cx = p.x1, cy = (p.y1 + p.y2) / 2;
-    var s = '<circle cx="' + cx + '" cy="' + cy + '" r="24" fill="#fff" stroke="#17202b" stroke-width="2.5"/><line x1="' + cx + '" y1="' + (cy - 24) + '" x2="' + cx + '" y2="' + (cy + 24) + '" stroke="#17202b" stroke-width="2"/>';
-    s += '<text x="' + (cx + 32) + '" y="' + (cy - 14) + '" font-size="16" font-weight="800" fill="#d3262b">+</text><text x="' + (cx + 32) + '" y="' + (cy + 24) + '" font-size="18" font-weight="800" fill="#1f5bd8">–</text>';
-    s += '<text x="' + (cx - 32) + '" y="' + (cy - 2) + '" text-anchor="end" font-size="13" font-weight="700" fill="#17202b">' + p.name + '</text><text x="' + (cx - 32) + '" y="' + (cy + 14) + '" text-anchor="end" font-size="12" fill="#4a5563">' + LT.num(p.U, 0) + " V</text>";
-    if (show && res) s += '<text x="' + (cx - 32) + '" y="' + (cy + 30) + '" text-anchor="end" font-size="11.5" font-weight="650" fill="#8a6400">' + LT.fmtI(Math.abs(res.I)) + "</text>";
-    return s;
+    return LT.sym.source({ cx: p.cx, cy: p.cy, r: 24 }) +
+      LT.sym.bmk({ x: p.cx, y: p.cy, gap: 36, name: p.name, value: LT.num(p.U, 0) + " V", extra: show && res ? LT.fmtI(Math.abs(res.I)) : null });
   }
 
   LT.$$('[data-sim="schaltung"]').forEach(function (host) {
@@ -190,15 +169,8 @@
     function draw() {
       var c = CIRCUITS[st.idx], res = solve(c, st.flips) || {};
       var h = '<svg viewBox="0 0 540 290" role="img" aria-label="Schaltplan ' + c.name + '">';
-      c.wires.forEach(function (d) { h += '<path d="' + d + '" fill="none" stroke="#17202b" stroke-width="2.5"/>'; });
-      (c.dots || []).forEach(function (d) { h += '<circle cx="' + d[0] + '" cy="' + d[1] + '" r="4.5" fill="#17202b"/>'; });
-      // Bauteile über die Leitung legen (weißer Hintergrund unter Symbolen)
-      c.parts.forEach(function (p) {
-        if (p.t === "D") {
-          var cx = (p.x1 + p.x2) / 2, cy = (p.y1 + p.y2) / 2, vert = p.x1 === p.x2;
-          h += '<rect x="' + (cx - (vert ? 4 : 17)) + '" y="' + (cy - (vert ? 17 : 4)) + '" width="' + (vert ? 8 : 34) + '" height="' + (vert ? 34 : 8) + '" fill="#fff"/>';
-        }
-      });
+      c.wires.forEach(function (d) { h += LT.sym.wire(d); });
+      (c.dots || []).forEach(function (d) { h += LT.sym.dot(d[0], d[1]); });
       c.parts.forEach(function (p) {
         if (p.t === "V") h += source(p, res[p.name], show);
         else if (p.t === "R") h += resistor(p, res[p.name], show);
@@ -213,7 +185,7 @@
       });
       var lines = c.parts.filter(function (p) { return p.t === "D"; }).map(function (p) {
         var r = res[p.name];
-        return "<li><b>" + p.name + (r && r.on ? " leitet</b> – Plus liegt an der Anode. Spannung an der Diode: 0,7 V." : " sperrt</b> – es fließt kein Strom durch die Diode, sie nimmt die anliegende Spannung auf.") + "</li>";
+        return "<li><b>" + p.name + (r && r.on ? " leitet</b> – das höhere Potenzial liegt an der Anode. Spannung an der Diode: 0,7 V." : " sperrt</b> – es fließt kein Strom durch die Diode, sie nimmt die anliegende Spannung auf.") + "</li>";
       });
       summary.innerHTML = "<strong>Ergebnis</strong><ul>" + lines.join("") + "</ul>" + (show ? "" : "<p>Spannungen und Ströme berechnen Sie mit Maschen- und Knotenregel selbst.</p>");
     }

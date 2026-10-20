@@ -1,7 +1,7 @@
 /* =========================================================================
    LUMIATECH – Produktzeichnungen (SVG), an einer Stelle gepflegt.
    Platzhalter im HTML:  <div data-art="led" data-color="red" data-dims="true"></div>
-   Verfügbar: led, diode, tower, sym-diode, sym-led
+   Verfügbar: led, diode, tower (Schaltzeichen und Schaltpläne: symbols.js)
    ========================================================================= */
 (function () {
   "use strict";
@@ -137,38 +137,12 @@
     return s + "</svg>";
   };
 
-  /** Schaltzeichen Diode / LED */
-  LT.artSymbol = function (o) {
-    o = o || {};
-    var led = o.type === "led";
-    var col = o.color || "#17202b";
-    var s = '<svg class="art-sym" viewBox="0 0 220 110" role="img" aria-label="Schaltzeichen ' + (led ? "Leuchtdiode" : "Diode") + ' mit Anode und Kathode">';
-    s += '<line x1="20" y1="60" x2="90" y2="60" stroke="' + col + '" stroke-width="3"/><line x1="130" y1="60" x2="200" y2="60" stroke="' + col + '" stroke-width="3"/>';
-    s += '<path d="M90 38 L90 82 L128 60 Z" fill="none" stroke="' + col + '" stroke-width="3" stroke-linejoin="round"/>';
-    s += '<line x1="130" y1="36" x2="130" y2="84" stroke="' + col + '" stroke-width="3.5"/>';
-    if (led) {
-      s += '<path d="M112 34 L128 16 M120 40 L136 22" stroke="' + col + '" stroke-width="2.5"/>';
-      s += '<path d="M128 16 l-8 2 l5 5z M136 22 l-8 2 l5 5z" fill="' + col + '"/>';
-    }
-    if (o.labels !== false) {
-      s += '<text x="20" y="96" font-size="15" font-weight="700" fill="#17202b">Anode (A)</text>';
-      s += '<text x="200" y="96" text-anchor="end" font-size="15" font-weight="700" fill="#17202b">Kathode (K)</text>';
-    }
-    if (o.current) {
-      s += '<path d="M60 26 h70" stroke="#e0a100" stroke-width="2.5"/><path d="M138 26 l-10 -5 v10z" fill="#e0a100"/>';
-      s += '<text x="98" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#8a6400">I<tspan font-size="10" dy="3">F</tspan></text>';
-    }
-    return s + "</svg>";
-  };
-
   function mount() {
     LT.$$("[data-art]").forEach(function (n) {
       var t = n.getAttribute("data-art");
       if (t === "led") n.innerHTML = LT.artLED({ color: n.getAttribute("data-color") || "red", dims: n.getAttribute("data-dims") === "true", lit: n.getAttribute("data-lit") !== "false" });
       else if (t === "diode") n.innerHTML = LT.artDiode({ dims: n.getAttribute("data-dims") !== "false" });
       else if (t === "tower") n.innerHTML = LT.artTower({ states: JSON.parse(n.getAttribute("data-states") || '{"red":1,"green":1,"blue":1}') });
-      else if (t === "sym-diode") n.innerHTML = LT.artSymbol({ type: "diode", current: n.hasAttribute("data-current") });
-      else if (t === "sym-led") n.innerHTML = LT.artSymbol({ type: "led", current: n.hasAttribute("data-current") });
     });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);

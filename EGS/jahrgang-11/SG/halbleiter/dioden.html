@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="assets/css/products.css">
   <script defer src="assets/js/config.js"></script>
   <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/symbols.js"></script>
   <script defer src="assets/js/physics.js"></script>
   <script defer src="assets/js/plot.js"></script>
   <script defer src="assets/js/illustrations.js"></script>
@@ -80,12 +81,16 @@
             <div class="grid grid-2 mt-2">
               <figure class="figure">
                 <div class="figure__frame center"><div data-art="sym-diode" class="sym-art"></div></div>
-                <figcaption>Schaltzeichen nach DIN EN 60617: Dreieck = Anode, Querstrich = Kathode</figcaption>
+                <figcaption>Schaltzeichen nach DIN EN 60617: Die Leitung läuft durch das Dreieck, der Querstrich markiert die Kathode. Kennzeichnung -R1 nach DIN EN 81346-2.</figcaption>
               </figure>
               <figure class="figure">
                 <div class="figure__frame"><div data-art="diode"></div></div>
                 <figcaption>Bauteil im Gehäuse DO-7: Der Farbring kennzeichnet die Kathode. Maße in mm.</figcaption>
               </figure>
+            </div>
+            <div class="note note--plain">
+              <div class="note__title">Kennzeichnung im Schaltplan</div>
+              <p>Jedes Bauteil erhält eine Betriebsmittelkennzeichnung mit vorangestelltem Bindestrich. Dioden tragen nach DIN EN 81346-2 wie Widerstände den Kennbuchstaben <strong>-R</strong> und werden fortlaufend nummeriert, zum Beispiel -R1, -R2. Die Kennzeichnung steht links neben senkrecht gezeichneten Bauteilen und oberhalb von waagerecht gezeichneten.</p>
             </div>
             <div class="note">
               <div class="note__title">Kathode erkennen</div>
@@ -106,7 +111,7 @@
                 <p><span class="pol pol--minus">–</span> an der Anode, <span class="pol pol--plus">+</span> an der Kathode. Die Sperrschicht wird breiter, es fließt praktisch kein Strom.</p>
               </div>
             </div>
-            <div data-sim="polung" data-title="Prüfaufbau: Quelle, Diode, Lampe" data-hint="Polen Sie die Quelle um oder drehen Sie die Diode."></div>
+            <div data-sim="polung" data-title="Prüfaufbau: Quelle, Diode, Meldeleuchte" data-hint="Polen Sie die Quelle um oder drehen Sie die Diode."></div>
           </section>
 
           <section id="kennlinie" data-toc-label="Kennlinie">
