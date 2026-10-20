@@ -244,6 +244,9 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
 .footer-brand .brand__claim { color: var(--on-dark-2); }
 .footer-brand address { font-style: normal; margin-top: 1rem; line-height: 1.6; }
 .footer-bottom { border-top: 1px solid var(--wafer-line); margin-top: 40px; padding-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+.footer-legal { margin-top: 14px; font-size: var(--fs-xs); color: var(--on-dark-2); opacity: .85; }
+.footer-legal p { margin: 0 0 .2rem; max-width: none; }
+.footer-legal a { text-decoration: underline; text-decoration-color: var(--wafer-line); }
 @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
 
 /* 6 · Bausteine ------------------------------------------------------------ */

@@ -263,7 +263,9 @@
       '<div><h4>Applikationen</h4><ul><li><a href="dioden-applikation.html">Verpolschutz</a></li><li><a href="dioden-applikation.html#schaltungen">Diodenschaltungen</a></li><li><a href="led-applikation.html">LED-Vorwiderstand</a></li><li><a href="led-applikation.html#signalsaeule">Signalsäulen-Retrofit</a></li></ul></div>' +
       '<div><h4>Unternehmen</h4><ul><li><a href="unternehmen.html">Über uns</a></li><li><a href="unternehmen.html#fertigung">Fertigung & Prüfung</a></li><li><a href="unternehmen.html#ausbildung">Ausbildung</a></li><li><a href="technologie.html">Halbleitertechnik</a></li></ul></div>' +
       "</div>" +
-      '<div class="footer-bottom"><span>© ' + year + " " + COMPANY.name + "</span><span>Zertifiziert nach ISO 9001, alle Produkte RoHS-konform</span></div></div>";
+      '<div class="footer-bottom"><span>© ' + year + " " + COMPANY.name + "</span><span>Zertifiziert nach ISO 9001, alle Produkte RoHS-konform</span></div>" +
+      '<div class="footer-legal"><p>KI-generierte Inhalte. Diese Website dient ausschließlich Lehrzwecken, LUMIATECH ist ein fiktives Unternehmen.</p>' +
+      '<p>Impressum: Tobias Niebel · Kontakt und Feedback: <a href="mailto:tobias.niebel@bspaf.de">tobias.niebel@bspaf.de</a></p></div></div>';
   }
 
   /* ---------- Inhaltsverzeichnis für lange Seiten ---------- */
