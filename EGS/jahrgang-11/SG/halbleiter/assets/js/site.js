@@ -38,6 +38,8 @@
   /* ---------- kleine Helfer, auch für die Simulationen ---------- */
   var LT = (window.LT = window.LT || {});
   LT.config = window.LT_CONFIG || { messwerteAnzeigen: false };
+  // Ordner dieses Skripts (…/assets/js/), um weitere Skripte bei Bedarf nachzuladen
+  var JS_BASE = (document.currentScript && document.currentScript.src || "assets/js/site.js").replace(/site\.js(\?.*)?$/, "");
 
   LT.$ = function (sel, root) { return (root || document).querySelector(sel); };
   LT.$$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
@@ -85,7 +87,10 @@
     bulb: '<path d="M7 14h6M7.5 17h5M10 2.5a5.2 5.2 0 0 0-3.2 9.3c.5.4.7 1 .7 1.6V14h5v-.6c0-.6.3-1.2.7-1.6A5.2 5.2 0 0 0 10 2.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>',
     lab: '<path d="M7.5 2.5h5M8.5 2.5v5L3.6 15.4A1.4 1.4 0 0 0 4.8 17.5h10.4a1.4 1.4 0 0 0 1.2-2.1L11.5 7.5v-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M5.5 12.5h9" stroke="currentColor" stroke-width="1.7"/>',
     chart: '<path d="M3 3v14h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M5.5 15c4.5 0 6-1 8-11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
-    circuit: '<path d="M2 10h4M14 10h4M6 6v8l7-4-7-4zM13 6v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>'
+    circuit: '<path d="M2 10h4M14 10h4M6 6v8l7-4-7-4zM13 6v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>',
+    chat: '<path d="M3.6 3.8h12.8c.6 0 1.1.5 1.1 1.1v8.2c0 .6-.5 1.1-1.1 1.1H9.2l-4 3.1v-3.1H3.6c-.6 0-1.1-.5-1.1-1.1V4.9c0-.6.5-1.1 1.1-1.1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.8" cy="9" r="1.05" fill="currentColor"/><circle cx="10" cy="9" r="1.05" fill="currentColor"/><circle cx="13.2" cy="9" r="1.05" fill="currentColor"/>',
+    external: '<path d="M11.5 3H17v5.5M17 3l-7.5 7.5M14.5 12v3.9c0 .6-.5 1.1-1.1 1.1H4.1c-.6 0-1.1-.5-1.1-1.1V6.6c0-.6.5-1.1 1.1-1.1H8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+    copy: '<rect x="7" y="7" width="10" height="10" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M13 7V4.6c0-.9-.7-1.6-1.6-1.6H4.6C3.7 3 3 3.7 3 4.6v6.8c0 .9.7 1.6 1.6 1.6H7" fill="none" stroke="currentColor" stroke-width="1.7"/>'
   };
   LT.icon = function (name, cls) {
     return '<svg viewBox="0 0 20 20" aria-hidden="true"' + (cls ? ' class="' + cls + '"' : "") + ">" + (ICONS[name] || "") + "</svg>";
@@ -236,7 +241,7 @@
     });
     document.addEventListener("click", function (e) { if (!host.contains(e.target)) closeAll(); });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") { closeAll(); menuBtn.setAttribute("aria-expanded", "false"); nav.classList.remove("is-open"); }
+      if (e.key === "Escape") { closeAll(); menuBtn.setAttribute("aria-expanded", "false"); nav.classList.remove("is-open"); document.documentElement.classList.remove("nav-open"); }
     });
 
     var menuBtn = LT.$(".menu-btn", host), nav = LT.$(".nav", host);
@@ -244,6 +249,7 @@
       var open = menuBtn.getAttribute("aria-expanded") !== "true";
       menuBtn.setAttribute("aria-expanded", String(open));
       nav.classList.toggle("is-open", open);
+      document.documentElement.classList.toggle("nav-open", open);
       menuBtn.innerHTML = LT.icon(open ? "close" : "menu") + "<span>" + (open ? "Schließen" : "Menü") + "</span>";
     });
   }
@@ -266,6 +272,131 @@
       '<div class="footer-bottom"><span>© ' + year + " " + COMPANY.name + "</span><span>Zertifiziert nach ISO 9001, alle Produkte RoHS-konform</span></div>" +
       '<div class="footer-legal"><p>KI-generierte Inhalte. Diese Website dient ausschließlich Lehrzwecken, LUMIATECH ist ein fiktives Unternehmen.</p>' +
       '<p>Impressum: Tobias Niebel · Kontakt und Feedback: <a href="mailto:tobias.niebel@bspaf.de">tobias.niebel@bspaf.de</a></p></div></div>';
+  }
+
+  /* ---------- KI-Support: Reiter, Hinweis beim Laden, Fenster mit QR-Code ----------
+     Einstellungen in config.js (kiChat). Der QR-Code wird aus dem Link erzeugt
+     (assets/js/vendor/qrcode.js, wird erst beim Öffnen des Fensters geladen). */
+  function buildSupport() {
+    var cfg = LT.config.kiChat || {};
+    var url = cfg.url;
+    if (!url || document.getElementById("support")) return;
+    var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); };
+    var U = esc(url);
+
+    var wrap = document.createElement("div");
+    wrap.className = "support";
+    wrap.id = "support";
+    wrap.innerHTML =
+      '<button class="support-tab" type="button" aria-haspopup="dialog" aria-controls="support-dialog">' + LT.icon("chat") +
+      '<span class="support-tab__long">Fragen? KI-Chat</span><span class="support-tab__short">Fragen?</span></button>' +
+      '<div class="support-teaser" aria-live="polite">' +
+      '<button class="support-teaser__close" type="button" aria-label="Hinweis schließen">' + LT.icon("close") + "</button>" +
+      "<strong>Fragen zu Dioden oder LEDs?</strong>" +
+      "<p>Unser KI-Support beantwortet sie direkt im Chat.</p>" +
+      '<button class="btn btn--litho btn--small support-teaser__open" type="button">' + LT.icon("chat") + "Chat öffnen</button></div>";
+    document.body.appendChild(wrap);
+
+    var dlg = document.createElement("dialog");
+    dlg.className = "support-dialog";
+    dlg.id = "support-dialog";
+    dlg.setAttribute("aria-labelledby", "support-title");
+    dlg.innerHTML =
+      '<div class="support-dialog__inner">' +
+      '<div class="support-dialog__head"><span class="support-dialog__badge">' + LT.icon("chat") + "</span>" +
+      '<div><span class="kicker">Technischer Support</span><h2 id="support-title">Stellen Sie Ihre Fragen im Chat</h2></div>' +
+      '<button class="support-dialog__close" type="button" aria-label="Fenster schließen">' + LT.icon("close") + "</button></div>" +
+      '<div class="support-dialog__body">' +
+      '<figure class="support-qr"><div class="support-qr__code"><span class="support-qr__wait">QR-Code wird erzeugt …</span></div>' +
+      '<figcaption>Mit der Smartphone-Kamera scannen</figcaption>' +
+      '<a class="support-qr__save" href="#" download="KI-Chat_QR-Code.svg" hidden>QR-Code speichern</a></figure>' +
+      '<div class="support-dialog__text">' +
+      "<p>Unser KI-Assistent hilft bei Fragen zu Dioden, LEDs, Kennlinien, Vorwiderständen und unseren Applikationen.</p>" +
+      '<a class="btn btn--litho support-dialog__go" href="' + U + '" target="_blank" rel="noopener">' + LT.icon("external") + "Chat im neuen Tab öffnen</a>" +
+      '<div class="support-link"><span class="support-link__label">Link zum Chat</span>' +
+      '<a class="support-link__url" href="' + U + '" target="_blank" rel="noopener">' + esc(url.replace(/^https?:\/\//, "")) + "</a>" +
+      '<button class="support-link__copy" type="button">' + LT.icon("copy") + '<span>Link kopieren</span></button></div>' +
+      '<p class="support-dialog__note">' + LT.icon("info") + "<span>Der Chat ist ein KI-Assistent. Antworten können Fehler enthalten – wichtige Werte bitte im Datenblatt prüfen.</span></p>" +
+      "</div></div></div>";
+    document.body.appendChild(dlg);
+
+    var tab = LT.$(".support-tab", wrap), teaser = LT.$(".support-teaser", wrap), timer = null;
+    function hideTeaser() { clearTimeout(timer); wrap.classList.remove("show-teaser"); }
+    function open() {
+      hideTeaser();
+      renderQR();
+      if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
+      tab.setAttribute("aria-expanded", "true");
+    }
+    function close() {
+      if (typeof dlg.close === "function") dlg.close(); else dlg.removeAttribute("open");
+    }
+    dlg.addEventListener("close", function () { tab.setAttribute("aria-expanded", "false"); });
+    tab.addEventListener("click", open);
+    LT.$(".support-teaser__open", wrap).addEventListener("click", open);
+    LT.$(".support-teaser__close", wrap).addEventListener("click", hideTeaser);
+    LT.$(".support-dialog__close", dlg).addEventListener("click", close);
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); }); // Klick neben das Fenster
+
+    // Link kopieren
+    var copyBtn = LT.$(".support-link__copy", dlg), copyLabel = LT.$("span", copyBtn);
+    copyBtn.addEventListener("click", function () {
+      function done(ok) {
+        copyLabel.textContent = ok ? "Kopiert" : "Bitte manuell kopieren";
+        copyBtn.classList.toggle("is-done", ok);
+        setTimeout(function () { copyLabel.textContent = "Link kopieren"; copyBtn.classList.remove("is-done"); }, 2200);
+      }
+      function fallback() {
+        var ta = document.createElement("textarea");
+        ta.value = url; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+        dlg.appendChild(ta); ta.select();
+        var ok = false; try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+        dlg.removeChild(ta); done(ok);
+      }
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(function () { done(true); }, fallback);
+      else fallback();
+    });
+
+    // QR-Code aus dem Link erzeugen (Bibliothek erst bei Bedarf laden)
+    var qrDone = false;
+    function renderQR() {
+      if (qrDone) return;
+      var host = LT.$(".support-qr__code", dlg);
+      function draw() {
+        try {
+          var q = window.qrcode(0, "M");
+          q.addData(url); q.make();
+          var n = q.getModuleCount(), b = 4, size = n + 2 * b, d = "";
+          for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (q.isDark(r, c)) d += "M" + (c + b) + " " + (r + b) + "h1v1h-1z";
+          var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + size + " " + size + '" shape-rendering="crispEdges" role="img" aria-label="QR-Code zum KI-Support-Chat">' +
+            '<rect width="' + size + '" height="' + size + '" fill="#fff"/><path d="' + d + '" fill="#17202b"/></svg>';
+          host.innerHTML = svg;
+          var save = LT.$(".support-qr__save", dlg);
+          save.href = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+          save.hidden = false;
+          qrDone = true;
+        } catch (err) { fail(); }
+      }
+      function fail() { host.innerHTML = '<span class="support-qr__wait">QR-Code nicht verfügbar – bitte den Link nutzen.</span>'; }
+      if (window.qrcode) { draw(); return; }
+      var s = document.createElement("script");
+      s.src = JS_BASE + "vendor/qrcode.js";
+      s.onload = draw; s.onerror = fail;
+      document.head.appendChild(s);
+    }
+
+    // Hinweis beim Laden der Seite
+    if (cfg.hinweisBeimLaden !== false) {
+      setTimeout(function () {
+        if (dlg.open) return;
+        wrap.classList.add("show-teaser");
+        var sec = cfg.hinweisSekunden === undefined ? 10 : +cfg.hinweisSekunden;
+        if (sec > 0) timer = setTimeout(hideTeaser, sec * 1000);
+      }, 1200);
+      // solange die Maus auf dem Hinweis ist, nicht automatisch schließen
+      teaser.addEventListener("mouseenter", function () { clearTimeout(timer); });
+      teaser.addEventListener("focusin", function () { clearTimeout(timer); });
+    }
   }
 
   /* ---------- Inhaltsverzeichnis für lange Seiten ---------- */
@@ -315,6 +446,7 @@
   function init() {
     buildHeader();
     buildFooter();
+    buildSupport();
     buildToc();
     initHotspots();
     LT.$$('input[type="range"]').forEach(LT.paintRange);

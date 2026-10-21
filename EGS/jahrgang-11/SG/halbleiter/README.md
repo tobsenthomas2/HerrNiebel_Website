@@ -30,6 +30,8 @@ assets/js/plot.js          Diagramm-Baukasten (SVG)
 assets/js/symbols.js      Schaltzeichen (DIN EN 60617) und Betriebsmittelkennzeichnung (DIN EN 81346-2)
 assets/js/illustrations.js Produktzeichnungen: LED, Diode, Signalsäule
 assets/js/sim-*.js         je eine Simulation
+assets/js/vendor/qrcode.js QR-Code-Erzeugung für den KI-Support (qrcode-generator, MIT-Lizenz, K. Arase)
+assets/img/logo/           Logo als SVG und PNG (auch auf downloads.html zum Herunterladen)
 assets/fonts/              Schriften lokal (Archivo, griechische Zeichen aus IBM Plex Sans)
 datenblaetter/             PDF-Datenblätter
 ```
@@ -66,6 +68,24 @@ window.LT_CONFIG = { messwerteAnzeigen: false };
 
 `false` (Standard): Arbeitspunkt, Signalsäule, Verpolschutz und Schaltungs-Check zeigen
 Ergebnisse nur grafisch bzw. qualitativ. `true`: zusätzlich alle berechneten Zahlenwerte.
+
+## Einstellung: KI-Support-Chat
+
+Auf jeder Seite gibt es rechts einen Reiter „Fragen? KI-Chat“ (auf dem Handy unten rechts „Fragen?“).
+Er öffnet ein Fenster mit QR-Code, Link und Kopier-Knopf. Beim Laden jeder Seite klappt
+zusätzlich kurz ein Hinweis neben dem Reiter auf.
+
+In `assets/js/config.js`:
+
+```js
+kiChat: {
+  url: "https://app.ais-chat.schule/…",   // neuer Link = neuer QR-Code, "" blendet alles aus
+  hinweisBeimLaden: true,                 // false = nur der Reiter, kein Hinweis
+  hinweisSekunden: 10                     // 0 = Hinweis bleibt, bis er geschlossen wird
+}
+```
+
+Der QR-Code wird im Browser aus dem Link erzeugt, es muss keine Bilddatei ausgetauscht werden.
 
 ## Neue Seite hinzufügen
 
