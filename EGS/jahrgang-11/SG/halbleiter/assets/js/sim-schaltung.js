@@ -185,7 +185,7 @@
       });
       var lines = c.parts.filter(function (p) { return p.t === "D"; }).map(function (p) {
         var r = res[p.name];
-        return "<li><b>" + p.name + (r && r.on ? " leitet</b> – das höhere Potenzial liegt an der Anode. Spannung an der Diode: 0,7 V." : " sperrt</b> – es fließt kein Strom durch die Diode, sie nimmt die anliegende Spannung auf.") + "</li>";
+        return "<li><b>" + p.name + (r && r.on ? " leitet</b> – das höhere Potenzial liegt an der Anode. Spannung an der Diode: vereinfacht 0,7 V." : " sperrt</b> – es fließt kein Strom durch die Diode, sie nimmt die anliegende Spannung auf.") + "</li>";
       });
       summary.innerHTML = "<strong>Ergebnis</strong><ul>" + lines.join("") + "</ul>" + (show ? "" : "<p>Spannungen und Ströme berechnen Sie mit Maschen- und Knotenregel selbst.</p>");
     }

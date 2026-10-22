@@ -10,9 +10,18 @@
   var Y0 = 0.4; // Lage der U-Achse (Anteil der Höhe von unten)
   var IMAX = 300, IRMAX = 10, URMAX_AX = 80, UFMAX_AX = 1.6;
 
+  /* Schleusenspannung U_S zeichnerisch: Tangente an den steilen Teil der Kennlinie
+     (hier bei I = 150 mA), verlängert bis zur U-Achse. Ergibt U_S ≈ 0,70 V. */
+  var I_TAN = 0.15;
+  var R_TAN = DEV.nVt / I_TAN + DEV.Rs;                       // Steigung ΔU/ΔI der Tangente in Ω
+  var U_S = LT.phys.U_of_I(DEV, I_TAN) - R_TAN * I_TAN;       // Schnittpunkt mit der U-Achse
+  /* Durchlassspannung laut Datenblatt: U_F bei I_F = 100 mA, 25 °C */
+  var DS = { I: 0.1, U: 0.97, Umax: 1.1 };
+
   var TERMS = {
-    durchlass: { t: "Durchlassrichtung", d: "Plus an der Anode, Minus an der Kathode. Ab der Schleusenspannung steigt der Strom sehr steil an – die Diode leitet." },
-    schleuse: { t: "Schleusenspannung (Durchlassspannung)", d: "Mindestspannung in Durchlassrichtung, ab der ein nennenswerter Strom fließt. Bei Silizium etwa 0,6 bis 0,7 V." },
+    durchlass: { t: "Durchlassrichtung", d: "Plus an der Anode, Minus an der Kathode. Ab der Schleusenspannung U<sub>S</sub> steigt der Strom sehr steil an – die Diode leitet." },
+    schleuse: { t: "Schleusenspannung U<sub>S</sub>", d: "Beschreibt den Knick der Kennlinie: Ab hier steigt der Strom stark an. Zeichnerisch legt man eine Tangente an den steilen Teil der Kennlinie – ihr Schnittpunkt mit der U-Achse ist U<sub>S</sub>. Silizium: etwa 0,6 bis 0,7 V, BAY 44: rund 0,7 V. Auch darunter fließt schon ein sehr kleiner Strom; einen scharfen Einschaltpunkt gibt es nicht." },
+    uf: { t: "Durchlassspannung U<sub>F</sub>", d: "Spannung, die bei einem bestimmten Durchlassstrom I<sub>F</sub> tatsächlich an der Diode abfällt – ein Punkt auf der Kennlinie. Weil die Kennlinie oberhalb von U<sub>S</sub> nicht senkrecht verläuft, steigt U<sub>F</sub> mit dem Strom weiter an. Das Datenblatt nennt U<sub>F</sub> deshalb immer mit Prüfstrom und Temperatur: BAY 44 typ. 0,97 V, max. 1,1 V bei I<sub>F</sub> = 100 mA und 25 °C." },
     ifmax: { t: "Maximaler Durchlassstrom", d: "Größter Strom in Durchlassrichtung, der dauerhaft fließen darf, ohne dass die Diode beschädigt wird. BAY 44: I<sub>F</sub> = 250 mA." },
     sperr: { t: "Sperrrichtung", d: "Minus an der Anode, Plus an der Kathode. Es fließt nur ein winziger Sperrstrom im Nano- bis Mikroampere-Bereich – die Diode sperrt." },
     urmax: { t: "Maximale Sperrspannung", d: "Größte Spannung, die in Sperrrichtung angelegt werden darf. BAY 44: U<sub>R</sub> = 50 V. Höhere Werte sind nicht zulässig." },
@@ -25,7 +34,7 @@
 
   function init(host) {
     var ui = LT.lab(host, { icon: "chart", top: true });
-    var st = { k: 750, show: false, active: null };
+    var st = { k: 750, show: false, tangent: false, active: null };
 
     function uOfK(k) { return k <= 500 ? -URMAX_AX * (1 - k / 500) : (k - 500) / 500 * 1.4; }
 
@@ -40,9 +49,15 @@
     sw.innerHTML = '<input type="checkbox"> Alle Fachbegriffe einblenden';
     ui.controls.appendChild(sw);
     LT.$("input", sw).addEventListener("change", function (e) { st.show = e.target.checked; chart.render(); });
+    var swT = document.createElement("div");
+    swT.className = "ctl";
+    swT.innerHTML = '<label class="switch"><input type="checkbox"><span>U<sub>S</sub> und U<sub>F</sub> einzeichnen</span></label>' +
+      '<span class="ctl__help">Tangente an den steilen Teil legen: Schnitt mit der U-Achse = Schleusenspannung U<sub>S</sub>. Der Datenblattpunkt zeigt U<sub>F</sub> bei 100 mA.</span>';
+    ui.controls.appendChild(swT);
+    LT.$("input", swT).addEventListener("change", function (e) { st.tangent = e.target.checked; chart.render(); });
 
     var readout = document.createElement("dl");
-    readout.className = "readout";
+    readout.className = "readout kl-readout";
     ui.controls.appendChild(readout);
     var status = document.createElement("div");
     ui.controls.appendChild(status);
@@ -90,6 +105,24 @@
         c.path(revOk, { class: "series", stroke: DEV.color, "stroke-width": 2.75 });
         c.path(revBad, { class: "series", stroke: DEV.color, "stroke-width": 2.75, "stroke-dasharray": "6 5" });
 
+        var narrow = c.width < 560;
+        // Schleusenspannung (Tangente) und Durchlassspannung (Datenblattpunkt)
+        if (st.tangent) {
+          var tTop = U_S + R_TAN * IMAX / 1e3;
+          c.el("line", { x1: c.sx(U_S), y1: c.sy(0), x2: c.sx(tTop), y2: c.sy(IMAX), stroke: "#8a6400", "stroke-width": 2, "stroke-dasharray": "8 5" }, c.gOver);
+          var iLab = narrow ? 0.07 : 0.035;
+          c.text(c.sx(U_S + R_TAN * iLab) + 9, c.sy(iLab * 1e3) + 4, "Tangente", { "text-anchor": "start", class: "series-label", fill: "#8a6400", "font-size": 12 }, c.gOver);
+          c.el("path", { d: "M" + c.sx(U_S) + " " + (c.sy(0) - 6) + " l5 6 l-5 6 l-5 -6z", fill: "#8a6400" }, c.gOver);
+          c.text(c.sx(U_S) - 16, c.sy(0) - 9, "U<sub>S</sub> ≈ " + LT.num(U_S, 2) + " V", { "text-anchor": "end", class: "series-label", fill: "#8a6400" }, c.gOver);
+          var dx = c.sx(DS.U), dy = c.sy(DS.I * 1e3);
+          c.el("line", { x1: dx, x2: dx, y1: dy, y2: c.sy(0), class: "guide", stroke: "#1f5bd8" }, c.gOver);
+          c.el("line", { x1: c.sx(0), x2: dx, y1: dy, y2: dy, class: "guide", stroke: "#1f5bd8" }, c.gOver);
+          // breit: rechts unter dem Punkt; schmal: im freien Feld unter der U-Achse (rechts unten)
+          var tx = narrow ? c.sx(UFMAX_AX) : dx + 16, a = narrow ? "end" : "start", ty = narrow ? c.sy(0) + 64 : dy + 24;
+          c.text(tx, ty, "U<sub>F</sub> = 0,97 V", { "text-anchor": a, class: "series-label", fill: "#1f5bd8" }, c.gOver);
+          c.text(tx, ty + 15, "bei I<sub>F</sub> = 100 mA", { "text-anchor": a, class: "series-label", fill: "#1f5bd8", "font-size": 11.5 }, c.gOver);
+        }
+
         // aktueller Punkt
         var u = uOfK(st.k), I = LT.phys.current(DEV, u), v = yv(I);
         var px = c.sx(u), py = c.sy(LT.clamp(v, -IRMAX * 1.05, IMAX * 1.05));
@@ -100,22 +133,29 @@
         // Begriffe / Markierungen
         var spots = [
           { id: "durchlass", n: 1, x: c.sx(0.3), y: c.sy(165), lx: c.sx(0.3) + 18, ly: c.sy(165) + 4, a: "start" },
-          { id: "schleuse", n: 2, x: c.sx(0.62), y: c.sy(0), lx: c.sx(0.62) + 2, ly: c.sy(0) + 40, a: "middle" },
-          { id: "ifmax", n: 3, x: c.sx(0.3), y: c.sy(250), lx: c.sx(0.3) + 18, ly: c.sy(250) - 10, a: "start" },
-          { id: "sperr", n: 4, x: c.sx(-25), y: c.sy(-4), lx: c.sx(-25), ly: c.sy(-4) + 30, a: "middle" },
-          { id: "urmax", n: 5, x: c.sx(-DEV.URmax), y: c.sy(60), lx: c.sx(-DEV.URmax) + 18, ly: c.sy(60) + 4, a: "start", lead: [c.sx(-DEV.URmax), c.sy(60), c.sx(-DEV.URmax), c.sy(0)] },
-          { id: "durchbruch", n: 6, x: c.sx(-DEV.UBR), y: c.sy(150), lx: c.sx(-DEV.UBR) + 18, ly: c.sy(150) + 4, a: "start", lead: [c.sx(-DEV.UBR), c.sy(150), c.sx(-DEV.UBR), c.sy(-1)] }
+          { id: "schleuse", n: 2, x: c.sx(U_S), y: c.sy(0), lx: c.sx(U_S), ly: c.sy(0) + 40, a: "middle" },
+          { id: "uf", n: 3, x: c.sx(DS.U), y: c.sy(DS.I * 1e3), lx: c.sx(DS.U) - 18, ly: c.sy(DS.I * 1e3) + 4, a: "end" },
+          { id: "ifmax", n: 4, x: c.sx(0.3), y: c.sy(250), lx: c.sx(0.3) + 18, ly: c.sy(250) - 10, a: "start" },
+          { id: "sperr", n: 5, x: c.sx(-25), y: c.sy(-4), lx: c.sx(-25), ly: c.sy(-4) + 30, a: "middle" },
+          { id: "urmax", n: 6, x: c.sx(-DEV.URmax), y: c.sy(60), lx: c.sx(-DEV.URmax) + 18, ly: c.sy(60) + 4, a: "start", lead: [c.sx(-DEV.URmax), c.sy(60), c.sx(-DEV.URmax), c.sy(0)] },
+          { id: "durchbruch", n: 7, x: c.sx(-DEV.UBR), y: c.sy(150), lx: c.sx(-DEV.UBR) + 18, ly: c.sy(150) + 4, a: "start", lead: [c.sx(-DEV.UBR), c.sy(150), c.sx(-DEV.UBR), c.sy(-1)] }
         ];
         spots.forEach(function (s) {
           if (s.lead) c.el("line", { x1: s.lead[0], y1: s.lead[1], x2: s.lead[2], y2: s.lead[3], stroke: "#6b7684", "stroke-dasharray": "2 3" }, c.gOver);
-          var g = c.el("g", { class: "kl-spot", tabindex: 0, role: "button", "aria-label": TERMS[s.id].t, style: "cursor:pointer" }, c.gOver);
+          var g = c.el("g", { class: "kl-spot", tabindex: 0, role: "button", "aria-label": TERMS[s.id].t.replace(/<[^>]+>/g, ""), style: "cursor:pointer" }, c.gOver);
           c.el("circle", { cx: s.x, cy: s.y, r: 12, fill: st.active === s.id ? "#17202b" : "#ffc400", stroke: "#17202b", "stroke-width": 2 }, g);
           c.text(s.x, s.y + 4.5, String(s.n), { "text-anchor": "middle", "font-size": 12.5, "font-weight": 800, fill: st.active === s.id ? "#ffc400" : "#17202b" }, g);
-          if (st.show || st.active === s.id) c.text(s.lx, s.ly, TERMS[s.id].t.replace(/ \(.*\)/, ""), { "text-anchor": s.a, class: "series-label", "font-size": 12 }, c.gOver);
+          if ((st.show && !narrow) || st.active === s.id) c.text(s.lx, s.ly, TERMS[s.id].t.replace(/ \(.*\)/, ""), { "text-anchor": s.a, class: "series-label", "font-size": 12 }, c.gOver);
           function pick() { st.active = s.id; term.innerHTML = "<strong>" + s.n + " · " + TERMS[s.id].t + "</strong><p>" + TERMS[s.id].d + "</p>"; chart.render(); }
           g.addEventListener("click", pick);
           g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
         });
+        if (narrow && st.show && !st.active) {
+          term.innerHTML = "<strong>Fachbegriffe an der Kennlinie</strong><ol class=\"kl-legend\">" +
+            spots.map(function (s) { return "<li>" + TERMS[s.id].t + "</li>"; }).join("") + "</ol><p>Tippen Sie auf eine Nummer für die Erklärung.</p>";
+        } else if (!st.active) {
+          term.innerHTML = "<strong>Fachbegriffe an der Kennlinie</strong><p>Tippen Sie auf eine nummerierte Markierung im Diagramm.</p>";
+        }
         c.text(c.sx(UFMAX_AX) - 4, c.sy(DEV.IFmax * 1e3) - 6, "I<sub>F,max</sub>", { "text-anchor": "end", class: "limit-label" }, c.gOver);
         c.text(c.sx(-DEV.URmax) - 6, c.sy(-IRMAX) - 4, "U<sub>R,max</sub>", { "text-anchor": "end", class: "limit-label" }, c.gOver);
       }
@@ -131,10 +171,12 @@
       var u = uOfK(st.k), I = LT.phys.current(DEV, u);
       readout.innerHTML =
         "<div><dt>Spannung</dt><dd>" + (u < 0 ? "U<sub>R</sub> = " + LT.num(-u, 1) : "U<sub>F</sub> = " + LT.num(u, 2)) + " V</dd></div>" +
-        "<div><dt>Strom</dt><dd>" + (u < 0 ? "I<sub>R</sub> = " + LT.fmtI(-I) : "I<sub>F</sub> = " + LT.fmtI(I)) + "</dd></div>";
+        "<div><dt>Strom</dt><dd>" + (u < 0 ? "I<sub>R</sub> = " + LT.fmtI(-I) : "I<sub>F</sub> = " + LT.fmtI(I)) + "</dd></div>" +
+        (u > 0 ? "<div class=\"readout__wide\"><dt>Abstand zur Schleusenspannung U<sub>S</sub> ≈ " + LT.num(U_S, 2) + " V</dt><dd>U<sub>F</sub> − U<sub>S</sub> = " + (Math.round((u - U_S) * 100) < 0 ? "−" : "") + LT.num(Math.abs(Math.round((u - U_S) * 100) / 100), 2) + " V</dd></div>" : "");
       if (u >= 0) {
-        if (u < 0.55) LT.status(status, "info", "Unterhalb der Schleusenspannung", "Es fließt kaum Strom.");
-        else if (I <= DEV.IFmax) LT.status(status, "ok", "Durchlassbereich", "Die Diode leitet. Kleine Spannungsänderung, große Stromänderung.");
+        if (u < U_S - 0.15) LT.status(status, "info", "Unterhalb der Schleusenspannung U<sub>S</sub>", "Es fließt nur ein sehr kleiner Strom.");
+        else if (u < U_S - 0.005) LT.status(status, "info", "Knickbereich", "Der Strom steigt immer schneller an. Die Schleusenspannung U<sub>S</sub> ≈ 0,7 V ist fast erreicht.");
+        else if (I <= DEV.IFmax) LT.status(status, "ok", "Durchlassbereich", "Die Diode leitet. Die Spannung U<sub>F</sub> gilt nur für diesen Strom: Mehr Strom ergibt ein größeres U<sub>F</sub>, weil die Kennlinie nicht senkrecht verläuft.");
         else LT.status(status, "bad", "Überlast", "Der maximale Durchlassstrom von 250 mA ist überschritten.");
       } else {
         if (-u <= DEV.URmax) LT.status(status, "ok", "Sperrbereich", "Die Diode sperrt, nur ein winziger Sperrstrom fließt.");

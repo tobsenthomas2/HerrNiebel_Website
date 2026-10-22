@@ -104,7 +104,7 @@
             <div class="grid grid-2 polung-cards">
               <div class="tile">
                 <h3>Durchlassrichtung</h3>
-                <p><span class="pol pol--plus">+</span> an der Anode, <span class="pol pol--minus">–</span> an der Kathode. Ab der Schleusenspannung (bei Silizium etwa 0,7 V) fließt Strom.</p>
+                <p><span class="pol pol--plus">+</span> an der Anode, <span class="pol pol--minus">–</span> an der Kathode. Ab der Schleusenspannung U<sub>S</sub> (bei Silizium etwa 0,7 V) steigt der Strom stark an.</p>
               </div>
               <div class="tile">
                 <h3>Sperrrichtung</h3>
@@ -117,9 +117,31 @@
           <section id="kennlinie" data-toc-label="Kennlinie">
             <h2>Die Kennlinie der BAY&nbsp;44</h2>
             <p class="intro">Die Strom-Spannungs-Kennlinie zeigt auf einen Blick, wie sich die Diode verhält. Rechts oben liegt der Durchlassbereich, links unten der Sperrbereich – mit unterschiedlichen Maßstäben, damit beide Bereiche lesbar sind.</p>
-            <p>Im Durchlassbereich fließt bis etwa 0,6 V kaum Strom. Danach steigt er steil an: Eine kleine Spannungsänderung bewirkt eine große Stromänderung. Im Sperrbereich fließt nur ein Sperrstrom von wenigen Nanoampere – bis die Durchbruchspannung erreicht ist.</p>
+            <p>Im Durchlassbereich fließt zunächst nur ein sehr kleiner Strom. Ab der Schleusenspannung U<sub>S</sub> ≈ 0,7 V steigt er steil an: Eine kleine Spannungsänderung bewirkt eine große Stromänderung. Im Sperrbereich fließt nur ein Sperrstrom von wenigen Nanoampere – bis die Durchbruchspannung erreicht ist.</p>
             <div data-sim="kennlinie" data-title="Kennlinien-Explorer BAY 44" data-hint="Verschieben Sie den Arbeitspunkt und tippen Sie auf die Nummern."></div>
             <p class="table-note">Kennlinie typisch bei 25 °C, aus dem Bauteilmodell unseres Applikationslabors. Verbindlich sind die Werte im Datenblatt.</p>
+
+            <h3 class="mt-2">Schleusenspannung U<sub>S</sub> oder Durchlassspannung U<sub>F</sub>?</h3>
+            <p>Beide Größen beschreiben die Spannung in Durchlassrichtung, meinen aber Verschiedenes. Wer sie verwechselt, rechnet bei großen Strömen mit zu kleinen Spannungen und Verlustleistungen.</p>
+            <div class="table-wrap">
+              <table class="spec">
+                <caption class="visually-hidden">Vergleich von Schleusenspannung und Durchlassspannung</caption>
+                <thead><tr><th></th><th>Schleusenspannung U<sub>S</sub></th><th>Durchlassspannung U<sub>F</sub></th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Was sie angibt</th><td>Knick der Kennlinie: Ab hier steigt der Strom stark an</td><td>Spannung, die bei einem bestimmten Strom I<sub>F</sub> tatsächlich an der Diode abfällt</td></tr>
+                  <tr><th scope="row">So ermitteln Sie sie</th><td>Tangente an den steilen Teil der Kennlinie legen und bis zur U-Achse verlängern</td><td>Bei I<sub>F</sub> auf der Kennlinie ablesen oder im Datenblatt nachschlagen</td></tr>
+                  <tr><th scope="row">Abhängig vom Strom?</th><td>Nein – Kennwert des Halbleiterwerkstoffs (Si ≈ 0,7&nbsp;V, Ge ≈ 0,3&nbsp;V)</td><td>Ja – steigt mit dem Strom, sinkt mit steigender Temperatur</td></tr>
+                  <tr><th scope="row">Im Datenblatt</th><td>meist nicht angegeben</td><td>immer, mit Prüfstrom und Temperatur</td></tr>
+                  <tr><th scope="row">BAY 44</th><td>≈ 0,7 V</td><td>typ. 0,97&nbsp;V, max. 1,1&nbsp;V bei I<sub>F</sub> = 100&nbsp;mA, 25&nbsp;°C</td></tr>
+                  <tr><th scope="row">Verwendung</th><td>Überschlagsrechnung mit U<sub>F</sub> ≈ U<sub>S</sub> = 0,7 V</td><td>genaue Berechnung von Verlustleistung, Vorwiderstand und Arbeitspunkt</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="note">
+              <div class="note__title"><span>Praxis-Hinweis: U<sub>S</sub> und U<sub>F</sub> unterscheiden</span></div>
+              <p>Die <strong>Schleusenspannung U<sub>S</sub></strong> beschreibt den Knick der Kennlinie, ab dem der Strom stark ansteigt. Zeichnerisch ist sie der Schnittpunkt der Tangente an den steilen Kennlinienteil mit der Spannungsachse. Einen scharfen Einschaltpunkt gibt es nicht: Auch unterhalb von U<sub>S</sub> fließt schon ein sehr kleiner Strom.</p>
+              <p>Die <strong>Durchlassspannung U<sub>F</sub></strong> ist der tatsächliche Spannungsabfall bei einem konkreten Betriebsstrom I<sub>F</sub>, also ein Punkt auf der Kennlinie. Da die Kennlinie nach dem Knick nicht senkrecht verläuft (Bahnwiderstand des Halbleiters), steigt U<sub>F</sub> mit zunehmendem Strom weiter an: bei der BAY 44 von etwa 0,64 V bei 10 mA auf 0,97 V bei 100 mA. Zusätzlich sinkt U<sub>F</sub> mit steigender Temperatur. Datenblätter geben U<sub>F</sub> deshalb immer für einen festen Prüfstrom und eine Temperatur an.</p>
+            </div>
           </section>
 
           <section id="kenndaten" data-toc-label="Kenndaten &amp; Datenblatt">

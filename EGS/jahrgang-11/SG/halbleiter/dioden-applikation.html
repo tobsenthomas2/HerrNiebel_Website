@@ -53,7 +53,7 @@
 
           <section id="auswahl" data-toc-label="Diode auswählen">
             <h2>Die passende Diode auswählen</h2>
-            <p class="intro">Ob eine Diode für Ihre Schaltung taugt, entscheiden die Grenzwerte im Datenblatt. Rechnen Sie dafür vereinfacht mit einer konstanten Durchlassspannung von 0,7 V.</p>
+            <p class="intro">Ob eine Diode für Ihre Schaltung taugt, entscheiden die Grenzwerte im Datenblatt. Rechnen Sie dafür vereinfacht mit einer konstanten Durchlassspannung U<sub>F</sub> ≈ U<sub>S</sub> = 0,7 V. Bei großen Strömen liegt die tatsächliche Durchlassspannung höher – <a href="dioden.html#kennlinie">siehe Kennlinie</a>.</p>
             <ol class="steps">
               <li><div><h3>Strom berechnen und mit I<sub>F</sub> vergleichen</h3><p>Der Strom durch Motor und Diode ergibt sich aus der Restspannung am Motor und seinem Widerstand.</p></div></li>
               <li><div><h3>Sperrspannung mit U<sub>R</sub> vergleichen</h3><p>Bei Verpolung liegt die volle Versorgungsspannung in Sperrrichtung an der Diode.</p></div></li>
@@ -69,6 +69,7 @@
               <div class="row"><span>Sperrspannung bei Verpolung</span><span>9 V <span class="res">≤ 50 V ✓</span></span></div>
               <div class="row"><span>Verlustleistung</span><span>P = 0,7 V · 0,138 A ≈ 0,10 W <span class="res">≤ 0,25 W ✓</span></span></div>
               <div class="row"><span>Ergebnis</span><span class="res">BAY 44 geeignet, Stromreserve rund 45 %</span></div>
+              <div class="row"><span>Genauer mit der Kennlinie</span><span>Bei diesem Strom liegt U<sub>F</sub> der BAY 44 laut Kennlinie bei ≈ 1,06 V statt 0,7 V. Der Strom sinkt leicht auf ≈ 132 mA, die Verlustleistung steigt auf P ≈ 1,06 V · 0,132 A ≈ 0,14 W <span class="res">≤ 0,25 W ✓</span></span></div>
             </div>
             <p class="mt-2">Alle Grenzwerte finden Sie auf der <a href="dioden.html#kenndaten">Produktseite</a> und im <a href="datenblaetter/LUMIATECH_BAY44_BAY45_BAY46.pdf" download>Datenblatt (PDF)</a>.</p>
           </section>
@@ -78,7 +79,7 @@
             <p class="intro">Dioden stecken nicht nur im Verpolschutz. In vielen Schaltungen müssen Sie bestimmen, welche Spannungen anliegen und welche Ströme fließen. Die Widerstände stehen dabei stellvertretend für Verbraucher.</p>
             <ol class="steps">
               <li><div><h3>Jede Diode prüfen: leitet sie oder sperrt sie?</h3><p>Liegt das höhere Potenzial an der Anode, leitet sie. Liegt es an der Kathode, sperrt sie.</p></div></li>
-              <li><div><h3>Leitende Si-Diode: U = 0,7 V</h3><p>Die Durchlassspannung wird vereinfacht als konstant angenommen.</p></div></li>
+              <li><div><h3>Leitende Si-Diode: U = 0,7 V</h3><p>Vereinfacht wird die Durchlassspannung U<sub>F</sub> als konstant und gleich der Schleusenspannung U<sub>S</sub> ≈ 0,7 V angenommen.</p></div></li>
               <li><div><h3>Sperrende Diode: I = 0</h3><p>Sie wirkt wie eine unterbrochene Leitung und nimmt die anliegende Spannung auf.</p></div></li>
               <li><div><h3>Restliche Größen berechnen</h3><p>Spannungen mit der Maschenregel, Ströme mit dem ohmschen Gesetz und der Knotenregel.</p></div></li>
             </ol>

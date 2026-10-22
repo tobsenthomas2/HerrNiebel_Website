@@ -122,7 +122,7 @@
         if (s > 0) LT.status(status, "ok", "Motor läuft vorwärts", "Ohne Schutzdiode – solange niemand die Anschlüsse vertauscht.");
         else LT.status(status, "bad", "Motor dreht falsch herum", "Das Förderband läuft rückwärts. Ohne Schutz kann die Anlage beschädigt werden.");
       } else if (st.pos === "series") {
-        if (s > 0 && d === "leitet") LT.status(status, "ok", "Motor läuft vorwärts", "Die Diode -R1 leitet. An ihr fallen etwa 0,7 V ab.");
+        if (s > 0 && d === "leitet") LT.status(status, "ok", "Motor läuft vorwärts", "Die Diode -R1 leitet. An ihr fällt die Durchlassspannung ab (vereinfacht 0,7 V).");
         else if (s < 0 && d === "sperrt") LT.status(status, "ok", "Geschützt: Motor steht", "Die Diode -R1 sperrt und nimmt die Spannung auf. Nichts wird beschädigt.");
         else if (s > 0) LT.status(status, "warn", "Diode falsch herum eingebaut", "Sie sperrt schon im Normalbetrieb – der Motor läuft nie.");
         else LT.status(status, "bad", "Motor dreht falsch herum", "Die falsch eingebaute Diode leitet gerade bei Verpolung.");
