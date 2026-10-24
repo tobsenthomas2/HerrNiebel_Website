@@ -407,3 +407,24 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .card-icon { width: 46px; height: 46px; font-size: 1.4rem; }
   .page-head h1 { font-size: 1.45rem; }
 }
+
+/* ============================================================
+   Impressum, Datenschutz und Rechtslinks
+   ============================================================ */
+.legal-links { display: inline-block; margin-left: 0.75rem; }
+.legal-links a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.legal-links a:hover { color: var(--accent); }
+.legal-links a[aria-current] { font-weight: 600; }
+@media (max-width: 600px) { .legal-links { display: block; margin: 0.35rem 0 0; } }
+
+.legal-doc { max-width: 780px; padding-bottom: 3rem; }
+.legal-doc h1 { margin: 0.6rem 0 0.4rem; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.01em; }
+.legal-doc h2 { margin: 2rem 0 0.5rem; font-size: 1.15rem; }
+.legal-doc p, .legal-doc li { color: var(--text); }
+.legal-doc ul { padding-left: 1.25rem; margin: 0.5rem 0 1rem; }
+.legal-doc li { margin: 0.25rem 0; }
+.legal-doc a { color: var(--accent); overflow-wrap: anywhere; }
+.legal-doc code { background: var(--border); padding: 0.05rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+.legal-meta { color: var(--muted); font-size: 0.9rem; }
+.legal-summary { margin-top: 1.25rem; padding: 0.4rem 1.25rem 0.6rem; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; }
+.legal-summary h2 { margin-top: 0.8rem; }

@@ -103,7 +103,8 @@ window.getCssVar = window.getCssVar || function(name) {
  *    .lumi-* control has a functional CSS glyph dependency on it, and the
  *    icon ban forbids decorative icons (Decision D2).
  * ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:ital,wght@0,300..700;1,300..700&family=Google+Sans+Code:ital,wght,MONO@0,300..700,0..1;1,300..700,0..1&display=swap');
+@import url('../../../../vendor/fonts/google-sans-flex.css');
+@import url('../../../../vendor/fonts/google-sans-code.css');
 
 /* ============================================================
  * 2. LIGHT TOKENS (:root)
@@ -1065,8 +1066,8 @@ button.active, button.is-active, button.selected, button.is-selected, button[ari
           </style>
 
   <!-- Three.js and OrbitControls -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="../../../../vendor/three-0.128.0/three.min.js"></script>
+  <script src="../../../../vendor/three-0.128.0/OrbitControls.js"></script>
 <script id="lumi-os-theme-init">
 (function() {
   function syncBody() {
@@ -1678,6 +1679,10 @@ button.active, button.is-active, button.selected, button.is-selected, button[ari
   </script>
 
 <script>/*luminous-slider-normalizer*/(function(){function f(r){if(!r||r.type!=='range')return;var mn=parseFloat(r.min||'0'),mx=parseFloat(r.max||'100'),v=parseFloat(r.value);if(isNaN(v))v=(mn+mx)/2;var p=mx>mn?((v-mn)/(mx-mn))*100:50;r.style.setProperty('--progress',p+'%');r.style.removeProperty('--slider-fill');}function all(){document.querySelectorAll('input[type="range"], .lumi-slider').forEach(f);}document.addEventListener('input',function(e){f(e.target);});if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',all);else all();})();</script>
+
+<!-- Impressum und Datenschutz: müssen von jeder Seite aus erreichbar sein -->
+<style>@media print{.hn-legal{display:none!important}}</style>
+<p class="hn-legal" style="margin:0;padding:10px 12px;text-align:center;font:12px/1.4 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;opacity:.8;position:relative;z-index:1;clear:both"><a href="../../../../impressum.html" style="color:inherit;text-decoration:underline">Impressum</a> · <a href="../../../../datenschutz.html" style="color:inherit;text-decoration:underline">Datenschutz</a></p>
 </body>
 </html>
 ```

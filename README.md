@@ -27,6 +27,9 @@ Schüler navigieren über **Bildungsgang → Jahrgang → Fach → Thema** zu de
 ├── style.css           # Design
 ├── app.js              # Logik: Routing, Rendern, Suche
 ├── config.json         # ← Hier wird die gesamte Struktur gepflegt
+├── impressum.html      # Impressum (§ 5 DDG, § 18 MStV)
+├── datenschutz.html    # Datenschutzerklärung (DSGVO)
+├── vendor/             # Schriften und Bibliotheken lokal (keine Google Fonts / CDNs), siehe vendor/README.md
 │
 ├── ET10/                          # Bildungsgang (ohne Jahrgangsebene)
 │   ├── elektrotechnik/
@@ -210,3 +213,11 @@ Mobile Ansicht prüfen: `F12` → Gerätesymbolleiste (`Strg + Umschalt + M`) �
 
 Code: [MIT-Lizenz](LICENSE) – frei verwendbar und anpassbar.
 Unterrichtsmaterialien in den Unterordnern: © <dein-name>, sofern nicht anders angegeben.
+
+---
+
+## ⚖️ Impressum, Datenschutz und Fremdressourcen
+
+- Impressum und Datenschutzerklärung liegen in `impressum.html` und `datenschutz.html` und sind von jeder Seite aus verlinkt.
+- **Neue Themenseiten** brauchen unten die Zeile mit `class="hn-legal"` (aus einer bestehenden Seite kopieren und die `../` an die Ordnertiefe anpassen).
+- **Keine Fremdressourcen einbinden** (Google Fonts, `cdn.tailwindcss.com`, cdnjs, jsDelivr, unpkg, placehold.co …). KI-generierte Seiten enthalten diese oft – vor dem Hochladen durch die lokalen Dateien aus `vendor/` ersetzen, sonst muss die Datenschutzerklärung angepasst werden.

@@ -4,28 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visionary Displays - The I²C Revolution</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        vd_dark: '#0f172a',
-                        vd_blue: '#3b82f6',
-                        vd_cyan: '#06b6d4',
-                        vd_green: '#10b981'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="../../../../vendor/fontawesome-free-6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        @import url('../../../../vendor/fonts/inter.css');
+        @import url('../../../../vendor/fonts/fira-code.css');
         
         .circuit-line {
             stroke-dasharray: 1000;
@@ -52,6 +34,7 @@
         .signal-high { fill: #10b981; }
         .signal-low { fill: #ef4444; }
     </style>
+    <link rel="stylesheet" href="tailwind.css"><!-- Tailwind 3.4, lokal erzeugt -->
 </head>
 <body class="bg-vd_dark text-slate-300 font-sans antialiased">
 
@@ -118,7 +101,7 @@
                     
                     <!-- Bild -->
                     <div class="w-full aspect-[1727/830] rounded-xl border-2 border-dashed border-slate-600 bg-slate-800/50 flex flex-col items-center justify-center text-slate-500 overflow-hidden relative hover:border-vd_blue transition-colors group shadow-lg">
-                        <img src="Visionary_Display_LCD.png" onerror="this.src='https://placehold.co/1727x830/1e293b/64748b?text=Visionary+Display+LCD'" alt="Visionary Display LCD" class="absolute inset-0 w-full h-full object-cover z-10">
+                        <img src="Visionary_Display_LCD.png" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%271727%27 height=%27830%27 viewBox=%270 0 1727 830%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%231e293b%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 fill=%27%2364748b%27 font-family=%27sans-serif%27 font-size=%2778%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27%3EVisionary Display LCD%3C/text%3E%3C/svg%3E'" alt="Visionary Display LCD" class="absolute inset-0 w-full h-full object-cover z-10">
                     </div>
                 </div>
             </div>
@@ -286,7 +269,7 @@
                                 <i class="fa-solid fa-microchip text-4xl mb-3 group-hover:text-vd_blue transition-colors"></i>
                                 <span class="text-sm font-medium px-4 text-center">Insert your image for jumpers / solder pads here</span>
                                 
-                                <img src="Adresse_einstellen_en.png" onerror="this.src='https://placehold.co/800x450/1e293b/64748b?text=Image:+Address+setting'" alt="Image of a jumper for address setting" class="absolute inset-0 w-full h-full object-contain bg-slate-900 z-10">
+                                <img src="Adresse_einstellen_en.png" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27450%27 viewBox=%270 0 800 450%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%231e293b%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 fill=%27%2364748b%27 font-family=%27sans-serif%27 font-size=%2736%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27%3EImage: Address setting%3C/text%3E%3C/svg%3E'" alt="Image of a jumper for address setting" class="absolute inset-0 w-full h-full object-contain bg-slate-900 z-10">
                             </div>
                             
                             <!-- Zweites Bild -->
@@ -297,7 +280,7 @@
                                     <span class="text-sm font-medium px-4 text-center">Insert your second image here</span>
                                     
                                     <!-- Tragen Sie hier den Dateinamen für Ihr zweites Bild ein -->
-                                    <img src="LCD_Adresse_Jumper_en.jpg" onerror="this.src='https://placehold.co/800x450/1e293b/64748b?text=Image:+LCD_Address_Jumper'" alt="Second image for address setting" class="absolute inset-0 w-full h-full object-contain bg-slate-900 z-10">
+                                    <img src="LCD_Adresse_Jumper_en.jpg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27450%27 viewBox=%270 0 800 450%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%231e293b%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 fill=%27%2364748b%27 font-family=%27sans-serif%27 font-size=%2736%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27%3EImage: LCD_Address_Jumper%3C/text%3E%3C/svg%3E'" alt="Second image for address setting" class="absolute inset-0 w-full h-full object-contain bg-slate-900 z-10">
                                 </div>
                             </div>
                         </div>
@@ -383,7 +366,7 @@
                     <!-- Das kompakte Bild ohne R/W-Legende -->
                     <div class="flex flex-col items-center w-full">
                         <div class="w-full max-w-5xl aspect-[21/9] bg-slate-900 rounded-xl border-2 border-slate-600 relative overflow-hidden mx-auto shadow-xl">
-                            <img src="i2c_protokoll_kompakt_en.png" onerror="this.src='https://placehold.co/1200x500/1e293b/64748b?text=Image:+I2C+Protocol+compact'" alt="Compact I2C Protocol" class="absolute inset-0 w-full h-full object-contain bg-slate-900 z-10">
+                            <img src="i2c_protokoll_kompakt_en.png" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%271200%27 height=%27500%27 viewBox=%270 0 1200 500%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%231e293b%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 fill=%27%2364748b%27 font-family=%27sans-serif%27 font-size=%2754%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27%3EImage: I2C Protocol compact%3C/text%3E%3C/svg%3E'" alt="Compact I2C Protocol" class="absolute inset-0 w-full h-full object-contain bg-slate-900 z-10">
                         </div>
                     </div>
                 </div>
@@ -802,5 +785,9 @@
             idleText.innerText = "Transmission successful! Ready.";
         }
     </script>
+
+<!-- Impressum und Datenschutz: müssen von jeder Seite aus erreichbar sein -->
+<style>@media print{.hn-legal{display:none!important}}</style>
+<p class="hn-legal" style="margin:0;padding:10px 12px;text-align:center;font:12px/1.4 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;opacity:.8;position:relative;z-index:1;clear:both"><a href="../../../../impressum.html" style="color:inherit;text-decoration:underline">Impressum</a> · <a href="../../../../datenschutz.html" style="color:inherit;text-decoration:underline">Datenschutz</a></p>
 </body>
 </html>

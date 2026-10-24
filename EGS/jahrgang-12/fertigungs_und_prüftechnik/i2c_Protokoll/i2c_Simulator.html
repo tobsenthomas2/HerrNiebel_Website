@@ -4,34 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I2C Protokoll Signal-Simulator - Visionary Displays</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        vd_dark: '#0f172a',
-                        vd_blue: '#3b82f6',
-                        vd_cyan: '#06b6d4',
-                        vd_green: '#10b981'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="../../../../vendor/fontawesome-free-6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        @import url('../../../../vendor/fonts/inter.css');
+        @import url('../../../../vendor/fonts/fira-code.css');
         
         /* Verhindert verschwommene Kanten auf High-DPI Displays */
         canvas {
             image-rendering: pixelated;
         }
     </style>
+    <link rel="stylesheet" href="tailwind.css"><!-- Tailwind 3.4, lokal erzeugt -->
 </head>
 <body class="bg-vd_dark text-slate-300 font-sans antialiased min-h-screen flex flex-col">
 
@@ -394,5 +377,9 @@
         // Initiale Darstellung
         buildAndDraw();
     </script>
+
+<!-- Impressum und Datenschutz: müssen von jeder Seite aus erreichbar sein -->
+<style>@media print{.hn-legal{display:none!important}}</style>
+<p class="hn-legal" style="margin:0;padding:10px 12px;text-align:center;font:12px/1.4 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;opacity:.8;position:relative;z-index:1;clear:both"><a href="../../../../impressum.html" style="color:inherit;text-decoration:underline">Impressum</a> · <a href="../../../../datenschutz.html" style="color:inherit;text-decoration:underline">Datenschutz</a></p>
 </body>
 </html>

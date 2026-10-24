@@ -271,7 +271,7 @@
       "</div>" +
       '<div class="footer-bottom"><span>© ' + year + " " + COMPANY.name + "</span><span>Zertifiziert nach ISO 9001, alle Produkte RoHS-konform</span></div>" +
       '<div class="footer-legal"><p>KI-generierte Inhalte. Diese Website dient ausschließlich Lehrzwecken, LUMIATECH ist ein fiktives Unternehmen.</p>' +
-      '<p>Impressum: Tobias Niebel · Kontakt und Feedback: <a href="mailto:tobias.niebel@bspaf.de">tobias.niebel@bspaf.de</a></p></div></div>';
+      '<p><a href="../../../../impressum.html">Impressum</a> · <a href="../../../../datenschutz.html">Datenschutz</a> · Kontakt und Feedback: <a href="mailto:tobias.niebel@bspaf.de">tobias.niebel@bspaf.de</a></p></div></div>';
   }
 
   /* ---------- KI-Support: Reiter, Hinweis beim Laden, Fenster mit QR-Code ----------

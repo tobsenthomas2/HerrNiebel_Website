@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timer Tool</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../vendor/fonts/inter.css">
+    <link rel="stylesheet" href="../../vendor/fonts/roboto-mono.css">
     
     <style>
         body {
@@ -92,6 +90,7 @@
         .time-adjust-btn { transition: transform 0.2s ease, color 0.2s ease; padding: 1cqh; }
         .time-adjust-btn:hover { color: #3b82f6; transform: scale(1.15); }
     </style>
+    <link rel="stylesheet" href="tailwind.css"><!-- Tailwind 3.4, lokal erzeugt -->
 </head>
 <body>
 
@@ -309,5 +308,9 @@
 
         document.getElementById('toggle-timer2').addEventListener('change', (e) => document.getElementById('timers-container').classList.toggle('two-active', e.target.checked));
     </script>
+
+<!-- Impressum und Datenschutz: müssen von jeder Seite aus erreichbar sein -->
+<style>@media print{.hn-legal{display:none!important}}</style>
+<p class="hn-legal" style="margin:0;padding:10px 12px;text-align:center;font:12px/1.4 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;opacity:.8;position:relative;z-index:1;clear:both"><a href="../../impressum.html" style="color:inherit;text-decoration:underline">Impressum</a> · <a href="../../datenschutz.html" style="color:inherit;text-decoration:underline">Datenschutz</a></p>
 </body>
 </html>

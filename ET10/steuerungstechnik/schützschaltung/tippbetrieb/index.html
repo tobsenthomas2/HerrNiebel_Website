@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulation: Schützschaltung (Tippbetrieb)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .component { transition: all 0.15s ease-in-out; }
         .glow-active { filter: drop-shadow(0 0 12px rgba(250, 204, 21, 1)); }
         .glow-idle { filter: drop-shadow(0 0 12px rgba(34, 197, 94, 0.8)); }
         svg text { font-family: sans-serif; pointer-events: none; user-select: none; }
     </style>
+    <link rel="stylesheet" href="tailwind.css"><!-- Tailwind 3.4, lokal erzeugt -->
 </head>
 <body class="bg-gray-100 text-gray-900 font-sans p-2 md:p-8">
 
@@ -329,5 +329,9 @@
             }
         }
     </script>
+
+<!-- Impressum und Datenschutz: müssen von jeder Seite aus erreichbar sein -->
+<style>@media print{.hn-legal{display:none!important}}</style>
+<p class="hn-legal" style="margin:0;padding:10px 12px;text-align:center;font:12px/1.4 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;opacity:.8;position:relative;z-index:1;clear:both"><a href="../../../../impressum.html" style="color:inherit;text-decoration:underline">Impressum</a> · <a href="../../../../datenschutz.html" style="color:inherit;text-decoration:underline">Datenschutz</a></p>
 </body>
 </html>

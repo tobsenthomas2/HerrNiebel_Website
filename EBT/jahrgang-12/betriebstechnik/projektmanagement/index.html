@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaTrack Consulting | Projektmanagement Excellence</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        @import url('../../../../vendor/fonts/inter.css');
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
@@ -16,6 +15,7 @@
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231e293b' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
     </style>
+    <link rel="stylesheet" href="tailwind.css"><!-- Tailwind 3.4, lokal erzeugt -->
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
 
@@ -105,7 +105,7 @@
                             <img src="Onkoo_SuS_Nasa.png" 
                                  alt="NASA Projekt Referenz" 
                                  class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" 
-                                 onerror="this.onerror=null; this.src='https://placehold.co/800x400/1e293b/94a3b8?text=Hier+Onkoo_SuS_Nasa.png+ablegen';">
+                                 onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27400%27 viewBox=%270 0 800 400%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%231e293b%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 fill=%27%2394a3b8%27 font-family=%27sans-serif%27 font-size=%2736%27 text-anchor=%27middle%27 dominant-baseline=%27middle%27%3EHier Onkoo_SuS_Nasa.png ablegen%3C/text%3E%3C/svg%3E';">
                         </div>
                     </div>
                 </div>
@@ -305,5 +305,9 @@
             switchTab('wer');
         });
     </script>
+
+<!-- Impressum und Datenschutz: müssen von jeder Seite aus erreichbar sein -->
+<style>@media print{.hn-legal{display:none!important}}</style>
+<p class="hn-legal" style="margin:0;padding:10px 12px;text-align:center;font:12px/1.4 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;opacity:.8;position:relative;z-index:1;clear:both"><a href="../../../../impressum.html" style="color:inherit;text-decoration:underline">Impressum</a> · <a href="../../../../datenschutz.html" style="color:inherit;text-decoration:underline">Datenschutz</a></p>
 </body>
 </html>
