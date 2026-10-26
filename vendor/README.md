@@ -25,6 +25,7 @@ Die Dateien stammen unverändert aus den angegebenen npm-Paketen.
 | `animejs-3.2.2/` | animejs | MIT |
 | `observablehq-plot-0.6.16/` | @observablehq/plot | ISC |
 | `matter-js-0.19.0/` | matter-js | MIT |
+| `html2canvas-1.4.1/` | html2canvas | MIT |
 
 Die Lizenztexte liegen in den jeweiligen Ordnern (`LICENSE.txt`) bzw. in `fonts/LICENSE-*.txt`.
 
