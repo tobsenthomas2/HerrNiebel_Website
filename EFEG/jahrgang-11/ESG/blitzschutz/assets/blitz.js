@@ -156,7 +156,7 @@
     if (foot) {
       foot.className = "foot";
       foot.innerHTML = '<div class="container"><p>© ' + new Date().getFullYear() + " Tobias Niebel. KI-generierte Inhalte, Website ausschließlich für Lehrzwecke. Werte zur Orientierung – maßgeblich ist DIN EN 62305-3.</p>" +
-        '<p><a href="../../../../impressum.html">Impressum</a> · <a href="../../../../datenschutz.html">Datenschutz</a> · Kontakt und Feedback: <a href="mailto:tobias.niebel@bspaf.de">tobias.niebel@bspaf.de</a></p></div>';
+        '<p><a href="../../../../impressum.html">Impressum</a> · <a href="../../../../datenschutz.html">Datenschutz</a> · Kontakt und Feedback: <a href="mailto:kontakt@herrniebel.de">kontakt@herrniebel.de</a></p></div>';
     }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", chrome); else chrome();
