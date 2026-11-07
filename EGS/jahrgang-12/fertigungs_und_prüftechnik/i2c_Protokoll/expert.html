@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="Expert knowledge – Visionary Displays" data-title-de="Experten-Wissen – Visionary Displays">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expert knowledge – Visionary Displays</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/fira-code.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="page-head center">
+    <div class="container center">
+      <div class="pill"><span class="ping" aria-hidden="true"></span><span data-lang="en">Bonus knowledge</span><span data-lang="de">Bonus-Wissen</span></div>
+      <h1><span data-lang="en">Expert knowledge</span><span data-lang="de">Experten-Wissen</span></h1>
+      <p data-lang="en">Additional information beyond the basics: reading data, the R/W bit in detail, practical questions and Arduino code for two displays.</p>
+      <p data-lang="de">Zusatzwissen über die Grundlagen hinaus: Daten lesen, das R/W-Bit im Detail, Praxisfragen und Arduino-Code für zwei Displays.</p>
+      <div class="btn-row" style="margin-top:1.6rem"><a class="btn btn--ghost btn--small" href="protocol.html"><i data-icon="left"></i><span data-lang="en">Back to the basics</span><span data-lang="de">Zurück zum Basiswissen</span></a></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" style="padding-top:24px">
+      <div class="container">
+        <!-- Begriffe und Adressen -->
+        <div class="grid-2" style="align-items:stretch">
+          <article class="panel">
+            <h2 style="font-size:1.3rem"><span data-lang="en">Who is allowed to talk? Controller and target</span><span data-lang="de">Wer darf sprechen? Controller und Target</span></h2>
+            <p data-lang="en">I²C works on the master/slave principle. In 2021 the terms “master” and “slave” were replaced throughout the specification by <strong>“controller”</strong> and <strong>“target”</strong>. You will find both pairs of terms in data sheets and libraries.</p>
+            <p data-lang="de">I²C arbeitet nach dem Master/Slave-Prinzip. Im Jahr 2021 wurden in der gesamten Spezifikation die Begriffe „Master“ und „Slave“ durch <strong>„Controller“</strong> und <strong>„Target“</strong> ersetzt. In Datenblättern und Bibliotheken begegnen Ihnen beide Begriffspaare.</p>
+            <p data-lang="en">Default addresses of display modules are often <code>0x27</code> or <code>0x3F</code> – depending on the port expander chip on the back.</p>
+            <p data-lang="de">Die Standardadressen von Display-Modulen sind oft <code>0x27</code> oder <code>0x3F</code> – je nach Port-Expander-Chip auf der Rückseite.</p>
+          </article>
+          <article class="panel">
+            <h2 style="font-size:1.3rem"><span data-lang="en">Hex conversion: a second way</span><span data-lang="de">Hex-Umrechnung: ein zweiter Weg</span></h2>
+            <p data-lang="en">Instead of adding a leading zero, you can also split the 7 bits from the right into a 4-bit and a 3-bit block. For the default address <code>0x27</code>: <code>010</code> = 2 and <code>0111</code> = 7.</p>
+            <p data-lang="de">Statt eine führende Null zu ergänzen, kann man die 7 Bits auch von rechts in einen 4er- und einen 3er-Block teilen. Bei der Standardadresse <code>0x27</code>: <code>010</code> = 2 und <code>0111</code> = 7.</p>
+            <div class="hexrow"><span class="muted">A2 A1 A0 = 1 1 1</span><span class="bits">010 0111</span><span class="hex">0x27</span></div>
+            <div class="hexrow hexrow--active"><span>A1 = 0 (Jumper)</span><span class="bits">010 01<b>0</b>1</span><span class="hex">0x25</span></div>
+          </article>
+        </div>
+
+        <!-- Goldene Regel -->
+        <article class="panel" style="margin-top:32px">
+          <h2 style="font-size:1.3rem"><span data-lang="en">The golden rule of data transfer</span><span data-lang="de">Die goldene Regel der Datenübertragung</span></h2>
+          <p data-lang="en">How do the ICs on the bus know when a bit is valid? The rule is simple: the data line (SDA) is read when the clock line (SCL) changes to HIGH (rising edge) and while SCL stays HIGH.</p>
+          <p data-lang="de">Wie wissen die ICs am Bus, wann ein Bit gültig ist? Die Regel beim I²C-Bus ist einfach: Die Datenleitung (SDA) wird gelesen, wenn die Taktleitung (SCL) auf HIGH wechselt (steigende Flanke) und solange SCL auf HIGH bleibt.</p>
+          <figure class="figure" style="max-width:64rem;margin:1.2rem auto 0">
+            <div class="figure__frame"><img loading="lazy" src="assets/img/protocol-full-de.webp" width="1600" height="551" alt="I²C frame: START, address, R/W, ACK, data bytes, STOP"></div>
+            <p class="note-de" data-lang="en">Diagram labelled in German.</p>
+          </figure>
+        </article>
+
+        <!-- R/W-Bit -->
+        <article class="panel" style="margin-top:32px">
+          <h2 style="font-size:1.3rem"><span data-lang="en">The R/W bit: write or read?</span><span data-lang="de">Das R/W-Bit: Schreiben oder Lesen?</span></h2>
+          <p data-lang="en">The 7-bit address is always followed by the decisive 8th bit of the first byte: the read/write bit. It sets the direction of communication for the following data bytes.</p>
+          <p data-lang="de">Nach der 7-Bit-Adresse folgt immer das entscheidende 8. Bit im ersten Byte: das Read/Write-Bit. Es legt die Kommunikationsrichtung für die folgenden Datenbytes fest.</p>
+          <div class="rw-row rw-row--w"><code>R/W = 0</code>
+            <p><strong>Write:</strong> <span data-lang="en">the controller sends data <em>to</em> the target.</span><span data-lang="de">Der Controller sendet Daten <em>an</em> das Target.</span>
+              <small data-lang="en">Example: you send a text that is to be shown on the LCD.</small><small data-lang="de">Beispiel: Sie senden einen Text, der auf dem LCD angezeigt werden soll.</small></p>
+          </div>
+          <div class="rw-row rw-row--r"><code>R/W = 1</code>
+            <p><strong>Read:</strong> <span data-lang="en">the controller receives data <em>from</em> the target.</span><span data-lang="de">Der Controller empfängt Daten <em>vom</em> Target.</span>
+              <small data-lang="en">Example: you query a temperature sensor on the display module. While reading, the target keeps sending data until the controller tells it with a NACK: “I have enough data.”</small><small data-lang="de">Beispiel: Sie fragen einen Temperatursensor am Displaymodul ab. Beim Lesen sendet das Target so lange Daten, bis der Controller ihm mit einem NACK sagt: „Mir reichen die Daten.“</small></p>
+          </div>
+          <figure class="figure" style="max-width:48rem;margin:1.2rem auto 0">
+            <div class="figure__frame figure__frame--dashed"><img loading="lazy" src="assets/img/read-write-de.webp" width="1600" height="1218" alt="Frames for writing and reading: S, slave address, R/W, A, data, A/NA, P"></div>
+            <p class="note-de" data-lang="en">Diagram labelled in German.</p>
+          </figure>
+        </article>
+      </div>
+    </section>
+
+    <!-- Praxisfragen -->
+    <section class="section section--alt section--line">
+      <div class="container">
+        <div class="section-head">
+          <h2><span data-lang="en">Further questions &amp; practice</span><span data-lang="de">Weiterführende Fragen &amp; Praxis</span></h2>
+          <p data-lang="en">Frequent questions from practice and a concrete code example for the Arduino.</p>
+          <p data-lang="de">Häufige Fragen aus der Praxis und ein konkretes Code-Beispiel für den Arduino.</p>
+        </div>
+        <div class="faq">
+          <article>
+            <h3><i data-icon="question"></i><span data-lang="en">How do you handle several I²C devices?</span><span data-lang="de">Wie geht man mit mehreren I²C-Geräten vor?</span></h3>
+            <p data-lang="en">Every device is connected in parallel to the same lines (SDA and SCL). The only important thing is that each device has a <strong>unique address</strong> (e.g. <code>0x27</code> and <code>0x26</code>). In the code you simply create a separate object with the matching address for each device.</p>
+            <p data-lang="de">Jedes Gerät wird parallel an die gleichen Leitungen (SDA und SCL) angeschlossen. Wichtig ist nur, dass jedes Gerät eine <strong>eindeutige Adresse</strong> (z. B. <code>0x27</code> und <code>0x26</code>) besitzt. Im Code legt man dann einfach für jedes Gerät ein eigenes Objekt mit der passenden Adresse an.</p>
+          </article>
+          <article>
+            <h3><i data-icon="question"></i><span data-lang="en">What changes if we want to read instead of write?</span><span data-lang="de">Was ändert sich, wenn wir lesen statt schreiben wollen?</span></h3>
+            <p data-lang="en">The 8th bit after the address (the R/W bit) is set to 1 (HIGH) by the controller. From now on the controller no longer sends data, it only generates the SCL clock. The addressed target takes control of the SDA line and clocks its data to the controller until the controller ends with a NACK.</p>
+            <p data-lang="de">Das 8. Bit nach der Adressierung (das R/W-Bit) wird vom Controller auf 1 (HIGH) gesetzt. Ab jetzt sendet der Controller keine Daten mehr, sondern erzeugt nur noch den SCL-Takt. Das adressierte Target übernimmt die Steuerung der SDA-Leitung und taktet seine Daten zum Controller, bis der Controller mit einem NACK abbricht.</p>
+          </article>
+          <article>
+            <h3><i data-icon="question"></i><span data-lang="en">Can I²C cables be any length?</span><span data-lang="de">Dürfen I²C-Kabel beliebig lang sein?</span></h3>
+            <p data-lang="en">No. I²C stands for “Inter-Integrated Circuit” and was developed for communication on one circuit board. The longer the cable, the higher the line capacitance. The signal edges become rounded (an RC charging curve). Usually the limit is reached after a few dozen centimetres, unless you reduce the clock rate drastically or use special driver ICs.</p>
+            <p data-lang="de">Nein. I²C bedeutet „Inter-Integrated Circuit“ und wurde für die Kommunikation auf einer Platine entwickelt. Je länger das Kabel, desto höher die Leitungskapazität. Die Flanken „verschleifen“ (RC-Ladekurve). Meist ist nach einigen Dutzend Zentimetern Schluss, außer man senkt die Taktrate stark ab oder nutzt spezielle Treiber-ICs.</p>
+          </article>
+          <article>
+            <h3><i data-icon="question"></i><span data-lang="en">Does every display need its own pull-up resistors?</span><span data-lang="de">Braucht jedes Display eigene Pull-up-Widerstände?</span></h3>
+            <p data-lang="en">No, the resistors apply to the <strong>whole bus</strong>. If you connect several modules that all have pull-ups soldered on, they are connected in parallel. The total resistance drops and the current when pulling the line to ground becomes too high. With many modules you often even have to remove the resistors on some boards!</p>
+            <p data-lang="de">Nein, die Widerstände gelten für den <strong>gesamten Bus</strong>. Wenn Sie mehrere Module anschließen, die alle fest eingelötete Pull-ups besitzen, schalten sich diese parallel. Der Gesamtwiderstand sinkt und der Strom beim „Auf-Masse-Ziehen“ wird zu groß. Oft muss man bei vielen Modulen die Widerstände auf einigen Boards sogar entfernen!</p>
+          </article>
+        </div>
+
+        <div class="code" data-lang="en">
+          <div class="code__head"><strong><i data-icon="code"></i>Practical example: two displays on the same bus</strong><span>Arduino_Multi_LCD.ino</span></div>
+<pre><span class="k">#include</span> <span class="s">&lt;LiquidCrystal_I2C.h&gt;</span>  <span class="c">// LCD library</span>
+
+<span class="c">// Create two displays with different addresses</span>
+<span class="t">LiquidCrystal_I2C</span> lcdSpannung(<span class="n">0x27</span>, <span class="n">16</span>, <span class="n">2</span>); <span class="c">// default address for voltage</span>
+<span class="t">LiquidCrystal_I2C</span> lcdStrom(<span class="n">0x26</span>, <span class="n">16</span>, <span class="n">2</span>);    <span class="c">// changed address for current</span>
+
+<span class="t">int</span> Poti_Spannung = A0;
+<span class="t">int</span> Poti_Strom = A1;
+
+<span class="t">void</span> <span class="k">setup</span>() {
+  <span class="c">// 1. Initialise display (voltage)</span>
+  lcdSpannung.init();
+  lcdSpannung.backlight();
+  lcdSpannung.setCursor(<span class="n">0</span>, <span class="n">0</span>);
+  lcdSpannung.clear();
+  lcdSpannung.print(<span class="s">"U: "</span>);
+  pinMode(Poti_Spannung, INPUT);
+  lcdSpannung.print(<span class="s">"Test!"</span>);
+
+  <span class="c">// 2. Initialise display (current)</span>
+  lcdStrom.init();
+  lcdStrom.backlight();
+  lcdStrom.setCursor(<span class="n">0</span>, <span class="n">0</span>);
+  lcdStrom.clear();
+  lcdStrom.print(<span class="s">"I: "</span>);
+  pinMode(Poti_Strom, INPUT);
+  lcdStrom.print(<span class="s">"Test!"</span>);
+
+  delay(<span class="n">5000</span>);
+
+  <span class="c">// Clear and prepare both displays</span>
+  lcdSpannung.clear();
+  lcdSpannung.print(<span class="s">"U: "</span>);
+
+  lcdStrom.clear();
+  lcdStrom.print(<span class="s">"I: "</span>);
+
+  delay(<span class="n">1000</span>);
+}
+
+<span class="t">void</span> <span class="k">loop</span>() {
+  <span class="c">// Measure voltage and show it on LCD 1</span>
+  <span class="t">int</span> valU = <span class="n">0</span>;
+  valU = analogRead(Poti_Spannung);
+  <span class="t">float</span> voltage = valU / <span class="n">20.23</span>;
+
+  lcdSpannung.setCursor(<span class="n">3</span>, <span class="n">0</span>);
+  lcdSpannung.print(voltage);
+  lcdSpannung.print(<span class="s">" V"</span>);
+
+  <span class="c">// Measure current and show it on LCD 2</span>
+  <span class="t">int</span> valI = <span class="n">0</span>;
+  valI = analogRead(Poti_Strom);
+  <span class="t">float</span> current = valI / <span class="n">100.0</span>; <span class="c">// fictitious conversion factor</span>
+
+  lcdStrom.setCursor(<span class="n">3</span>, <span class="n">0</span>);
+  lcdStrom.print(current);
+  lcdStrom.print(<span class="s">" A"</span>);
+
+  delay(<span class="n">1000</span>);
+}</pre>
+        </div>
+
+        <div class="code" data-lang="de">
+          <div class="code__head"><strong><i data-icon="code"></i>Praxisbeispiel: Zwei Displays am selben Bus</strong><span>Arduino_Multi_LCD.ino</span></div>
+<pre><span class="k">#include</span> <span class="s">&lt;LiquidCrystal_I2C.h&gt;</span>  <span class="c">// LCD-Bibliothek</span>
+
+<span class="c">// Zwei Displays mit unterschiedlichen Adressen anlegen</span>
+<span class="t">LiquidCrystal_I2C</span> lcdSpannung(<span class="n">0x27</span>, <span class="n">16</span>, <span class="n">2</span>); <span class="c">// Standardadresse für Spannung</span>
+<span class="t">LiquidCrystal_I2C</span> lcdStrom(<span class="n">0x26</span>, <span class="n">16</span>, <span class="n">2</span>);    <span class="c">// Geänderte Adresse für Strom</span>
+
+<span class="t">int</span> Poti_Spannung = A0;
+<span class="t">int</span> Poti_Strom = A1;
+
+<span class="t">void</span> <span class="k">setup</span>() {
+  <span class="c">// 1. Display (Spannung) initialisieren</span>
+  lcdSpannung.init();
+  lcdSpannung.backlight();
+  lcdSpannung.setCursor(<span class="n">0</span>, <span class="n">0</span>);
+  lcdSpannung.clear();
+  lcdSpannung.print(<span class="s">"U: "</span>);
+  pinMode(Poti_Spannung, INPUT);
+  lcdSpannung.print(<span class="s">"Test!"</span>);
+
+  <span class="c">// 2. Display (Stromstärke) initialisieren</span>
+  lcdStrom.init();
+  lcdStrom.backlight();
+  lcdStrom.setCursor(<span class="n">0</span>, <span class="n">0</span>);
+  lcdStrom.clear();
+  lcdStrom.print(<span class="s">"I: "</span>);
+  pinMode(Poti_Strom, INPUT);
+  lcdStrom.print(<span class="s">"Test!"</span>);
+
+  delay(<span class="n">5000</span>);
+
+  <span class="c">// Beide Displays bereinigen und vorbereiten</span>
+  lcdSpannung.clear();
+  lcdSpannung.print(<span class="s">"U: "</span>);
+
+  lcdStrom.clear();
+  lcdStrom.print(<span class="s">"I: "</span>);
+
+  delay(<span class="n">1000</span>);
+}
+
+<span class="t">void</span> <span class="k">loop</span>() {
+  <span class="c">// Spannung messen und auf LCD 1 ausgeben</span>
+  <span class="t">int</span> valU = <span class="n">0</span>;
+  valU = analogRead(Poti_Spannung);
+  <span class="t">float</span> voltage = valU / <span class="n">20.23</span>;
+
+  lcdSpannung.setCursor(<span class="n">3</span>, <span class="n">0</span>);
+  lcdSpannung.print(voltage);
+  lcdSpannung.print(<span class="s">" V"</span>);
+
+  <span class="c">// Stromstärke messen und auf LCD 2 ausgeben</span>
+  <span class="t">int</span> valI = <span class="n">0</span>;
+  valI = analogRead(Poti_Strom);
+  <span class="t">float</span> current = valI / <span class="n">100.0</span>; <span class="c">// Fiktiver Umrechnungsfaktor</span>
+
+  lcdStrom.setCursor(<span class="n">3</span>, <span class="n">0</span>);
+  lcdStrom.print(current);
+  lcdStrom.print(<span class="s">" A"</span>);
+
+  delay(<span class="n">1000</span>);
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container container--narrow cta">
+        <div>
+          <p data-lang="en">Try it yourself: change the R/W bit and the ACKs in the simulator.</p>
+          <p data-lang="de">Selbst ausprobieren: R/W-Bit und ACKs im Simulator verändern.</p>
+          <a class="btn btn--small" href="simulator.html"><i data-icon="wave"></i><span data-lang="en">Open signal simulator</span><span data-lang="de">Signal-Simulator öffnen</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"><p class="footer__legal"><a href="../../../../impressum.html">Impressum</a> · <a href="../../../../datenschutz.html">Datenschutz</a></p></footer>
+</body>
+</html>

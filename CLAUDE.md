@@ -8,7 +8,7 @@ tags:
   - schule/website
   - herrniebel
   - prompt-kontext
-version: 2
+version: 3
 stand: 2026-11-07
 ---
 
@@ -34,7 +34,10 @@ stand: 2026-11-07
 
 ## 1 · Ablauf für eine neue Website
 
-1. **Lesen:** diesen Guide, das Repo (`git pull`), die Referenzbeispiele (Abschnitt 9) und das mitgeschickte Material.
+1. **Lesen:** nur diesen Guide und das mitgeschickte Material. Der Guide reicht zum Loslegen, **das Repo nicht durchlesen**.
+   - Vorher `git pull`: lädt den aktuellen Stand, kostet keine Tokens.
+   - Gezielt öffnen, nur wenn nötig: `config.json` (Kachel), die betroffene Stelle in `impressum.html` bzw. `datenschutz.html`.
+   - Aus den Referenzbeispielen (Abschnitt 9) nur die Datei öffnen, deren Baustein übernommen wird, z. B. `site.js` der I²C-Seite für Navigation und Sprachumschalter.
 2. **Fragen stellen**, gesammelt in **einer** Nachricht, bevor gebaut wird:
    - Wohin? Bildungsgang, Jahrgang, Fach, Ordnername
    - Lernziele und Material: Welche Arbeitsblätter, Datenblätter und Lösungen gibt es? Was müssen die Schüler können?
@@ -116,9 +119,9 @@ stand: 2026-11-07
 - **Navigation zentral:** Header, Navigation und Footer erzeugt `site.js` aus dem `NAV`-Array. Eine neue Seite wird nur dort eingetragen.
 - **Simulationen als Platzhalter:** `<div data-sim="kennlinie" data-title="…" data-hint="…"></div>` in der Seite, die Logik steht in `sim-kennlinie.js`.
 - **Richtwerte:**
-  - HTML ≤ ca. 600 Zeilen, Simulation ≤ ca. 400 Zeilen
-  - keine Inline-Skripte über ca. 30 Zeilen
-- **Keine Seitenkopien:** keine `index_en.html` oder `index_experten.html` als Kopie. Sprache per Umschalter, Vertiefung als eigene Seite oder einblendbare Abschnitte.
+  - HTML ≤ ca. 1000 Zeilen (zweisprachig), JS-Datei ≤ ca. 800 Zeilen
+  - Inline-Skripte ≤ ca. 50 Zeilen, alles Größere in eine eigene JS-Datei
+- **Keine Seitenkopien:** keine Sprach- oder Experten-Kopie einer Seite (z. B. `index_en.html`). Sprache per Umschalter, Vertiefung als eigene Seite nur mit den Zusatzinhalten.
 - **Bilder:** WebP oder JPG, ≤ 300 KB, höchstens 1600 px breit.
 - **README.md** im Themenordner pflegen: Seitenliste, `data-sim`-Tabelle, Einstellungen.
 
@@ -289,21 +292,20 @@ Vorlage für **Technik und Aufbau** (noch ohne Sprachumschalter, dieser kommt au
 
 Fachlich vorbildlich ist der Kennlinien-Explorer mit der Unterscheidung von U_S und U_F.
 
-**I²C-Protokoll – Visionary Displays GmbH** · `EGS/jahrgang-12/fertigungs_und_prüftechnik/i2c_Protokoll/` · https://herrniebel.de/EGS/jahrgang-12/fertigungs_und_pr%C3%BCftechnik/i2c_Protokoll/index.html
-Vorlage für **Geschichte und Didaktik**:
-- Marketing-Aufhänger „Schluss mit dem Kabel-Chaos“
+**I²C-Protokoll – Visionary Displays GmbH** · `EGS/jahrgang-12/fertigungs_und_prüftechnik/i2c_Protokoll/` · https://herrniebel.de/EGS/jahrgang-12/fertigungs_und_pr%C3%BCftechnik/i2c_Protokoll/
+Vorlage für **Geschichte, Didaktik und den kompletten Aufbau nach diesem Guide**:
+- Marketing-Aufhänger „End the cable chaos“ / „Schluss mit dem Kabel-Chaos“
 - Produktvergleich alt/neu (HD44780 parallel vs. I²C)
-- roter Faden Hardware → Protokoll → Live-Oszilloskop, eigener Signal-Simulator
+- roter Faden Hardware → Protokoll → Live-Oszilloskop → eigener Signal-Simulator
 - Verdrahtungsseite, Wissens-Chat-Bot
 - „Bestellung“ als Übergang zur echten Hardware im Labor
-- Experten-Version zur Differenzierung, eigene Fotos
-
-**Nicht übernehmen:**
-- separate Sprachseite `index_en.html` (→ Umschalter)
-- Experten-Seite als Komplettkopie
-- lange Inline-Skripte
-- Tailwind
-- Bilder über 1 MB
+- Experten-Seite nur mit Zusatzwissen (Controller/Target, R/W im Detail, FAQ, Arduino-Code), eigene Fotos
+- **Technik:**
+  - 8 kleine Seiten (33–256 Zeilen)
+  - `site.js` mit `NAV`-Array, Fußzeile, eigenen Symbolen und **EN/DE-Umschalter**: die kompakteste Vorlage dafür
+  - zwei Simulationen als `sim-*.js`
+  - Bilder als WebP, Bilder mit Text je Sprache
+  - eigenes CSS ohne Tailwind
 
 ## 10 · Qualitätscheck vor dem Zeigen
 
@@ -339,21 +341,9 @@ Vorlage für **Geschichte und Didaktik**:
 
 ## Anhang · Ältere Seiten mit Tailwind
 
-Die Seiten Tippbetrieb, I²C-Protokoll, Projektmanagement, Prüfungstimer und RandomPicker nutzen eine **statisch erzeugte `tailwind.css`** (v3.4.17) im eigenen Ordner, kein CDN mehr. Nach neuen Klassen neu erzeugen:
+Die Seiten Tippbetrieb, Projektmanagement, Prüfungstimer und RandomPicker nutzen eine **statisch erzeugte `tailwind.css`** (v3.4.17) im eigenen Ordner, kein CDN mehr. Nach neuen Klassen neu erzeugen:
 
 ```bash
 printf '@tailwind base;\n@tailwind components;\n@tailwind utilities;\n' > /tmp/input.css
 npx tailwindcss@3.4.17 -i /tmp/input.css -o tailwind.css --content "./*.html" --minify
-```
-
-Für die I²C-Seiten zusätzlich mit `-c tailwind.config.js` aufrufen. Die Datei im Ordner anlegen:
-
-```js
-module.exports = {
-  content: ["./*.html"],
-  theme: { extend: {
-    colors: { vd_dark: "#0f172a", vd_blue: "#3b82f6", vd_cyan: "#06b6d4", vd_green: "#10b981" },
-    fontFamily: { sans: ["Inter", "sans-serif"], mono: ["Fira Code", "monospace"] }
-  } }
-};
 ```

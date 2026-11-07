@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="The I²C protocol – Visionary Displays" data-title-de="Das I²C-Protokoll – Visionary Displays">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The I²C protocol – Visionary Displays</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/fira-code.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/sim-oscilloscope.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="page-head center">
+    <div class="container center">
+      <h1><span data-lang="en">The protocol: communication</span><span data-lang="de">Das Protokoll: Kommunikation</span></h1>
+      <p data-lang="en">I²C works on the master/slave principle. Only the master (your microcontroller) generates the clock (SCL) and starts the communication.</p>
+      <p data-lang="de">I²C arbeitet nach dem Master/Slave-Prinzip. Nur der Master (Ihr Mikrocontroller) erzeugt den Takt (SCL) und startet die Kommunikation.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" style="padding-top:24px">
+      <div class="container">
+        <div class="panel" id="edges">
+          <div style="max-width:56rem;margin:0 auto 2rem">
+            <h2 style="font-size:1.35rem"><span data-lang="en">Edges as triggers for reading</span><span data-lang="de">Flanken als Trigger zum Lesen</span></h2>
+            <p data-lang="en">How do the ICs on the bus know when a bit is valid? The I²C bus uses edges as triggers: the data line (SDA) is read exactly when the <strong>clock line (SCL) changes to HIGH (rising edge)</strong>. After that, SDA must not change while SCL remains HIGH. SDA may only change again once SCL drops to LOW.</p>
+            <p data-lang="de">Wie wissen die ICs am Bus, wann ein Bit gültig ist? Der I²C-Bus nutzt dafür Flanken als Trigger: Die Datenleitung (SDA) wird immer genau dann gelesen, wenn die <strong>Taktleitung (SCL) auf HIGH wechselt (steigende Flanke)</strong>. Danach darf sich SDA nicht mehr ändern, während SCL auf HIGH bleibt. SDA darf sich erst wieder ändern, sobald SCL auf LOW abfällt.</p>
+            <div class="box box--blue">
+              <h4><i data-icon="info"></i><span data-lang="en">Important for the exam:</span><span data-lang="de">Wichtig für die Prüfung:</span></h4>
+              <p class="small muted" data-lang="en">This also means that the state of SDA may <em>only</em> change while SCL is LOW. If SDA changes while SCL is HIGH, this is not interpreted as a data bit, but as a START or STOP condition!</p>
+              <p class="small muted" data-lang="de">Das bedeutet auch, dass sich der Zustand von SDA <em>nur</em> ändern darf, während SCL auf LOW liegt. Ändert sich SDA, während SCL auf HIGH ist, wird das nicht als Datenbit, sondern als START- oder STOPP-Bedingung interpretiert!</p>
+            </div>
+          </div>
+          <figure class="figure" style="max-width:64rem;margin:0 auto">
+            <div class="figure__frame">
+              <img data-lang="en" loading="lazy" src="assets/img/protocol-compact-en.webp" width="1600" height="898" alt="Example: master writes data – SCL and SDA with START, address, R/W, ACK, data, ACK, STOP">
+              <img data-lang="de" loading="lazy" src="assets/img/protocol-compact-de.webp" width="1600" height="898" alt="Beispiel: Master schreibt Daten – SCL und SDA mit START, Adresse, R/W, ACK, Daten, ACK, STOP">
+            </div>
+          </figure>
+        </div>
+
+        <div class="grid-3" style="margin-top:32px" id="steps">
+          <article class="step" style="--c:#eab308">
+            <div class="step__num">1</div>
+            <h3>START</h3>
+            <p data-lang="en">The master pulls SDA LOW while SCL is still HIGH. This wakes up all slaves on the bus: “Attention, a message is coming!”</p>
+            <p data-lang="de">Der Master zieht SDA auf LOW, während SCL noch HIGH ist. Das weckt alle Slaves am Bus auf: „Achtung, eine Nachricht kommt!“</p>
+          </article>
+          <article class="step" style="--c:#3b82f6">
+            <div class="step__num">2</div>
+            <h3>ADDR</h3>
+            <p data-lang="en">The master sends a 7-bit address. Each Visionary Display has its own address (default is <code>0x27</code>). Only the addressed slave keeps listening.</p>
+            <p data-lang="de">Der Master sendet eine 7-Bit-Adresse. Jedes Visionary Display hat eine eigene Adresse (Standard ist <code>0x27</code>). Nur der aufgerufene Slave hört weiter zu.</p>
+          </article>
+          <article class="step" style="--c:#a855f7">
+            <div class="step__num">3</div>
+            <h3>READ / <span class="overline">WRITE</span></h3>
+            <p data-lang="en">The <strong>8th bit</strong> determines the direction of communication: it specifies whether the master writes data to the slave (0) or reads from it (1).</p>
+            <p data-lang="de">Das <strong>8. Bit</strong> bestimmt die Kommunikationsrichtung: Es legt fest, ob der Master Daten an den Slave schreibt (0) oder davon liest (1).</p>
+            <div class="step__more">
+              <p><strong style="color:#3b82f6"><span class="overline">WRITE</span> (0):</strong> <span data-lang="en">master sends to slave (e.g. text for the LCD).</span><span data-lang="de">Master sendet an Slave (z. B. Text für das LCD).</span></p>
+              <p><strong style="color:#c084fc">READ (1):</strong> <span data-lang="en">master receives from slave (e.g. reading a sensor value).</span><span data-lang="de">Master empfängt vom Slave (z. B. Sensorwert abfragen).</span></p>
+            </div>
+          </article>
+          <article class="step" style="--c:#10b981">
+            <div class="step__num">4</div>
+            <h3>ACK</h3>
+            <p data-lang="en">The slave replies with an acknowledge bit (ACK = LOW) if it has understood the address or data and is ready to communicate.</p>
+            <p data-lang="de">Der Slave antwortet mit einem Bestätigungsbit (ACK = LOW), wenn er die Adresse bzw. die Daten verstanden hat und zur Kommunikation bereit ist.</p>
+            <div class="step__more">
+              <p data-lang="en"><strong style="color:#f87171">Error case (NACK):</strong> if the slave does not understand the data or cannot be reached, the SDA line stays HIGH (1) due to the pull-up resistors. This state is called <strong style="color:#f87171">NACK</strong> (not acknowledge). The master notices this and aborts the transmission.</p>
+              <p data-lang="de"><strong style="color:#f87171">Fehlerfall (NACK):</strong> Versteht der Slave die Daten nicht oder ist er nicht erreichbar, bleibt die SDA-Leitung durch die Pull-up-Widerstände auf HIGH (1). Diesen Zustand nennt man <strong style="color:#f87171">NACK</strong> (Not Acknowledge). Der Master bemerkt das und bricht die Übertragung ab.</p>
+            </div>
+          </article>
+          <article class="step" style="--c:#f97316">
+            <div class="step__num">5</div>
+            <h3>DATA</h3>
+            <p data-lang="en">The actual payload (e.g. a command or text for the display) is sent byte by byte. Each byte is followed by another ACK.</p>
+            <p data-lang="de">Die eigentlichen Nutzdaten (z. B. ein Befehl oder Text für das Display) werden byteweise gesendet. Nach jedem Byte folgt erneut ein ACK.</p>
+          </article>
+          <article class="step" style="--c:#ef4444">
+            <div class="step__num">6</div>
+            <h3>STOP</h3>
+            <p data-lang="en">At the end, the master releases SDA while SCL is HIGH – the pull-up resistors pull the line back to HIGH. This officially frees the bus again.</p>
+            <p data-lang="de">Am Ende gibt der Master SDA bei HIGH-SCL frei – die Pull-up-Widerstände ziehen die Leitung wieder auf HIGH. Damit wird der Bus offiziell wieder freigegeben.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt section--line" id="oscilloscope">
+      <div class="container" style="max-width:64rem">
+        <div class="sim-head">
+          <div>
+            <h2><span data-lang="en">Live oscilloscope simulator</span><span data-lang="de">Live-Oszilloskop-Simulator</span></h2>
+            <p data-lang="en">Send a character to our display and watch the bus.</p>
+            <p data-lang="de">Senden Sie ein Zeichen an unser Display und beobachten Sie den Bus.</p>
+          </div>
+          <a class="btn btn--green" href="simulator.html"><span data-lang="en">SIMULATE YOURSELF! CLICK ME!</span><span data-lang="de">SIMULIERE SELBST! KLICK MICH!</span></a>
+        </div>
+        <div data-sim="oscilloscope"></div>
+      </div>
+    </section>
+
+    <section class="section section--line">
+      <div class="container container--narrow cta">
+        <div>
+          <p data-lang="en">Do you have questions?</p><p data-lang="de">Du hast Fragen?</p>
+          <a class="btn btn--small" href="assistant.html"><i data-icon="chat"></i><span data-lang="en">Knowledge chat bot</span><span data-lang="de">Wissens-Chat-Bot</span></a>
+        </div>
+        <div class="cta__sep"></div>
+        <div>
+          <p data-lang="en">Already done? Would you like to deepen your knowledge further?</p><p data-lang="de">Schon fertig? Möchtest du dein Wissen noch weiter vertiefen?</p>
+          <a class="btn btn--small" href="expert.html"><span data-lang="en">Click here for bonus knowledge</span><span data-lang="de">Hier geht's zum Bonus-Wissen</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"><p class="footer__legal"><a href="../../../../impressum.html">Impressum</a> · <a href="../../../../datenschutz.html">Datenschutz</a></p></footer>
+</body>
+</html>

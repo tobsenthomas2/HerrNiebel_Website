@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="Hardware level – Visionary Displays" data-title-de="Hardware-Ebene – Visionary Displays">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hardware level – Visionary Displays</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/fira-code.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="page-head center">
+    <div class="container center">
+      <h1><span data-lang="en">The hardware level: how it works electrically</span><span data-lang="de">Die Hardware-Ebene: Wie es elektrisch funktioniert</span></h1>
+      <p data-lang="en">Open drain, pull-up resistors and the address of every bus participant.</p>
+      <p data-lang="de">Open-Drain, Pull-up-Widerstände und die Adresse jedes Busteilnehmers.</p>
+    </div>
+  </header>
+
+  <main class="section" style="padding-top:24px">
+    <div class="container">
+      <!-- Open-Drain und Pull-ups -->
+      <section class="panel" id="open-drain">
+        <div class="grid-2">
+          <div>
+            <h2 style="font-size:1.35rem"><span data-lang="en">Open drain and pull-up resistors</span><span data-lang="de">Open-Drain und Pull-up-Widerstände</span></h2>
+            <p data-lang="en">As future system electronics technicians, you need to know what happens electrically on the bus. I²C uses an <strong>open-drain</strong> (for FETs) or <strong>open-collector</strong> (for bipolar transistors) architecture.</p>
+            <p data-lang="de">Als angehende Systemelektroniker müssen Sie wissen, was elektrisch auf dem Bus passiert. I²C verwendet eine <strong>Open-Drain</strong>- (bei FETs) oder <strong>Open-Collector</strong>-Architektur (bei Bipolartransistoren).</p>
+            <p data-lang="en">This means: a bus participant can only pull the line to ground (LOW) and <em>not</em> actively drive it to VCC (HIGH).</p>
+            <p data-lang="de">Das bedeutet: Ein Busteilnehmer kann die Leitung nur auf Masse (LOW) ziehen und <em>nicht</em> aktiv auf VCC (HIGH).</p>
+            <div class="box box--cyan" style="margin-bottom:1rem">
+              <h4><i data-icon="warn"></i><span data-lang="en">Important for practice!</span><span data-lang="de">Wichtig für die Praxis!</span></h4>
+              <p class="small" data-lang="en">For the bus to be at HIGH level in the idle state, <strong>pull-up resistors (R<sub>P</sub>)</strong> to VCC are absolutely necessary (usually 4.7 kΩ to 10 kΩ, depending on the bus capacitance and speed).</p>
+              <p class="small" data-lang="de">Damit der Bus im Ruhezustand auf HIGH-Pegel liegt, sind zwingend <strong>Pull-up-Widerstände (R<sub>P</sub>)</strong> gegen VCC erforderlich (meist 4,7 kΩ bis 10 kΩ, abhängig von der Buskapazität und Geschwindigkeit).</p>
+            </div>
+            <p class="small muted"><em data-lang="en">IMPORTANT:</em><em data-lang="de">WICHTIG:</em> <span data-lang="en">our Visionary Displays already have the pull-up resistors soldered on the back!</span><span data-lang="de">Unsere Visionary Displays haben die Pull-up-Widerstände schon auf der Rückseite verlötet!</span></p>
+          </div>
+          <div class="box" style="padding:20px;display:flex;justify-content:center">
+            <svg viewBox="0 0 400 300" style="width:100%;max-width:28rem;font:12px var(--mono);color:var(--text)" role="img" aria-label="I²C bus: VCC, pull-up resistors, SDA, SCL, microcontroller and LCD">
+              <line x1="50" y1="30" x2="350" y2="30" stroke="#ef4444" stroke-width="3"/>
+              <text x="12" y="35" fill="#ef4444" font-weight="700">VCC</text>
+              <line x1="50" y1="120" x2="350" y2="120" stroke="#3b82f6" stroke-width="4"/>
+              <text x="12" y="125" fill="#3b82f6" font-weight="700">SDA</text>
+              <line x1="50" y1="170" x2="350" y2="170" stroke="#06b6d4" stroke-width="4"/>
+              <text x="12" y="175" fill="#06b6d4" font-weight="700">SCL</text>
+              <g stroke="currentColor" fill="none" stroke-width="2">
+                <circle cx="100" cy="30" r="3" fill="#ef4444" stroke="none"/>
+                <line x1="100" y1="30" x2="100" y2="50"/><rect x="90" y="50" width="20" height="40" fill="#1e293b"/><line x1="100" y1="90" x2="100" y2="120"/>
+                <circle cx="100" cy="120" r="3" fill="#3b82f6" stroke="none"/>
+                <circle cx="180" cy="30" r="3" fill="#ef4444" stroke="none"/>
+                <line x1="180" y1="30" x2="180" y2="50"/><rect x="170" y="50" width="20" height="40" fill="#1e293b"/><line x1="180" y1="90" x2="180" y2="115"/>
+                <path d="M 180 115 A 5 5 0 0 1 180 125"/><line x1="180" y1="125" x2="180" y2="170"/>
+                <circle cx="180" cy="170" r="3" fill="#06b6d4" stroke="none"/>
+              </g>
+              <text x="84" y="74" fill="currentColor" text-anchor="end">-R1</text>
+              <text x="164" y="74" fill="currentColor" text-anchor="end">-R2</text>
+              <text x="116" y="74" fill="#94a3b8">R<tspan font-size="9" dy="3">P</tspan></text>
+              <text x="196" y="74" fill="#94a3b8">R<tspan font-size="9" dy="3">P</tspan></text>
+              <rect x="40" y="220" width="120" height="60" rx="5" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+              <text x="100" y="250" fill="#fff" text-anchor="middle" font-weight="700"><tspan data-lang="en">Microcontroller</tspan><tspan data-lang="de">Mikrocontroller</tspan></text>
+              <text x="100" y="267" fill="#94a3b8" text-anchor="middle">(Master)</text>
+              <rect x="240" y="220" width="120" height="60" rx="5" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
+              <text x="300" y="250" fill="#fff" text-anchor="middle" font-weight="700">Visionary LCD</text>
+              <text x="300" y="267" fill="#94a3b8" text-anchor="middle">(Slave)</text>
+              <line x1="80" y1="120" x2="80" y2="220" stroke="#3b82f6" stroke-width="2"/><circle cx="80" cy="120" r="3" fill="#3b82f6"/>
+              <line x1="125" y1="170" x2="125" y2="220" stroke="#06b6d4" stroke-width="2"/><circle cx="125" cy="170" r="3" fill="#06b6d4"/>
+              <line x1="275" y1="120" x2="275" y2="220" stroke="#3b82f6" stroke-width="2"/><circle cx="275" cy="120" r="3" fill="#3b82f6"/>
+              <line x1="325" y1="170" x2="325" y2="220" stroke="#06b6d4" stroke-width="2"/><circle cx="325" cy="170" r="3" fill="#06b6d4"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Adresseinstellung -->
+      <section class="panel" id="address">
+        <div class="grid-2" style="align-items:start">
+          <div style="display:grid;gap:24px">
+            <figure class="figure">
+              <div class="figure__frame figure__frame--dashed">
+                <img data-lang="en" loading="lazy" src="assets/img/address-jumpers-en.webp" width="1400" height="892" alt="Changing the 7-bit address with the jumpers A0, A1 and A2">
+                <img data-lang="de" loading="lazy" src="assets/img/address-jumpers-de.webp" width="1400" height="892" alt="7-Bit-Adresse mit den Jumpern A0, A1 und A2 ändern">
+              </div>
+            </figure>
+            <figure class="figure">
+              <figcaption><span data-lang="en">View of the back of the LCD:</span><span data-lang="de">Ansicht der Rückseite des LCD:</span></figcaption>
+              <div class="figure__frame figure__frame--dashed">
+                <img data-lang="en" loading="lazy" src="assets/img/lcd-back-jumpers-en.webp" width="1600" height="749" alt="Back of the LCD with the address jumpers A0, A1 and A2">
+                <img data-lang="de" loading="lazy" src="assets/img/lcd-back-jumpers-de.webp" width="1600" height="748" alt="Rückseite des LCD mit den Adress-Jumpern A0, A1 und A2">
+              </div>
+            </figure>
+          </div>
+          <div>
+            <h2 style="font-size:1.35rem"><span data-lang="en">Address setting in practice</span><span data-lang="de">Adresseinstellung in der Praxis</span></h2>
+            <p data-lang="en">What happens if you want to connect two identical displays or sensors to the same I²C bus? Since every device listens to a specific address from the factory, there would be a conflict (data collision).</p>
+            <p data-lang="de">Was passiert, wenn Sie zwei gleiche Displays oder Sensoren an denselben I²C-Bus anschließen möchten? Da jedes Gerät ab Werk auf eine bestimmte Adresse hört, gäbe es einen Konflikt (Datenkollision).</p>
+            <p data-lang="en">The solution: almost all I²C modules allow you to adjust the base address in hardware. This is usually done via solder bridges (solder jumpers) or plug-in jumpers labelled <strong>A0, A1 and A2</strong>.</p>
+            <p data-lang="de">Die Lösung: Fast alle I²C-Module bieten die Möglichkeit, die Basisadresse hardwareseitig anzupassen. Meist geschieht dies über Lötbrücken (Solder Jumper) oder Steck-Jumper mit den Bezeichnungen <strong>A0, A1 und A2</strong>.</p>
+            <div class="box box--green" style="padding:1.2rem">
+              <h4><i data-icon="bulb"></i><span data-lang="en">Example based on the picture</span><span data-lang="de">Beispiel anhand des Bildes</span></h4>
+              <p class="small" data-lang="en">The 7-bit address consists of a fixed part (<code>0100</code>) and the adjustable pins (<code>A2 A1 A0</code>). The logic of the pins is very simple due to internal pull-up resistors:</p>
+              <p class="small" data-lang="de">Die 7-Bit-Adresse besteht aus einem festen Teil (<code>0100</code>) und den einstellbaren Pins (<code>A2 A1 A0</code>). Die Logik der Pins ist durch interne Pull-up-Widerstände sehr einfach:</p>
+              <ul class="carets">
+                <li><span data-lang="en">No jumper set</span><span data-lang="de">Kein Jumper gesetzt</span> = <span class="tag tag--high">HIGH (1)</span></li>
+                <li><span data-lang="en">Jumper set (bridged)</span><span data-lang="de">Jumper gesetzt (gebrückt)</span> = <span class="tag tag--low">LOW (0)</span></li>
+              </ul>
+              <div class="panel" style="padding:1rem;background:var(--bg-2)">
+                <h4 style="font-size:.9rem"><span data-lang="en">Conversion to hexadecimal</span><span data-lang="de">Die Umrechnung in Hexadezimal</span></h4>
+                <p class="xs muted" data-lang="en">Tip: to easily convert the 7 bits into hexadecimal, just imagine a leading zero on the far left. This creates two simple 4-bit blocks.</p>
+                <p class="xs muted" data-lang="de">Tipp: Um die 7 Bits leichter in Hexadezimal umzuwandeln, denkt man sich ganz links einfach eine führende Null dazu. So entstehen zwei einfache 4-Bit-Blöcke.</p>
+                <div class="hexrow"><span class="muted"><span data-lang="en">Default (all open):</span><span data-lang="de">Standard (alle offen):</span></span><span class="bits"><i>0</i>010 0111</span><span class="hex">0x27</span></div>
+                <div class="hexrow hexrow--active"><span><span data-lang="en">In the picture (A1 set):</span><span data-lang="de">Im Bild (A1 gesetzt):</span></span><span class="bits"><i>0</i>010 01<b>0</b>1</span><span class="hex">0x25</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="btn-row" style="margin-top:40px">
+        <a class="btn" href="protocol.html"><span data-lang="en">Next: the protocol</span><span data-lang="de">Weiter: das Protokoll</span><i data-icon="right"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"><p class="footer__legal"><a href="../../../../impressum.html">Impressum</a> · <a href="../../../../datenschutz.html">Datenschutz</a></p></footer>
+</body>
+</html>
