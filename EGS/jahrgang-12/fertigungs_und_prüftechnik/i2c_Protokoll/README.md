@@ -1,7 +1,7 @@
 # Visionary Displays – I²C-Protokoll
 
 Firmenauftritt der fiktiven Visionary Displays GmbH zum I²C-Bus (EGS, Jahrgang 12, Fertigungs- und Prüftechnik).
-Aufgebaut nach dem Website-Guide (`/CLAUDE.md`): Englisch als Standard, Umschalter EN | DE, reines HTML/CSS/JS,
+Aufgebaut nach dem Website-Guide (Obsidian): Englisch als Standard, Umschalter EN | DE, reines HTML/CSS/JS,
 keine Fremdserver. Funktioniert auch per Doppelklick (Schriften kommen aus `/vendor/fonts`).
 
 ## Seiten

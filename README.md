@@ -5,8 +5,6 @@ Schüler navigieren über **Bildungsgang → Jahrgang → Fach → Thema** zu de
 
 🔗 **Live-Seite:** https://herrniebel.de
 
-📘 **Neue Lernwebsite bauen?** Regeln, Ablauf und Vorlagen stehen im Website-Guide [`CLAUDE.md`](CLAUDE.md).
-
 ---
 
 ## ✨ Funktionen
