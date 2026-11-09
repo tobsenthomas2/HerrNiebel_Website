@@ -165,14 +165,14 @@ code { font-family: var(--mono); font-size: .9em; background: var(--surface-2); 
 blockquote.quote { margin: 0; padding: 1.1rem 1.3rem; border-left: 4px solid var(--hot); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; font-size: 1.05rem; }
 blockquote.quote cite { display: block; margin-top: .6rem; font-style: normal; font-size: .88rem; color: var(--ink-2); }
 
-/* Zuschaltbare Lernhilfen (config.js -> hints) */
-.hint { display: none; margin: .9rem 0; padding: .8rem 1rem; border-radius: var(--radius); background: #fff8e6; border: 1px dashed #e1b84a; font-size: .92rem; }
+/* Tipps (config.js -> hints): kleines „!“ öffnet den Hinweis an Ort und Stelle */
+.hint { display: none; margin: .5rem 0 .9rem; padding: .8rem 1rem; border-radius: var(--radius); background: #fff8e6; border: 1px dashed #e1b84a; font-size: .92rem; }
 .hint::before { content: "💡 "; }
-body.show-hints .hint { display: block; }
-.help-toggle { display: none; align-items: center; gap: .35rem; font: 700 .78rem/1 var(--font); padding: .5rem .6rem; border-radius: 8px; border: 1px solid var(--line); background: #fff; color: var(--ink-2); cursor: pointer; flex-shrink: 0; }
-.help-toggle[aria-pressed="true"] { background: #fff1c9; border-color: #e1b84a; color: #6b4b00; }
-body.hints-enabled .help-toggle { display: inline-flex; }
-@media (max-width: 520px) { .help-toggle span { display: none; } }
+.hint.is-open { display: block; }
+.hint-btn { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; margin: -14px 24px 0 auto; padding: 0; box-shadow: 0 0 0 3px #fff, 0 2px 6px rgba(0,0,0,.12); border-radius: 50%; border: 2px solid #e1b84a; background: #fff8e6; color: #8a5a00; font: 800 .95rem/1 var(--font); cursor: pointer; transition: background .15s, color .15s, transform .15s; }
+.hint-btn:hover { transform: scale(1.1); }
+.hint-btn[aria-expanded="true"] { background: #e1b84a; color: #fff; }
+.hint-btn:focus-visible { outline: 3px solid var(--cold); outline-offset: 2px; }
 
 /* ---------- Tabellen ---------- */
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
@@ -260,7 +260,7 @@ details.more[open] summary { margin-bottom: .6rem; }
 @media (max-width: 760px) { .footer__grid { grid-template-columns: 1fr; gap: 1.2rem; } }
 
 @media print {
-  .nav, .topbar, .lang-switch, .help-toggle, .menu-btn, .footer__legal { display: none !important; }
+  .nav, .topbar, .lang-switch, .hint-btn, .menu-btn, .footer__legal { display: none !important; }
   body { background: #fff; }
   .card, .sim { box-shadow: none; break-inside: avoid; }
 }

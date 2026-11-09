@@ -11,13 +11,13 @@ Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und g
 | Datei | Navigation (EN / DE) | Inhalt | Zweck in der Stunde |
 |---|---|---|---|
 | `index.html` | Home / Start | Claim, Produktlinien COMPACT · STORE · FLOW, Referenzen | Orientierung |
-| `technology.html` | Technology / Technik | Speicher vs. Durchlauf, offen vs. druckfest, 230 V vs. 400 V, hydraulisch vs. elektronisch | Rollen Küche & Bad, Reflexionskarte A |
+| `about.html` | Company / Firma | Geschichte, Fertigung, Ausbildung | Authentizität |
 | `products.html` | Products / Produkte | 5 Geräte mit Kenndaten und Netto-Listenpreisen, Vergleichstabelle | Geräteauswahl, Kosten |
+| `technology.html` | Technology / Technik | Speicher vs. Durchlauf, offen vs. druckfest, 230 V vs. 400 V, hydraulisch vs. elektronisch | Rollen Küche & Bad, Reflexionskarte A |
 | `configurator.html` | Planning Tool / Planungshilfe | Anschluss-Check, Betriebskosten-Vergleich | Prüfen der Auswahl, Reflexionskarte B |
 | `project-guide.html` | Partner Academy / Fachpartner-Akademie | ProStart: Kundendienst oder Projekt, 4 Phasen, Magisches Dreieck, SMART, Steckbrief-Download, Chef als Referent | Rolle Projektleitung, Reflexionskarte C |
 | `support.html` | Service & FAQ | Montagefehler, Netzbetreiber, Inbetriebnahme „erst Wasser, dann Strom“ | Informationsauswahl, Sprinter |
 | `expert.html` | Expert Know-how / Expertenwissen | Regelungstechnik, Netzrückwirkungen, Opferanode, Hygiene | Differenzierung nach oben |
-| `about.html` | Company / Unternehmen | Geschichte, Fertigung, Ausbildung | Authentizität |
 | `request.html` | (Footer) Contact / Kontakt | Kontaktformular – **sendet keine Daten** | Authentizität |
 
 ## Simulationen (`assets/js/`)
@@ -37,7 +37,7 @@ Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und g
 ## Lehrer-Einstellungen (`assets/js/config.js`)
 
 - `showValues: false` – Anschluss-Check zeigt den Strom nicht als Zahl, sondern nur die Formel (Schüler rechnen selbst). `true` für Kontrolle/Besprechung.
-- `hints: true` – Schalter „Tipps“ im Kopf; die Hinweiskästen (gelb) sind beim Laden immer aus.
+- `hints: true` – Wo es einen Tipp gibt, sitzt unten rechts am Kasten bzw. an der Simulation ein kleines „!“. Ein Klick öffnet den gelben Hinweis, ein zweiter schließt ihn. `false` blendet alle Tipps aus.
 - `kiChatUrl: ""` – Link zu einem KI-Chat eintragen, dann erscheint unten rechts ein Support-Button.
 - `legalRoot` – Pfad zu Impressum/Datenschutz auf herrniebel.de (Standard `../../../../`).
 

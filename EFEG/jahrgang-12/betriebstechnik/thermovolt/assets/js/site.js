@@ -1,7 +1,7 @@
 /* =========================================================================
    THERMOVOLT Systems GmbH – gemeinsame Bausteine
    Kopf (NAV-Array), Fußzeile, Symbole, Sprache EN/DE ohne Cookies/Storage,
-   zuschaltbare Lernhilfen, optionaler KI-Chat-Reiter
+   Tipps per „!“-Symbol, optionaler KI-Chat-Reiter
    ========================================================================= */
 (function () {
   "use strict";
@@ -11,13 +11,13 @@
 
   var NAV = [
     { href: "index.html", en: "Home", de: "Start" },
-    { href: "technology.html", en: "Technology", de: "Technik" },
+    { href: "about.html", en: "Company", de: "Firma" },
     { href: "products.html", en: "Products", de: "Produkte" },
+    { href: "technology.html", en: "Technology", de: "Technik" },
     { href: "configurator.html", en: "Planning", de: "Planung" },
     { href: "project-guide.html", en: "Academy", de: "Akademie" },
     { href: "support.html", en: "Service", de: "Service" },
-    { href: "expert.html", en: "Expert", de: "Experten" },
-    { href: "about.html", en: "Company", de: "Firma" }
+    { href: "expert.html", en: "Expert", de: "Experten" }
   ];
 
   /* ---------- Symbole (eigene SVG, 24 × 24) ---------- */
@@ -83,8 +83,6 @@
         '<div class="container nav__bar">' +
           '<a class="brand" href="index.html">' + SITE.logo() + "<span>THERMO<b>VOLT</b></span></a>" +
           '<div class="nav__links">' + links + "</div>" +
-          '<button type="button" class="help-toggle" aria-pressed="false" title="Tipps">' + SITE.icon("bulb") +
-            both({ en: "Tips", de: "Tipps" }) + "</button>" +
           '<div class="lang-switch" role="group" aria-label="Language / Sprache">' +
             '<button type="button" data-set-lang="en" aria-pressed="true">EN</button>' +
             '<button type="button" data-set-lang="de" aria-pressed="false">DE</button>' +
@@ -102,15 +100,32 @@
       btn.innerHTML = '<span class="visually-hidden">Menu</span>' + SITE.icon(open ? "close" : "menu");
     });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { btn.click(); btn.focus(); } });
+  }
 
-    if (CFG.hints) {
-      document.body.classList.add("hints-enabled");
-      var hb = document.querySelector(".help-toggle");
-      hb.addEventListener("click", function () {
-        var on = document.body.classList.toggle("show-hints");
-        hb.setAttribute("aria-pressed", String(on));
+  /* ---------- Tipps: kleines „!“ an der Stelle des Tipps, Klick öffnet/schließt ---------- */
+  var hintBtns = [];
+  function hintLabel(b) {
+    var open = b.getAttribute("aria-expanded") === "true";
+    var t = SITE.t(open ? { en: "Hide tip", de: "Tipp ausblenden" } : { en: "Show tip", de: "Tipp anzeigen" });
+    b.setAttribute("aria-label", t); b.title = t;
+  }
+  function buildHints() {
+    if (!CFG.hints) return;                       /* config.js: hints = false → keine Tipps */
+    document.querySelectorAll(".hint").forEach(function (h, i) {
+      h.id = h.id || "tip-" + (i + 1);
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "hint-btn"; b.textContent = "!";
+      b.setAttribute("aria-expanded", "false"); b.setAttribute("aria-controls", h.id);
+      b.addEventListener("click", function () {
+        var open = b.getAttribute("aria-expanded") !== "true";
+        b.setAttribute("aria-expanded", String(open));
+        h.classList.toggle("is-open", open);
+        hintLabel(b);
       });
-    }
+      h.parentNode.insertBefore(b, h);
+      hintBtns.push(b);
+    });
+    document.addEventListener("langchange", function () { hintBtns.forEach(hintLabel); });
   }
 
   /* ---------- Fußzeile ---------- */
@@ -189,6 +204,7 @@
   });
 
   buildNav();
+  buildHints();
   buildFooter();
   buildChat();
   fillIcons();
