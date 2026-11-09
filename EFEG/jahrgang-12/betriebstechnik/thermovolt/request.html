@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-title-en="Contact – THERMOVOLT" data-title-de="Kontakt – THERMOVOLT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact – THERMOVOLT</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/config.js"></script>
+  <script defer src="assets/js/site.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow"><span data-lang="en">Contact</span><span data-lang="de">Kontakt</span></span>
+      <h1><span data-lang="en">Technical question?</span><span data-lang="de">Technische Frage?</span></h1>
+      <p class="lead" data-lang="en">Our application engineers answer partner enquiries within one working day.</p>
+      <p class="lead" data-lang="de">Unsere Anwendungstechniker beantworten Fachpartner-Anfragen innerhalb eines Werktags.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container grid-2" style="align-items:start">
+        <form class="card form" id="contact-form" novalidate>
+          <label><span data-lang="en">Company</span><span data-lang="de">Firma</span><input type="text" name="company" autocomplete="off"></label>
+          <label><span data-lang="en">Subject</span><span data-lang="de">Thema</span>
+            <select name="topic" id="topic"></select>
+          </label>
+          <label><span data-lang="en">Your question</span><span data-lang="de">Ihre Frage</span><textarea name="msg" rows="5"></textarea></label>
+          <button class="btn btn--hot" type="submit"><span data-lang="en">Send enquiry</span><span data-lang="de">Anfrage senden</span></button>
+          <p id="form-msg" class="callout callout--ok" hidden></p>
+        </form>
+        <div class="card">
+          <h3>THERMOVOLT Systems GmbH</h3>
+          <p class="muted" data-lang="en">Thalbrunn plant · Application engineering · Partner Academy</p>
+          <p class="muted" data-lang="de">Werk Thalbrunn · Anwendungstechnik · Fachpartner-Akademie</p>
+          <p><a href="mailto:kontakt@herrniebel.de">kontakt@herrniebel.de</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>
+    function fillTopics() {
+      var de = document.documentElement.lang === "de";
+      var t = de ? ["Geräteauswahl", "Montage", "Fachpartner-Akademie"] : ["Device selection", "Installation", "Partner Academy"];
+      document.getElementById("topic").innerHTML = t.map(function (x) { return "<option>" + x + "</option>"; }).join("");
+    }
+    fillTopics();
+    document.addEventListener("langchange", fillTopics);
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var m = document.getElementById("form-msg");
+      m.hidden = false;
+      m.textContent = document.documentElement.lang === "de"
+        ? "Danke! In dieser Fassung werden keine Daten übertragen – schreiben Sie uns gern per E-Mail."
+        : "Thank you! This version does not transmit any data – feel free to e-mail us.";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" data-title-en="Technology – THERMOVOLT" data-title-de="Technik – THERMOVOLT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technology – THERMOVOLT</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/config.js"></script>
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/physics.js"></script>
+  <script defer src="assets/js/sim-power.js"></script>
+  <script defer src="assets/js/sim-tank.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow"><span data-lang="en">Technology</span><span data-lang="de">Technik</span></span>
+      <h1><span data-lang="en">How electric water heaters work</span><span data-lang="de">So arbeiten elektrische Warmwasserbereiter</span></h1>
+      <p class="lead" data-lang="en">Every electric water heater converts electrical energy into heat via a heating element <code>-R1</code>. What differs is <em>when</em> the water is heated and <em>under which pressure</em> it is stored.</p>
+      <p class="lead" data-lang="de">Jeder elektrische Warmwasserbereiter wandelt elektrische Energie über einen Heizwiderstand <code>-R1</code> in Wärme um. Unterschiedlich ist, <em>wann</em> das Wasser erwärmt wird und <em>unter welchem Druck</em> es steht.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">1 · <span data-lang="en">Operating principle</span><span data-lang="de">Arbeitsweise</span></span>
+          <h2><span data-lang="en">Storage or instantaneous?</span><span data-lang="de">Speicher oder Durchlauf?</span></h2>
+        </div>
+        <div class="grid-2" style="margin-bottom:1.4rem">
+          <div class="card card--cold">
+            <span class="tag tag--cold"><span data-lang="en">Storage water heater</span><span data-lang="de">Speicherwassererwärmer</span></span>
+            <p data-lang="en">Heats a stored volume of water <strong>in advance</strong> and keeps it hot. Because there is time for heating, a <strong>small heating power</strong> of 2–6 kW is sufficient. The amount of hot water is limited by the tank volume; afterwards the tank has to heat up again. Heat is lost through the insulation all day (<strong>standby loss</strong>).</p>
+            <p data-lang="de">Erwärmt einen Wasservorrat <strong>im Voraus</strong> und hält ihn warm. Weil Zeit zum Aufheizen bleibt, reicht eine <strong>kleine Heizleistung</strong> von 2–6 kW. Die Warmwassermenge ist durch den Speicherinhalt begrenzt; danach muss der Speicher neu aufheizen. Über die Dämmung geht rund um die Uhr Wärme verloren (<strong>Bereitschaftsverlust</strong>).</p>
+          </div>
+          <div class="card card--hot">
+            <span class="tag tag--hot"><span data-lang="en">Instantaneous water heater</span><span data-lang="de">Durchlauferhitzer</span></span>
+            <p data-lang="en">Heats the water <strong>only while it flows</strong> through the heating block. There is no time to store energy – the heat must be delivered at the moment of use. This requires a <strong>high heating power</strong> of typically 18–24 kW. No tank, no standby loss, unlimited hot water.</p>
+            <p data-lang="de">Erwärmt das Wasser <strong>nur, während es fließt</strong>. Es gibt keine Zeit, Energie zu bevorraten – die Wärme muss im Moment der Entnahme geliefert werden. Dafür ist eine <strong>hohe Heizleistung</strong> von typisch 18–24 kW nötig. Kein Behälter, kein Bereitschaftsverlust, Warmwasser ohne Vorratsgrenze.</p>
+          </div>
+        </div>
+        <div class="callout callout--info">
+          <p data-lang="en"><strong>Key relation:</strong> the energy to heat water is <code>Q = m · c · Δϑ</code>. Power is energy per time: <code>P = Q / t</code>. In flow mode this becomes <code>P = V̇ · c · Δϑ</code> (with c = 4.19 kJ/(kg·K) and 1 L ≈ 1 kg).</p>
+          <p data-lang="de"><strong>Zusammenhang:</strong> Die Energie zum Erwärmen ist <code>Q = m · c · Δϑ</code>. Leistung ist Energie pro Zeit: <code>P = Q / t</code>. Im Durchlauf wird daraus <code>P = V̇ · c · Δϑ</code> (mit c = 4,19 kJ/(kg·K) und 1 L ≈ 1 kg).</p>
+        </div>
+        <div data-sim="power"></div>
+      </div>
+    </section>
+
+    <section class="section section--white">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">2 · <span data-lang="en">Hydraulics</span><span data-lang="de">Hydraulik</span></span>
+          <h2><span data-lang="en">Open or pressure-resistant?</span><span data-lang="de">Offen oder druckfest?</span></h2>
+        </div>
+        <div class="grid-2" style="margin-bottom:1.4rem">
+          <div class="card">
+            <h3><span data-lang="en">Open (unpressurised) units</span><span data-lang="de">Offene (drucklose) Geräte</span></h3>
+            <p data-lang="en">The tank is connected to the atmosphere through the always-open spout – it is <strong>never under mains pressure</strong>. This allows a light plastic tank. The valve of the special <strong>low-pressure tap</strong> sits in the cold-water <em>inlet</em>: when you open it, cold water flows into the tank and pushes hot water out of the spout. During heating, the water expands and drips from the spout – a sign of correct function.</p>
+            <p data-lang="de">Der Behälter ist über den immer offenen Auslauf mit der Atmosphäre verbunden – er steht <strong>nie unter Leitungsdruck</strong>. Deshalb genügt ein leichter Kunststoffbehälter. Das Ventil der speziellen <strong>Niederdruckarmatur</strong> sitzt im Kaltwasser-<em>Zulauf</em>: Öffnet man es, strömt Kaltwasser in den Behälter und drückt Warmwasser aus dem Auslauf. Beim Aufheizen dehnt sich das Wasser aus und tropft am Auslauf ab – ein Zeichen für richtige Funktion.</p>
+            <p class="small muted" data-lang="en">Use: exactly one tapping point · tap with 3 connections.</p>
+            <p class="small muted" data-lang="de">Einsatz: genau eine Entnahmestelle · Armatur mit 3 Anschlüssen.</p>
+          </div>
+          <div class="card">
+            <h3><span data-lang="en">Closed (pressure-resistant) units</span><span data-lang="de">Geschlossene (druckfeste) Geräte</span></h3>
+            <p data-lang="en">The device is permanently under mains pressure (typically 3–5 bar). Standard <strong>pressure taps</strong> with 2 connections can be used, the valve sits in the hot-water <em>outlet</em>. One device can supply <strong>several tapping points</strong>. Storage tanks need a steel pressure vessel and a <strong>safety group</strong> (relief valve, non-return valve).</p>
+            <p data-lang="de">Das Gerät steht dauerhaft unter Leitungsdruck (typisch 3–5 bar). Es können normale <strong>Druckarmaturen</strong> mit 2 Anschlüssen verwendet werden, das Ventil sitzt im Warmwasser-<em>Ablauf</em>. Ein Gerät kann <strong>mehrere Entnahmestellen</strong> versorgen. Speicher brauchen einen Stahl-Druckbehälter und eine <strong>Sicherheitsgruppe</strong> (Sicherheitsventil, Rückflussverhinderer).</p>
+            <p class="small muted" data-lang="en">Use: several tapping points · standard pressure taps.</p>
+            <p class="small muted" data-lang="de">Einsatz: mehrere Entnahmestellen · normale Druckarmaturen.</p>
+          </div>
+        </div>
+        <div data-sim="tank"></div>
+        <p class="hint"><span data-lang="en">Count the connections of a tap: 3 hoses = low-pressure tap for open units, 2 hoses = pressure tap.</span><span data-lang="de">Zählen Sie die Anschlüsse einer Armatur: 3 Schläuche = Niederdruckarmatur für offene Geräte, 2 Schläuche = Druckarmatur.</span></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">3 · <span data-lang="en">Electrical supply</span><span data-lang="de">Netzanschluss</span></span>
+          <h2><span data-lang="en">230 V or 400 V?</span><span data-lang="de">230 V oder 400 V?</span></h2>
+          <p data-lang="en">The heating power determines the current – and therefore the connection.</p>
+          <p data-lang="de">Die Heizleistung bestimmt den Strom – und damit den Anschluss.</p>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <span class="tag"><span data-lang="en">Single-phase</span><span data-lang="de">Einphasig</span></span>
+            <p><code>1~/N/PE AC 230 V</code></p>
+            <p><code>P = U · I</code> &nbsp;⇒&nbsp; <code>I = P / U</code></p>
+            <p class="muted" data-lang="en">Plug-in COMPACT units (2 kW) run on a standard socket circuit with 16 A protection. Single-phase loads are limited to 4.6 kVA (VDE-AR-N 4100).</p>
+            <p class="muted" data-lang="de">Steckerfertige COMPACT-Geräte (2 kW) laufen an einem normalen Steckdosenstromkreis mit 16 A Absicherung. Einphasige Verbraucher sind auf 4,6 kVA begrenzt (VDE-AR-N 4100).</p>
+          </div>
+          <div class="card">
+            <span class="tag"><span data-lang="en">Three-phase</span><span data-lang="de">Dreiphasig</span></span>
+            <p><code>3~/PE AC 400 V</code></p>
+            <p><code>P = √3 · U · I</code> &nbsp;⇒&nbsp; <code>I = P / (√3 · U)</code></p>
+            <p class="muted" data-lang="en">The power is distributed evenly over L1, L2 and L3. Instantaneous heaters are permanently connected to their own circuit (3-pole circuit breaker).</p>
+            <p class="muted" data-lang="de">Die Leistung verteilt sich gleichmäßig auf L1, L2 und L3. Durchlauferhitzer werden fest an einen eigenen Stromkreis angeschlossen (3-poliger Leitungsschutzschalter).</p>
+          </div>
+          <div class="card">
+            <span class="tag"><span data-lang="en">Grid operator</span><span data-lang="de">Netzbetreiber</span></span>
+            <p data-lang="en">Instantaneous water heaters must be <strong>registered</strong> with the grid operator. Single devices above <strong>12 kW</strong> require the grid operator's <strong>approval before connection</strong> (TAB / VDE-AR-N 4100).</p>
+            <p data-lang="de">Durchlauferhitzer sind beim Netzbetreiber <strong>anzumelden</strong>. Einzelgeräte über <strong>12 kW</strong> brauchen <strong>vor dem Anschluss die Zustimmung</strong> des Netzbetreibers (TAB / VDE-AR-N 4100).</p>
+          </div>
+        </div>
+        <p class="hint"><span data-lang="en">Compare: which current would a heater draw on 230 V – and which on 400 V three-phase? Which fuse protects the circuit?</span><span data-lang="de">Vergleichen Sie: Welchen Strom zöge ein Gerät an 230 V – und welchen an 400 V Drehstrom? Welche Sicherung schützt den Stromkreis?</span></p>
+      </div>
+    </section>
+
+    <section class="section section--white">
+      <div class="container grid-2" style="align-items:center">
+        <div>
+          <span class="eyebrow">4 · <span data-lang="en">Control</span><span data-lang="de">Steuerung</span></span>
+          <h2><span data-lang="en">Hydraulic or electronic?</span><span data-lang="de">Hydraulisch oder elektronisch?</span></h2>
+          <p data-lang="en"><strong>Hydraulically controlled</strong> instantaneous heaters switch fixed power stages on via a differential pressure switch. If the flow changes – for example because a second tap is opened – the outlet temperature changes too.</p>
+          <p data-lang="de"><strong>Hydraulisch gesteuerte</strong> Durchlauferhitzer schalten über einen Differenzdruckschalter feste Leistungsstufen zu. Ändert sich der Durchfluss – etwa weil eine zweite Zapfstelle geöffnet wird –, ändert sich auch die Auslauftemperatur.</p>
+          <p data-lang="en"><strong>Electronically controlled</strong> heaters measure flow and temperatures continuously and adjust the heating power steplessly. The set temperature is kept to the degree – and no energy is wasted by overheating and re-mixing.</p>
+          <p data-lang="de"><strong>Elektronisch geregelte</strong> Geräte messen Durchfluss und Temperaturen laufend und passen die Heizleistung stufenlos an. Die eingestellte Temperatur bleibt gradgenau – und es wird keine Energie durch Überhitzen und Nachmischen verschwendet.</p>
+          <a class="btn btn--ghost" href="expert.html#control"><span data-lang="en">Control technology in detail</span><span data-lang="de">Regelungstechnik im Detail</span><i data-icon="right"></i></a>
+        </div>
+        <div class="card">
+          <div class="table-wrap" style="border:0">
+            <table class="tech" style="min-width:0">
+              <thead><tr><th></th><th>TV-DH18</th><th>TV-DE21</th></tr></thead>
+              <tbody>
+                <tr><td data-lang="en">Control</td><td data-lang="de">Steuerung</td><td data-lang="en">hydraulic, 2 stages</td><td data-lang="de">hydraulisch, 2 Stufen</td><td data-lang="en">electronic, stepless</td><td data-lang="de">elektronisch, stufenlos</td></tr>
+                <tr><td data-lang="en">Temperature</td><td data-lang="de">Temperatur</td><td data-lang="en">depends on flow</td><td data-lang="de">abhängig vom Durchfluss</td><td data-lang="en">set to the degree</td><td data-lang="de">gradgenau einstellbar</td></tr>
+                <tr><td data-lang="en">Second tap opened</td><td data-lang="de">Zweite Zapfstelle auf</td><td data-lang="en">temperature changes</td><td data-lang="de">Temperatur schwankt</td><td data-lang="en">temperature held</td><td data-lang="de">Temperatur bleibt</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

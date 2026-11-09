@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" font-family="Inter, sans-serif">
+<rect x="52" y="16" width="96" height="150" rx="16" fill="#ffffff" stroke="#d2cabc" stroke-width="2.5"/>
+<rect x="52" y="16" width="96" height="7" rx="3.5" fill="#e0522a"/>
+<rect x="66" y="42" width="68" height="40" rx="7" fill="#1c222a"/><text x="100" y="70" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">38°</text>
+<circle cx="80" cy="102" r="8" fill="#fff" stroke="#d2cabc" stroke-width="2"/><circle cx="120" cy="102" r="8" fill="#fff" stroke="#d2cabc" stroke-width="2"/>
+<text x="100" y="146" text-anchor="middle" font-size="10" font-weight="800" fill="#1c222a">TV-DE21</text>
+<rect x="80" y="166" width="10" height="22" rx="3" fill="#17698a"/><rect x="110" y="166" width="10" height="22" rx="3" fill="#e0522a"/></svg>

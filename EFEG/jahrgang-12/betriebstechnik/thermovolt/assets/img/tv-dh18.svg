@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" font-family="Inter, sans-serif">
+<rect x="52" y="16" width="96" height="150" rx="16" fill="#ffffff" stroke="#d2cabc" stroke-width="2.5"/>
+<circle cx="100" cy="72" r="22" fill="#fff" stroke="#1c222a" stroke-width="2.5"/><line x1="100" y1="72" x2="88" y2="58" stroke="#1c222a" stroke-width="3.5" stroke-linecap="round"/>
+<text x="74" y="110" font-size="10" font-weight="700" fill="#47515d">I</text><text x="122" y="110" font-size="10" font-weight="700" fill="#47515d">II</text>
+<text x="100" y="146" text-anchor="middle" font-size="10" font-weight="800" fill="#1c222a">TV-DH18</text>
+<rect x="80" y="166" width="10" height="22" rx="3" fill="#17698a"/><rect x="110" y="166" width="10" height="22" rx="3" fill="#e0522a"/></svg>

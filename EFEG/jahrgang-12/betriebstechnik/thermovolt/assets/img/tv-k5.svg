@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" font-family="Inter, sans-serif"><rect width="200" height="200" fill="none"/>
+<rect x="66" y="22" width="68" height="120" rx="12" fill="#eef5f8" stroke="#17698a" stroke-width="3"/>
+<rect x="70" y="70" width="60" height="68" rx="9" fill="#17698a" opacity=".18"/>
+<g stroke="#17698a" stroke-width="2"><line x1="122" y1="40" x2="130" y2="40"/><line x1="122" y1="60" x2="130" y2="60"/><line x1="122" y1="80" x2="130" y2="80"/><line x1="122" y1="100" x2="130" y2="100"/><line x1="122" y1="120" x2="130" y2="120"/></g>
+<rect x="58" y="142" width="84" height="30" rx="8" fill="#ffffff" stroke="#d2cabc" stroke-width="2"/>
+<circle cx="84" cy="157" r="8" fill="#e0522a"/><text x="118" y="161" text-anchor="middle" font-size="10" font-weight="800" fill="#1c222a">TV-K5</text>
+<path d="M142 150 h22 v14" fill="none" stroke="#47515d" stroke-width="5" stroke-linecap="round"/></svg>

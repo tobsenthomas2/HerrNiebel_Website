@@ -401,6 +401,32 @@
               ]
             }
           ]
+        },
+        {
+          "id": "jg12",
+          "title": "Jahrgang 12",
+          "icon": "📘",
+          "folder": "jahrgang-12",
+          "children": [
+            {
+              "id": "betriebstechnik",
+              "title": "Betriebstechnik",
+              "icon": "🏭",
+              "children": [
+                {
+                  "id": "thermovolt",
+                  "title": "THERMOVOLT Systems",
+                  "description": "Herstellerwebsite Warmwassertechnik: Geräte, Planungshilfe und ProStart-Projektmethode.",
+                  "icon": "🚿",
+                  "tags": [
+                    "Simulation",
+                    "Projekt"
+                  ],
+                  "badge": "Neu"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

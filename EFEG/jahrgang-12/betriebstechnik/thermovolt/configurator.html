@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" data-title-en="Planning tool – THERMOVOLT" data-title-de="Planungshilfe – THERMOVOLT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planning tool – THERMOVOLT</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/config.js"></script>
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/physics.js"></script>
+  <script defer src="assets/js/sim-heater.js"></script>
+  <script defer src="assets/js/sim-costs.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow"><span data-lang="en">Planning tool for professionals</span><span data-lang="de">Planungshilfe für Fachbetriebe</span></span>
+      <h1><span data-lang="en">Check before you order.</span><span data-lang="de">Erst prüfen, dann bestellen.</span></h1>
+      <p class="lead" data-lang="en">Most complaints we receive are not device faults but planning errors: the wrong tap, the wrong supply, the wrong device for the tapping point. Check your configuration in two minutes.</p>
+      <p class="lead" data-lang="de">Die meisten Reklamationen, die uns erreichen, sind keine Gerätefehler, sondern Planungsfehler: falsche Armatur, falscher Anschluss, falsches Gerät für die Zapfstelle. Prüfen Sie Ihre Konfiguration in zwei Minuten.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">1 · <span data-lang="en">Connection check</span><span data-lang="de">Anschluss-Check</span></span>
+          <h2><span data-lang="en">Device, tapping points, tap, supply</span><span data-lang="de">Gerät, Entnahmestellen, Armatur, Anschluss</span></h2>
+          <p data-lang="en">Select a device and enter the situation on site. The check shows what fits – and what does not.</p>
+          <p data-lang="de">Wählen Sie ein Gerät und geben Sie die Situation vor Ort ein. Der Check zeigt, was passt – und was nicht.</p>
+        </div>
+        <div data-sim="heater"></div>
+        <p class="hint"><span data-lang="en">Enter the configuration exactly as found on site first – then change one setting at a time and watch which messages turn green.</span><span data-lang="de">Geben Sie zuerst die Konfiguration genau so ein, wie Sie sie vor Ort vorfinden – ändern Sie dann immer nur eine Einstellung und beobachten Sie, welche Meldungen grün werden.</span></p>
+      </div>
+    </section>
+
+    <section class="section section--white">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">2 · <span data-lang="en">Economy</span><span data-lang="de">Wirtschaftlichkeit</span></span>
+          <h2><span data-lang="en">What does hot water cost over the years?</span><span data-lang="de">Was kostet Warmwasser über die Jahre?</span></h2>
+          <p data-lang="en">The purchase price is only part of the story. Compare purchase and electricity costs over the period of use – for your customer's household.</p>
+          <p data-lang="de">Der Kaufpreis ist nur ein Teil der Rechnung. Vergleichen Sie Anschaffung und Stromkosten über die Nutzungsdauer – für den Haushalt Ihres Kunden.</p>
+        </div>
+        <div data-sim="costs"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2" style="align-items:center">
+        <div>
+          <h2><span data-lang="en">Larger project?</span><span data-lang="de">Größeres Projekt?</span></h2>
+          <p data-lang="en">When several rooms, other trades, a fixed budget and a fixed date come together, the device choice is only one part. Our ProStart method helps you start such projects cleanly.</p>
+          <p data-lang="de">Wenn mehrere Räume, andere Gewerke, ein festes Budget und ein fester Termin zusammenkommen, ist die Geräteauswahl nur ein Teil. Unsere ProStart-Methode hilft Ihnen, solche Projekte sauber zu starten.</p>
+        </div>
+        <div><a class="btn btn--hot" href="project-guide.html"><i data-icon="compass"></i><span data-lang="en">To the Partner Academy</span><span data-lang="de">Zur Fachpartner-Akademie</span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>
