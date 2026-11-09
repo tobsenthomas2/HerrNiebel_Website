@@ -44,6 +44,7 @@ Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und g
 ## Technik
 
 - Reines HTML/CSS/JS, kein Build, läuft per Doppelklick offline.
+- Für Tablets/iPads geprüft (hoch und quer): Produktkarten unter 1200 px einspaltig, Kostenvergleich unter 1100 px untereinander, größere Bedienflächen bei Touch-Bedienung, Eingabefelder mit 16 px (kein automatisches Zoomen).
 - Sprache EN Standard, Umschalter EN | DE (`?lang=de`), keine Cookies, kein Storage.
 - Schrift Inter lokal als woff2 (`assets/fonts/`, SIL Open Font License 1.1).
 - Downloads: `docs/ProStart_Projektsteckbrief.pdf` (= leeres Arbeitsblatt der Stunde).

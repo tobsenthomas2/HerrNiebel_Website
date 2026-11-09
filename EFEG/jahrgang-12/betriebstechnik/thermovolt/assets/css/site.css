@@ -131,6 +131,8 @@ code { font-family: var(--mono); font-size: .9em; background: var(--surface-2); 
 .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
 @media (max-width: 980px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 680px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: minmax(0, 1fr); } }
+/* Produktkarten brauchen Breite: unter 1200 px (z. B. iPad hoch und quer) eine Karte pro Zeile */
+@media (max-width: 1199px) { .grid-products { grid-template-columns: minmax(0, 1fr); } }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-l); padding: 1.4rem; box-shadow: var(--shadow-s); min-width: 0; }
 .card--flat { box-shadow: none; }
 .card--hot { border-top: 4px solid var(--hot); }
@@ -140,7 +142,7 @@ code { font-family: var(--mono); font-size: .9em; background: var(--surface-2); 
 .tag--hot { background: var(--hot-soft); border-color: #f3c6b3; color: var(--hot-dark); }
 .tag--cold { background: var(--cold-soft); border-color: #b9dbe7; color: var(--cold-dark); }
 .tile { display: block; text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-l); padding: 1.3rem; transition: transform .15s, box-shadow .15s; }
-.tile:hover { transform: translateY(-2px); box-shadow: var(--shadow); color: inherit; }
+@media (hover: hover) { .tile:hover { transform: translateY(-2px); box-shadow: var(--shadow); color: inherit; } }
 .tile .ico { width: 30px; height: 30px; color: var(--hot); margin-bottom: .7rem; }
 .tile h3 { margin-bottom: .35rem; }
 .tile p { color: var(--ink-2); font-size: .94rem; margin: 0; }
@@ -170,27 +172,30 @@ blockquote.quote cite { display: block; margin-top: .6rem; font-style: normal; f
 .hint::before { content: "💡 "; }
 .hint.is-open { display: block; }
 .hint-btn { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; margin: -14px 24px 0 auto; padding: 0; box-shadow: 0 0 0 3px #fff, 0 2px 6px rgba(0,0,0,.12); border-radius: 50%; border: 2px solid #e1b84a; background: #fff8e6; color: #8a5a00; font: 800 .95rem/1 var(--font); cursor: pointer; transition: background .15s, color .15s, transform .15s; }
-.hint-btn:hover { transform: scale(1.1); }
+@media (hover: hover) { .hint-btn:hover { transform: scale(1.1); } }
 .hint-btn[aria-expanded="true"] { background: #e1b84a; color: #fff; }
 .hint-btn:focus-visible { outline: 3px solid var(--cold); outline-offset: 2px; }
 
 /* ---------- Tabellen ---------- */
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
-table.tech { width: 100%; border-collapse: collapse; font-size: .9rem; min-width: 640px; }
+table.tech { width: 100%; border-collapse: collapse; font-size: .9rem; min-width: 560px; }
+.sim table.tech { min-width: 0; font-size: .85rem; }
+.sim table.tech th, .sim table.tech td { padding: .55rem .5rem; }
 table.tech th, table.tech td { text-align: left; padding: .7rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
 table.tech thead th { background: var(--surface-2); font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); }
 table.tech tbody tr:last-child td { border-bottom: 0; }
 table.tech td.num, table.tech th.num { text-align: right; font-feature-settings: "tnum" 1; white-space: nowrap; }
 
 /* ---------- Produkte ---------- */
-.product { display: grid; grid-template-columns: 180px 1fr; gap: 1.4rem; align-items: start; }
+.product { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 1.4rem; align-items: start; }
 .product__img { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: .8rem; }
 .product__price { font: 800 1.35rem/1 var(--font-display); color: var(--ink); white-space: nowrap; }
 .product__price small { display: block; font: 400 .75rem/1.3 var(--font); color: var(--ink-3); margin-top: .25rem; white-space: normal; max-width: 230px; }
 .product__head { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }
-dl.specs { display: grid; grid-template-columns: max-content 1fr; gap: .3rem 1rem; margin: .9rem 0 0; font-size: .9rem; }
+dl.specs { display: grid; grid-template-columns: minmax(0, max-content) minmax(0, 1fr); gap: .3rem 1rem; margin: .9rem 0 0; font-size: .9rem; }
 dl.specs dt { color: var(--ink-3); }
-dl.specs dd { margin: 0; font-weight: 600; }
+dl.specs dd { margin: 0; font-weight: 600; overflow-wrap: break-word; }
+.product > div { min-width: 0; }
 @media (max-width: 680px) { .product { grid-template-columns: 1fr; } .product__img { max-width: 220px; } dl.specs { grid-template-columns: 1fr; gap: .05rem; } dl.specs dd { margin-bottom: .45rem; } }
 details.more { margin-top: 1rem; border-top: 1px solid var(--line); padding-top: .8rem; }
 details.more summary { cursor: pointer; font-weight: 700; color: var(--cold); }
@@ -222,6 +227,8 @@ details.more[open] summary { margin-bottom: .6rem; }
 .sim__head h3 { margin: 0; }
 .sim__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 1.2rem; align-items: start; }
 @media (max-width: 860px) { .sim__grid { grid-template-columns: minmax(0, 1fr); } }
+/* Kostenvergleich mit Tabelle: auf Tablets untereinander, damit die Tabelle volle Breite hat */
+@media (max-width: 1100px) { [data-sim="costs"] .sim__grid { grid-template-columns: minmax(0, 1fr); } }
 .sim fieldset { border: 1px solid var(--line); border-radius: var(--radius); padding: .7rem .85rem .85rem; margin: 0 0 .8rem; min-width: 0; }
 .sim legend { font-weight: 700; font-size: .85rem; padding: 0 .3rem; color: var(--ink-2); }
 .seg { display: flex; flex-wrap: wrap; gap: .4rem; }
@@ -263,4 +270,16 @@ details.more[open] summary { margin-bottom: .6rem; }
   .nav, .topbar, .lang-switch, .hint-btn, .menu-btn, .footer__legal { display: none !important; }
   body { background: #fff; }
   .card, .sim { box-shadow: none; break-inside: avoid; }
+}
+
+/* ---------- Touch-Geräte (Tablet/iPad) ---------- */
+@media (pointer: coarse) {
+  .lang-switch button { padding: .85rem .85rem; }
+  .menu-btn { padding: .6rem; }
+  .nav__panel a { padding-top: .8rem; padding-bottom: .8rem; }
+  .hint-btn { width: 36px; height: 36px; margin-top: -18px; font-size: 1.05rem; }
+  .sim select, .sim input[type="number"], .form input, .form select, .form textarea { font-size: 16px; padding: .6rem .65rem; }
+  .range input { height: 34px; }
+  details.more > summary { padding: .4rem 0; }
+  .seg button, .sim .btn { min-height: 42px; padding: .6rem .8rem; }
 }
