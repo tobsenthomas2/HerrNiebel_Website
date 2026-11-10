@@ -137,6 +137,61 @@
         </div>
       </div>
     </section>
+    <section class="section" id="calc">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">5 · <span data-lang="en">Planning maths</span><span data-lang="de">Rechnen für die Planung</span></span>
+          <h2><span data-lang="en">Formula card: heating water</span><span data-lang="de">Formelkarte: Wasser erwärmen</span></h2>
+          <p data-lang="en">The four relations every partner contractor needs for a specification sheet – with units and typical values.</p>
+          <p data-lang="de">Die vier Zusammenhänge, die jeder Fachpartner für ein Pflichtenheft braucht – mit Einheiten und typischen Werten.</p>
+        </div>
+        <div class="grid-2" style="margin-bottom:1.4rem">
+          <div class="card">
+            <span class="tag tag--cold">1 · <span data-lang="en">Heat</span><span data-lang="de">Wärmemenge</span></span>
+            <p><code>Q = m · c · Δϑ</code></p>
+            <p class="small muted" data-lang="en">Q in kJ · m in kg (1 L of water ≈ 1 kg) · c = 4.19 kJ/(kg·K) · Δϑ in K (= difference in °C). Conversion: <strong>1 kWh = 3600 kJ</strong>.</p>
+            <p class="small muted" data-lang="de">Q in kJ · m in kg (1 L Wasser ≈ 1 kg) · c = 4,19 kJ/(kg·K) · Δϑ in K (= Differenz in °C). Umrechnung: <strong>1 kWh = 3600 kJ</strong>.</p>
+          </div>
+          <div class="card">
+            <span class="tag tag--cold">2 · <span data-lang="en">Electrical energy and time</span><span data-lang="de">Elektrische Arbeit und Zeit</span></span>
+            <p><code>W = Q / η</code> &nbsp; <code>t = W / P</code></p>
+            <p class="small muted" data-lang="en">η = heat utilisation factor (losses). Typical: storage heaters ≈ 0.95, instantaneous heaters ≈ 0.99. W in kWh, P in kW → t in h.</p>
+            <p class="small muted" data-lang="de">η = Wärmenutzungsgrad (Verluste). Typisch: Speicher ≈ 0,95, Durchlauferhitzer ≈ 0,99. W in kWh, P in kW → t in h.</p>
+          </div>
+          <div class="card">
+            <span class="tag tag--cold">3 · <span data-lang="en">Mixed water</span><span data-lang="de">Mischwasser</span></span>
+            <p><code>V<sub>M</sub> = V<sub>S</sub> · (ϑ<sub>S</sub> − ϑ<sub>K</sub>) / (ϑ<sub>M</sub> − ϑ<sub>K</sub>)</code></p>
+            <p class="small muted" data-lang="en">How much water at the tap temperature ϑ<sub>M</sub> a tank V<sub>S</sub> at ϑ<sub>S</sub> delivers when it is mixed with cold water ϑ<sub>K</sub> (heat balance).</p>
+            <p class="small muted" data-lang="de">Wie viel Wasser mit Zapftemperatur ϑ<sub>M</sub> ein Speicher V<sub>S</sub> mit ϑ<sub>S</sub> liefert, wenn er mit Kaltwasser ϑ<sub>K</sub> gemischt wird (Wärmebilanz).</p>
+          </div>
+          <div class="card">
+            <span class="tag tag--hot">4 · <span data-lang="en">Power in flow mode</span><span data-lang="de">Leistung im Durchlauf</span></span>
+            <p><code>P = ṁ · c · Δϑ</code></p>
+            <p class="small muted" data-lang="en">ṁ in kg/s: litres per minute ÷ 60. Result in kJ/s = kW (heat). Electrical power: divide by η.</p>
+            <p class="small muted" data-lang="de">ṁ in kg/s: Liter pro Minute ÷ 60. Ergebnis in kJ/s = kW (Wärme). Elektrische Leistung: durch η teilen.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3><span data-lang="en">Worked example: 30 L storage heater at the hand-wash basin of a workshop</span><span data-lang="de">Rechenbeispiel: 30-L-Speicher am Handwaschbecken einer Werkstatt</span></h3>
+          <p class="small muted" data-lang="en">Always in the same order: given – wanted – formula – calculation with units – result in a sentence.</p>
+          <p class="small muted" data-lang="de">Immer in derselben Reihenfolge: Gegeben – Gesucht – Formel – Rechnung mit Einheiten – Ergebnis als Satz.</p>
+          <div class="table-wrap">
+            <table class="tech">
+              <tbody>
+                <tr><td data-lang="en">Given</td><td data-lang="de">Gegeben</td><td>V = 30 L → m = 30 kg · ϑ<sub>K</sub> = 15 °C · ϑ<sub>S</sub> = 60 °C · P = 2 kW · η = 0,95</td></tr>
+                <tr><td data-lang="en">Wanted</td><td data-lang="de">Gesucht</td><td data-lang="en">heat-up time t; mixed water at 40 °C</td><td data-lang="de">Aufheizzeit t; Mischwasser mit 40 °C</td></tr>
+                <tr><td data-lang="en">Heat</td><td data-lang="de">Wärmemenge</td><td>Q = 30 kg · 4,19 kJ/(kg·K) · 45 K = 5657 kJ = 5657 kJ ÷ 3600 kJ/kWh = 1,57 kWh</td></tr>
+                <tr><td data-lang="en">Energy</td><td data-lang="de">Arbeit</td><td>W = 1,57 kWh ÷ 0,95 = 1,65 kWh</td></tr>
+                <tr><td data-lang="en">Time</td><td data-lang="de">Zeit</td><td>t = 1,65 kWh ÷ 2 kW = 0,83 h ≈ 50 min</td></tr>
+                <tr><td data-lang="en">Mixed water</td><td data-lang="de">Mischwasser</td><td>V<sub>M</sub> = 30 L · (60 − 15) K ÷ (40 − 15) K = 54 L</td></tr>
+                <tr><td data-lang="en">Result</td><td data-lang="de">Ergebnis</td><td data-lang="en">After about 50 minutes the tank is hot; it then supplies about 54 L of water at 40 °C.</td><td data-lang="de">Nach etwa 50 Minuten ist der Speicher aufgeheizt; er liefert dann rund 54 L Wasser mit 40 °C.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="hint"><span data-lang="en">Typical slips: forgetting ÷ 3600 (kJ → kWh), multiplying by η instead of dividing (W is always larger than Q), using litres per minute instead of kg/s in flow mode. Note: the power calculator above ignores losses (η = 1).</span><span data-lang="de">Typische Fehler: ÷ 3600 vergessen (kJ → kWh), mit η malnehmen statt teilen (W ist immer größer als Q), im Durchlauf Liter pro Minute statt kg/s einsetzen. Hinweis: Der Leistungsrechner oben rechnet ohne Verluste (η = 1).</span></p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer id="site-footer"></footer>

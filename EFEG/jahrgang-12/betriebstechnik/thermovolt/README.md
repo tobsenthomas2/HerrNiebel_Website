@@ -1,6 +1,6 @@
 # THERMOVOLT Systems GmbH – Herstellerauftritt Warmwassertechnik
 
-Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und gebäudetechnische Anlagen planen und realisieren“ in Verbindung mit LF 10 „Elektrische Geräte und Anlagen der Haustechnik …“ (Einheit Projektmanagement & Warmwassergeräte, Woche 1).
+Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und gebäudetechnische Anlagen planen und realisieren“ in Verbindung mit LF 10 „Elektrische Geräte und Anlagen der Haustechnik …“ (Reihe Projektmanagement & Elektrowärme „Haus Hesselholz“, ab Woche 1).
 
 **Konzept:** THERMOVOLT ist ein fiktiver Hersteller elektrischer Warmwasserbereiter. Die Seite ist ein reiner Firmenauftritt: Der Kundenfall Hesselholz kommt **nicht** auf der Website vor (er kommt als Sprachnachricht, Chat und Unterlagen in die Klasse). Der Chef des Ausbildungsbetriebs, **Andreas Grabmaier** (Elektro Grabmaier GmbH), ist nebenberuflich Referent der THERMOVOLT-Fachpartner-Akademie und Mitentwickler der Projektmethode **ProStart** – deshalb nutzt das Team dessen Leitfaden und Steckbrief-Vorlage.
 
@@ -12,10 +12,10 @@ Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und g
 |---|---|---|---|
 | `index.html` | Home / Start | Claim, Produktlinien COMPACT · STORE · FLOW, Referenzen | Orientierung |
 | `about.html` | Company / Firma | Geschichte, Fertigung, Ausbildung | Authentizität |
-| `products.html` | Products / Produkte | 5 Geräte mit Kenndaten und Netto-Listenpreisen, Vergleichstabelle | Geräteauswahl, Kosten |
-| `technology.html` | Technology / Technik | Speicher vs. Durchlauf, offen vs. druckfest, 230 V vs. 400 V, hydraulisch vs. elektronisch | Rollen Küche & Bad, Reflexionskarte A |
+| `products.html` | Products / Produkte | 6 Geräte mit Kenndaten und Netto-Listenpreisen (TV-S80 und Verbrühschutz DE21 ab Woche 2), Vergleichstabelle | Geräteauswahl, Kosten |
+| `technology.html` | Technology / Technik | Speicher vs. Durchlauf, offen vs. druckfest, 230 V vs. 400 V, hydraulisch vs. elektronisch, Formelkarte „Wasser erwärmen“ mit Rechenbeispiel (Woche 2) | Rollen Küche & Bad, Reflexionskarte A |
 | `configurator.html` | Planning Tool / Planungshilfe | Anschluss-Check, Betriebskosten-Vergleich | Prüfen der Auswahl, Reflexionskarte B |
-| `project-guide.html` | Partner Academy / Fachpartner-Akademie | ProStart: Kundendienst oder Projekt, 4 Phasen, Magisches Dreieck, SMART, Steckbrief-Download, Chef als Referent | Rolle Projektleitung, Reflexionskarte C |
+| `project-guide.html` | Partner Academy / Fachpartner-Akademie | ProStart: Kundendienst oder Projekt, 4 Phasen, Magisches Dreieck, SMART, Steckbrief-Download, Chef als Referent; Lastenheft/Pflichtenheft mit Übung und Vorlage (Woche 2) | Rolle Projektleitung, Reflexionskarte C |
 | `support.html` | Service & FAQ | Montagefehler, Netzbetreiber, Inbetriebnahme „erst Wasser, dann Strom“ | Informationsauswahl, Sprinter |
 | `expert.html` | Expert Know-how / Expertenwissen | Regelungstechnik, Netzrückwirkungen, Opferanode, Hygiene | Differenzierung nach oben |
 | `request.html` | (Footer) Contact / Kontakt | Kontaktformular – **sendet keine Daten** | Authentizität |
@@ -31,6 +31,7 @@ Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und g
 | `data-sim="projectcheck"` | `sim-projectcheck.js` | project-guide | 3 Übungsaufträge + Schnell-Check der 5 Merkmale nach DIN 69901-5 |
 | `data-sim="triangle"` | `sim-triangle.js` | project-guide | Magisches Dreieck mit Fixieren/Freigeben und „Was passiert, wenn …?“ |
 | `data-sim="smart"` | `sim-smart.js` | project-guide | SMART-Baukasten am Beispiel Vereinsheim |
+| `data-sim="spec"` | `sim-spec.js` | project-guide | Übung „Lastenheft, Pflichtenheft oder Lösungswunsch?“ am Beispiel Vereinsheim (Woche 2) |
 
 `physics.js` enthält die gemeinsamen Rechenmodelle (c = 4,19 kJ/(kg·K), I = P/U, I = P/(√3·U)).
 
@@ -47,7 +48,7 @@ Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und g
 - Für Tablets/iPads geprüft (hoch und quer): Produktkarten unter 1200 px einspaltig, Kostenvergleich unter 1100 px untereinander, größere Bedienflächen bei Touch-Bedienung, Eingabefelder mit 16 px (kein automatisches Zoomen).
 - Sprache EN Standard, Umschalter EN | DE (`?lang=de`), keine Cookies, kein Storage.
 - Schrift Inter lokal als woff2 (`assets/fonts/`, SIL Open Font License 1.1).
-- Downloads: `docs/ProStart_Projektsteckbrief.pdf` (= leeres Arbeitsblatt der Stunde).
+- Downloads: `docs/ProStart_Projektsteckbrief.pdf` (Woche 1) und `docs/ProStart_Pflichtenheft.pdf` (Woche 2) – leere Vorlagen ohne Kundenfall.
 
 ## Beim Hochladen auf herrniebel.de
 

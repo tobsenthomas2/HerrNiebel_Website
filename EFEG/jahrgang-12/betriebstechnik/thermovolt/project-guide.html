@@ -12,6 +12,7 @@
   <script defer src="assets/js/sim-projectcheck.js"></script>
   <script defer src="assets/js/sim-triangle.js"></script>
   <script defer src="assets/js/sim-smart.js"></script>
+  <script defer src="assets/js/sim-spec.js"></script>
 </head>
 <body>
   <div id="site-nav"></div>
@@ -69,7 +70,7 @@
         </div>
         <div class="phases">
           <div class="phase"><h3><span data-lang="en">Definition</span><span data-lang="de">Projektdefinition</span></h3><p class="muted small" data-lang="en">Analyse the situation, check feasibility, choose the system, define the goal.</p><p class="muted small" data-lang="de">Ist-Situation aufnehmen, Machbarkeit prüfen, System auswählen, Ziel festlegen.</p><span class="gate">M1 · <span data-lang="en">project charter approved</span><span data-lang="de">Projektsteckbrief freigegeben</span></span></div>
-          <div class="phase"><h3><span data-lang="en">Planning</span><span data-lang="de">Projektplanung</span></h3><p class="muted small" data-lang="en">Work breakdown structure, schedule, costs, circuit diagram, ordering, grid registration.</p><p class="muted small" data-lang="de">Projektstrukturplan, Terminplan, Kosten, Schaltplan, Bestellung, Anmeldung beim Netzbetreiber.</p><span class="gate">M2 · <span data-lang="en">planning approved</span><span data-lang="de">Planung freigegeben</span></span></div>
+          <div class="phase"><h3><span data-lang="en">Planning</span><span data-lang="de">Projektplanung</span></h3><p class="muted small" data-lang="en">Specification sheet, work breakdown structure, schedule, costs, circuit diagram, ordering, grid registration.</p><p class="muted small" data-lang="de">Pflichtenheft, Projektstrukturplan, Terminplan, Kosten, Schaltplan, Bestellung, Anmeldung beim Netzbetreiber.</p><span class="gate">M2 · <span data-lang="en">planning approved</span><span data-lang="de">Planung freigegeben</span></span></div>
           <div class="phase"><h3><span data-lang="en">Execution</span><span data-lang="de">Projektdurchführung</span></h3><p class="muted small" data-lang="en">Installation, filling and venting, electrical connection, testing to VDE 0100-600.</p><p class="muted small" data-lang="de">Montage, Befüllen und Entlüften, Elektroanschluss, Prüfung nach VDE 0100-600.</p><span class="gate">M3 · <span data-lang="en">commissioning</span><span data-lang="de">Inbetriebnahme</span></span></div>
           <div class="phase"><h3><span data-lang="en">Closure</span><span data-lang="de">Projektabschluss</span></h3><p class="muted small" data-lang="en">Handover and instruction, documentation, final costing, lessons learned.</p><p class="muted small" data-lang="de">Übergabe und Einweisung, Dokumentation, Nachkalkulation, Erfahrungen sichern.</p><span class="gate">M4 · <span data-lang="en">acceptance signed</span><span data-lang="de">Abnahme unterschrieben</span></span></div>
         </div>
@@ -123,7 +124,56 @@
       </div>
     </section>
 
-    <section class="section section--white">
+    <section class="section section--white" id="specification">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">6 · <span data-lang="en">Planning phase</span><span data-lang="de">Planungsphase</span></span>
+          <h2><span data-lang="en">Requirements sheet and specification sheet</span><span data-lang="de">Lastenheft und Pflichtenheft</span></h2>
+          <p data-lang="en">After milestone M1 the customer usually describes in more detail what the system has to achieve. ProStart separates two documents clearly – following DIN 69901-5.</p>
+          <p data-lang="de">Nach Meilenstein M1 beschreibt der Kunde meist genauer, was die Anlage leisten soll. ProStart trennt dabei zwei Dokumente sauber – angelehnt an DIN 69901-5.</p>
+        </div>
+        <div class="grid-2" style="margin-bottom:1.4rem">
+          <div class="card card--cold">
+            <span class="tag tag--cold"><span data-lang="en">Customer · WHAT and WHAT FOR</span><span data-lang="de">Auftraggeber · WAS und WOFÜR</span></span>
+            <h3><span data-lang="en">Requirements sheet (Lastenheft)</span><span data-lang="de">Lastenheft</span></h3>
+            <p data-lang="en">Everything the <strong>customer</strong> requires of the result: uses, quantities, comfort, budget, dates – in the customer's own words. It says <em>what</em> is needed and <em>what for</em>, not how.</p>
+            <p data-lang="de">Alle Forderungen des <strong>Auftraggebers</strong> an das Ergebnis: Nutzung, Mengen, Komfort, Budget, Termine – in der Sprache des Kunden. Es sagt, <em>was</em> gebraucht wird und <em>wofür</em>, nicht wie.</p>
+            <p class="small muted" data-lang="en">Tip: if a customer already names a device („like the big boiler at …“), note it as a <strong>solution wish</strong> and check it in the specification sheet.</p>
+            <p class="small muted" data-lang="de">Tipp: Nennt der Kunde schon ein Gerät („so einen großen Boiler wie bei …“), notieren Sie das als <strong>Lösungswunsch</strong> und prüfen ihn im Pflichtenheft.</p>
+          </div>
+          <div class="card card--hot">
+            <span class="tag tag--hot"><span data-lang="en">Contractor · HOW and WITH WHAT</span><span data-lang="de">Auftragnehmer · WIE und WOMIT</span></span>
+            <h3><span data-lang="en">Specification sheet (Pflichtenheft)</span><span data-lang="de">Pflichtenheft</span></h3>
+            <p data-lang="en">The <strong>contractor's</strong> answer to every requirement: which device, which connection, which settings – each with a <strong>proof</strong> (calculation, data sheet) and an <strong>acceptance criterion</strong>. Signed by both sides, it becomes the binding basis of the contract.</p>
+            <p data-lang="de">Die Antwort des <strong>Auftragnehmers</strong> auf jede Forderung: welches Gerät, welcher Anschluss, welche Einstellung – jeweils mit <strong>Nachweis</strong> (Rechnung, Datenblatt) und <strong>Abnahmekriterium</strong>. Von beiden unterschrieben, wird es zur verbindlichen Vertragsgrundlage.</p>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-bottom:1.4rem">
+          <div class="card">
+            <h3><span data-lang="en">The ProStart thread: one line per requirement</span><span data-lang="de">Der ProStart-Faden: eine Zeile je Forderung</span></h3>
+            <ol>
+              <li data-lang="en"><strong>Requirement</strong> with number (R1, R2 …) – from the requirements sheet</li><li data-lang="de"><strong>Forderung</strong> mit Nummer (L1, L2 …) – aus dem Lastenheft</li>
+              <li data-lang="en"><strong>Implementation</strong> – device, data, setting</li><li data-lang="de"><strong>Umsetzung</strong> – Gerät, Daten, Einstellung</li>
+              <li data-lang="en"><strong>Proof</strong> – calculation or data sheet</li><li data-lang="de"><strong>Nachweis</strong> – Rechnung oder Datenblatt</li>
+              <li data-lang="en"><strong>Acceptance criterion</strong> – how we check it at handover</li><li data-lang="de"><strong>Abnahmekriterium</strong> – wie wir es bei der Übergabe prüfen</li>
+            </ol>
+            <a class="btn btn--hot" href="docs/ProStart_Pflichtenheft.pdf" download><i data-icon="file"></i><span data-lang="en">Download template (PDF, German)</span><span data-lang="de">Vorlage herunterladen (PDF)</span></a>
+          </div>
+          <div class="card">
+            <h3><span data-lang="en">Acceptance criteria that can be checked</span><span data-lang="de">Abnahmekriterien, die man prüfen kann</span></h3>
+            <p data-lang="en">A good criterion names a <strong>quantity</strong>, a <strong>target value</strong> and the <strong>test method</strong>.</p>
+            <p data-lang="de">Ein gutes Kriterium nennt <strong>Messgröße</strong>, <strong>Sollwert</strong> und <strong>Prüfmethode</strong>.</p>
+            <ul class="checks">
+              <li><i data-icon="close" style="color:var(--err)"></i><span data-lang="en">„The showers are warm enough.“</span><span data-lang="de">„Die Duschen sind warm genug.“</span></li>
+              <li><i data-icon="check"></i><span data-lang="en">„Each shower in the club house delivers 8 L/min at ≥ 40 °C for 10 minutes – measured with thermometer and measuring jug.“</span><span data-lang="de">„Jede Dusche im Vereinsheim liefert 8 L/min mit ≥ 40 °C über 10 Minuten – gemessen mit Thermometer und Messbecher.“</span></li>
+            </ul>
+          </div>
+        </div>
+        <div data-sim="spec"></div>
+      </div>
+    </section>
+
+    <section class="section">
       <div class="container">
         <div class="section-head"><h2><span data-lang="en">Academy dates</span><span data-lang="de">Akademie-Termine</span></h2></div>
         <div class="table-wrap">
