@@ -271,6 +271,17 @@ details.more[open] summary { margin-bottom: .6rem; }
 .footer__legal { border-top: 1px solid #333c46; margin-top: 1.8rem; padding-top: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .6rem; font-size: .8rem; color: #8e98a3; }
 @media (max-width: 760px) { .footer__grid { grid-template-columns: 1fr; gap: 1.2rem; } }
 
+/* ---------- Armatur-Grafiken (Technik › 2) ---------- */
+.tap-def { margin-bottom: 1.4rem; border-left: 4px solid var(--cold); }
+.tap-def p { margin: 0; }
+.tap-fig { margin: .2rem 0 1rem; padding: .7rem .7rem .3rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); }
+.tap-svg { display: block; width: 100%; height: auto; max-width: 460px; margin: 0 auto; }
+.tap-fig figcaption { font-weight: 700; font-size: .95rem; margin: .5rem 0 .2rem; }
+.tap-legend { margin: 0 0 .4rem; padding-left: 1.5rem; font-size: .88rem; line-height: 1.45; color: var(--ink-2); }
+.tap-legend li { margin: .15rem 0; }
+.tap-legend li::marker { font-weight: 700; color: var(--ink); }
+@media (max-width: 900px) { .tap-grid { grid-template-columns: minmax(0, 1fr); } }
+
 @media print {
   .nav, .topbar, .lang-switch, .hint-btn, .menu-btn, .footer__legal { display: none !important; }
   body { background: #fff; }
