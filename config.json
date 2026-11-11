@@ -351,6 +351,17 @@
                     "Theorie",
                     "Übung"
                   ]
+                },
+                {
+                  "id": "stallwatt",
+                  "title": "STALLWATT Agrartechnik",
+                  "description": "Herstellerwebsite Elektrowärme für Stall und Hof: Wärmequellen, Prüfstände, Planungshilfe und Projektstart.",
+                  "icon": "🐥",
+                  "tags": [
+                    "Simulation",
+                    "Projekt"
+                  ],
+                  "badge": "Neu"
                 }
               ]
             }
