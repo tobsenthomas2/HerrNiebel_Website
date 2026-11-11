@@ -43,6 +43,11 @@
 
 /* Sprache: nur die gewählte Fassung zeigen */
 html[lang="en"] [data-lang="de"], html[lang="de"] [data-lang="en"] { display: none !important; }
+/* Unterrichtswoche (config.js -> week): data-week="N" erst ab Woche N sichtbar, data-week-max="N" nur bis Woche N.
+   site.js setzt die Klassen wk2 … wkN am <html>. Ohne JavaScript bleibt der Stand von Woche 1. */
+html:not(.wk2) [data-week="2"], html:not(.wk3) [data-week="3"], html:not(.wk4) [data-week="4"], html:not(.wk5) [data-week="5"], html:not(.wk6) [data-week="6"], html:not(.wk7) [data-week="7"], html:not(.wk8) [data-week="8"], html:not(.wk9) [data-week="9"], html:not(.wk10) [data-week="10"], html:not(.wk11) [data-week="11"], html:not(.wk12) [data-week="12"] { display: none !important; }
+html.wk2 [data-week-max="1"], html.wk3 [data-week-max="2"], html.wk4 [data-week-max="3"], html.wk5 [data-week-max="4"], html.wk6 [data-week-max="5"], html.wk7 [data-week-max="6"], html.wk8 [data-week-max="7"], html.wk9 [data-week-max="8"], html.wk10 [data-week-max="9"], html.wk11 [data-week-max="10"], html.wk12 [data-week-max="11"] { display: none !important; }
+html:not(.wk2) #specification + .section { background: var(--surface); border-block: 1px solid var(--line); }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); -webkit-text-size-adjust: 100%; }

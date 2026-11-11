@@ -12,7 +12,7 @@ Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und g
 |---|---|---|---|
 | `index.html` | Home / Start | Claim, Produktlinien COMPACT · STORE · FLOW, Referenzen | Orientierung |
 | `about.html` | Company / Firma | Geschichte, Fertigung, Ausbildung | Authentizität |
-| `products.html` | Products / Produkte | 6 Geräte mit Kenndaten und Netto-Listenpreisen (TV-S80 und Verbrühschutz DE21 ab Woche 2), Vergleichstabelle | Geräteauswahl, Kosten |
+| `products.html` | Products / Produkte | 5 Geräte (ab Woche 2: 6) mit Kenndaten und Netto-Listenpreisen (TV-S80 und Verbrühschutz DE21 ab Woche 2), Vergleichstabelle | Geräteauswahl, Kosten |
 | `technology.html` | Technology / Technik | Speicher vs. Durchlauf, offen vs. druckfest, 230 V vs. 400 V, hydraulisch vs. elektronisch, Formelkarte „Wasser erwärmen“ mit Rechenbeispiel (Woche 2) | Rollen Küche & Bad, Reflexionskarte A |
 | `configurator.html` | Planning Tool / Planungshilfe | Anschluss-Check, Betriebskosten-Vergleich | Prüfen der Auswahl, Reflexionskarte B |
 | `project-guide.html` | Partner Academy / Fachpartner-Akademie | ProStart: Kundendienst oder Projekt, 4 Phasen, Magisches Dreieck, SMART, Steckbrief-Download, Chef als Referent; Lastenheft/Pflichtenheft mit Übung und Vorlage (Woche 2) | Rolle Projektleitung, Reflexionskarte C |
@@ -36,6 +36,16 @@ Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und g
 `physics.js` enthält die gemeinsamen Rechenmodelle (c = 4,19 kJ/(kg·K), I = P/U, I = P/(√3·U)).
 
 ## Lehrer-Einstellungen (`assets/js/config.js`)
+
+- `week: 2` – **Unterrichtswoche.** Die Website wächst mit der Reihe: Angezeigt wird nur, was bis zu dieser Woche freigegeben ist. **Vor jeder Einheit anpassen** (steht im UVP unter „Vorbereitung“). Ändern direkt auf GitHub: Datei öffnen → Stift → Zahl ändern → „Commit changes“; nach 1–2 Minuten live.
+  - Früheren Stand zeigen (zweite Klasse, Wiederholung, nächstes Schuljahr): Link mit `?w=1` weitergeben, z. B. `…/thermovolt/?w=1`. Der Zusatz wandert beim Klicken über alle Seiten mit. Mehr als in `week` freigegeben ist, lässt sich über den Link nicht anzeigen.
+  - Im HTML: `data-week="N"` = erst ab Woche N sichtbar, `data-week-max="N"` = nur bis Woche N. Geht bei Abschnitten, Karten, Tabellenzellen und einzelnen Sätzen.
+  - Die Inhalte sind nur ausgeblendet, nicht geschützt (im Quelltext lesbar). Da die Website keine Lösungen enthält, ist das unkritisch.
+
+| Woche | kommt dazu |
+|---|---|
+| 1 | Grundstand: 5 Geräte, Technik 1–4, Planungshilfe, Akademie (Projekt-Check, Phasen, Dreieck, SMART, Steckbrief) |
+| 2 | Produkte: TV-S80, Verbrühschutz TV-DE21 · Technik: Formelkarte „Wasser erwärmen“ · Akademie: Lastenheft/Pflichtenheft mit Übung und Vorlage |
 
 - `showValues: false` – Anschluss-Check zeigt den Strom nicht als Zahl, sondern nur die Formel (Schüler rechnen selbst). `true` für Kontrolle/Besprechung.
 - `hints: true` – Wo es einen Tipp gibt, sitzt unten rechts am Kasten bzw. an der Simulation ein kleines „!“. Ein Klick öffnet den gelben Hinweis, ein zweiter schließt ihn. `false` blendet alle Tipps aus.

@@ -1,13 +1,22 @@
 /* =========================================================================
    THERMOVOLT Systems GmbH – gemeinsame Bausteine
    Kopf (NAV-Array), Fußzeile, Symbole, Sprache EN/DE ohne Cookies/Storage,
-   Tipps per „!“-Symbol, optionaler KI-Chat-Reiter
+   Tipps per „!“-Symbol, Unterrichtswoche (config.js week / ?w=), optionaler KI-Chat-Reiter
    ========================================================================= */
 (function () {
   "use strict";
   var SITE = (window.SITE = window.SITE || {});
   var CFG = window.SITE_CONFIG || {};
   var ROOT = CFG.legalRoot || "../../../../";
+
+  /* ---------- Unterrichtswoche: Inhalte mit data-week="N" erst ab Woche N, data-week-max="N" nur bis Woche N ----------
+     Obergrenze = config.js (week); ?w=1 im Link zeigt einen früheren Stand, nie einen späteren. */
+  var MAXW = 12;
+  var cfgWeek = Math.min(MAXW, Math.max(1, parseInt(CFG.week, 10) || 1));
+  var urlWeek = parseInt(new URLSearchParams(location.search).get("w"), 10);
+  var WEEK = urlWeek >= 1 && urlWeek < cfgWeek ? urlWeek : cfgWeek;
+  SITE.week = WEEK;
+  for (var wk = 2; wk <= WEEK; wk++) document.documentElement.classList.add("wk" + wk);
 
   var NAV = [
     { href: "index.html", en: "Home", de: "Start" },
@@ -197,10 +206,14 @@
     var b = e.target.closest("[data-set-lang]");
     if (b) { SITE.setLang(b.getAttribute("data-set-lang"), true); return; }
     var a = e.target.closest("a[href]");
-    if (!a || SITE.lang() === "en" || a.target === "_blank") return;
+    if (!a || a.target === "_blank" || (SITE.lang() === "en" && WEEK === cfgWeek)) return;
     var href = a.getAttribute("href"); if (/^(#|mailto:|tel:|https?:)/i.test(href)) return;
     var u = new URL(href, location.href);
-    if (/\.html$/i.test(u.pathname) && !/(impressum|datenschutz)\.html$/i.test(u.pathname)) { u.searchParams.set("lang", "de"); a.href = u.href; }
+    if (/\.html$/i.test(u.pathname) && !/(impressum|datenschutz)\.html$/i.test(u.pathname)) {
+      if (SITE.lang() === "de") u.searchParams.set("lang", "de");
+      if (WEEK < cfgWeek) u.searchParams.set("w", WEEK);      /* früheren Stand über alle Seiten mitnehmen */
+      a.href = u.href;
+    }
   });
 
   buildNav();
