@@ -19,8 +19,23 @@
  *                             „Fragen? …“ neben dem Reiter auf.
  *                     false = nur der Reiter ist sichtbar.
  *   hinweisSekunden:  wie lange der Hinweis stehen bleibt (0 = bis er geschlossen wird).
+ *
+ * woche  (UNTERRICHTSWOCHE – die Website wächst mit dem Unterricht)
+ *   Vor jeder Stunde die aktuelle Woche eintragen. Angezeigt wird nur, was bis
+ *   zu dieser Woche freigeschaltet ist. Dioden und Halbleiter-Grundlagen sind
+ *   immer sichtbar.
+ *   Einen früheren Stand zeigt der Link-Zusatz ?w=1, z. B. für eine Parallelklasse:
+ *   …/halbleiter/index.html?w=1 – nie mehr, als hier eingestellt ist.
+ *
+ * themen  (ab welcher Woche erscheint welches Thema?)
+ *   leds:         LED-Produktseite, LED-Applikation, Signalsäule, LED-Datenblätter
+ *   transistoren: vorbereitet – die Transistor-Seiten folgen noch
+ *   Braucht ein Thema länger, einfach die Zahl erhöhen.
  */
 window.LT_CONFIG = {
+  woche: 1,
+  themen: { leds: 2, transistoren: 3 },
+
   messwerteAnzeigen: false,
   kiChat: {
     url: "https://app.ais-chat.schule/ua/learning-scenarios/554d2d0d-b615-486d-802b-0a0486584b10/dialog?inviteCode=3BHIYHY9",

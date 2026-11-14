@@ -1,7 +1,23 @@
-/* Startseite: LED im Hero umschalten */
+/* Startseite: Bauteil im Hero umschalten – Diode (Woche 1) bzw. LED (ab LED-Woche) */
 (function () {
   "use strict";
   var LT = window.LT;
+
+  /* Diode BAY 44/45/46: Typen unterscheiden sich nur in der Sperrspannung */
+  var dhost = document.getElementById("hero-diode");
+  if (dhost) {
+    var UR = { "BAY 44": "50 V", "BAY 45": "150 V", "BAY 46": "300 V" };
+    dhost.innerHTML = LT.artDiode({ dims: true });
+    LT.$$("[data-diode]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var t = b.getAttribute("data-diode");
+        LT.$("#hero-dtype").textContent = t;
+        LT.$("#hero-dur").textContent = UR[t];
+        LT.$$("[data-diode]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      });
+    });
+  }
+
   var host = document.getElementById("hero-led");
   if (!host) return;
   var D = LT.phys.devices;

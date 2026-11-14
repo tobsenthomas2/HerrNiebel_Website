@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-titel-ohne-leds="LUMIATECH Semiconductor | Silizium-Dioden für die Industrie">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,8 @@
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/home.css">
-  <script defer src="assets/js/config.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/woche.js"></script>
   <script defer src="assets/js/site.js"></script>
   <script defer src="assets/js/symbols.js"></script>
   <script defer src="assets/js/physics.js"></script>
@@ -19,20 +20,42 @@
   <header id="site-header"></header>
 
   <main id="main">
-    <!-- Hero: die LED aus dem Datenblatt, umschaltbar -->
+    <!-- Hero: Bauteil aus dem Datenblatt, umschaltbar (Woche 1: Diode, ab LED-Woche: LED) -->
     <section class="hero">
       <div class="container hero__grid">
         <div class="hero__text">
           <p class="kicker">Halbleiter-Distribution und Applikationslabor seit 1994</p>
-          <h1>Dioden und LEDs für Anlagen, die nicht stehen dürfen.</h1>
-          <p class="hero__lead">Wir liefern Silizium-Dioden und <span class="nowrap">5-mm-LEDs</span> ab Lager in Pfaffenhofen – und erklären Ihnen, wie Sie die Bauteile sicher auslegen. Zu jedem Produkt gibt es Datenblatt, Kennlinie und eine Applikationsschrift aus unserem Labor.</p>
+          <h1>Dioden<span data-thema="leds"> und LEDs</span> für Anlagen, die nicht stehen dürfen.</h1>
+          <p class="hero__lead">Wir liefern Silizium-Dioden<span data-thema="leds"> und <span class="nowrap">5-mm-LEDs</span></span> ab Lager in Pfaffenhofen – und erklären Ihnen, wie Sie die Bauteile sicher auslegen. Zu jedem Produkt gibt es Datenblatt, Kennlinie und eine Applikationsschrift aus unserem Labor.</p>
           <div class="btn-row">
-            <a class="btn" href="leds.html">LEDs ansehen</a>
-            <a class="btn btn--ghost" href="dioden.html">Dioden ansehen</a>
+            <a class="btn" href="leds.html" data-thema="leds">LEDs ansehen</a>
+            <a class="btn btn--ghost" href="dioden.html" data-thema="leds">Dioden ansehen</a>
+            <a class="btn" href="dioden.html" data-ohne="leds">Dioden ansehen</a>
+            <a class="btn btn--ghost" href="dioden-applikation.html" data-ohne="leds">Zur Applikation</a>
           </div>
         </div>
 
-        <figure class="hero__product" aria-labelledby="hero-cap">
+        <figure class="hero__product" aria-labelledby="hero-dcap" data-ohne="leds">
+          <div class="hero__sheet hero__sheet--diode">
+            <div class="hero__diode" id="hero-diode"></div>
+            <div class="hero__specs" aria-live="polite">
+              <div><span>Typ</span><strong id="hero-dtype">BAY 44</strong></div>
+              <div><span>Sperrspannung U<sub>R</sub></span><strong id="hero-dur">50 V</strong></div>
+              <div><span>Durchlassstrom I<sub>F</sub></span><strong>250 mA</strong></div>
+              <div><span>U<sub>F</sub> bei 100 mA</span><strong>typ. 0,97 V</strong></div>
+            </div>
+          </div>
+          <div class="hero__switch">
+            <figcaption id="hero-dcap">Silizium-Diode im Glasgehäuse DO-7 – Typ wählen:</figcaption>
+            <div class="seg" role="group" aria-label="Diodentyp">
+              <button type="button" data-diode="BAY 44" aria-pressed="true">BAY 44</button>
+              <button type="button" data-diode="BAY 45" aria-pressed="false">BAY 45</button>
+              <button type="button" data-diode="BAY 46" aria-pressed="false">BAY 46</button>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="hero__product" aria-labelledby="hero-cap" data-thema="leds">
           <div class="hero__sheet">
             <div class="hero__led" id="hero-led"></div>
             <div class="hero__specs" aria-live="polite">
@@ -58,7 +81,8 @@
           <div><dd>1994</dd><dt>gegründet in Pfaffenhofen a. d. Ilm</dt></div>
           <div><dd>24 h</dd><dt>Versand für Lagerware</dt></div>
           <div><dd>100 %</dd><dt>elektrische Endprüfung jeder Charge</dt></div>
-          <div><dd>&gt; 50.000 h</dd><dt>Lebensdauer unserer LEDs im Dauerbetrieb</dt></div>
+          <div data-thema="leds"><dd>&gt; 50.000 h</dd><dt>Lebensdauer unserer LEDs im Dauerbetrieb</dt></div>
+          <div data-ohne="leds"><dd>150 °C</dd><dt>Sperrschichttemperatur unserer Glasdioden</dt></div>
         </dl>
       </div>
     </section>
@@ -67,10 +91,11 @@
     <section class="section section--alt" aria-labelledby="produkte-h">
       <div class="container">
         <div class="section-head">
-          <h2 id="produkte-h">Zwei Produktlinien, ein Ansprechpartner</h2>
-          <p>Von der Schaltdiode für den Verpolschutz bis zur Signal-LED: Sie bekommen Bauteile, Datenblätter und Auslegungshilfe aus einer Hand.</p>
+          <h2 id="produkte-h"><span data-thema="leds">Zwei Produktlinien, ein Ansprechpartner</span><span data-ohne="leds">Silizium-Dioden ab Lager</span></h2>
+          <p data-thema="leds">Von der Schaltdiode für den Verpolschutz bis zur Signal-LED: Sie bekommen Bauteile, Datenblätter und Auslegungshilfe aus einer Hand.</p>
+          <p data-ohne="leds">Vom Gleichrichter bis zum Verpolschutz: Sie bekommen Bauteile, Datenblätter und Auslegungshilfe aus einer Hand.</p>
         </div>
-        <div class="grid grid-2">
+        <div class="grid grid-2 grid--lines">
           <article class="product">
             <div class="product__visual"><div data-art="diode" class="product-art product-art--diode"></div></div>
             <div class="product__body">
@@ -87,7 +112,7 @@
               </div>
             </div>
           </article>
-          <article class="product">
+          <article class="product" data-thema="leds">
             <div class="product__visual product__visual--leds">
               <div data-art="led" data-color="red" class="product-art"></div>
               <div data-art="led" data-color="green" class="product-art"></div>
@@ -112,7 +137,7 @@
     </section>
 
     <!-- Praxisfall Signalsäule -->
-    <section class="section section--dark" aria-labelledby="retrofit-h">
+    <section class="section section--dark" aria-labelledby="retrofit-h" data-thema="leds">
       <div class="container split">
         <div>
           <p class="kicker">Aus der Praxis</p>
@@ -173,7 +198,7 @@
             <span class="ico" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M3 17h14M3 17V3" stroke="#17202b" stroke-width="1.6" fill="none"/><path d="M4 16c6 0 7-1 9-12" stroke="#17202b" stroke-width="1.8" fill="none"/></svg></span>
             <div><h3><a href="dioden.html#kennlinie">Die Kennlinie lesen</a></h3><p>Schleusen- und Durchlassspannung, Sperrbereich und Durchbruch auf einen Blick.</p></div>
           </li>
-          <li>
+          <li data-thema="leds">
             <span class="ico" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 2.5a5.2 5.2 0 0 0-3.2 9.3c.5.4.7 1 .7 1.6V14h5v-.6c0-.6.3-1.2.7-1.6A5.2 5.2 0 0 0 10 2.5z" fill="none" stroke="#17202b" stroke-width="1.6"/><path d="M7.5 17h5" stroke="#17202b" stroke-width="1.6"/></svg></span>
             <div><h3><a href="leds.html#funktion">Wie eine LED Licht erzeugt</a></h3><p>Rekombination, Photonen und warum Blau mehr Spannung braucht als Rot.</p></div>
           </li>
@@ -194,7 +219,8 @@
         </div>
         <ol class="timeline timeline--short">
           <li><time>1994</time><div><h3>Gründung in Pfaffenhofen</h3><p>Prüfung und Vertrieb von Glasdioden für die Industrie.</p></div></li>
-          <li><time>2006</time><div><h3>Einstieg in die Optoelektronik</h3><p>Erste LED-Baureihen für Bedienfelder und Anzeigen.</p></div></li>
+          <li data-thema="leds"><time>2006</time><div><h3>Einstieg in die Optoelektronik</h3><p>Erste LED-Baureihen für Bedienfelder und Anzeigen.</p></div></li>
+          <li data-ohne="leds"><time>2012</time><div><h3>Applikationslabor</h3><p>Kennlinien-Messplatz und Beratung für die Auslegung von Diodenschaltungen.</p></div></li>
           <li class="is-now"><time>2026</time><div><h3>Online-Applikationslabor</h3><p>Kennlinien und Simulationen für alle Produkte – frei zugänglich.</p></div></li>
         </ol>
       </div>

@@ -1,14 +1,15 @@
 # LUMIATECH – Halbleiter-Website
 
 Firmenauftritt der fiktiven LUMIATECH Semiconductor GmbH zu Dioden und LEDs
-(Fach SG, Jahrgang 11, EGS). Reines HTML/CSS/JS, keine externen Abhängigkeiten,
+(Fach SG, Jahrgang 11, EGS). Die Website wächst mit dem Unterricht: Woche 1 nur Dioden,
+dann LEDs, später Transistoren (Einstellung `woche` in `config.js`). Reines HTML/CSS/JS, keine externen Abhängigkeiten,
 funktioniert auch offline und per Doppelklick auf `index.html`.
 
 ## Seiten
 
 | Datei | Inhalt |
 |---|---|
-| `index.html` | Startseite: umschaltbare LED, Produktlinien, Praxisfälle Signalsäule und Verpolschutz |
+| `index.html` | Startseite: umschaltbare Diode (Woche 1) bzw. LED, Produktlinien, Praxisfälle Signalsäule und Verpolschutz |
 | `technologie.html` | Leiter/Halbleiter/Nichtleiter, Dotierung, PN-Übergang |
 | `dioden.html` | BAY 44/45/46: Aufbau, Schaltzeichen, Polung, Kennlinie, Kenndaten, Datenblatt |
 | `dioden-applikation.html` | Verpolschutz, Diode auswählen, Diodenschaltungen berechnen, Diode als Widerstand |
@@ -24,6 +25,7 @@ assets/css/site.css        Design für alle Seiten (Farben, Schrift, Bausteine)
 assets/css/home.css        nur Startseite
 assets/css/products.css    Produkt- und Applikationsseiten
 assets/js/config.js        Einstellungen (siehe unten)
+assets/js/woche.js         Unterrichtswoche: blendet Inhalte je nach Woche ein/aus (ohne defer laden!)
 assets/js/site.js          Kopfzeile, Navigation, Fußzeile, Inhaltsverzeichnis, Helfer
 assets/js/physics.js       Bauteilmodelle (Kennlinien von BAY 44 und den drei LEDs)
 assets/js/plot.js          Diagramm-Baukasten (SVG)
@@ -58,6 +60,41 @@ Eine Simulation wird mit einem Platzhalter eingebunden und das passende Skript i
 | `arbeitspunkt` | `sim-arbeitspunkt.js` | led-applikation |
 | `signalsaeule` | `sim-signalsaeule.js` | led-applikation |
 
+## Einstellung: Unterrichtswoche (die Website wächst mit)
+
+Zuerst gibt es nur Dioden, dann kommen LEDs dazu, später weitere Halbleiter wie Transistoren.
+In `assets/js/config.js`:
+
+```js
+woche: 1,                              // vor jeder Stunde die aktuelle Woche eintragen
+themen: { leds: 2, transistoren: 3 },  // ab welcher Woche erscheint welches Thema?
+```
+
+| Woche (Standard) | sichtbar |
+|---|---|
+| 1 | Technologie, Dioden, Dioden-Applikation, Unternehmen, Downloads (nur Dioden) – Startseite mit Dioden-Hero |
+| 2 | zusätzlich LEDs: Produktseite, LED-Applikation, Signalsäule, LED-Datenblätter, LED-Hero |
+| 3 | vorbereitet für Transistoren (Seiten folgen) |
+
+Braucht ein Thema länger, nur die Zahl unter `themen` erhöhen. Einen früheren Stand zeigt der
+Link-Zusatz `?w=1` (z. B. für eine Parallelklasse); interne Links nehmen ihn mit. Mehr als in
+`config.js` eingestellt lässt sich per Link nicht freischalten.
+
+**Auszeichnung in den Seiten** (Logik in `woche.js`, ohne `defer` direkt nach `config.js` laden):
+
+| Markierung | Wirkung |
+|---|---|
+| `data-thema="leds"` | erst sichtbar, wenn das Thema freigeschaltet ist |
+| `data-ohne="leds"` | nur sichtbar, solange das Thema noch gesperrt ist (Ersatztext, z. B. „Dioden“ statt „Dioden und LEDs“) |
+| `<html data-seite="leds">` | ganze Seite gesperrt → Weiterleitung zur Startseite |
+| `<html data-titel-ohne-leds="…">` | Seitentitel, solange das Thema gesperrt ist |
+| `thema: "leds"` im `NAV`-Array (`site.js`) | Menüeintrag erst ab der Freischaltung |
+| `LT.frei("leds")` in JavaScript | Abfrage, z. B. für Texte im Support-Fenster und in der Fußzeile |
+
+**Neues Thema (z. B. Transistoren):** Seiten mit `<html data-seite="transistoren">` anlegen, im `NAV`
+mit `thema: "transistoren"` eintragen, Hinweise auf anderen Seiten mit `data-thema="transistoren"`
+markieren. Ein neuer Schlüssel unter `themen` funktioniert ohne weitere Programmierung.
+
 ## Einstellung: Messwerte anzeigen
 
 In `assets/js/config.js`:
@@ -91,6 +128,7 @@ Der QR-Code wird im Browser aus dem Link erzeugt, es muss keine Bilddatei ausget
 
 1. Vorhandene Seite kopieren (z. B. `leds.html`) und Inhalt ersetzen.
 2. In `assets/js/site.js` im Array `NAV` eintragen – Kopf- und Fußzeile passen sich überall an.
+   Gehört die Seite zu einem späteren Thema: `thema: "…"` dazuschreiben (siehe Unterrichtswoche).
 3. Abschnitte als `<section id="…">` mit `<h2>` anlegen; das Inhaltsverzeichnis entsteht automatisch.
 
 ## Schaltpläne und Kennzeichnung

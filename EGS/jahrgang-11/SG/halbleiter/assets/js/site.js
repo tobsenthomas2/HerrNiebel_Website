@@ -4,6 +4,8 @@
      jeder Seite eingesetzt (<header id="site-header">, <footer id="site-footer">).
    - Neue Seite? Nur das NAV-Array unten ergänzen.
    - Inhaltsverzeichnis (.toc) wird automatisch aus den <section id> mit <h2> erzeugt.
+   - Unterrichtswoche: Einträge mit thema: "leds" erscheinen erst, wenn das Thema
+     in config.js freigeschaltet ist (Logik in woche.js).
    ========================================================================= */
 (function () {
   "use strict";
@@ -14,14 +16,14 @@
       label: "Produkte",
       children: [
         { href: "dioden.html", label: "Silizium-Dioden", sub: "Serie BAY 44, BAY 45, BAY 46" },
-        { href: "leds.html", label: "5-mm-LEDs", sub: "Serie L-7113 in Rot, Grün und Blau" }
+        { href: "leds.html", label: "5-mm-LEDs", sub: "Serie L-7113 in Rot, Grün und Blau", thema: "leds" }
       ]
     },
     {
       label: "Applikationen",
       children: [
         { href: "dioden-applikation.html", label: "Verpolschutz & Diodenschaltungen", sub: "Dioden richtig einsetzen und berechnen" },
-        { href: "led-applikation.html", label: "LEDs richtig betreiben", sub: "Vorwiderstand, Arbeitspunkt, Signalsäulen-Retrofit" }
+        { href: "led-applikation.html", label: "LEDs richtig betreiben", sub: "Vorwiderstand, Arbeitspunkt, Signalsäulen-Retrofit", thema: "leds" }
       ]
     },
     { href: "technologie.html", label: "Technologie" },
@@ -38,6 +40,16 @@
   /* ---------- kleine Helfer, auch für die Simulationen ---------- */
   var LT = (window.LT = window.LT || {});
   LT.config = window.LT_CONFIG || { messwerteAnzeigen: false };
+  /* Unterrichtswoche (woche.js): LT.frei("leds") → ist das Thema schon freigeschaltet? */
+  var WOCHE = window.LT_WOCHE || { woche: 1, eingestellt: 1, frei: function () { return true; } };
+  LT.woche = WOCHE.woche;
+  LT.frei = WOCHE.frei;
+  function sichtbar(item) { return !item.thema || LT.frei(item.thema); }
+  var NAV_FREI = NAV.map(function (item) {
+    if (!item.children) return item;
+    var c = item.children.filter(sichtbar);
+    return c.length ? { label: item.label, children: c } : null;
+  }).filter(function (item) { return item && sichtbar(item); });
   // Ordner dieses Skripts (…/assets/js/), um weitere Skripte bei Bedarf nachzuladen
   var JS_BASE = (document.currentScript && document.currentScript.src || "assets/js/site.js").replace(/site\.js(\?.*)?$/, "");
 
@@ -195,7 +207,7 @@
     var host = document.getElementById("site-header");
     if (!host) return;
     host.className = "site-header";
-    var items = NAV.map(function (item, i) {
+    var items = NAV_FREI.map(function (item, i) {
       if (item.children) {
         var isCur = item.children.some(function (c) { return c.href === current; });
         var links = item.children
@@ -260,13 +272,17 @@
     if (!host) return;
     host.className = "site-footer";
     var year = new Date().getFullYear();
+    function links(list) {
+      return list.filter(function (l) { return !l[2] || LT.frei(l[2]); })
+        .map(function (l) { return '<li><a href="' + l[0] + '">' + l[1] + "</a></li>"; }).join("");
+    }
     host.innerHTML =
       '<div class="container"><div class="footer-grid">' +
       '<div class="footer-brand"><a class="brand" href="index.html">' + LT.logo() +
       '<span><span class="brand__name">LUMIATECH</span><span class="brand__claim">Semiconductor GmbH</span></span></a>' +
       "<address>" + COMPANY.name + "<br>" + COMPANY.street + "<br>" + COMPANY.city + "</address></div>" +
-      '<div><h4>Produkte</h4><ul><li><a href="dioden.html">Silizium-Dioden BAY 44/45/46</a></li><li><a href="leds.html">5-mm-LEDs L-7113</a></li><li><a href="downloads.html">Datenblätter</a></li></ul></div>' +
-      '<div><h4>Applikationen</h4><ul><li><a href="dioden-applikation.html">Verpolschutz</a></li><li><a href="dioden-applikation.html#schaltungen">Diodenschaltungen</a></li><li><a href="led-applikation.html">LED-Vorwiderstand</a></li><li><a href="led-applikation.html#signalsaeule">Signalsäulen-Retrofit</a></li></ul></div>' +
+      '<div><h4>Produkte</h4><ul>' + links([["dioden.html", "Silizium-Dioden BAY 44/45/46"], ["leds.html", "5-mm-LEDs L-7113", "leds"], ["downloads.html", "Datenblätter"]]) + "</ul></div>" +
+      '<div><h4>Applikationen</h4><ul>' + links([["dioden-applikation.html", "Verpolschutz"], ["dioden-applikation.html#schaltungen", "Diodenschaltungen"], ["led-applikation.html", "LED-Vorwiderstand", "leds"], ["led-applikation.html#signalsaeule", "Signalsäulen-Retrofit", "leds"]]) + "</ul></div>" +
       '<div><h4>Unternehmen</h4><ul><li><a href="unternehmen.html">Über uns</a></li><li><a href="unternehmen.html#fertigung">Fertigung & Prüfung</a></li><li><a href="unternehmen.html#ausbildung">Ausbildung</a></li><li><a href="technologie.html">Halbleitertechnik</a></li></ul></div>' +
       "</div>" +
       '<div class="footer-bottom"><span>© ' + year + " " + COMPANY.name + "</span><span>Zertifiziert nach ISO 9001, alle Produkte RoHS-konform</span></div>" +
@@ -292,7 +308,7 @@
       '<span class="support-tab__long">Fragen? KI-Chat</span><span class="support-tab__short">Fragen?</span></button>' +
       '<div class="support-teaser" aria-live="polite">' +
       '<button class="support-teaser__close" type="button" aria-label="Hinweis schließen">' + LT.icon("close") + "</button>" +
-      "<strong>Fragen zu Dioden oder LEDs?</strong>" +
+      "<strong>Fragen zu Dioden" + (LT.frei("leds") ? " oder LEDs" : "") + "?</strong>" +
       "<p>Unser KI-Support beantwortet sie direkt im Chat.</p>" +
       '<button class="btn btn--litho btn--small support-teaser__open" type="button">' + LT.icon("chat") + "Chat öffnen</button></div>";
     document.body.appendChild(wrap);
@@ -311,7 +327,7 @@
       '<figcaption>Mit der Smartphone-Kamera scannen</figcaption>' +
       '<a class="support-qr__save" href="#" download="KI-Chat_QR-Code.svg" hidden>QR-Code speichern</a></figure>' +
       '<div class="support-dialog__text">' +
-      "<p>Unser KI-Assistent hilft bei Fragen zu Dioden, LEDs, Kennlinien, Vorwiderständen und unseren Applikationen.</p>" +
+      "<p>Unser KI-Assistent hilft bei Fragen zu " + (LT.frei("leds") ? "Dioden, LEDs, Kennlinien, Vorwiderständen" : "Dioden, Kennlinien, Diodenschaltungen") + " und unseren Applikationen.</p>" +
       '<a class="btn btn--litho support-dialog__go" href="' + U + '" target="_blank" rel="noopener">' + LT.icon("external") + "Chat im neuen Tab öffnen</a>" +
       '<div class="support-link"><span class="support-link__label">Link zum Chat</span>' +
       '<a class="support-link__url" href="' + U + '" target="_blank" rel="noopener">' + esc(url.replace(/^https?:\/\//, "")) + "</a>" +
@@ -404,7 +420,7 @@
     LT.$$("[data-toc]").forEach(function (toc) {
       var root = LT.$(toc.getAttribute("data-toc"));
       if (!root) return;
-      var sections = LT.$$(":scope > section[id]", root);
+      var sections = LT.$$(":scope > section[id]", root).filter(function (s) { return getComputedStyle(s).display !== "none"; });
       var html = '<div class="toc__title">Auf dieser Seite</div><ol>' +
         sections.map(function (s) {
           var h = LT.$("h2", s);
@@ -441,6 +457,20 @@
         b.addEventListener("click", function () { show(b); });
       });
     });
+  }
+
+  /* Früheren Stand (?w=1) über alle internen Links mitnehmen */
+  if (WOCHE.woche < WOCHE.eingestellt) {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("a[href]");
+      if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+      var href = a.getAttribute("href");
+      if (/^(#|mailto:|tel:|https?:)/i.test(href)) return;
+      var u = new URL(href, location.href);
+      if (!/\.html$/i.test(u.pathname) || /(impressum|datenschutz)\.html$/i.test(u.pathname)) return;
+      u.searchParams.set("w", WOCHE.woche);
+      a.href = u.href;
+    }, true);
   }
 
   function init() {

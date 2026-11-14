@@ -8,7 +8,8 @@
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/products.css">
-  <script defer src="assets/js/config.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/woche.js"></script>
   <script defer src="assets/js/site.js"></script>
   <script defer src="assets/js/physics.js"></script>
   <script defer src="assets/js/illustrations.js"></script>
@@ -21,7 +22,7 @@
       <div class="container">
         <nav class="crumbs" aria-label="Brotkrumen"><a href="index.html">Start</a><span aria-hidden="true">/</span><span>Unternehmen</span></nav>
         <h1>Halbleiter mit Applikationswissen</h1>
-        <p class="lead">LUMIATECH ist ein mittelständischer Halbleiter-Distributor aus Pfaffenhofen a. d. Ilm. Wir liefern Dioden und LEDs ab Lager – und helfen unseren Kunden, sie richtig einzusetzen.</p>
+        <p class="lead">LUMIATECH ist ein mittelständischer Halbleiter-Distributor aus Pfaffenhofen a. d. Ilm. Wir liefern Dioden<span data-thema="leds"> und LEDs</span> ab Lager – und helfen unseren Kunden, sie richtig einzusetzen.</p>
       </div>
     </div>
 
@@ -46,9 +47,9 @@
         <ol class="timeline">
           <li><time>1994</time><div><h3>Gründung in Pfaffenhofen</h3><p>Prüfung und Vertrieb von Silizium-Glasdioden für regionale Gerätebauer.</p></div></li>
           <li><time>1999</time><div><h3>Distribution für die Industrie</h3><p>Eigenes Lager und Lieferungen an Maschinenbauer in ganz Süddeutschland.</p></div></li>
-          <li><time>2006</time><div><h3>Einstieg in die Optoelektronik</h3><p>Erste LED-Baureihen für Bedienfelder, Anzeigen und Schaltschränke.</p></div></li>
-          <li><time>2012</time><div><h3>Applikationslabor</h3><p>Kennlinien-Messplatz und Beratung für die Auslegung von Dioden- und LED-Schaltungen.</p></div></li>
-          <li><time>2018</time><div><h3>Retrofit-Programm für Signalsäulen</h3><p>Umrüstsätze und Auslegungshilfe für Instandhaltungsabteilungen.</p></div></li>
+          <li data-thema="leds"><time>2006</time><div><h3>Einstieg in die Optoelektronik</h3><p>Erste LED-Baureihen für Bedienfelder, Anzeigen und Schaltschränke.</p></div></li>
+          <li><time>2012</time><div><h3>Applikationslabor</h3><p>Kennlinien-Messplatz und Beratung für die Auslegung von <span data-thema="leds">Dioden- und LED-Schaltungen</span><span data-ohne="leds">Diodenschaltungen</span>.</p></div></li>
+          <li data-thema="leds"><time>2018</time><div><h3>Retrofit-Programm für Signalsäulen</h3><p>Umrüstsätze und Auslegungshilfe für Instandhaltungsabteilungen.</p></div></li>
           <li><time>2024</time><div><h3>Neues Logistikzentrum</h3><p>2.400 m² ESD-geschützte Lagerfläche, Versand innerhalb von 24 Stunden.</p></div></li>
           <li class="is-now"><time>2026</time><div><h3>Online-Applikationslabor</h3><p>Kennlinien und Simulationen zu allen Lagertypen – frei zugänglich.</p></div></li>
         </ol>
@@ -58,7 +59,7 @@
     <section class="section" id="fertigung" aria-labelledby="fert-h">
       <div class="container">
         <div class="section-head">
-          <h2 id="fert-h">Vom Wafer zur geprüften LED</h2>
+          <h2 id="fert-h">Vom Wafer zur geprüften <span data-thema="leds">LED</span><span data-ohne="leds">Diode</span></h2>
           <p>Unsere Partnerwerke fertigen die Chips. Jede Charge, die unser Lager erreicht, durchläuft anschließend die Eingangsprüfung in Pfaffenhofen.</p>
         </div>
         <div class="split split--top">
@@ -66,9 +67,12 @@
             <li><div><h3>Kristall und Wafer</h3><p>Aus hochreinem Halbleitermaterial wird ein Einkristall gezogen und in dünne Scheiben gesägt.</p></div></li>
             <li><div><h3>Dotierung</h3><p>Fremdatome erzeugen P- und N-leitende Schichten – so entsteht der PN-Übergang.</p></div></li>
             <li><div><h3>Vereinzeln</h3><p>Der Wafer wird in tausende Chips zerteilt, jeder kaum größer als ein Sandkorn.</p></div></li>
-            <li><div><h3>Bonden</h3><p>Der Chip wird in die Reflektorwanne geklebt und mit einem Golddraht an die Anode angeschlossen.</p></div></li>
-            <li><div><h3>Vergießen</h3><p>Eine Linse aus Epoxidharz schützt den Chip und formt den Lichtstrahl.</p></div></li>
-            <li><div><h3>Prüfen und Sortieren</h3><p>Durchlassspannung, Sperrstrom, Lichtstärke und Wellenlänge werden gemessen und die Chips nach Werten sortiert. In Pfaffenhofen folgt die Eingangsprüfung jeder Charge.</p></div></li>
+            <li data-thema="leds"><div><h3>Bonden</h3><p>Der Chip wird in die Reflektorwanne geklebt und mit einem Golddraht an die Anode angeschlossen.</p></div></li>
+            <li data-thema="leds"><div><h3>Vergießen</h3><p>Eine Linse aus Epoxidharz schützt den Chip und formt den Lichtstrahl.</p></div></li>
+            <li data-ohne="leds"><div><h3>Kontaktieren</h3><p>Der Chip wird zwischen zwei Anschlussstücke gelötet, an denen die Anschlussdrähte sitzen.</p></div></li>
+            <li data-ohne="leds"><div><h3>Einglasen</h3><p>Ein Glasröhrchen wird über Chip und Anschlussstücke geschoben und verschmolzen. Das Gehäuse DO-7 ist dicht, ein Farbring markiert die Kathode.</p></div></li>
+            <li data-ohne="leds"><div><h3>Prüfen und Sortieren</h3><p>Durchlassspannung, Sperrstrom und Sperrspannung werden gemessen und die Dioden nach Spannungsklassen sortiert – daraus werden BAY 44, BAY 45 und BAY 46. In Pfaffenhofen folgt die Eingangsprüfung jeder Charge.</p></div></li>
+            <li data-thema="leds"><div><h3>Prüfen und Sortieren</h3><p>Durchlassspannung, Sperrstrom, Lichtstärke und Wellenlänge werden gemessen und die Chips nach Werten sortiert. In Pfaffenhofen folgt die Eingangsprüfung jeder Charge.</p></div></li>
           </ol>
           <figure class="figure">
             <div class="figure__frame wafer-frame">

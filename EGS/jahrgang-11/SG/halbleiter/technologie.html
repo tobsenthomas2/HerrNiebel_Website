@@ -7,7 +7,8 @@
   <meta name="description" content="Leiter, Halbleiter und Nichtleiter, Dotierung und PN-Übergang – das Grundlagenwissen hinter unseren Dioden und LEDs, mit interaktiven Simulationen.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
-  <script defer src="assets/js/config.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/woche.js"></script>
   <script defer src="assets/js/site.js"></script>
   <script defer src="assets/js/physics.js"></script>
   <script defer src="assets/js/plot.js"></script>
@@ -23,7 +24,7 @@
       <div class="container">
         <nav class="crumbs" aria-label="Brotkrumen"><a href="index.html">Start</a><span aria-hidden="true">/</span><span>Technologie</span></nav>
         <h1>Halbleitertechnik verstehen</h1>
-        <p class="lead">Was im Kristall passiert, entscheidet über jede Kennlinie im Datenblatt. Hier erklären wir die Grundlagen, auf denen unsere Dioden und LEDs aufbauen – zum Lesen und zum Ausprobieren.</p>
+        <p class="lead">Was im Kristall passiert, entscheidet über jede Kennlinie im Datenblatt. Hier erklären wir die Grundlagen, auf denen unsere Dioden<span data-thema="leds"> und LEDs</span> aufbauen – zum Lesen und zum Ausprobieren.</p>
       </div>
     </div>
 
@@ -85,7 +86,7 @@
 
           <section id="pn-uebergang">
             <h2>Der PN-Übergang</h2>
-            <p class="intro">Grenzen ein P-Leiter und ein N-Leiter in einem Kristall aneinander, entsteht der PN-Übergang – das Herz jeder Diode und jeder LED.</p>
+            <p class="intro">Grenzen ein P-Leiter und ein N-Leiter in einem Kristall aneinander, entsteht der PN-Übergang – das Herz jeder Diode<span data-thema="leds"> und jeder LED</span>.</p>
             <p>An der Grenzfläche wandern freie Elektronen aus dem N-Leiter in den P-Leiter und füllen dort Löcher. Zurück bleiben nur die ortsfesten Ionen: negative Ionen auf der P-Seite, positive Ionen auf der N-Seite. Diese Zone ohne freie Ladungsträger heißt <strong>Sperrschicht</strong> oder Raumladungszone (RLZ). Ihr elektrisches Feld verhindert, dass weitere Ladungsträger hinüberwandern.</p>
 
             <div data-sim="pn" data-mode="diode" data-title="PN-Übergang im Stromkreis" data-hint="Wählen Sie die Polung und erhöhen Sie die Spannung langsam."></div>
@@ -111,7 +112,7 @@
           <section id="bauteile">
             <h2>Vom PN-Übergang zum Bauteil</h2>
             <p class="intro">Aus demselben Prinzip entstehen ganz unterschiedliche Bauteile. Welcher Halbleiterwerkstoff verwendet wird, bestimmt ihre Eigenschaften.</p>
-            <div class="grid grid-2">
+            <div class="grid grid-2 grid--lines">
               <article class="product">
                 <div class="product__visual"><div data-art="diode" data-dims="false" style="width:100%;max-width:380px"></div></div>
                 <div class="product__body">
@@ -120,7 +121,7 @@
                   <div class="btn-row"><a class="btn btn--ghost" href="dioden.html">Dioden BAY 44/45/46</a></div>
                 </div>
               </article>
-              <article class="product">
+              <article class="product" data-thema="leds">
                 <div class="product__visual" style="display:flex;justify-content:center;gap:4px"><div data-art="led" data-color="blue" style="width:84px"></div><div data-art="led" data-color="green" style="width:84px"></div></div>
                 <div class="product__body">
                   <h3>Leuchtdiode (LED)</h3>
