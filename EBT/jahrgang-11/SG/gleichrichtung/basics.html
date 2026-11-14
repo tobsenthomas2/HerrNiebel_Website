@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="How it works: rectifiers – Watt auf Achse" data-title-de="So funktioniert’s: Gleichrichter – Watt auf Achse">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How it works: rectifiers – Watt auf Achse</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/week.js"></script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../vendor/fonts/montserrat.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/fira-code.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/scope.js"></script>
+  <script defer src="assets/js/sim-rectifier.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="article-head">
+    <div class="narrow">
+      <span class="kicker"><span data-lang="en">How it works</span><span data-lang="de">So funktioniert’s</span></span>
+      <h1><span data-lang="en">From AC to “almost DC”: rectifiers at the workbench</span><span data-lang="de">Von Wechsel- zu „fast Gleich“-Spannung: Gleichrichter an der Werkbank</span></h1>
+      <p class="lead" data-lang="en">Generators, transformers and dynamos deliver alternating voltage. LEDs, batteries and electronics want current in one direction. In between sits the rectifier. Here’s how I explain it to friends at the workbench.</p>
+      <p class="lead" data-lang="de">Generatoren, Trafos und Dynamos liefern Wechselspannung. LEDs, Akkus und Elektronik wollen Strom in eine Richtung. Dazwischen sitzt der Gleichrichter. So erklär ich das Freunden an der Werkbank.</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="narrow">
+      <nav data-toc></nav>
+
+      <h2 id="ac"><span data-lang="en">Alternating voltage: û, T and f</span><span data-lang="de">Wechselspannung: û, T und f</span></h2>
+      <p data-lang="en">An AC voltage swings between a positive and a negative peak value û. One full swing is a period T; the number of periods per second is the frequency f.</p>
+      <p data-lang="de">Eine Wechselspannung pendelt zwischen einem positiven und einem negativen Scheitelwert û. Ein ganzer Durchgang ist eine Periode T; die Anzahl der Perioden pro Sekunde ist die Frequenz f.</p>
+      <figure class="figure">
+        <div class="figure__frame">
+          <svg viewBox="0 0 520 210" width="520" role="img" aria-label="Sine wave with peak value û and period T">
+            <g font-family="Fira Code, monospace" font-size="14" fill="#1d2520">
+              <line x1="40" y1="105" x2="500" y2="105" stroke="#1d2520" stroke-width="1.5"/>
+              <line x1="40" y1="20" x2="40" y2="190" stroke="#1d2520" stroke-width="1.5"/>
+              <path d="M40 105 C 80 -5, 120 -5, 160 105 S 240 215, 280 105 S 360 -5, 400 105 S 480 215, 500 135" fill="none" stroke="#e2552b" stroke-width="3"/>
+              <line x1="100" y1="22" x2="100" y2="105" stroke="#2f5d4c" stroke-width="2" stroke-dasharray="5 4"/>
+              <text x="108" y="62">û</text>
+              <line x1="220" y1="105" x2="220" y2="188" stroke="#2f5d4c" stroke-width="2" stroke-dasharray="5 4"/>
+              <text x="228" y="160">−û</text>
+              <path d="M40 200 H280" stroke="#1d2520" stroke-width="1.5"/>
+              <path d="M40 195v10M280 195v10" stroke="#1d2520" stroke-width="1.5"/>
+              <text x="160" y="196" text-anchor="middle">T</text>
+              <text x="505" y="100" text-anchor="end">t</text>
+              <text x="48" y="20">u</text>
+            </g>
+          </svg>
+        </div>
+      </figure>
+      <div class="formula"><span data-lang="en">f = 1 / T  ·  û = U<sub>eff</sub> · √2  ·  e.g. 12 V~ → û ≈ 17 V</span><span data-lang="de">f = 1 / T  ·  û = U<sub>eff</sub> · √2  ·  z. B. 12 V~ → û ≈ 17 V</span></div>
+
+      <h2 id="diode"><span data-lang="en">The diode: a one-way valve</span><span data-lang="de">Die Diode: ein Rückschlagventil für Strom</span></h2>
+      <p data-lang="en">A diode lets current through from anode to cathode (forward direction) as soon as the voltage across it exceeds its forward voltage U<sub>F</sub> – about 0.7&nbsp;V for silicon. In the other direction it blocks – up to its maximum reverse voltage U<sub>RRM</sub>. Above that it breaks down.</p>
+      <p data-lang="de">Eine Diode lässt Strom von der Anode zur Kathode durch (Durchlassrichtung), sobald die Spannung an ihr die Durchlassspannung U<sub>F</sub> übersteigt – bei Silizium etwa 0,7&nbsp;V. In der Gegenrichtung sperrt sie – bis zu ihrer maximalen Sperrspannung U<sub>RRM</sub>. Darüber bricht sie durch.</p>
+      <p data-lang="en">Want to know <em>why</em> a PN junction behaves like that? My semiconductor dealer explains it better than I could: <a href="../../../../EGS/jahrgang-11/SG/halbleiter/technologie.html">LUMIATECH – Technology</a>.</p>
+      <p data-lang="de">Wer wissen will, <em>warum</em> sich ein PN-Übergang so verhält: Mein Halbleiter-Händler erklärt das besser, als ich es könnte: <a href="../../../../EGS/jahrgang-11/SG/halbleiter/technologie.html">LUMIATECH – Technologie</a>.</p>
+
+      <h2 id="half-wave"><span data-lang="en">Half-wave rectifier (E1U)</span><span data-lang="de">Einweggleichrichter (E1U)</span></h2>
+      <p data-lang="en">The simplest rectifier is one diode in series with the load. In the positive half-wave it conducts – current flows, the lamp lights. In the negative half-wave it blocks – no current, and the diode takes the reverse voltage.</p>
+      <p data-lang="de">Der einfachste Gleichrichter ist eine Diode in Reihe zum Verbraucher. In der positiven Halbwelle leitet sie – es fließt Strom, die Lampe leuchtet. In der negativen Halbwelle sperrt sie – kein Strom, und die Diode übernimmt die Sperrspannung.</p>
+      <p data-lang="en">What comes out is a <strong>pulsating DC voltage</strong>: always the same direction, but only one pulse per period – with a gap in between.</p>
+      <p data-lang="de">Heraus kommt eine <strong>pulsierende Gleichspannung</strong>: immer dieselbe Richtung, aber nur ein Puls pro Periode – mit einer Lücke dazwischen.</p>
+      <p data-lang="en" data-week-max="1">Try it in the simulator below: play it in slow motion and watch which way the current flows.</p>
+      <p data-lang="de" data-week-max="1">Probier’s im Simulator unten aus: Spiel ihn in Zeitlupe ab und schau, wo der Strom fließt.</p>
+
+      <div data-week="2">
+        <h2 id="bridge"><span data-lang="en">Bridge rectifier (B2U)</span><span data-lang="de">Brückengleichrichter (B2U)</span></h2>
+        <p data-lang="en">Four diodes in a diamond – the so-called Graetz bridge. The AC goes in at two corners, the DC comes out at the other two. In each half-wave <strong>two diodes</strong> conduct, and the current always flows through the load in the <strong>same direction</strong>. The negative half-wave is “folded up”.</p>
+        <p data-lang="de">Vier Dioden als Raute – die sogenannte Graetz-Brücke. Die Wechselspannung geht an zwei Ecken rein, die Gleichspannung kommt an den anderen zwei raus. In jeder Halbwelle leiten <strong>zwei Dioden</strong>, und der Strom fließt immer in <strong>derselben Richtung</strong> durch den Verbraucher. Die negative Halbwelle wird „hochgeklappt“.</p>
+        <ul data-lang="en">
+          <li>Two pulses per period instead of one – the pulse frequency is 2·f.</li>
+          <li>The current always passes <strong>two</strong> diodes: that costs 2·U<sub>F</sub>.</li>
+        </ul>
+        <ul data-lang="de">
+          <li>Zwei Pulse pro Periode statt einem – die Pulsfrequenz ist 2·f.</li>
+          <li>Der Strom geht immer durch <strong>zwei</strong> Dioden: Das kostet 2·U<sub>F</sub>.</li>
+        </ul>
+        <h3><span data-lang="en">The mean value U<sub>d</sub></span><span data-lang="de">Der Mittelwert U<sub>d</sub></span></h3>
+        <p data-lang="en">A multimeter on DC shows the arithmetic mean U<sub>d</sub> of the pulsating voltage. With ideal diodes (U = effective value of the AC):</p>
+        <p data-lang="de">Ein Multimeter auf DC zeigt den arithmetischen Mittelwert U<sub>d</sub> der pulsierenden Spannung. Mit idealen Dioden gilt (U = Effektivwert der Wechselspannung):</p>
+        <div class="formula"><span data-lang="en">E1U: U<sub>d</sub> ≈ 0.45 · U  ·  B2U: U<sub>d</sub> ≈ 0.9 · U</span><span data-lang="de">E1U: U<sub>d</sub> ≈ 0,45 · U  ·  B2U: U<sub>d</sub> ≈ 0,9 · U</span></div>
+        <p data-lang="en">Real diodes take their share: the smaller the voltage, the more the diode losses matter.</p>
+        <p data-lang="de">Echte Dioden zweigen ihren Anteil ab: Je kleiner die Spannung, desto mehr fallen die Diodenverluste ins Gewicht.</p>
+
+        <h2 id="generator"><span data-lang="en">Generators: speed changes everything</span><span data-lang="de">Generatoren: Die Drehzahl ändert alles</span></h2>
+        <p data-lang="en">A transformer always delivers 50&nbsp;Hz. A generator doesn’t: its frequency depends on how fast it turns (f = p · n, with p pole pairs and speed n). And the faster it turns, the higher the voltage it induces.</p>
+        <p data-lang="de">Ein Trafo liefert immer 50&nbsp;Hz. Ein Generator nicht: Seine Frequenz hängt davon ab, wie schnell er sich dreht (f = p · n, mit p Polpaaren und Drehzahl n). Und je schneller er dreht, desto höher die induzierte Spannung.</p>
+        <p data-lang="en">In the simulator, switch the source to “Generator” and turn the speed down. Compare the lamp in slow motion with what your eye would see in real time.</p>
+        <p data-lang="de">Stell im Simulator die Quelle auf „Generator“ und dreh die Drehzahl herunter. Vergleich die Lampe in Zeitlupe mit dem, was dein Auge in Echtzeit sehen würde.</p>
+      </div>
+
+      <div data-sim="rectifier" data-title-en="Rectifier: current paths in slow motion" data-title-de="Gleichrichter: Strompfade in Zeitlupe" data-hint-en="Orange = the path the current takes right now. Yellow strip = when the lamp gets current." data-hint-de="Orange = der Weg, den der Strom gerade nimmt. Gelber Streifen = wann die Lampe Strom bekommt."><noscript><p class="noscript">JavaScript needed.</p></noscript></div>
+
+      <h2 id="scope"><span data-lang="en">Measuring with the scope – without fireworks</span><span data-lang="de">Messen mit dem Oszi – ohne Feuerwerk</span></h2>
+      <ul data-lang="en">
+        <li><strong>One probe</strong> on the point you want to see, <strong>ground clip at the minus of the lamp</strong>.</li>
+        <li>The ground clips of all channels are connected inside the scope – and through the power plug to protective earth.</li>
+        <li>So: all ground clips to <strong>one and the same point</strong>. Never two ground clips on different points of a circuit.</li>
+        <li>DC setting on the multimeter shows the mean value; the scope shows the shape.</li>
+      </ul>
+      <ul data-lang="de">
+        <li><strong>Ein Tastkopf</strong> an den Punkt, den du sehen willst, <strong>Masseklemme an den Minuspol der Lampe</strong>.</li>
+        <li>Die Masseklemmen aller Kanäle sind im Oszi miteinander verbunden – und über den Netzstecker mit dem Schutzleiter.</li>
+        <li>Also: alle Masseklemmen an <strong>ein und denselben Punkt</strong>. Nie zwei Masseklemmen an verschiedene Punkte einer Schaltung.</li>
+        <li>Das Multimeter auf DC zeigt den Mittelwert, das Oszi die Kurvenform.</li>
+      </ul>
+      <div class="box box--warn" data-week="2"><p data-lang="en"><strong>Earthed source + bridge rectifier = trap.</strong> If the source is earthed as well (e.g. a mains-powered function generator), the scope ground can short a diode of the bridge through the protective earth – even with only one probe. Generators like dynamos are not earthed, so this doesn’t happen there. Never remove the protective earth!</p><p data-lang="de"><strong>Geerdete Quelle + Brückengleichrichter = Falle.</strong> Ist auch die Quelle geerdet (z. B. ein Funktionsgenerator am Netz), kann die Oszi-Masse über den Schutzleiter eine Diode der Brücke kurzschließen – sogar mit nur einem Tastkopf. Generatoren wie Dynamos sind nicht geerdet, da passiert das nicht. Niemals den Schutzleiter abklemmen!</p></div>
+
+      <hr>
+      <div class="btn-row">
+        <a class="btn btn--ghost" href="index.html"><i data-icon="left"></i><span data-lang="en">All posts</span><span data-lang="de">Alle Beiträge</span></a>
+        <a class="btn" href="parts.html"><span data-lang="en">Parts corner</span><span data-lang="de">Bauteil-Ecke</span><i data-icon="right"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-week="2" data-title-en="Three wires instead of two: my small wind turbine – Watt auf Achse" data-title-de="Drei Kabel statt zwei: mein kleines Windrad – Watt auf Achse">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three wires instead of two: my small wind turbine – Watt auf Achse</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/week.js"></script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../vendor/fonts/montserrat.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/fira-code.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/scope.js"></script>
+  <script defer src="assets/js/sim-three-phase.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="article-head">
+    <div class="narrow">
+      <span class="kicker"><span data-lang="en">For advanced tinkerers</span><span data-lang="de">Für Fortgeschrittene</span></span>
+      <h1><span data-lang="en">Three wires instead of two: my small wind turbine</span><span data-lang="de">Drei Kabel statt zwei: mein kleines Windrad</span></h1>
+      <p class="lead" data-lang="en">A second-hand wind generator for the hut, three wires coming out of it – and the question of what to do with all of them.</p>
+      <p class="lead" data-lang="de">Ein gebrauchter Windgenerator für die Hütte, drei Kabel kommen raus – und die Frage, was man mit allen dreien anfängt.</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="narrow">
+      <nav data-toc></nav>
+
+      <h2 id="inside"><span data-lang="en">What’s in the box</span><span data-lang="de">Was drinsteckt</span></h2>
+      <p data-lang="en">A small permanent-magnet generator from a flea market. It came with a built-in charge controller, which I removed – I wanted to see the raw voltage. What comes out are three wires: <strong>L1, L2, L3</strong>.</p>
+      <p data-lang="de">Ein kleiner Permanentmagnet-Generator vom Flohmarkt. Ein eingebauter Laderegler war dabei, den hab ich ausgebaut – ich wollte die rohe Spannung sehen. Raus kommen drei Kabel: <strong>L1, L2, L3</strong>.</p>
+      <p data-lang="en">Inside there are three windings, offset by 120°. When the rotor turns, each winding produces an AC voltage – same frequency, same amplitude, but each shifted by a third of a period. That’s <strong>three-phase AC</strong>, just like in a workshop socket, only much smaller.</p>
+      <p data-lang="de">Drinnen sitzen drei Wicklungen, um 120° versetzt. Dreht sich der Rotor, erzeugt jede Wicklung eine Wechselspannung – gleiche Frequenz, gleiche Amplitude, aber jeweils um eine Drittelperiode verschoben. Das ist <strong>Drehstrom</strong>, wie an der Werkstatt-Steckdose, nur viel kleiner.</p>
+
+      <h2 id="measured"><span data-lang="en">What I measured</span><span data-lang="de">Was ich gemessen habe</span></h2>
+      <p data-lang="en">Blades off, generator shaft on the cordless drill, scope between L1 and L2, <strong>no load</strong>:</p>
+      <p data-lang="de">Flügel ab, Generatorwelle an den Akkuschrauber, Oszi zwischen L1 und L2, <strong>ohne Last</strong>:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th><span data-lang="en">speed</span><span data-lang="de">Drehzahl</span></th><th><span data-lang="en">frequency</span><span data-lang="de">Frequenz</span></th><th><span data-lang="en">peak value L1–L2</span><span data-lang="de">Scheitelwert L1–L2</span></th></tr></thead>
+        <tbody>
+          <tr><td class="num">≈ 200 min⁻¹</td><td class="num">≈ 20 Hz</td><td class="num">≈ 9 V</td></tr>
+          <tr><td class="num">≈ 600 min⁻¹</td><td class="num">≈ 60 Hz</td><td class="num">≈ 27 V</td></tr>
+          <tr><td class="num">≈ 1000 min⁻¹</td><td class="num">≈ 100 Hz</td><td class="num">≈ 45 V</td></tr>
+        </tbody>
+      </table></div>
+      <p data-lang="en">Same as with every generator: faster → higher frequency and higher voltage. And in a real storm, with nothing connected, it can go higher still.</p>
+      <p data-lang="de">Wie bei jedem Generator: schneller → höhere Frequenz und höhere Spannung. Und im echten Sturm, ohne dass etwas angeschlossen ist, geht es noch höher.</p>
+      <div class="box box--warn"><p data-lang="en"><strong>Safety:</strong> above 50&nbsp;V AC or 120&nbsp;V DC it’s no longer safety extra-low voltage – touching it gets dangerous. Never let the turbine spin freely in strong wind without a load or a brake. Test with the blades removed.</p><p data-lang="de"><strong>Sicherheit:</strong> Über 50&nbsp;V AC bzw. 120&nbsp;V DC ist es keine Kleinspannung mehr – Berühren wird gefährlich. Das Windrad nie ohne Last oder Bremse im Starkwind frei drehen lassen. Getestet wird ohne Flügel.</p></div>
+
+      <h2 id="diodes"><span data-lang="en">Which diodes for the rectifier?</span><span data-lang="de">Welche Dioden für den Gleichrichter?</span></h2>
+      <p data-lang="en">For the solar light I went for Schottky (see the <a href="diode-duel.html">diode duel</a>). Here the situation is different – much more voltage. I have these in my drawer:</p>
+      <p data-lang="de">Bei der Solarleuchte hab ich Schottky genommen (siehe <a href="diode-duel.html">Dioden-Duell</a>). Hier ist die Lage anders – viel mehr Spannung. In der Schublade liegen:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th><span data-lang="en">diode</span><span data-lang="de">Diode</span></th><th>U<sub>RRM</sub></th><th>U<sub>F</sub> @ 1 A (max.)</th></tr></thead>
+        <tbody>
+          <tr><td>1N4007</td><td class="num">1000 V</td><td class="num">1,1 V</td></tr>
+          <tr><td>1N5817 (Schottky)</td><td class="num">20 V</td><td class="num">0,45 V</td></tr>
+          <tr><td>1N5819 (Schottky)</td><td class="num">40 V</td><td class="num">0,60 V</td></tr>
+          <tr><td><span data-lang="en">100 V Schottky (e.g. SR1100)</span><span data-lang="de">100-V-Schottky (z. B. SR1100)</span></td><td class="num">100 V</td><td class="num">0,85 V</td></tr>
+        </tbody>
+      </table></div>
+      <p data-lang="en">Which one would <em>you</em> pick – and why? Think about my measured values, the storm, and how much the forward voltage matters compared with the generator voltage.</p>
+      <p data-lang="de">Welche würdest <em>du</em> nehmen – und warum? Denk an meine Messwerte, an den Sturm und daran, wie viel die Durchlassspannung im Vergleich zur Generatorspannung ausmacht.</p>
+
+      <h2 id="b6u"><span data-lang="en">Six diodes for three wires (B6U)</span><span data-lang="de">Sechs Dioden für drei Kabel (B6U)</span></h2>
+      <p data-lang="en">At first I only connected two of the three wires to an ordinary bridge rectifier. Works – but the third wire just hung there. The proper way is a <strong>three-phase bridge</strong>: six diodes, one column with an upper and a lower diode for each wire.</p>
+      <p data-lang="de">Zuerst hatte ich nur zwei der drei Kabel an einen normalen Brückengleichrichter gehängt. Geht – aber das dritte Kabel hing nutzlos herum. Richtig macht man es mit einer <strong>Drehstrom-Brücke</strong>: sechs Dioden, für jedes Kabel eine Spalte mit einer oberen und einer unteren Diode.</p>
+      <div class="box"><p data-lang="en"><strong>The rule:</strong> at every moment, the upper diode of the <em>most positive</em> wire and the lower diode of the <em>most negative</em> wire conduct.</p><p data-lang="de"><strong>Die Regel:</strong> In jedem Moment leiten die obere Diode am <em>positivsten</em> Kabel und die untere Diode am <em>negativsten</em> Kabel.</p></div>
+
+      <div data-sim="three-phase" data-title-en="Three wires: which diodes conduct?" data-title-de="Drei Kabel: Welche Dioden leiten?" data-hint-en="Play in slow motion. Compare 2 wires and 3 wires." data-hint-de="In Zeitlupe abspielen. 2 Kabel und 3 Kabel vergleichen."><noscript><p class="noscript">JavaScript needed.</p></noscript></div>
+
+      <p data-lang="en" data-week-max="2">Are three wires really better than two? Don’t take my word for it – measure it.</p>
+      <p data-lang="de" data-week-max="2">Sind drei Kabel wirklich besser als zwei? Glaub’s mir nicht einfach – miss es nach.</p>
+
+      <hr>
+      <a class="btn btn--ghost" href="index.html"><i data-icon="left"></i><span data-lang="en">All posts</span><span data-lang="de">Alle Beiträge</span></a>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

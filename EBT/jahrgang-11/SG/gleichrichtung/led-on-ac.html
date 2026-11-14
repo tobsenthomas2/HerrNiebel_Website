@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="My garden-transformer disaster: LEDs on AC – Watt auf Achse" data-title-de="Mein Gartentrafo-Desaster: LEDs an Wechselspannung – Watt auf Achse">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My garden-transformer disaster: LEDs on AC – Watt auf Achse</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/week.js"></script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../vendor/fonts/montserrat.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/fira-code.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/scope.js"></script>
+  <script defer src="assets/js/sim-led-ac.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="article-head">
+    <div class="narrow">
+      <a class="backlink" href="index.html"><i data-icon="left"></i><span data-lang="en">All posts</span><span data-lang="de">Alle Beiträge</span></a>
+      <span class="post-card__meta">LOG #11 · <span data-lang="en">Oct 2026 · 6 min read</span><span data-lang="de">Okt. 2026 · 6 Min. Lesezeit</span> · #led #ac #reversevoltage</span>
+      <h1><span data-lang="en">My garden-transformer disaster: LEDs on AC</span><span data-lang="de">Mein Gartentrafo-Desaster: LEDs an Wechselspannung</span></h1>
+      <p class="lead" data-lang="en">Halogen out, LEDs in – two evenings later, two LEDs were dead. Spoiler: the datasheet had warned me. I just hadn’t read the right line.</p>
+      <p class="lead" data-lang="de">Halogen raus, LEDs rein – zwei Abende später waren zwei LEDs tot. Spoiler: Das Datenblatt hatte mich gewarnt. Ich hatte nur die falsche Zeile gelesen.</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="narrow">
+      <nav data-toc></nav>
+
+      <h2 id="what-happened"><span data-lang="en">What happened</span><span data-lang="de">Was passiert ist</span></h2>
+      <p data-lang="en">Our hut terrace has six little spotlights on an old garden transformer: <strong>12&nbsp;V~</strong>, the classic halogen setup. Halogen bulbs eat power, and up there power is precious. So I bought a bag of bright white LEDs, soldered a series resistor to each one and swapped them in.</p>
+      <p data-lang="de">Unsere Hüttenterrasse hat sechs kleine Spots an einem alten Gartentrafo: <strong>12&nbsp;V~</strong>, das klassische Halogen-Set. Halogenlampen fressen Strom, und da oben ist Strom kostbar. Also hab ich eine Tüte helle weiße LEDs gekauft, an jede einen Vorwiderstand gelötet und sie eingesetzt.</p>
+      <p data-lang="en">Lights on – everything glowed. Two evenings later: two LEDs dead, a third one flickering strangely. Transformer fine, resistors fine. So what killed my LEDs?</p>
+      <p data-lang="de">Licht an – alles leuchtet. Zwei Abende später: zwei LEDs tot, eine dritte flackert komisch. Trafo in Ordnung, Widerstände in Ordnung. Was hat meine LEDs umgebracht?</p>
+
+      <h2 id="ac"><span data-lang="en">AC in 30 seconds</span><span data-lang="de">Wechselspannung in 30 Sekunden</span></h2>
+      <p data-lang="en">“12&nbsp;V~” is the <strong>effective value</strong> (RMS). The real voltage swings back and forth between +û and −û – and the peak value û is quite a bit higher:</p>
+      <p data-lang="de">„12&nbsp;V~“ ist der <strong>Effektivwert</strong>. Die echte Spannung pendelt zwischen +û und −û – und der Scheitelwert û ist deutlich höher:</p>
+      <div class="formula"><span data-lang="en">û = U<sub>eff</sub> · √2 ≈ 12 V · 1.41 ≈ 17 V</span><span data-lang="de">û = U<sub>eff</sub> · √2 ≈ 12 V · 1,41 ≈ 17 V</span></div>
+      <p data-lang="en">And it flips polarity <strong>50 times per second</strong> (f = 50&nbsp;Hz). One period lasts T = 1/f = 20&nbsp;ms: for 10&nbsp;ms the upper wire is plus, for the next 10&nbsp;ms it is minus.</p>
+      <p data-lang="de">Und sie wechselt <strong>50-mal pro Sekunde</strong> die Richtung (f = 50&nbsp;Hz). Eine Periode dauert T = 1/f = 20&nbsp;ms: 10&nbsp;ms lang ist die obere Leitung Plus, die nächsten 10&nbsp;ms Minus.</p>
+
+      <h2 id="led-is-a-diode"><span data-lang="en">An LED is a diode – with a weak spot</span><span data-lang="de">Eine LED ist eine Diode – mit Schwachstelle</span></h2>
+      <p data-lang="en">In the forward direction a white LED starts to conduct at about 2.7–3&nbsp;V and lights up. In the reverse direction it blocks – <strong>but only up to a limit</strong>. That limit is in the datasheet as the maximum reverse voltage <strong>U<sub>R</sub></strong>. And for most LEDs it is tiny:</p>
+      <p data-lang="de">In Durchlassrichtung fängt eine weiße LED bei etwa 2,7–3&nbsp;V an zu leiten und leuchtet. In Sperrrichtung sperrt sie – <strong>aber nur bis zu einer Grenze</strong>. Die steht im Datenblatt als maximale Sperrspannung <strong>U<sub>R</sub></strong>. Und die ist bei den meisten LEDs winzig:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th><span data-lang="en">white LED</span><span data-lang="de">weiße LED</span></th><th><span data-lang="en">silicon diode 1N4007</span><span data-lang="de">Siliziumdiode 1N4007</span></th></tr></thead>
+        <tbody>
+          <tr><td><span data-lang="en">forward voltage U<sub>F</sub> (typ.)</span><span data-lang="de">Durchlassspannung U<sub>F</sub> (typ.)</span></td><td class="num">≈ 3 V</td><td class="num">≈ 0,7–0,9 V</td></tr>
+          <tr><td><span data-lang="en">max. reverse voltage</span><span data-lang="de">max. Sperrspannung</span></td><td class="num">U<sub>R</sub> = 5 V</td><td class="num">U<sub>RRM</sub> = 1000 V</td></tr>
+        </tbody>
+      </table></div>
+      <p data-lang="en">My own short datasheets for both are in the <a href="parts.html">parts corner</a>.</p>
+      <p data-lang="de">Meine Kurz-Datenblätter zu beiden findest du in der <a href="parts.html">Bauteil-Ecke</a>.</p>
+
+      <h2 id="why"><span data-lang="en">Why my LEDs died</span><span data-lang="de">Warum meine LEDs gestorben sind</span></h2>
+      <p data-lang="en">In every negative half-wave the LED blocks. No current flows, so there is no voltage drop across the resistor either – which means the <strong>whole −17&nbsp;V sit across the LED</strong>. That is more than three times what the datasheet allows. Some LEDs survive that for a while. Mine didn’t.</p>
+      <p data-lang="de">In jeder negativen Halbwelle sperrt die LED. Es fließt kein Strom, also fällt auch am Widerstand keine Spannung ab – und damit liegen die <strong>ganzen −17&nbsp;V an der LED</strong>. Das ist mehr als dreimal so viel, wie das Datenblatt erlaubt. Manche LEDs halten das eine Weile aus. Meine nicht.</p>
+
+      <div data-sim="led-ac" data-title-en="LED on a garden transformer" data-title-de="LED am Gartentrafo" data-hint-en="Set the transformer voltage and a protection – watch the LED voltage (yellow) and the red limit." data-hint-de="Trafospannung und Schutz einstellen – achte auf die LED-Spannung (gelb) und die rote Grenze."><noscript><p class="noscript">JavaScript needed.</p></noscript></div>
+
+      <h2 id="fixes"><span data-lang="en">Two fixes I tried</span><span data-lang="de">Zwei Lösungen, die ich ausprobiert habe</span></h2>
+      <h3><span data-lang="en">1 · Protection diode in series</span><span data-lang="de">1 · Schutzdiode in Reihe</span></h3>
+      <p data-lang="en">A 1N4007 in series with the LED. In the negative half-wave it blocks and takes the reverse voltage – it can handle up to 1000&nbsp;V. The price: in the forward direction it costs about 0.7&nbsp;V that the LED doesn’t get.</p>
+      <p data-lang="de">Eine 1N4007 in Reihe zur LED. In der negativen Halbwelle sperrt sie und übernimmt die Sperrspannung – sie verträgt bis zu 1000&nbsp;V. Der Preis: In Durchlassrichtung kostet sie etwa 0,7&nbsp;V, die der LED fehlen.</p>
+      <h3><span data-lang="en">2 · Protection diode antiparallel</span><span data-lang="de">2 · Schutzdiode antiparallel</span></h3>
+      <p data-lang="en">A diode across the LED, pointing the other way. In the negative half-wave it conducts and holds the LED’s reverse voltage at about −0.7&nbsp;V. The price: in the negative half-wave current flows uselessly through the diode and the resistor – the resistor gets warm, energy is wasted.</p>
+      <p data-lang="de">Eine Diode parallel zur LED, aber andersherum. In der negativen Halbwelle leitet sie und hält die Sperrspannung an der LED bei etwa −0,7&nbsp;V. Der Preis: In der negativen Halbwelle fließt sinnlos Strom über Diode und Widerstand – der Widerstand wird warm, Energie geht verloren.</p>
+      <p data-lang="en">For the terrace I went with <strong>series diodes</strong>: the transformer has more than enough voltage, so the 0.7&nbsp;V don’t hurt, and nothing heats up in the negative half-wave.</p>
+      <p data-lang="de">Für die Terrasse hab ich <strong>Dioden in Reihe</strong> genommen: Der Trafo hat Spannung mehr als genug, die 0,7&nbsp;V tun also nicht weh, und in der negativen Halbwelle wird nichts warm.</p>
+      <div class="note"><span data-lang="en">Whether that works for <em>your</em> project depends on how much voltage you have to spare. Check before you copy!</span><span data-lang="de">Ob das für <em>dein</em> Projekt passt, hängt davon ab, wie viel Spannung du übrig hast. Erst prüfen, dann nachbauen!</span></div>
+
+      <h2 id="flicker"><span data-lang="en">Does it flicker now?</span><span data-lang="de">Flackert das jetzt?</span></h2>
+      <p data-lang="en">With one diode the LED only gets current in every second half-wave: 50 light pulses per second, dark in between. My eyes don’t notice – at 50&nbsp;Hz it looks steady. On the scope, though, you see it immediately.</p>
+      <p data-lang="de">Mit einer Diode bekommt die LED nur in jeder zweiten Halbwelle Strom: 50 Lichtpulse pro Sekunde, dazwischen dunkel. Meine Augen merken davon nichts – bei 50&nbsp;Hz wirkt es ruhig. Auf dem Oszi sieht man es aber sofort.</p>
+      <p data-lang="en">The circuit with one diode that only lets one half-wave through has a name, by the way: <strong>half-wave rectifier</strong>. More about it in <a href="basics.html">How it works</a>.</p>
+      <p data-lang="de">Die Schaltung mit einer Diode, die nur eine Halbwelle durchlässt, hat übrigens einen Namen: <strong>Einweggleichrichter</strong>. Mehr dazu unter <a href="basics.html">So funktioniert’s</a>.</p>
+
+      <h2 id="measure"><span data-lang="en">How I measured it</span><span data-lang="de">So hab ich gemessen</span></h2>
+      <p data-lang="en">Scope probe (CH1) at the plus of the LED, <strong>ground clip at the minus of the LED</strong>. That shows exactly what the LED gets. If you use a second channel, its ground clip goes to the <em>same</em> point – the ground clips of a scope are connected to each other inside.</p>
+      <p data-lang="de">Tastkopf (CH1) an den Pluspol der LED, <strong>Masseklemme an den Minuspol der LED</strong>. So sieht man genau, was die LED abbekommt. Wer einen zweiten Kanal nimmt: dessen Masseklemme an <em>denselben</em> Punkt – die Masseklemmen eines Oszis sind innen miteinander verbunden.</p>
+      <div class="box box--warn"><p data-lang="en"><strong>Never</strong> remove the protective earth of the scope to “make it work”. If the measurement only works without it, the setup is wrong.</p><p data-lang="de"><strong>Niemals</strong> den Schutzleiter am Oszi abklemmen, „damit es geht“. Wenn die Messung nur so funktioniert, stimmt der Aufbau nicht.</p></div>
+
+      <h2 id="learned"><span data-lang="en">What I learned</span><span data-lang="de">Was ich gelernt habe</span></h2>
+      <ul data-lang="en">
+        <li>12&nbsp;V~ means peaks of about ±17&nbsp;V.</li>
+        <li>An LED blocks in reverse – but only up to U<sub>R</sub>, often just 5&nbsp;V.</li>
+        <li>No current, no voltage drop across the resistor: in reverse the resistor doesn’t protect anything.</li>
+        <li>Read the <em>whole</em> datasheet, not just the brightness.</li>
+      </ul>
+      <ul data-lang="de">
+        <li>12&nbsp;V~ heißt Spitzen von etwa ±17&nbsp;V.</li>
+        <li>Eine LED sperrt in Gegenrichtung – aber nur bis U<sub>R</sub>, oft nur 5&nbsp;V.</li>
+        <li>Kein Strom, kein Spannungsfall am Widerstand: In Sperrrichtung schützt der Widerstand gar nichts.</li>
+        <li>Das <em>ganze</em> Datenblatt lesen, nicht nur die Helligkeit.</li>
+      </ul>
+
+      <section class="comments" aria-labelledby="c-title">
+        <h2 id="c-title"><span data-lang="en">Comments (5)</span><span data-lang="de">Kommentare (5)</span></h2>
+        <div class="comment">
+          <div class="comment__avatar" style="background:#6b8f71">GG</div>
+          <div><div class="comment__meta"><strong>Gartenzwerg_Gerd</strong><span data-lang="en">3 weeks ago</span><span data-lang="de">vor 3 Wochen</span><span class="verdict verdict--part"><span data-lang="en">incomplete</span><span data-lang="de">unvollständig</span></span></div>
+            <p data-lang="en">Mine have been running on the transformer without anything for years! Never had a problem.</p>
+            <p data-lang="de">Meine laufen seit Jahren ohne alles am Trafo! Nie Probleme gehabt.</p></div>
+        </div>
+        <div class="comment">
+          <div class="comment__avatar" style="background:#c2512b">MB</div>
+          <div><div class="comment__meta"><strong>Mara_baut</strong><span data-lang="en">3 weeks ago</span><span data-lang="de">vor 3 Wochen</span><span class="verdict verdict--good"><span data-lang="en">helpful</span><span data-lang="de">hilfreich</span></span></div>
+            <p data-lang="en">Or just buy LED retrofits for 12&nbsp;V AC – they have the rectifier and the current control built in.</p>
+            <p data-lang="de">Oder gleich LED-Retrofits für 12&nbsp;V AC kaufen – da sind Gleichrichter und Stromregelung schon drin.</p></div>
+        </div>
+        <div class="comment comment--reply comment--author">
+          <div class="comment__avatar" style="background:#1d2520">K</div>
+          <div><div class="comment__meta"><strong>Kathi</strong><span data-lang="en">3 weeks ago</span><span data-lang="de">vor 3 Wochen</span></div>
+            <p data-lang="en">@Mara true! But I wanted to understand what’s inside 😉</p>
+            <p data-lang="de">@Mara stimmt! Aber ich wollte verstehen, was da drin ist 😉</p></div>
+        </div>
+        <div class="comment">
+          <div class="comment__avatar" style="background:#7a5c99">VV</div>
+          <div><div class="comment__meta"><strong>Volt-Vroni</strong><span data-lang="en">2 weeks ago</span><span data-lang="de">vor 2 Wochen</span><span class="verdict verdict--part"><span data-lang="en">incomplete</span><span data-lang="de">unvollständig</span></span></div>
+            <p data-lang="en">Antiparallel is a botch, you heat half of it away.</p>
+            <p data-lang="de">Antiparallel ist Pfusch, da verheizt du die Hälfte.</p></div>
+        </div>
+        <div class="comment">
+          <div class="comment__avatar" style="background:#2b6cb0">L9</div>
+          <div><div class="comment__meta"><strong>Lukas_92</strong><span data-lang="en">1 week ago</span><span data-lang="de">vor 1 Woche</span><span class="verdict verdict--bad"><span data-lang="en">wrong</span><span data-lang="de">falsch</span></span></div>
+            <p data-lang="en">Just turn the LED around, then it runs in the other half-wave and nothing breaks.</p>
+            <p data-lang="de">Dreh die LED einfach um, dann läuft sie in der anderen Halbwelle und nix geht kaputt.</p></div>
+        </div>
+      </section>
+
+      <hr>
+      <div class="btn-row">
+        <a class="btn btn--ghost" href="index.html"><i data-icon="left"></i><span data-lang="en">All posts</span><span data-lang="de">Alle Beiträge</span></a>
+        <a class="btn" href="basics.html"><span data-lang="en">How it works</span><span data-lang="de">So funktioniert’s</span><i data-icon="right"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

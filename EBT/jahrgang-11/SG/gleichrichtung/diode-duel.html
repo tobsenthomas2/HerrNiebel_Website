@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-week="2" data-title-en="Diode duel: silicon vs. Schottky – Watt auf Achse" data-title-de="Dioden-Duell: Silizium gegen Schottky – Watt auf Achse">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diode duel: silicon vs. Schottky – Watt auf Achse</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/week.js"></script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../vendor/fonts/montserrat.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/fira-code.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/scope.js"></script>
+  <script defer src="assets/js/sim-diode-loss.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="article-head">
+    <div class="narrow">
+      <a class="backlink" href="index.html"><i data-icon="left"></i><span data-lang="en">All posts</span><span data-lang="de">Alle Beiträge</span></a>
+      <span class="post-card__meta">LOG #12 · <span data-lang="en">Nov 2026 · 7 min read</span><span data-lang="de">Nov. 2026 · 7 Min. Lesezeit</span> · #schottky #solar #datasheet</span>
+      <h1><span data-lang="en">Diode duel: silicon vs. Schottky at my solar hut light</span><span data-lang="de">Dioden-Duell: Silizium gegen Schottky an meiner Solar-Hüttenleuchte</span></h1>
+      <p class="lead" data-lang="en">My hut light’s battery never got full. The culprit was a single diode – and the fix was a different one. But Schottky isn’t magic either.</p>
+      <p class="lead" data-lang="de">Der Akku meiner Hüttenleuchte wurde nie voll. Schuld war eine einzige Diode – und die Lösung eine andere. Aber Schottky ist auch kein Zaubertrick.</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="narrow">
+      <nav data-toc></nav>
+
+      <h2 id="setup"><span data-lang="en">The setup</span><span data-lang="de">Der Aufbau</span></h2>
+      <p data-lang="en">On the hut’s outhouse (yes, really) there is a small solar panel – about 6&nbsp;V when the sun is out. It charges a 4.8&nbsp;V NiMH battery pack, and in the evening that pack powers an LED light. Between panel and battery sits a <strong>diode</strong>: at night, when the panel delivers nothing, it stops the battery from discharging back through the panel.</p>
+      <p data-lang="de">Am Hütten-Klohäuschen (ja, wirklich) hängt ein kleines Solarmodul – etwa 6&nbsp;V, wenn die Sonne scheint. Es lädt einen 4,8-V-NiMH-Akku, und abends versorgt der Akku eine LED-Leuchte. Zwischen Modul und Akku sitzt eine <strong>Diode</strong>: Nachts, wenn das Modul nichts liefert, verhindert sie, dass sich der Akku rückwärts über das Modul entlädt.</p>
+      <p data-lang="en">I had used a 1N4007 – it was in the drawer. Result: the battery was never really full. I measured: <strong>about 0.8&nbsp;V</strong> across the diode while charging. Out of 6&nbsp;V! That’s a big bite.</p>
+      <p data-lang="de">Ich hatte eine 1N4007 genommen – lag halt in der Schublade. Ergebnis: Der Akku wurde nie richtig voll. Nachgemessen: <strong>etwa 0,8&nbsp;V</strong> an der Diode beim Laden. Von 6&nbsp;V! Das ist ein ordentlicher Happen.</p>
+
+      <h2 id="schottky"><span data-lang="en">Enter the Schottky diode</span><span data-lang="de">Auftritt: die Schottky-Diode</span></h2>
+      <p data-lang="en">A Schottky diode uses a metal–semiconductor junction instead of a PN junction. The effect: a <strong>much lower forward voltage</strong> – roughly half that of a silicon diode at the same current.</p>
+      <p data-lang="de">Eine Schottky-Diode hat statt eines PN-Übergangs einen Metall-Halbleiter-Übergang. Der Effekt: eine <strong>deutlich kleinere Durchlassspannung</strong> – grob die Hälfte einer Siliziumdiode beim gleichen Strom.</p>
+      <p data-lang="en">But there’s no free lunch. Typical for Schottky diodes:</p>
+      <p data-lang="de">Aber geschenkt gibt’s nichts. Typisch für Schottky-Dioden:</p>
+      <ul data-lang="en">
+        <li>a <strong>lower maximum reverse voltage</strong> U<sub>RRM</sub> than silicon rectifiers,</li>
+        <li>a <strong>higher reverse current</strong> I<sub>R</sub>, which rises strongly with temperature.</li>
+      </ul>
+      <ul data-lang="de">
+        <li>eine <strong>kleinere maximale Sperrspannung</strong> U<sub>RRM</sub> als Silizium-Gleichrichter,</li>
+        <li>ein <strong>höherer Sperrstrom</strong> I<sub>R</sub>, der mit der Temperatur stark steigt.</li>
+      </ul>
+
+      <div data-sim="diode-loss" data-title-en="Diode duel: what does the diode cost?" data-title-de="Dioden-Duell: Was kostet die Diode?" data-hint-en="Pick a diode, set current and source voltage." data-hint-de="Diode wählen, Strom und Quellenspannung einstellen."><noscript><p class="noscript">JavaScript needed.</p></noscript></div>
+
+      <h2 id="my-choice"><span data-lang="en">My choice – and why</span><span data-lang="de">Meine Wahl – und warum</span></h2>
+      <p data-lang="en">I switched to a <strong>1N5817</strong>. Before that, I checked the reverse voltage – my rule:</p>
+      <p data-lang="de">Ich hab auf eine <strong>1N5817</strong> gewechselt. Vorher hab ich die Sperrspannung geprüft – meine Regel:</p>
+      <div class="box"><p data-lang="en"><strong>U<sub>RRM</sub> of the diode &gt; the highest reverse voltage the diode can <em>ever</em> see</strong> – not just in normal operation, but also in the worst case. Plus a safety margin.</p><p data-lang="de"><strong>U<sub>RRM</sub> der Diode &gt; die höchste Sperrspannung, die an der Diode <em>jemals</em> auftreten kann</strong> – nicht nur im Normalbetrieb, sondern auch im ungünstigsten Fall. Plus Sicherheitsreserve.</p></div>
+      <p data-lang="en">In my case: at night the battery (max. about 5.6&nbsp;V) sits on one side of the diode, the dark panel on the other. Even with the panel unplugged the diode never sees more than about 6&nbsp;V in reverse. 20&nbsp;V is plenty. Result: almost half a volt less loss, and the battery is full again by the afternoon.</p>
+      <p data-lang="de">Bei mir: Nachts hängt auf der einen Seite der Diode der Akku (max. etwa 5,6&nbsp;V), auf der anderen das dunkle Modul. Selbst mit abgestecktem Modul sieht die Diode nie mehr als etwa 6&nbsp;V in Sperrrichtung. 20&nbsp;V reichen locker. Ergebnis: fast ein halbes Volt weniger Verlust, und der Akku ist am Nachmittag wieder voll.</p>
+      <div class="note"><span data-lang="en">Low voltage, every tenth of a volt counts → Schottky can be worth it. High voltage or big voltage peaks → read the reverse voltage line twice.</span><span data-lang="de">Kleine Spannung, jedes Zehntelvolt zählt → Schottky kann sich lohnen. Hohe Spannung oder große Spannungsspitzen → die Zeile mit der Sperrspannung zweimal lesen.</span></div>
+      <p data-lang="en">Datasheets of all three diodes: <a href="parts.html">parts corner</a>.</p>
+      <p data-lang="de">Datenblätter aller drei Dioden: <a href="parts.html">Bauteil-Ecke</a>.</p>
+
+      <section class="comments" aria-labelledby="c-title">
+        <h2 id="c-title"><span data-lang="en">Comments (8)</span><span data-lang="de">Kommentare (8)</span></h2>
+
+        <div class="comment">
+          <div class="comment__avatar" style="background:#2f5d4c">LL</div>
+          <div><div class="comment__meta"><strong>Lastenrad-Lena</strong><span data-lang="en">5 days ago</span><span data-lang="de">vor 5 Tagen</span><span class="verdict verdict--part"><span data-lang="en">incomplete</span><span data-lang="de">unvollständig</span></span></div>
+            <p data-lang="en">Same story on my cargo bike! Hub dynamo, a <strong>Schottky bridge plus a fat capacitor</strong> – and the flickering at walking speed was gone. Schottky FTW 😎</p>
+            <p data-lang="de">Gleiche Geschichte an meinem Lastenrad! Nabendynamo, <strong>Schottky-Brücke plus dicker Elko</strong> – und das Flackern bei Schrittgeschwindigkeit war weg. Schottky for the win 😎</p></div>
+        </div>
+        <div class="comment comment--reply comment--author">
+          <div class="comment__avatar" style="background:#1d2520">K</div>
+          <div><div class="comment__meta"><strong>Kathi</strong><span data-lang="en">5 days ago</span><span data-lang="de">vor 5 Tagen</span></div>
+            <p data-lang="en">@Lena nice! Which Schottkys exactly? And how much voltage does your dynamo make with no lamp connected at full speed?</p>
+            <p data-lang="de">@Lena cool! Welche Schottkys genau? Und wie viel Spannung macht dein Dynamo ohne Lampe bei voller Fahrt?</p></div>
+        </div>
+        <div class="comment comment--reply">
+          <div class="comment__avatar" style="background:#2f5d4c">LL</div>
+          <div><div class="comment__meta"><strong>Lastenrad-Lena</strong><span data-lang="en">4 days ago</span><span data-lang="de">vor 4 Tagen</span></div>
+            <p data-lang="en">No idea, the ones with “58-something” printed on them. Never measured without the lamp 🤷</p>
+            <p data-lang="de">Keine Ahnung, die mit „58-irgendwas“ drauf. Ohne Lampe nie gemessen 🤷</p></div>
+        </div>
+        <div class="comment">
+          <div class="comment__avatar" style="background:#c0362c">MP</div>
+          <div><div class="comment__meta"><strong>MaxPower_88</strong><span data-lang="en">4 days ago</span><span data-lang="de">vor 4 Tagen</span><span class="verdict verdict--bad"><span data-lang="en">wrong</span><span data-lang="de">falsch</span></span></div>
+            <p data-lang="en">Schottky is ALWAYS better. Less loss = better, end of story. I only use 1N5817 now, everywhere!</p>
+            <p data-lang="de">Schottky ist IMMER besser. Weniger Verlust = besser, Ende. Ich bau nur noch 1N5817 ein, überall!</p></div>
+        </div>
+        <div class="comment">
+          <div class="comment__avatar" style="background:#5b6b8c">EE</div>
+          <div><div class="comment__meta"><strong>Elektro-Ede</strong><span data-lang="en">3 days ago</span><span data-lang="de">vor 3 Tagen</span><span class="verdict verdict--good"><span data-lang="en">helpful</span><span data-lang="de">hilfreich</span></span></div>
+            <p data-lang="en">Careful with generators: <strong>with no load</strong> (lamp broken or unplugged) they produce a lot more voltage than in normal operation. Check that against the reverse voltage in the datasheet!</p>
+            <p data-lang="de">Vorsicht bei Generatoren: <strong>ohne Last</strong> (Lampe kaputt oder abgesteckt) machen die deutlich mehr Spannung als im Normalbetrieb. Das mit der Sperrspannung im Datenblatt vergleichen!</p></div>
+        </div>
+        <div class="comment">
+          <div class="comment__avatar" style="background:#7c6a46">NF</div>
+          <div><div class="comment__meta"><strong>Nachtfalke</strong><span data-lang="en">3 days ago</span><span data-lang="de">vor 3 Tagen</span><span class="verdict verdict--bad"><span data-lang="en">wrong</span><span data-lang="de">falsch</span></span></div>
+            <p data-lang="en">If your dynamo light flickers, just put a bigger resistor in front of the LED. Less current, less flicker.</p>
+            <p data-lang="de">Wenn das Dynamolicht flackert, einfach einen größeren Widerstand vor die LED. Weniger Strom, weniger Flackern.</p></div>
+        </div>
+        <div class="comment">
+          <div class="comment__avatar" style="background:#7a5c99">VV</div>
+          <div><div class="comment__meta"><strong>Volt-Vroni</strong><span data-lang="en">2 days ago</span><span data-lang="de">vor 2 Tagen</span><span class="verdict verdict--good"><span data-lang="en">helpful</span><span data-lang="de">hilfreich</span></span></div>
+            <p data-lang="en">@Lena about that capacitor: electrolytic caps <strong>only the right way round</strong>, and the voltage rating must be higher than the highest voltage that can occur. Otherwise: pop.</p>
+            <p data-lang="de">@Lena zum Elko: Elektrolytkondensatoren <strong>nur richtig herum</strong>, und die Spannungsfestigkeit muss über der höchsten Spannung liegen, die auftreten kann. Sonst: Plopp.</p></div>
+        </div>
+        <div class="comment">
+          <div class="comment__avatar" style="background:#2b6cb0">TT</div>
+          <div><div class="comment__meta"><strong>Trailtom</strong><span data-lang="en">1 day ago</span><span data-lang="de">vor 1 Tag</span><span class="verdict verdict--part"><span data-lang="en">off topic</span><span data-lang="de">am Thema vorbei</span></span></div>
+            <p data-lang="en">Or just buy a battery light, problem solved 🙄</p>
+            <p data-lang="de">Oder einfach ’ne Akkulampe kaufen, Problem gelöst 🙄</p></div>
+        </div>
+      </section>
+
+      <hr>
+      <div class="btn-row">
+        <a class="btn btn--ghost" href="index.html"><i data-icon="left"></i><span data-lang="en">All posts</span><span data-lang="de">Alle Beiträge</span></a>
+        <a class="btn" href="parts.html"><span data-lang="en">Parts corner</span><span data-lang="de">Bauteil-Ecke</span><i data-icon="right"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

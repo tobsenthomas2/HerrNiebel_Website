@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="Watt auf Achse – self-built power for bike, hut &amp; trail" data-title-de="Watt auf Achse – selbstgebauter Strom für Rad, Hütte &amp; Trail">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Watt auf Achse – self-built power for bike, hut &amp; trail</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/week.js"></script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../vendor/fonts/montserrat.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/fira-code.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/scope.js"></script>
+  <script defer src="assets/js/sim-polarity.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="hero">
+    <div class="container hero__grid">
+      <div>
+        <div class="hero__meta"><span class="stamp">Werkstatt-Log</span><span class="tag">#offgrid</span><span class="tag">#bike</span><span class="tag">#diy</span></div>
+        <h1><span data-lang="en">Light from your own <em>legs</em>, wind &amp; solder.</span><span data-lang="de">Licht aus eigener <em>Kraft</em>, Wind &amp; Lötzinn.</span></h1>
+        <p class="lead" data-lang="en">Hi, I’m Kathi – bike mechanic by trade, tinkerer by heart. Our hut up at 1,400&nbsp;m has no power line, so anything that lights up there, I build myself: dynamo lights, solar, a small wind turbine. Here I write down what worked – and what went up in smoke.</p>
+        <p class="lead" data-lang="de">Servus, ich bin Kathi – gelernte Zweiradmechatronikerin, Bastlerin aus Leidenschaft. Unsere Hütte auf 1.400&nbsp;m hat keinen Stromanschluss, also bau ich alles, was dort leuchtet, selbst: Dynamolicht, Solar, ein kleines Windrad. Hier schreib ich auf, was funktioniert hat – und was in Rauch aufgegangen ist.</p>
+        <div class="btn-row">
+          <a class="btn" href="led-on-ac.html" data-week-max="1"><i data-icon="right"></i><span data-lang="en">Read the latest post</span><span data-lang="de">Zum neuesten Beitrag</span></a>
+          <a class="btn" href="diode-duel.html" data-week="2"><i data-icon="right"></i><span data-lang="en">Read the latest post</span><span data-lang="de">Zum neuesten Beitrag</span></a>
+          <a class="btn btn--ghost" href="basics.html"><span data-lang="en">How it works</span><span data-lang="de">So funktioniert’s</span></a>
+        </div>
+      </div>
+      <div class="hero__art"><img src="assets/img/hero.svg" width="520" height="380" alt="Night scene: mountain hut with a small wind turbine and a bicycle with its headlight on"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2><span data-lang="en">Latest posts</span><span data-lang="de">Neueste Beiträge</span></h2>
+          <span class="post-card__meta"><span data-lang="en">fresh from the workbench</span><span data-lang="de">frisch von der Werkbank</span></span>
+        </div>
+        <div class="grid-2">
+          <a class="post-card" href="diode-duel.html" data-week="2">
+            <div class="post-card__art">
+              <svg viewBox="0 0 320 160" aria-hidden="true">
+                <rect width="320" height="160" fill="#1f3f33"/>
+                <g transform="translate(26 30)" stroke="#f4efe6" stroke-width="2.5" fill="#2f5d4c">
+                  <rect width="92" height="64" rx="4"/><path d="M0 21h92M0 43h92M31 0v64M61 0v64" fill="none"/>
+                  <path d="M46 64v26" fill="none"/>
+                </g>
+                <g fill="#ffc633"><circle cx="130" cy="28" r="9"/></g>
+                <g stroke="#ffc633" stroke-width="3" fill="none" stroke-linejoin="round">
+                  <path d="M160 80h22M182 66v28M182 66l24 14-24 14M206 64v32M206 80h18"/>
+                </g>
+                <text x="240" y="88" font-family="Montserrat, sans-serif" font-weight="800" font-size="22" fill="#e2552b">VS</text>
+                <g stroke="#4fd1c5" stroke-width="3" fill="none" stroke-linejoin="round">
+                  <path d="M160 128h22M182 114v28M182 114l24 14-24 14M206 112v32M200 112h6M206 144h6M206 128h18"/>
+                </g>
+              </svg>
+            </div>
+            <div class="post-card__body">
+              <span class="post-card__meta">LOG #12 · <span data-lang="en">Nov 2026 · 7 min read</span><span data-lang="de">Nov. 2026 · 7 Min. Lesezeit</span></span>
+              <h3><span data-lang="en">Diode duel: silicon vs. Schottky at my solar hut light</span><span data-lang="de">Dioden-Duell: Silizium gegen Schottky an meiner Solar-Hüttenleuchte</span></h3>
+              <p data-lang="en">Why my battery never got full – and how a different diode saved almost half a volt. With comments from you, and some of them are … bold.</p>
+              <p data-lang="de">Warum mein Akku nie voll wurde – und wie eine andere Diode fast ein halbes Volt gerettet hat. Mit euren Kommentaren, und manche davon sind … mutig.</p>
+              <div class="tags"><span class="tag">#schottky</span><span class="tag">#solar</span><span class="tag">#datasheet</span></div>
+            </div>
+          </a>
+          <a class="post-card" href="led-on-ac.html">
+            <div class="post-card__art">
+              <svg viewBox="0 0 320 160" aria-hidden="true">
+                <rect width="320" height="160" fill="#1f3f33"/>
+                <path d="M10 80 C40 20 70 20 100 80 S160 140 190 80 250 20 280 80 310 120 320 110" fill="none" stroke="#4fd1c5" stroke-width="3"/>
+                <g transform="translate(160 80)" stroke="#ffc633" stroke-width="3" fill="#1f3f33" stroke-linejoin="round">
+                  <path d="M-34 0h20M-14 -16v32l26 -16z M12 -16v32M12 0h22"/>
+                  <path d="M0 -24l8 -12M10 -20l8 -12" fill="none"/>
+                </g>
+                <g stroke="#e2552b" stroke-width="5" stroke-linecap="round"><path d="M196 34l26 26M222 34l-26 26"/></g>
+              </svg>
+            </div>
+            <div class="post-card__body">
+              <span class="post-card__meta">LOG #11 · <span data-lang="en">Oct 2026 · 6 min read</span><span data-lang="de">Okt. 2026 · 6 Min. Lesezeit</span></span>
+              <h3><span data-lang="en">My garden-transformer disaster: LEDs on AC</span><span data-lang="de">Mein Gartentrafo-Desaster: LEDs an Wechselspannung</span></h3>
+              <p data-lang="en">Halogen out, LEDs in – two evenings later, two LEDs were dead. What the datasheet had been trying to tell me all along.</p>
+              <p data-lang="de">Halogen raus, LEDs rein – zwei Abende später waren zwei LEDs tot. Was mir das Datenblatt die ganze Zeit sagen wollte.</p>
+              <div class="tags"><span class="tag">#led</span><span class="tag">#ac</span><span class="tag">#reversevoltage</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container grid-2" style="align-items:start">
+        <div>
+          <span class="kicker"><span data-lang="en">Quick check</span><span data-lang="de">Schnelltest</span></span>
+          <h2><span data-lang="en">Which way round?</span><span data-lang="de">Welche Richtung?</span></h2>
+          <p data-lang="en">Before we talk about lights on a bike or at the hut: an LED is a <strong>diode</strong>. It only lets current through in one direction. Turn it round and it blocks – and then the whole voltage sits across the LED.</p>
+          <p data-lang="de">Bevor wir über Licht am Rad oder an der Hütte reden: Eine LED ist eine <strong>Diode</strong>. Sie lässt Strom nur in eine Richtung durch. Dreh sie um, und sie sperrt – und dann liegt die ganze Spannung an der LED.</p>
+          <p data-lang="en">Try it with different batteries. Watch the gauge on the right: how much reverse voltage can a white LED take?</p>
+          <p data-lang="de">Probier’s mit verschiedenen Batterien. Schau auf die Anzeige rechts: Wie viel Sperrspannung verträgt eine weiße LED?</p>
+        </div>
+        <div data-sim="polarity" data-title-en="Battery, resistor, LED" data-title-de="Batterie, Widerstand, LED" data-hint-en="Pick a battery and flip it." data-hint-de="Batterie wählen und umdrehen."><noscript><p class="noscript">JavaScript needed.</p></noscript></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2><span data-lang="en">Notes from the workbench</span><span data-lang="de">Notizen von der Werkbank</span></h2>
+        </div>
+        <div class="grid-3">
+          <div class="note"><strong><span data-lang="en">Scope rule no. 1</span><span data-lang="de">Oszi-Regel Nr. 1</span></strong><br>
+            <span data-lang="en">One probe. Ground clip at the minus of the lamp. Two ground clips at different points of a circuit can short it out through the scope’s earth. Ask me how I know.</span>
+            <span data-lang="de">Ein Tastkopf. Masseklemme an den Minuspol der Lampe. Zwei Masseklemmen an verschiedenen Punkten können die Schaltung über die Erdung des Oszis kurzschließen. Frag nicht, woher ich das weiß.</span></div>
+          <div class="note"><strong><span data-lang="en">Datasheet first</span><span data-lang="de">Erst das Datenblatt</span></strong><br>
+            <span data-lang="en">Before I solder anything, I look up three things: forward voltage U_F, current I_F and the maximum reverse voltage. Saves money, nerves and LEDs.</span>
+            <span data-lang="de">Bevor ich irgendwas löte, schau ich drei Dinge nach: Durchlassspannung U_F, Strom I_F und die maximale Sperrspannung. Spart Geld, Nerven und LEDs.</span></div>
+          <div class="note" data-week-max="1"><strong><span data-lang="en">Parts drawer</span><span data-lang="de">Bauteil-Schublade</span></strong><br>
+            <span data-lang="en">Which diodes and LEDs I keep in my drawer – with my own short datasheets: see the parts corner.</span>
+            <span data-lang="de">Welche Dioden und LEDs in meiner Schublade liegen – mit meinen eigenen Kurz-Datenblättern: siehe Bauteil-Ecke.</span>
+            <br><a href="parts.html"><span data-lang="en">→ Parts corner</span><span data-lang="de">→ Bauteil-Ecke</span></a></div>
+          <div class="note" data-week="2"><strong><span data-lang="en">Spinning things bite</span><span data-lang="de">Was sich dreht, beißt</span></strong><br>
+            <span data-lang="en">Generator on the drill? Low gear, hands off the rotating parts, long hair tied back. And capacitors only the right way round.</span>
+            <span data-lang="de">Generator am Akkuschrauber? Kleiner Gang, Finger weg von drehenden Teilen, lange Haare zusammen. Und Elkos nur richtig herum.</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

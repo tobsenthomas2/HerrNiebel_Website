@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="Parts corner – Watt auf Achse" data-title-de="Bauteil-Ecke – Watt auf Achse">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parts corner – Watt auf Achse</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/week.js"></script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../vendor/fonts/montserrat.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/fira-code.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="article-head">
+    <div class="narrow">
+      <span class="kicker"><span data-lang="en">Parts corner</span><span data-lang="de">Bauteil-Ecke</span></span>
+      <h1><span data-lang="en">What’s in my parts drawer</span><span data-lang="de">Was in meiner Bauteil-Schublade liegt</span></h1>
+      <p class="lead" data-lang="en">The parts I use in my projects – with the values that matter and my own short datasheets to download.</p>
+      <p class="lead" data-lang="de">Die Bauteile aus meinen Projekten – mit den wichtigen Kennwerten und meinen eigenen Kurz-Datenblättern zum Herunterladen.</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="narrow">
+      <div class="box"><p data-lang="en">Values summarized from typical manufacturer datasheets (25&nbsp;°C). Parts of the same type from different manufacturers can differ a little – always check the datasheet of the part you actually have.</p><p data-lang="de">Werte zusammengefasst aus typischen Herstellerdatenblättern (25&nbsp;°C). Bauteile gleichen Typs verschiedener Hersteller können etwas abweichen – im Zweifel immer das Datenblatt des Bauteils prüfen, das du wirklich in der Hand hast.</p></div>
+
+      <article class="card part" style="margin-top:28px">
+        <div class="part__pic">
+          <svg viewBox="0 0 160 90" aria-hidden="true"><path d="M8 45h40M112 45h40" stroke="#9aa3a0" stroke-width="5" stroke-linecap="round"/><rect x="48" y="30" width="64" height="30" rx="7" fill="#1d2520"/><rect x="96" y="30" width="8" height="30" fill="#cfd4d2"/><text x="72" y="49" font-family="Fira Code, monospace" font-size="9" fill="#cfd4d2" text-anchor="middle">4007</text></svg>
+        </div>
+        <div>
+          <h3>1N4007</h3>
+          <p data-lang="en">The workhorse: general-purpose silicon rectifier diode in a DO-41 case. Cheap, robust, takes a lot of reverse voltage. Ring = cathode.</p>
+          <p data-lang="de">Das Arbeitstier: Silizium-Gleichrichterdiode im DO-41-Gehäuse. Billig, robust, verträgt viel Sperrspannung. Ring = Kathode.</p>
+          <div class="table-wrap"><table>
+            <tbody>
+              <tr><td><span data-lang="en">max. repetitive reverse voltage</span><span data-lang="de">max. periodische Sperrspannung</span></td><td class="num">U<sub>RRM</sub> = 1000 V</td></tr>
+              <tr><td><span data-lang="en">average forward current</span><span data-lang="de">Dauergrenzstrom (Mittelwert)</span></td><td class="num">I<sub>F(AV)</sub> = 1 A</td></tr>
+              <tr><td><span data-lang="en">surge current (8.3 ms)</span><span data-lang="de">Stoßstrom (8,3 ms)</span></td><td class="num">I<sub>FSM</sub> = 30 A</td></tr>
+              <tr><td><span data-lang="en">forward voltage</span><span data-lang="de">Durchlassspannung</span></td><td class="num">U<sub>F</sub> ≤ 1,1 V @ 1 A<br>typ. ≈ 0,86 V @ 0,5 A</td></tr>
+              <tr><td><span data-lang="en">reverse current at U<sub>RRM</sub></span><span data-lang="de">Sperrstrom bei U<sub>RRM</sub></span></td><td class="num">I<sub>R</sub> ≤ 5 µA</td></tr>
+            </tbody>
+          </table></div>
+          <a class="btn btn--small" href="docs/1N4007_datasheet.pdf" download><i data-icon="download"></i><span data-lang="en">Datasheet (PDF, EN)</span><span data-lang="de">Datenblatt (PDF, EN)</span></a>
+        </div>
+      </article>
+
+      <article class="card part" style="margin-top:22px">
+        <div class="part__pic">
+          <svg viewBox="0 0 160 120" aria-hidden="true"><path d="M80 8 l18 10 v22 l18 10 v22 l-18 10 v22 l-18 10 l-18 -10 v-22 l-18 -10 v-22 l18 -10 v-22z" fill="#c9ced0" stroke="#1d2520" stroke-width="2"/><circle cx="80" cy="60" r="22" fill="#f4efe6" stroke="#1d2520" stroke-width="2"/><circle cx="80" cy="60" r="12" fill="#fff1c2" stroke="#e2552b" stroke-width="2"/><text x="50" y="22" font-family="Fira Code, monospace" font-size="11" fill="#1d2520">+</text><text x="104" y="104" font-family="Fira Code, monospace" font-size="13" fill="#1d2520">−</text></svg>
+        </div>
+        <div>
+          <h3><span data-lang="en">3 W power LED, cool white (on 20 mm aluminium star)</span><span data-lang="de">3-W-Power-LED, kaltweiß (auf 20-mm-Alustern)</span></h3>
+          <p data-lang="en">My favourite for lamps: very bright, needs a heat sink – and is very sensitive in the reverse direction.</p>
+          <p data-lang="de">Mein Favorit für Lampen: sehr hell, braucht Kühlung – und ist in Sperrrichtung sehr empfindlich.</p>
+          <div class="table-wrap"><table>
+            <tbody>
+              <tr><td><span data-lang="en">max. forward current (DC)</span><span data-lang="de">max. Durchlassstrom (DC)</span></td><td class="num">I<sub>F</sub> = 700 mA</td></tr>
+              <tr><td><span data-lang="en">forward voltage</span><span data-lang="de">Durchlassspannung</span></td><td class="num">U<sub>F</sub> typ. 3,0 V @ 350 mA<br>typ. 3,2 V @ 700 mA (2,8 … 3,6 V)</td></tr>
+              <tr><td><span data-lang="en">max. reverse voltage</span><span data-lang="de">max. Sperrspannung</span></td><td class="num">U<sub>R</sub> = 5 V</td></tr>
+              <tr><td><span data-lang="en">luminous flux</span><span data-lang="de">Lichtstrom</span></td><td class="num">≈ 200 lm @ 700 mA</td></tr>
+              <tr><td><span data-lang="en">viewing angle</span><span data-lang="de">Abstrahlwinkel</span></td><td class="num">120°</td></tr>
+            </tbody>
+          </table></div>
+          <a class="btn btn--small" href="docs/PowerLED_3W_datasheet.pdf" download><i data-icon="download"></i><span data-lang="en">Datasheet (PDF, EN)</span><span data-lang="de">Datenblatt (PDF, EN)</span></a>
+        </div>
+      </article>
+
+      <article class="card part" style="margin-top:22px" data-week="2">
+        <div class="part__pic">
+          <svg viewBox="0 0 160 90" aria-hidden="true"><path d="M8 45h40M112 45h40" stroke="#9aa3a0" stroke-width="5" stroke-linecap="round"/><rect x="48" y="30" width="64" height="30" rx="7" fill="#1d2520"/><rect x="96" y="30" width="8" height="30" fill="#cfd4d2"/><text x="72" y="49" font-family="Fira Code, monospace" font-size="9" fill="#cfd4d2" text-anchor="middle">5817</text></svg>
+        </div>
+        <div>
+          <h3>1N5817 <span class="tag">Schottky</span></h3>
+          <p data-lang="en">Schottky diode: metal–semiconductor junction instead of a PN junction. Clearly lower forward voltage than silicon. Same DO-41 case, ring = cathode. Look at <em>all</em> the values before you use it.</p>
+          <p data-lang="de">Schottky-Diode: Metall-Halbleiter-Übergang statt PN-Übergang. Deutlich kleinere Durchlassspannung als Silizium. Gleiches DO-41-Gehäuse, Ring = Kathode. Vor dem Einsatz <em>alle</em> Werte anschauen.</p>
+          <div class="table-wrap"><table>
+            <tbody>
+              <tr><td><span data-lang="en">max. repetitive reverse voltage</span><span data-lang="de">max. periodische Sperrspannung</span></td><td class="num">U<sub>RRM</sub> = 20 V</td></tr>
+              <tr><td><span data-lang="en">average forward current</span><span data-lang="de">Dauergrenzstrom (Mittelwert)</span></td><td class="num">I<sub>F(AV)</sub> = 1 A</td></tr>
+              <tr><td><span data-lang="en">surge current (8.3 ms)</span><span data-lang="de">Stoßstrom (8,3 ms)</span></td><td class="num">I<sub>FSM</sub> = 25 A</td></tr>
+              <tr><td><span data-lang="en">forward voltage</span><span data-lang="de">Durchlassspannung</span></td><td class="num">U<sub>F</sub> ≤ 0,45 V @ 1 A<br>typ. ≈ 0,37 V @ 0,5 A</td></tr>
+              <tr><td><span data-lang="en">reverse current at U<sub>RRM</sub></span><span data-lang="de">Sperrstrom bei U<sub>RRM</sub></span></td><td class="num">I<sub>R</sub> ≤ 1 mA (25 °C)<br>≤ 10 mA (100 °C)</td></tr>
+            </tbody>
+          </table></div>
+          <a class="btn btn--small" href="docs/1N5817_datasheet.pdf" download><i data-icon="download"></i><span data-lang="en">Datasheet (PDF, EN)</span><span data-lang="de">Datenblatt (PDF, EN)</span></a>
+        </div>
+      </article>
+
+      <article class="card part" style="margin-top:22px" data-week="2">
+        <div class="part__pic">
+          <svg viewBox="0 0 160 90" aria-hidden="true"><path d="M8 45h40M112 45h40" stroke="#9aa3a0" stroke-width="5" stroke-linecap="round"/><rect x="48" y="30" width="64" height="30" rx="7" fill="#1d2520"/><rect x="96" y="30" width="8" height="30" fill="#cfd4d2"/><text x="72" y="49" font-family="Fira Code, monospace" font-size="9" fill="#cfd4d2" text-anchor="middle">5819</text></svg>
+        </div>
+        <div>
+          <h3>1N5819 <span class="tag">Schottky</span></h3>
+          <p data-lang="en">The bigger sister of the 1N5817 – same family, same case, different values.</p>
+          <p data-lang="de">Die große Schwester der 1N5817 – gleiche Familie, gleiches Gehäuse, andere Werte.</p>
+          <div class="table-wrap"><table>
+            <tbody>
+              <tr><td><span data-lang="en">max. repetitive reverse voltage</span><span data-lang="de">max. periodische Sperrspannung</span></td><td class="num">U<sub>RRM</sub> = 40 V</td></tr>
+              <tr><td><span data-lang="en">average forward current</span><span data-lang="de">Dauergrenzstrom (Mittelwert)</span></td><td class="num">I<sub>F(AV)</sub> = 1 A</td></tr>
+              <tr><td><span data-lang="en">surge current (8.3 ms)</span><span data-lang="de">Stoßstrom (8,3 ms)</span></td><td class="num">I<sub>FSM</sub> = 25 A</td></tr>
+              <tr><td><span data-lang="en">forward voltage</span><span data-lang="de">Durchlassspannung</span></td><td class="num">U<sub>F</sub> ≤ 0,60 V @ 1 A<br>typ. ≈ 0,45 V @ 0,5 A</td></tr>
+              <tr><td><span data-lang="en">reverse current at U<sub>RRM</sub></span><span data-lang="de">Sperrstrom bei U<sub>RRM</sub></span></td><td class="num">I<sub>R</sub> ≤ 1 mA (25 °C)<br>≤ 10 mA (100 °C)</td></tr>
+            </tbody>
+          </table></div>
+          <a class="btn btn--small" href="docs/1N5819_datasheet.pdf" download><i data-icon="download"></i><span data-lang="en">Datasheet (PDF, EN)</span><span data-lang="de">Datenblatt (PDF, EN)</span></a>
+        </div>
+      </article>
+
+      <hr>
+      <div class="btn-row">
+        <a class="btn btn--ghost" href="basics.html"><i data-icon="left"></i><span data-lang="en">How it works</span><span data-lang="de">So funktioniert’s</span></a>
+        <a class="btn" href="index.html"><span data-lang="en">All posts</span><span data-lang="de">Alle Beiträge</span><i data-icon="right"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>
