@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 380" role="img" aria-label="Night scene: mountain hut with a small wind turbine and a bicycle with its headlight on">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#152a22"/>
+      <stop offset="1" stop-color="#2f5d4c"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffe9a3" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#ffc633" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="win" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffe9a3" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#ffc633" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame"><rect width="520" height="380" rx="22"/></clipPath>
+    <style>
+      .rotor { transform-origin: 382px 128px; animation: spin 6s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @media (prefers-reduced-motion: reduce) { .rotor { animation: none; } }
+    </style>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="520" height="380" fill="url(#sky)"/>
+    <g fill="#f4efe6">
+      <circle cx="60" cy="50" r="1.6"/><circle cx="120" cy="90" r="1.2"/><circle cx="200" cy="40" r="1.8"/><circle cx="280" cy="70" r="1.2"/>
+      <circle cx="330" cy="30" r="1.4"/><circle cx="470" cy="60" r="1.6"/><circle cx="430" cy="105" r="1.1"/><circle cx="40" cy="130" r="1.1"/>
+    </g>
+    <circle cx="455" cy="48" r="20" fill="#f4efe6"/>
+    <circle cx="465" cy="42" r="18" fill="#1d3a2f"/>
+    <!-- Berge -->
+    <path d="M-10 260 L90 140 L150 200 L230 100 L330 220 L400 170 L530 270 V380 H-10z" fill="#3e7461"/>
+    <path d="M90 140 L112 166 L100 160 L88 170 L76 157z M230 100 L258 134 L244 128 L230 140 L214 130 L206 128z" fill="#f4efe6"/>
+    <path d="M-10 300 Q120 230 260 270 T530 250 V380 H-10z" fill="#28513f"/>
+    <!-- Hütte -->
+    <g transform="translate(300 214)">
+      <circle cx="40" cy="38" r="46" fill="url(#win)"/>
+      <rect x="0" y="22" width="78" height="48" fill="#8a5a3c" stroke="#1d2520" stroke-width="3"/>
+      <path d="M-10 26 L39 -12 L88 26z" fill="#5b3a29" stroke="#1d2520" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="14" y="34" width="20" height="18" fill="#ffc633" stroke="#1d2520" stroke-width="2.5"/>
+      <rect x="46" y="38" width="18" height="32" fill="#5b3a29" stroke="#1d2520" stroke-width="2.5"/>
+      <path d="M24 34v18M14 43h20" stroke="#1d2520" stroke-width="2"/>
+    </g>
+    <!-- Windrad -->
+    <path d="M382 130 L386 246 H378z" fill="#f4efe6" stroke="#1d2520" stroke-width="2"/>
+    <g class="rotor">
+      <path d="M382 128 L377 72 Q382 66 387 72z" fill="#f4efe6" stroke="#1d2520" stroke-width="2"/>
+      <path d="M382 128 L432 152 Q433 160 425 160z" fill="#f4efe6" stroke="#1d2520" stroke-width="2"/>
+      <path d="M382 128 L334 159 Q327 155 331 149z" fill="#f4efe6" stroke="#1d2520" stroke-width="2"/>
+    </g>
+    <circle cx="382" cy="128" r="7" fill="#e2552b" stroke="#1d2520" stroke-width="2"/>
+    <!-- Kabel zur Hütte -->
+    <path d="M382 246 Q365 262 352 270" fill="none" stroke="#1d2520" stroke-width="2" stroke-dasharray="4 4"/>
+    <!-- Weg -->
+    <path d="M-10 350 Q140 300 300 330 T540 320" fill="none" stroke="#d6cab5" stroke-width="10" stroke-linecap="round" opacity=".35"/>
+    <!-- Fahrrad mit Licht -->
+    <path d="M196 300 L520 230 V370 L196 316z" fill="url(#beam)"/>
+    <g fill="none" stroke="#f4efe6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="78" cy="318" r="32"/>
+      <circle cx="182" cy="318" r="32"/>
+      <path d="M78 318 L112 266 L160 266 L182 318 M112 266 L130 318 L160 266 M130 318 H78 M160 266 L154 250 L170 246 M112 266 L106 254 H96 M100 254 H120"/>
+    </g>
+    <g stroke="#f4efe6" stroke-width="1.4" opacity=".7">
+      <path d="M78 286v64M46 318h64M57 297l42 42M99 297l-42 42M182 286v64M150 318h64M161 297l42 42M203 297l-42 42"/>
+    </g>
+    <!-- Dynamo am Vorderrad + Lampe -->
+    <rect x="168" y="270" width="10" height="20" rx="3" fill="#e2552b" stroke="#1d2520" stroke-width="2" transform="rotate(-25 173 280)"/>
+    <path d="M186 300 h12 v-8 h-12z" fill="#ffc633" stroke="#1d2520" stroke-width="2"/>
+    <path d="M173 285 Q182 296 188 296" fill="none" stroke="#1d2520" stroke-width="1.6"/>
+  </g>
+</svg>

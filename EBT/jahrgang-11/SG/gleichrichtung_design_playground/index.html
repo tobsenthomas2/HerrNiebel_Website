@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="Watt auf Achse – self-built power for bike, hut &amp; trail" data-title-de="Watt auf Achse – selbstgebauter Strom für Rad, Hütte &amp; Trail">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Watt auf Achse – self-built power for bike, hut &amp; trail</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/week.js"></script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+  <script defer src="assets/js/home.js"></script>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <main>
+    <!-- Einstieg: links Vorstellung (7), rechts Werkbank (5) -->
+    <section class="intro">
+      <div class="container grid12">
+        <div class="intro__text">
+          <div class="intro__meta"><span class="stamp">Werkstatt-Log</span><span class="kicker" style="margin:0">since 2019 · 1,400 m · 0 sockets</span></div>
+          <h1><span data-lang="en">I build light out of <em>legs</em>, wind &amp; solder.</span><span data-lang="de">Ich baue Licht aus <em>Beinen</em>, Wind &amp; Lötzinn.</span></h1>
+          <p class="lead" data-lang="en">Hi, I’m <strong>Kathi</strong> – bike mechanic by trade, tinkerer by heart. Our family hut sits at 1,400&nbsp;m and has <mark>no power line at all</mark>. So everything that lights up there, I build myself: dynamo lights, a bit of solar, a small wind turbine from the flea market.</p>
+          <p class="lead" data-lang="de">Servus, ich bin <strong>Kathi</strong> – gelernte Zweiradmechatronikerin, Bastlerin aus Leidenschaft. Unsere Familienhütte liegt auf 1.400&nbsp;m und hat <mark>überhaupt keinen Stromanschluss</mark>. Also bau ich alles, was dort leuchtet, selbst: Dynamolicht, ein bisschen Solar, ein kleines Windrad vom Flohmarkt.</p>
+          <p class="lead" data-lang="en">This blog is my workshop log. I write down <mark>what worked, what went up in smoke</mark> – and what the datasheet had been trying to tell me all along.</p>
+          <p class="lead" data-lang="de">Dieser Blog ist mein Werkstatt-Logbuch. Ich schreib auf, <mark>was funktioniert hat, was in Rauch aufgegangen ist</mark> – und was mir das Datenblatt die ganze Zeit sagen wollte.</p>
+          <div class="intro__links">
+            <a class="arrow-link" href="#stream"><span data-lang="en">Browse the log</span><span data-lang="de">Zum Logbuch</span><i data-icon="right"></i></a>
+            <a class="arrow-link" href="about.html"><span data-lang="en">More about me</span><span data-lang="de">Mehr über mich</span><i data-icon="right"></i></a>
+          </div>
+        </div>
+
+        <aside class="intro__aside" aria-labelledby="bench-title">
+          <div class="scribble scribble--bench" aria-hidden="true">
+            <span data-lang="en">what’s on my bench right now</span><span data-lang="de">was grad auf meiner Werkbank liegt</span>
+            <svg width="70" height="40" viewBox="0 0 70 40"><path d="M4 6 C18 30 40 36 62 28 M62 28 l-9 -7 M62 28 l-10 5" fill="none" stroke="#b23a26" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="bench">
+            <div class="bench__head"><span id="bench-title"><span data-lang="en">On the workbench</span><span data-lang="de">Aktuell auf der Werkbank</span></span><span class="bench__live">live-ish</span></div>
+            <ul class="bench__list">
+              <li class="bench__item">
+                <div class="bench__row"><span class="bench__name"><span data-lang="en">Terrace LEDs on the garden transformer</span><span data-lang="de">Terrassen-LEDs am Gartentrafo</span></span><span class="bench__pct">100 %</span></div>
+                <div class="bar bar--done"><span style="--p:100%"></span></div>
+                <div class="bench__note"><span data-lang="en">running for 3 weeks – no casualties ✓</span><span data-lang="de">läuft seit 3 Wochen – keine Toten mehr ✓</span></div>
+              </li>
+              <li class="bench__item" data-week-max="1">
+                <div class="bench__row"><span class="bench__name"><span data-lang="en">Solar light for the outhouse</span><span data-lang="de">Solarleuchte fürs Klohäuschen</span></span><span class="bench__pct">60 %</span></div>
+                <div class="bar"><span style="--p:60%"></span></div>
+                <div class="bench__note"><span data-lang="en">battery never gets full … the diode?</span><span data-lang="de">Akku wird nie voll … die Diode?</span></div>
+              </li>
+              <li class="bench__item" data-week="2">
+                <div class="bench__row"><span class="bench__name"><span data-lang="en">Solar light for the outhouse</span><span data-lang="de">Solarleuchte fürs Klohäuschen</span></span><span class="bench__pct">100 %</span></div>
+                <div class="bar bar--done"><span style="--p:100%"></span></div>
+                <div class="bench__note"><span data-lang="en">new diode in, battery full by 3 pm ✓</span><span data-lang="de">neue Diode drin, Akku um 15 Uhr voll ✓</span></div>
+              </li>
+              <li class="bench__item" data-week-max="1">
+                <div class="bench__row"><span class="bench__name"><span data-lang="en">Flea-market wind turbine</span><span data-lang="de">Flohmarkt-Windrad</span></span><span class="bench__pct">20 %</span></div>
+                <div class="bar"><span style="--p:20%"></span></div>
+                <div class="bench__note"><span data-lang="en">controller removed. three wires. head scratching.</span><span data-lang="de">Regler ausgebaut. Drei Kabel. Kopfkratzen.</span></div>
+              </li>
+              <li class="bench__item" data-week="2">
+                <div class="bench__row"><span class="bench__name"><span data-lang="en">Flea-market wind turbine</span><span data-lang="de">Flohmarkt-Windrad</span></span><span class="bench__pct">45 %</span></div>
+                <div class="bar"><span style="--p:45%"></span></div>
+                <div class="bench__note"><span data-lang="en">measured it. now: which diodes?</span><span data-lang="de">vermessen. Jetzt: welche Dioden?</span></div>
+              </li>
+            </ul>
+            <dl class="bench__facts">
+              <dt><span data-lang="en">soldering iron</span><span data-lang="de">Lötkolben</span></dt><dd>340 °C</dd>
+              <dt><span data-lang="en">hut, this morning</span><span data-lang="de">Hütte, heute früh</span></dt><dd>6 °C · <span data-lang="en">foehn</span><span data-lang="de">Föhn</span></dd>
+              <dt><span data-lang="en">coffee</span><span data-lang="de">Kaffee</span></dt><dd><span data-lang="en">cup no.</span><span data-lang="de">Tasse Nr.</span> <span class="coffee__n" id="coffee-n">3</span><button class="coffee" type="button" id="coffee-btn" aria-label="+1 coffee">+1 ☕</button></dd>
+              <dt><span data-lang="en">open browser tabs</span><span data-lang="de">offene Browser-Tabs</span></dt><dd><span data-lang="en">too many (datasheets)</span><span data-lang="de">zu viele (Datenblätter)</span></dd>
+            </dl>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Herausgehobener Beitrag -->
+    <section class="featured-wrap" aria-label="Featured post">
+      <div class="container">
+        <article class="featured" data-week-max="1">
+          <div class="featured__text">
+            <div class="featured__label"><span class="badge"><span data-lang="en">latest post</span><span data-lang="de">neuester Beitrag</span></span><span class="meta">LOG #11 · <span data-lang="en">Oct 2026 · 6 min</span><span data-lang="de">Okt. 2026 · 6 Min.</span></span></div>
+            <h2><a href="led-on-ac.html"><span data-lang="en">My garden-transformer disaster: <em>LEDs on AC</em></span><span data-lang="de">Mein Gartentrafo-Desaster: <em>LEDs an Wechselspannung</em></span></a></h2>
+            <p data-lang="en">Halogen out, LEDs in – two evenings later, two LEDs were dead. Spoiler: the datasheet had warned me. I just hadn’t read the right line.</p>
+            <p data-lang="de">Halogen raus, LEDs rein – zwei Abende später waren zwei LEDs tot. Spoiler: Das Datenblatt hatte mich gewarnt. Ich hatte nur die falsche Zeile gelesen.</p>
+            <div class="featured__tags"><span class="tag">#led</span><span class="tag">#ac</span><span class="tag">#reversevoltage</span></div>
+            <div><a class="btn" href="led-on-ac.html"><span data-lang="en">Read the post</span><span data-lang="de">Beitrag lesen</span><i data-icon="right"></i></a></div>
+          </div>
+          <div class="featured__sketch">
+            <div class="sketch" data-sketch="ac"></div>
+          </div>
+        </article>
+
+        <article class="featured" data-week="2">
+          <div class="featured__text">
+            <div class="featured__label"><span class="badge"><span data-lang="en">latest post</span><span data-lang="de">neuester Beitrag</span></span><span class="meta">LOG #12 · <span data-lang="en">Nov 2026 · 7 min</span><span data-lang="de">Nov. 2026 · 7 Min.</span></span></div>
+            <h2><a href="diode-duel.html"><span data-lang="en">Diode duel: <em>silicon vs. Schottky</em> at my solar hut light</span><span data-lang="de">Dioden-Duell: <em>Silizium gegen Schottky</em> an meiner Solar-Hüttenleuchte</span></a></h2>
+            <p data-lang="en">Why my battery never got full – and how a different diode saved almost half a volt. With comments from you, and some of them are … bold.</p>
+            <p data-lang="de">Warum mein Akku nie voll wurde – und wie eine andere Diode fast ein halbes Volt gerettet hat. Mit euren Kommentaren, und manche davon sind … mutig.</p>
+            <div class="featured__tags"><span class="tag">#schottky</span><span class="tag">#solar</span><span class="tag">#datasheet</span></div>
+            <div><a class="btn" href="diode-duel.html"><span data-lang="en">Read the post</span><span data-lang="de">Beitrag lesen</span><i data-icon="right"></i></a></div>
+          </div>
+          <div class="featured__sketch">
+            <div class="sketch" data-sketch="duel"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Beitrags-Stream -->
+    <section class="stream" id="stream">
+      <div class="container">
+        <div class="stream__head">
+          <h2><span data-lang="en">The log</span><span data-lang="de">Das Logbuch</span></h2>
+          <div class="filter" role="group" aria-label="Filter by topic">
+            <button type="button" data-filter="all" aria-pressed="true"><span data-lang="en">all</span><span data-lang="de">alle</span><span class="filter__count"></span></button>
+            <button type="button" data-filter="led" aria-pressed="false">#led<span class="filter__count"></span></button>
+            <button type="button" data-filter="diodes" aria-pressed="false"><span data-lang="en">#diodes</span><span data-lang="de">#dioden</span><span class="filter__count"></span></button>
+            <button type="button" data-filter="generators" aria-pressed="false" data-week="2"><span data-lang="en">#generators</span><span data-lang="de">#generatoren</span><span class="filter__count"></span></button>
+            <button type="button" data-filter="measuring" aria-pressed="false"><span data-lang="en">#measuring</span><span data-lang="de">#messen</span><span class="filter__count"></span></button>
+            <button type="button" data-filter="notes" aria-pressed="false"><span data-lang="en">#notes</span><span data-lang="de">#notizen</span><span class="filter__count"></span></button>
+          </div>
+        </div>
+
+        <div class="stream__grid">
+          <a class="post press" href="led-on-ac.html" data-topics="led measuring" data-week="2">
+            <div class="post__top"><span class="post__num"></span><span class="post__type post__type--post"><span data-lang="en">post</span><span data-lang="de">Beitrag</span></span></div>
+            <h3><span data-lang="en">My garden-transformer disaster: LEDs on AC</span><span data-lang="de">Mein Gartentrafo-Desaster: LEDs an Wechselspannung</span></h3>
+            <p data-lang="en">Peak value, reverse voltage and two ways to protect an LED.</p>
+            <p data-lang="de">Scheitelwert, Sperrspannung und zwei Wege, eine LED zu schützen.</p>
+            <div class="post__foot"><span class="post__date">LOG #11 · <span data-lang="en">Oct 2026</span><span data-lang="de">Okt. 2026</span></span><span class="tag">#led</span><span class="tag">#ac</span></div>
+          </a>
+
+          <a class="post press" href="basics.html" data-topics="diodes measuring generators">
+            <div class="post__top"><span class="post__num"></span><span class="post__type post__type--guide"><span data-lang="en">guide</span><span data-lang="de">Grundlagen</span></span></div>
+            <h3><span data-lang="en">From AC to “almost DC”: rectifiers at the workbench</span><span data-lang="de">Von Wechsel- zu „fast Gleich“: Gleichrichter an der Werkbank</span></h3>
+            <p data-lang="en">û, T and f, the diode as a one-way valve, half-wave rectifier – with a slow-motion simulator.</p>
+            <p data-lang="de">û, T und f, die Diode als Rückschlagventil, Einweggleichrichter – mit Zeitlupen-Simulator.</p>
+            <div class="post__foot"><span class="post__date"><span data-lang="en">evergreen</span><span data-lang="de">Dauerbrenner</span></span><span class="tag">#diode</span><span class="tag">#scope</span></div>
+          </a>
+
+          <div class="post post--note" data-topics="measuring notes">
+            <div class="post__top"><span class="post__num"></span><span class="post__type post__type--note"><span data-lang="en">note</span><span data-lang="de">Notiz</span></span></div>
+            <p class="post__quote" data-lang="en">Scope rule no. 1: one probe, ground clip at the minus of the lamp. Two ground clips on different points = short circuit through earth. Ask me how I know.</p>
+            <p class="post__quote" data-lang="de">Oszi-Regel Nr. 1: ein Tastkopf, Masseklemme an den Minuspol der Lampe. Zwei Masseklemmen an verschiedenen Punkten = Kurzschluss über die Erde. Frag nicht, woher ich das weiß.</p>
+            <div class="post__foot"><span class="post__date"><span data-lang="en">from the workbench</span><span data-lang="de">von der Werkbank</span></span><span class="tag">#scope</span></div>
+          </div>
+
+          <a class="post press" href="parts.html" data-topics="led diodes">
+            <div class="post__top"><span class="post__num"></span><span class="post__type"><span data-lang="en">reference</span><span data-lang="de">Nachschlagen</span></span></div>
+            <h3><span data-lang="en">What’s in my parts drawer</span><span data-lang="de">Was in meiner Bauteil-Schublade liegt</span></h3>
+            <p data-lang="en">Diodes and LEDs with the values that matter – and my own short datasheets as PDF.</p>
+            <p data-lang="de">Dioden und LEDs mit den wichtigen Kennwerten – und meinen eigenen Kurz-Datenblättern als PDF.</p>
+            <div class="post__foot"><span class="post__date"><span data-lang="en">updated regularly</span><span data-lang="de">wird laufend ergänzt</span></span><span class="tag">#datasheet</span></div>
+          </a>
+
+          <a class="post press" href="small-wind.html" data-topics="generators diodes" data-week="2">
+            <div class="post__top"><span class="post__num"></span><span class="post__type"><span data-lang="en">advanced</span><span data-lang="de">Fortgeschritten</span></span></div>
+            <h3><span data-lang="en">Three wires instead of two: my small wind turbine</span><span data-lang="de">Drei Kabel statt zwei: mein kleines Windrad</span></h3>
+            <p data-lang="en">Three-phase AC, my measurements – and six diodes for three wires.</p>
+            <p data-lang="de">Drehstrom, meine Messwerte – und sechs Dioden für drei Kabel.</p>
+            <div class="post__foot"><span class="post__date"><span data-lang="en">for advanced tinkerers</span><span data-lang="de">für Fortgeschrittene</span></span><span class="tag">#3phase</span><span class="tag">#wind</span></div>
+          </a>
+
+          <div class="post post--note" data-topics="led diodes notes">
+            <div class="post__top"><span class="post__num"></span><span class="post__type post__type--note"><span data-lang="en">note</span><span data-lang="de">Notiz</span></span></div>
+            <p class="post__quote" data-lang="en">Datasheet first: U<sub>F</sub>, I<sub>F</sub> and the maximum reverse voltage. Saves money, nerves and LEDs.</p>
+            <p class="post__quote" data-lang="de">Erst das Datenblatt: U<sub>F</sub>, I<sub>F</sub> und die maximale Sperrspannung. Spart Geld, Nerven und LEDs.</p>
+            <div class="post__foot"><span class="post__date"><span data-lang="en">from the workbench</span><span data-lang="de">von der Werkbank</span></span><span class="tag">#datasheet</span></div>
+          </div>
+
+          <div class="post post--note" data-topics="generators notes" data-week="2">
+            <div class="post__top"><span class="post__num"></span><span class="post__type post__type--note"><span data-lang="en">note</span><span data-lang="de">Notiz</span></span></div>
+            <p class="post__quote" data-lang="en">Generator on the drill? Low gear, hands off the rotating parts, long hair tied back. Capacitors only the right way round.</p>
+            <p class="post__quote" data-lang="de">Generator am Akkuschrauber? Kleiner Gang, Finger weg von drehenden Teilen, lange Haare zusammen. Elkos nur richtig herum.</p>
+            <div class="post__foot"><span class="post__date"><span data-lang="en">from the workbench</span><span data-lang="de">von der Werkbank</span></span><span class="tag">#safety</span></div>
+          </div>
+
+          <a class="post press" href="about.html" data-topics="">
+            <div class="post__top"><span class="post__num"></span><span class="post__type"><span data-lang="en">about</span><span data-lang="de">über mich</span></span></div>
+            <h3><span data-lang="en">Kathi, bike mechanic with a soldering iron</span><span data-lang="de">Kathi, Zweiradmechatronikerin mit Lötkolben</span></h3>
+            <p data-lang="en">Who writes here, why the hut has no power line – and my four workshop rules.</p>
+            <p data-lang="de">Wer hier schreibt, warum die Hütte keinen Strom hat – und meine vier Werkstatt-Regeln.</p>
+            <div class="post__foot"><span class="post__date">since 2019</span></div>
+          </a>
+
+          <p class="stream__empty" hidden><span data-lang="en">Nothing here yet for this topic. Back to the workbench!</span><span data-lang="de">Zu diesem Thema gibt’s noch nichts. Zurück an die Werkbank!</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>
