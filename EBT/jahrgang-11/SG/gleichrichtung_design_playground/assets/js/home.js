@@ -101,7 +101,8 @@
     var pts = [];
     for (var x = x0; x <= xEnd; x += 4) pts.push([x, y0 - A * Math.sin((x - x0) / P * 2 * Math.PI)]);
     el("path", { d: wobble(pts, 0.7), stroke: INK, "stroke-width": 2.6, fill: "none", "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
-    el("text", { x: x0 + 5 * P / 4 + 14, y: y0 - A + 6, "font-family": MONO, "font-size": 12, fill: INK }, svg).textContent = "û ≈ +17 V";
+    var peak2 = x0 + 5 * P / 4, uhatLbl = el("text", { x: peak2 + 14, y: y0 - A + 6, "font-family": MONO, "font-size": 12, fill: INK }, svg);
+    uhatLbl.textContent = "û ≈ +17 V";
     el("text", { x: x0 + 3 * P / 4 - 30, y: y0 + A + 22, "font-family": MONO, "font-size": 12, fill: INK }, svg).textContent = "≈ −17 V";
     // LED-Kritzelei rechts
     var lx = 466, ly = 118;
@@ -129,6 +130,7 @@
       x = Math.max(x0, Math.min(xEnd, x));
       var u = 17 * Math.sin((x - x0) / P * 2 * Math.PI), y = y0 - A * u / 17;
       cur.setAttribute("x1", x); cur.setAttribute("x2", x);
+      uhatLbl.setAttribute("opacity", Math.abs(x - peak2) < 70 ? 0 : 1);
       dot.setAttribute("cx", x); dot.setAttribute("cy", y);
       val.setAttribute("x", Math.min(x + 10, xEnd - 70)); val.setAttribute("y", y + (u >= 0 ? -12 : 24));
       val.textContent = "u = " + (u >= 0 ? "+" : "−") + SITE.num(Math.abs(u), 0) + " V";

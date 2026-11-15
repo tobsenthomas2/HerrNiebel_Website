@@ -78,10 +78,6 @@
         '<div class="container nav__bar">' +
           '<a class="brand" href="index.html" aria-label="Watt auf Achse – Blog">' + BRAND + "</a>" +
           '<div class="nav__links">' + links + "</div>" +
-          '<div class="lang-switch" role="group" aria-label="Language / Sprache">' +
-            '<button type="button" data-set-lang="en" aria-pressed="true">EN</button>' +
-            '<button type="button" data-set-lang="de" aria-pressed="false">DE</button>' +
-          "</div>" +
           '<button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel">' +
             '<span class="visually-hidden">Menu</span>' + SITE.icon("menu") + "</button>" +
         "</div>" +
@@ -197,7 +193,7 @@
       "<strong>" + both({ en: "Stuck at the workbench?", de: "Hängst du fest?" }) + "</strong>" +
       "<p>" + both({ en: "Ask the Schrauber-Chat – my AI workshop assistant answers right away.", de: "Frag im Schrauber-Chat – mein KI-Werkstattassistent antwortet sofort." }) + "</p>" +
       '<button class="btn btn--small support-teaser__open" type="button">' + SITE.icon("chat") + both({ en: "Open chat", de: "Chat öffnen" }) + "</button></div>";
-    document.body.appendChild(wrap);
+    dock().appendChild(wrap);
 
     var dlg = document.createElement("dialog");
     dlg.className = "support-dialog";
@@ -281,16 +277,72 @@
       document.head.appendChild(s);
     }
 
+    document.addEventListener("langdock:open", hideTeaser);
     if (cfg.hinweisBeimLaden !== false) {
-      setTimeout(function () {
-        if (dlg.open) return;
+      var shown = false;
+      var showTeaser = function () {
+        if (shown || dlg.open) return;
+        if (document.documentElement.classList.contains("langdock-open")) return;   // erst die Sprachkarte
+        shown = true;
         wrap.classList.add("show-teaser");
         var sec = cfg.hinweisSekunden === undefined ? 10 : +cfg.hinweisSekunden;
         if (sec > 0) timer = setTimeout(hideTeaser, sec * 1000);
-      }, 1500);
+      };
+      setTimeout(showTeaser, 1500);
+      document.addEventListener("langdock:close", function () { setTimeout(showTeaser, 1200); });
       teaser.addEventListener("mouseenter", function () { clearTimeout(timer); });
       teaser.addEventListener("focusin", function () { clearTimeout(timer); });
     }
+  }
+
+  /* ---------- Dock rechts: Sprach-Knopf über dem Schrauber-Chat ---------- */
+  function dock() {
+    var d = document.getElementById("dock");
+    if (!d) { d = document.createElement("div"); d.className = "dock"; d.id = "dock"; document.body.appendChild(d); }
+    return d;
+  }
+
+  // Schwebende Sprachkarte: auf der Startseite (ohne ?lang=) beim Öffnen ausgeklappt,
+  // sonst nur der kleine Knopf. Schließen → klein über dem Chat-Reiter; Klick darauf → Karte wieder da.
+  function buildLangDock() {
+    var file = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    var startOpen = file === "index.html" && !new URLSearchParams(location.search).has("lang");
+    var box = document.createElement("div");
+    box.className = "langdock";
+    box.innerHTML =
+      '<div class="langdock__card" id="langdock-card" role="group" aria-labelledby="langdock-title">' +
+        '<button class="langdock__close" type="button" aria-label="Close / Schließen">' + SITE.icon("close") + "</button>" +
+        '<p class="langdock__hand" id="langdock-title">English or Deutsch?</p>' +
+        '<p class="langdock__sub">language · Sprache</p>' +
+        '<div class="langdock__opts">' +
+          '<button type="button" data-set-lang="en" aria-pressed="false"><b>EN</b> English</button>' +
+          '<button type="button" data-set-lang="de" aria-pressed="false"><b>DE</b> Deutsch</button>' +
+        "</div>" +
+      "</div>" +
+      '<button class="langdock__mini" type="button" aria-controls="langdock-card" aria-expanded="false">' +
+        '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h10M8 3v2M5 5c0 4 3 7 7 8M11 5c0 3-3 7-7 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 21l4-10 4 10M14.5 17.5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '<span class="langdock__code"></span><span class="visually-hidden">Language / Sprache</span></button>';
+    dock().appendChild(box);
+    var mini = box.querySelector(".langdock__mini"), card = box.querySelector(".langdock__card"), code = box.querySelector(".langdock__code");
+    function setOpen(open, focus) {
+      box.classList.toggle("is-open", open);
+      card.hidden = !open;
+      mini.setAttribute("aria-expanded", String(open));
+      document.documentElement.classList.toggle("langdock-open", open);
+      document.dispatchEvent(new CustomEvent(open ? "langdock:open" : "langdock:close"));
+      if (focus) (open ? card.querySelector('[aria-pressed="true"]') || card.querySelector("[data-set-lang]") : mini).focus();
+    }
+    function showCode() { code.textContent = SITE.lang().toUpperCase(); }
+    mini.addEventListener("click", function () { setOpen(!box.classList.contains("is-open"), true); });
+    box.querySelector(".langdock__close").addEventListener("click", function () { setOpen(false, true); });
+    box.addEventListener("keydown", function (e) { if (e.key === "Escape" && box.classList.contains("is-open")) setOpen(false, true); });
+    card.querySelectorAll("[data-set-lang]").forEach(function (b) {
+      b.addEventListener("click", function () { setTimeout(function () { setOpen(false, false); }, 650); });
+    });
+    document.addEventListener("langchange", showCode);
+    showCode();
+    setOpen(startOpen, false);
+    SITE.setLang(SITE.lang(), false);                  // aria-pressed der neuen Knöpfe setzen
   }
 
   buildNav();
@@ -299,6 +351,7 @@
   verdicts();
   SITE.setLang(fromUrl(), false);
   buildToc();
+  buildLangDock();
   buildSupport();
   document.dispatchEvent(new CustomEvent("siteready"));
 })();
