@@ -55,5 +55,5 @@ Lernwebsite nach `KI_Website_Guide.md` für **EBT 12**, Lernfelder „Elektrotec
 - Für Tablets/iPads geprüft (hoch und quer).
 - Sprache EN Standard, Umschalter EN | DE (`?lang=de`).
 - Schrift Inter lokal als woff2 (`assets/fonts/`, SIL Open Font License 1.1).
-- Downloads: `docs/Projektsteckbrief_Vorlage.pdf` (Woche 1) und `docs/Pflichtenheft_Vorlage.pdf` (Woche 2) – leere Vorlagen ohne Kundenfall.
+- Downloads: `docs/Projektsteckbrief_Vorlage.pdf` (Woche 1), `docs/07_Rollenkarten.pdf` (Woche 1, Beispiel einer möglichen Rollenverteilung) und `docs/Pflichtenheft_Vorlage.pdf` (Woche 2).
 - Alle Firmen, Personen und Produkte sind erfunden. Technische Angaben sind für den Unterricht vereinfacht; maßgeblich sind Normen und Herstellerangaben.
