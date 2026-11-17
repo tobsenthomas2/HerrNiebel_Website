@@ -5,6 +5,7 @@
 (function () {
   "use strict";
   var LT = window.LT, svgEl = LT.svg;
+  var T = LT.t;
   var COLS = 5, ROWS = 4, DX = 112, DY = 92, OX = 76, OY = 62, R = 23;
   var C = { electron: "#1f5bd8", hole: "#d3262b", bond: "#c4ccd5", atom: "#eef1f4", ink: "#17202b" };
 
@@ -14,18 +15,18 @@
     var ui = LT.lab(host, { icon: "lab" });
     var st = { mode: "eigen", temp: 1 };
 
-    LT.segmented(ui.controls, "Kristall", [
-      { value: "eigen", label: "Reines Silizium" },
-      { value: "n", label: "N-dotiert (Phosphor)" },
-      { value: "p", label: "P-dotiert (Bor)" }
+    LT.segmented(ui.controls, T("Crystal", "Kristall"), [
+      { value: "eigen", label: T("Pure silicon", "Reines Silizium") },
+      { value: "n", label: T("N-doped (phosphorus)", "N-dotiert (Phosphor)") },
+      { value: "p", label: T("P-doped (boron)", "P-dotiert (Bor)") }
     ], "eigen", function (v) { st.mode = v; tempCtl.el.style.display = v === "eigen" ? "" : "none"; build(); });
 
-    var TEMPS = ["sehr kalt (–200 °C)", "Raumtemperatur", "warm (80 °C)", "heiß (150 °C)"];
+    var TEMPS = [T("very cold (–200 °C)", "sehr kalt (–200 °C)"), T("room temperature", "Raumtemperatur"), "warm (80 °C)", T("hot (150 °C)", "heiß (150 °C)")];
     var tempCtl = LT.slider(ui.controls, {
-      label: "Temperatur", min: 0, max: 3, step: 1, value: 1,
+      label: T("Temperature", "Temperatur"), min: 0, max: 3, step: 1, value: 1,
       format: function (v) { return TEMPS[v]; },
       onInput: function (v) { st.temp = v; build(); },
-      help: "Wärme bricht einzelne Bindungen auf – es entstehen freie Elektronen und Löcher."
+      help: T("Heat breaks individual bonds – free electrons and holes are created.", "Wärme bricht einzelne Bindungen auf – es entstehen freie Elektronen und Löcher.")
     });
     var text = document.createElement("div");
     text.className = "pn-explain";
@@ -36,10 +37,10 @@
     var legend = document.createElement("div");
     legend.className = "legend";
     legend.innerHTML =
-      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="11" fill="' + C.atom + '" stroke="#6b7684" stroke-width="1.5"/></svg>Atom mit 4 Außenelektronen (Si)</span>' +
-      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="9" cy="13" r="4" fill="#4b5563"/><circle cx="17" cy="13" r="4" fill="#4b5563"/></svg>Elektronenpaarbindung</span>' +
-      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="6" fill="' + C.electron + '"/></svg>freies Elektron</span>' +
-      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="6" fill="#fff" stroke="' + C.hole + '" stroke-width="2" stroke-dasharray="3 2"/></svg>Loch (fehlendes Elektron)</span>';
+      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="11" fill="' + C.atom + '" stroke="#6b7684" stroke-width="1.5"/></svg>' + T('Atom with 4 valence electrons (Si)', 'Atom mit 4 Außenelektronen (Si)') + '</span>' +
+      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="9" cy="13" r="4" fill="#4b5563"/><circle cx="17" cy="13" r="4" fill="#4b5563"/></svg>' + T('Covalent bond', 'Elektronenpaarbindung') + '</span>' +
+      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="6" fill="' + C.electron + '"/></svg>' + T('free electron', 'freies Elektron') + '</span>' +
+      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="6" fill="#fff" stroke="' + C.hole + '" stroke-width="2" stroke-dasharray="3 2"/></svg>' + T('Hole (missing electron)', 'Loch (fehlendes Elektron)') + '</span>';
     ui.stage.appendChild(legend);
 
     var atoms = [], slots = [], frees = [], holes = [], dopant = null, tick = 0;
@@ -138,13 +139,13 @@
     function updateText() {
       var t;
       if (st.mode === "eigen") {
-        t = "<strong>Reines Silizium (Eigenleitung)</strong><p>Jedes Si-Atom ist über vier Elektronenpaarbindungen mit seinen Nachbarn verbunden. " +
-          (st.temp === 0 ? "Bei sehr tiefer Temperatur sind alle Elektronen gebunden – der Kristall isoliert nahezu." :
-           "Durch Wärme brechen einzelne Bindungen auf. Es entstehen freie Elektronen und Löcher – je wärmer, desto mehr. Deshalb leiten Halbleiter bei Wärme besser, Metalle dagegen schlechter.") + "</p>";
+        t = T("<strong>Pure silicon (intrinsic conduction)</strong><p>Each Si atom is connected to its neighbours by four covalent bonds. ", "<strong>Reines Silizium (Eigenleitung)</strong><p>Jedes Si-Atom ist über vier Elektronenpaarbindungen mit seinen Nachbarn verbunden. ") +
+          (st.temp === 0 ? T("At very low temperature all electrons are bound – the crystal is almost an insulator.", "Bei sehr tiefer Temperatur sind alle Elektronen gebunden – der Kristall isoliert nahezu.") :
+           T("Heat breaks individual bonds. Free electrons and holes are created – the warmer, the more. This is why semiconductors conduct better when warm, whereas metals conduct worse.", "Durch Wärme brechen einzelne Bindungen auf. Es entstehen freie Elektronen und Löcher – je wärmer, desto mehr. Deshalb leiten Halbleiter bei Wärme besser, Metalle dagegen schlechter.")) + "</p>";
       } else if (st.mode === "n") {
-        t = "<strong>N-Dotierung mit Phosphor (5 Außenelektronen)</strong><p>Vier Elektronen gehen Bindungen ein, das fünfte ist nur schwach gebunden und wird zum <b>freien Elektron</b>. Zurück bleibt ein ortsfestes positives Ion. Die beweglichen Ladungsträger sind negativ: N-Leiter.</p>";
+        t = T("<strong>N-doping with phosphorus (5 valence electrons)</strong><p>Four electrons form bonds, the fifth is only weakly bound and becomes a <b>free electron</b>. A fixed positive ion remains. The mobile charge carriers are negative: N-type.</p>", "<strong>N-Dotierung mit Phosphor (5 Außenelektronen)</strong><p>Vier Elektronen gehen Bindungen ein, das fünfte ist nur schwach gebunden und wird zum <b>freien Elektron</b>. Zurück bleibt ein ortsfestes positives Ion. Die beweglichen Ladungsträger sind negativ: N-Leiter.</p>");
       } else {
-        t = "<strong>P-Dotierung mit Bor (3 Außenelektronen)</strong><p>Für die vierte Bindung fehlt ein Elektron – es entsteht ein <b>Loch</b>. Springt ein Nachbarelektron hinein, wandert das Loch weiter. Zurück bleibt ein ortsfestes negatives Ion. Die beweglichen Ladungsträger wirken positiv: P-Leiter.</p>";
+        t = T("<strong>P-doping with boron (3 valence electrons)</strong><p>One electron is missing for the fourth bond – a <b>hole</b> is created. If a neighbouring electron jumps into it, the hole moves on. A fixed negative ion remains. The mobile charge carriers act as positive: P-type.</p>", "<strong>P-Dotierung mit Bor (3 Außenelektronen)</strong><p>Für die vierte Bindung fehlt ein Elektron – es entsteht ein <b>Loch</b>. Springt ein Nachbarelektron hinein, wandert das Loch weiter. Zurück bleibt ein ortsfestes negatives Ion. Die beweglichen Ladungsträger wirken positiv: P-Leiter.</p>");
       }
       text.innerHTML = t;
       svg.setAttribute("aria-label", text.textContent);

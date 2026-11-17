@@ -17,6 +17,7 @@
 (function () {
   "use strict";
   var LT = (window.LT = window.LT || {});
+  var T = LT.t;
   var INK = "#17202b", RED = "#c42b2b";
   var SW = 2.5; // Linienstärke Leitungen und Schaltzeichen
 
@@ -171,19 +172,19 @@
   LT.artSymbol = function (o) {
     o = o || {};
     var led = o.type === "led";
-    var s = '<svg class="art-sym" viewBox="0 0 240 130" role="img" aria-label="Schaltzeichen ' + (led ? "Leuchtdiode" : "Diode") + ' mit Anode und Kathode">';
+    var s = '<svg class="art-sym" viewBox="0 0 240 130" role="img" aria-label="' + T("Circuit symbol of a " + (led ? "light-emitting diode" : "diode") + " with anode and cathode", "Schaltzeichen " + (led ? "Leuchtdiode" : "Diode") + " mit Anode und Kathode") + '">';
     s += sym.wire("M20 74 H220");
     s += sym.diode({ cx: 120, cy: 74, s: 44, dir: "right", led: led, lead: 0 });
     s += sym.bmk({ x: 120, y: 74, side: "top", gap: led ? 58 : 34, name: led ? "-P1" : "-R1" });
     s += '<text x="20" y="62" font-size="15" font-weight="700" fill="' + INK + '">A</text>';
     s += '<text x="220" y="62" text-anchor="end" font-size="15" font-weight="700" fill="' + INK + '">K</text>';
-    s += '<text x="20" y="112" font-size="12.5" fill="#4a5563">Anode</text><text x="220" y="112" text-anchor="end" font-size="12.5" fill="#4a5563">Kathode</text>';
+    s += '<text x="20" y="112" font-size="12.5" fill="#4a5563">Anode</text><text x="220" y="112" text-anchor="end" font-size="12.5" fill="#4a5563">' + T("Cathode", "Kathode") + '</text>';
     return s + "</svg>";
   };
 
   /** Grundschaltung LED mit Vorwiderstand und Zählpfeilen */
   function schGrundLED() {
-    var s = '<svg viewBox="0 0 440 330" role="img" aria-label="Grundschaltung: Spannungsquelle -G1, Vorwiderstand -R1 und Leuchtdiode -P1 in Reihe, mit Zählpfeilen für U b, U RV, U F und I F">';
+    var s = '<svg viewBox="0 0 440 330" role="img" aria-label="' + T('Basic circuit: voltage source -G1, series resistor -R1 and light-emitting diode -P1 in series, with reference arrows for U b, U RV, U F and I F', 'Grundschaltung: Spannungsquelle -G1, Vorwiderstand -R1 und Leuchtdiode -P1 in Reihe, mit Zählpfeilen für U b, U RV, U F und I F') + '">';
     s += sym.wire("M120 141 V50 H320 V275 H120 V189");
     s += sym.source({ cx: 120, cy: 165 });
     s += sym.bmk({ x: 120, y: 165, gap: 34, name: "-G1", value: "U<tspan baseline-shift='sub' font-size='72%'>b</tspan>" });
@@ -201,14 +202,14 @@
 
   /** Rechenbeispiel Reihenschaltung: Quelle, Widerstand, Diode (Durchlass- oder Sperrrichtung) */
   function schBeispiel(fwd) {
-    var s = '<svg viewBox="0 0 420 300" role="img" aria-label="Beispiel: Quelle -G1 5 V, Widerstand -R1 1 Kiloohm und Diode -R2 in ' + (fwd ? "Durchlassrichtung" : "Sperrrichtung") + '">';
+    var s = '<svg viewBox="0 0 420 300" role="img" aria-label="' + T("Example: source -G1 5 V, resistor -R1 1 kilohm and diode -R2 in the " + (fwd ? "forward direction" : "reverse direction"), "Beispiel: Quelle -G1 5 V, Widerstand -R1 1 Kiloohm und Diode -R2 in " + (fwd ? "Durchlassrichtung" : "Sperrrichtung")) + '">';
     s += sym.wire("M110 126 V50 H300 V250 H110 V174");
     s += sym.source({ cx: 110, cy: 150 });
     s += sym.bmk({ x: 110, y: 150, gap: 34, name: "-G1", value: "5 V" });
     s += sym.resistor({ cx: 300, cy: 110 });
     s += sym.bmk({ x: 300, y: 110, name: "-R1", value: "1 kΩ" });
     s += sym.diode({ cx: 300, cy: 196, s: 34, dir: fwd ? "down" : "up", lead: 0 });
-    s += sym.bmk({ x: 300, y: 196, gap: 28, name: "-R2", value: "Si-Diode" });
+    s += sym.bmk({ x: 300, y: 196, gap: 28, name: "-R2", value: T("Si diode", "Si-Diode") });
     if (fwd) {
       s += sym.arrow({ x1: 340, y1: 92, x2: 340, y2: 128, color: "#e0a100" });
       s += '<text x="352" y="116" font-size="15" font-weight="700" fill="#8a6400">I</text>';
@@ -220,7 +221,7 @@
 
   /** Verpolschutz (Kurzform für die Startseite) */
   function schVerpol() {
-    var s = '<svg viewBox="0 0 440 280" role="img" aria-label="Verpolschutz: Spannungsquelle -G1, Diode -R1 in Reihe und Gleichstrommotor -M1">';
+    var s = '<svg viewBox="0 0 440 280" role="img" aria-label="' + T('Reverse polarity protection: voltage source -G1, diode -R1 in series and DC motor -M1', 'Verpolschutz: Spannungsquelle -G1, Diode -R1 in Reihe und Gleichstrommotor -M1') + '">';
     s += sym.wire("M90 116 V60 H360 V108 M360 172 V230 H90 V164");
     s += sym.source({ cx: 90, cy: 140, r: 24 });
     s += sym.bmk({ x: 90, y: 140, gap: 36, name: "-G1" });

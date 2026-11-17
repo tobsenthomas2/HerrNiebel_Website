@@ -6,28 +6,29 @@
 (function () {
   "use strict";
   var LT = (window.LT = window.LT || {});
+  var T = LT.t;
   var I20 = 0.02;
 
   var DEVICES = {
     si: {
-      id: "si", name: "Si-Diode BAY 44", short: "Si-Diode", color: "#4b5563", dash: "",
+      id: "si", name: T("Si diode BAY 44", "Si-Diode BAY 44"), short: T("Si diode", "Si-Diode"), color: "#4b5563", dash: "",
       U20: 0.70, nVt: 0.05, Rs: 2.4,
       IFmax: 0.25, URmax: 50, UBR: 70, Ptot: 0.25
     },
     red: {
-      id: "red", name: "LED rot L-7113SURDK", short: "LED rot", color: "#d3262b", dash: "",
+      id: "red", name: T("LED red L-7113SURDK", "LED rot L-7113SURDK"), short: T("LED red", "LED rot"), color: "#d3262b", dash: "",
       U20: 1.95, nVt: 0.05, Rs: 7,
       IFmax: 0.030, URmax: 5, Ptot: 0.075, lambdaD: 630, lambdaPeak: 645, material: "AlGaInP", glow: "#ff3b2f"
     },
     green: {
-      id: "green", name: "LED grün L-7113SGD", short: "LED grün", color: "#14873d", dash: "7 5",
+      id: "green", name: T("LED green L-7113SGD", "LED grün L-7113SGD"), short: T("LED green", "LED grün"), color: "#14873d", dash: "7 5",
       U20: 2.20, nVt: 0.05, Rs: 12,
       IFmax: 0.025, URmax: 5, Ptot: 0.0625, lambdaD: 568, lambdaPeak: 565, material: "GaP", glow: "#38e06a"
     },
     blue: {
-      id: "blue", name: "LED blau L-7113MBTL", short: "LED blau", color: "#1f5bd8", dash: "9 4 2 4",
+      id: "blue", name: T("LED blue L-7113MBTL", "LED blau L-7113MBTL"), short: T("LED blue", "LED blau"), color: "#1f5bd8", dash: "9 4 2 4",
       U20: 3.80, nVt: 0.06, Rs: 13,
-      IFmax: 0.030, URmax: 5, Ptot: 0.105, lambdaD: 466, lambdaPeak: 430, material: "GaN auf SiC", glow: "#3d7bff"
+      IFmax: 0.030, URmax: 5, Ptot: 0.105, lambdaD: 466, lambdaPeak: 430, material: T("GaN on SiC", "GaN auf SiC"), glow: "#3d7bff"
     }
   };
 

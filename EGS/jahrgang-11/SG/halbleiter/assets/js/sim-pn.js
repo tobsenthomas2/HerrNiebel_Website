@@ -7,6 +7,7 @@
 (function () {
   "use strict";
   var LT = window.LT;
+  var T = LT.t;
   var C = {
     hole: "#d3262b", electron: "#1f5bd8", ink: "#17202b", ink3: "#6b7684", line: "#d4dae1",
     pBg: "#fdf1f0", nBg: "#eef3fd", rlz: "#f3f4f6", metal: "#4b5563", current: "#e0a100"
@@ -21,14 +22,14 @@
     var st = { mode: "none", k: 0, color: "red", dev: isLED ? D.red : D.si };
 
     /* ---------- Bedienelemente ---------- */
-    LT.segmented(ui.controls, "Spannungsquelle", [
-      { value: "none", label: "Keine" },
-      { value: "fwd", label: "Durchlass" },
-      { value: "rev", label: "Sperr" }
+    LT.segmented(ui.controls, T("Voltage source", "Spannungsquelle"), [
+      { value: "none", label: T("None", "Keine") },
+      { value: "fwd", label: T("Forward", "Durchlass") },
+      { value: "rev", label: T("Reverse", "Sperr") }
     ], "none", function (v) { st.mode = v; slider.input.disabled = v === "none"; if (v !== "none" && st.k === 0) slider.set(v === "fwd" ? 40 : 40); st.k = slider.get(); refresh(); });
 
     if (isLED) {
-      LT.segmented(ui.controls, "Halbleiterwerkstoff", [
+      LT.segmented(ui.controls, T("Semiconductor material", "Halbleiterwerkstoff"), [
         { value: "red", html: '<span class="dot" style="background:#d3262b"></span>AlGaInP' },
         { value: "green", html: '<span class="dot" style="background:#14873d"></span>GaP' },
         { value: "blue", html: '<span class="dot" style="background:#1f5bd8"></span>GaN' }
@@ -36,7 +37,7 @@
     }
 
     var slider = LT.slider(ui.controls, {
-      label: "Spannung U", min: 0, max: 100, step: 1, value: 0,
+      label: T("Voltage U", "Spannung U"), min: 0, max: 100, step: 1, value: 0,
       format: function () { return st.mode === "none" ? "0 V" : LT.num(voltage(), st.mode === "rev" ? 1 : 2) + " V"; },
       onInput: function (v) { st.k = v; refresh(); }
     });
@@ -57,11 +58,11 @@
     var legend = document.createElement("div");
     legend.className = "legend";
     legend.innerHTML =
-      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="10" fill="#fff" stroke="' + C.electron + '" stroke-width="2"/><path d="M8 13h10" stroke="' + C.electron + '" stroke-width="2.4"/></svg>negatives Ion (ortsfest)</span>' +
-      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="10" fill="#fff" stroke="' + C.hole + '" stroke-width="2"/><path d="M8 13h10M13 8v10" stroke="' + C.hole + '" stroke-width="2.4"/></svg>positives Ion (ortsfest)</span>' +
-      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="7" fill="' + C.hole + '"/><path d="M9.5 13h7M13 9.5v7" stroke="#fff" stroke-width="2"/></svg>Loch (beweglich)</span>' +
-      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="7" fill="' + C.electron + '"/><path d="M9.5 13h7" stroke="#fff" stroke-width="2"/></svg>Elektron (beweglich)</span>' +
-      (isLED ? '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="5" fill="#ffc400"/><circle cx="13" cy="13" r="10" fill="none" stroke="#ffc400" stroke-opacity=".5" stroke-width="2"/></svg>Photon (Licht)</span>' : "");
+      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="10" fill="#fff" stroke="' + C.electron + '" stroke-width="2"/><path d="M8 13h10" stroke="' + C.electron + '" stroke-width="2.4"/></svg>' + T('negative ion (fixed)', 'negatives Ion (ortsfest)') + '</span>' +
+      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="10" fill="#fff" stroke="' + C.hole + '" stroke-width="2"/><path d="M8 13h10M13 8v10" stroke="' + C.hole + '" stroke-width="2.4"/></svg>' + T('positive ion (fixed)', 'positives Ion (ortsfest)') + '</span>' +
+      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="7" fill="' + C.hole + '"/><path d="M9.5 13h7M13 9.5v7" stroke="#fff" stroke-width="2"/></svg>' + T('hole (mobile)', 'Loch (beweglich)') + '</span>' +
+      '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="7" fill="' + C.electron + '"/><path d="M9.5 13h7" stroke="#fff" stroke-width="2"/></svg>' + T('electron (mobile)', 'Elektron (beweglich)') + '</span>' +
+      (isLED ? '<span><svg viewBox="0 0 26 26" style="width:20px;height:20px"><circle cx="13" cy="13" r="5" fill="#ffc400"/><circle cx="13" cy="13" r="10" fill="none" stroke="#ffc400" stroke-opacity=".5" stroke-width="2"/></svg>' + T('photon (light)', 'Photon (Licht)') + '</span>' : "");
     ui.stage.appendChild(legend);
 
     function voltage() {
@@ -247,12 +248,12 @@
 
       // Beschriftung Kristall
       ctx.fillStyle = C.ink; ctx.font = "700 " + Math.round(LT.clamp(W / 50, 12, 15)) + "px " + font; ctx.textAlign = "center";
-      ctx.fillText("P-Leiter", G.x0 + G.half / 2, G.y1 + 22);
-      ctx.fillText("N-Leiter", G.xj + G.half / 2, G.y1 + 22);
+      ctx.fillText(T("P-type", "P-Leiter"), G.x0 + G.half / 2, G.y1 + 22);
+      ctx.fillText(T("N-type", "N-Leiter"), G.xj + G.half / 2, G.y1 + 22);
       ctx.font = "600 " + Math.round(LT.clamp(W / 58, 11, 13)) + "px " + font; ctx.fillStyle = "#8a6400";
-      ctx.fillText("Sperrschicht (RLZ)", G.xj, G.y1 + 42);
+      ctx.fillText(T("Depletion layer", "Sperrschicht (RLZ)"), G.xj, G.y1 + 42);
       ctx.fillStyle = C.ink3; ctx.textAlign = "left"; ctx.fillText("Anode (A)", G.x0 - 7, G.y1 + 42);
-      ctx.textAlign = "right"; ctx.fillText("Kathode (K)", G.x1 + 7, G.y1 + 42);
+      ctx.textAlign = "right"; ctx.fillText(T("Cathode (K)", "Kathode (K)"), G.x1 + 7, G.y1 + 42);
 
       // Stromkreis (Schaltzeichen nach DIN EN 60617, Kennzeichnung oberhalb)
       var lx = G.x0 - 3.5, rx = G.x1 + 3.5, ty = G.top, bx = G.xj, R0 = 16;
@@ -325,31 +326,31 @@
       var U = voltage(), I = current(), steps, title, kind;
       var thr = st.dev.U20 * (isLED ? 0.9 : 0.8);
       if (st.mode === "none") {
-        title = "Ohne äußere Spannung";
-        steps = ["Am Übergang wandern Elektronen aus dem N-Leiter in den P-Leiter und besetzen dort Löcher.",
-                 "Zurück bleiben nur ortsfeste Ionen: Die Sperrschicht (Raumladungszone) enthält keine freien Ladungsträger."];
-        LT.status(status, "info", "Keine Spannung angelegt", "Die Sperrschicht trennt P- und N-Leiter.");
+        title = T("Without external voltage", "Ohne äußere Spannung");
+        steps = [T("At the junction, electrons move from the N-type region into the P-type region and occupy holes there.", "Am Übergang wandern Elektronen aus dem N-Leiter in den P-Leiter und besetzen dort Löcher."),
+                 T("Only fixed ions remain: the depletion layer (space charge region) contains no free charge carriers.", "Zurück bleiben nur ortsfeste Ionen: Die Sperrschicht (Raumladungszone) enthält keine freien Ladungsträger.")];
+        LT.status(status, "info", T("No voltage applied", "Keine Spannung angelegt"), T("The depletion layer separates the P-type and N-type regions.", "Die Sperrschicht trennt P- und N-Leiter."));
       } else if (st.mode === "fwd") {
-        title = "Durchlassrichtung: Plus an P (Anode), Minus an N (Kathode)";
+        title = T("Forward direction: plus at P (anode), minus at N (cathode)", "Durchlassrichtung: Plus an P (Anode), Minus an N (Kathode)");
         if (U < thr) {
-          steps = ["Die Quelle drückt Löcher und Elektronen in Richtung Sperrschicht.",
-                   "Die Sperrschicht wird schmaler. Unterhalb der Schleusenspannung fließt aber noch kaum Strom."];
-          LT.status(status, "warn", "Spannung unterhalb der Schleusenspannung", isLED ? "Die LED bleibt dunkel." : "Die Leuchte -P1 bleibt aus.");
+          steps = [T("The source pushes holes and electrons towards the depletion layer.", "Die Quelle drückt Löcher und Elektronen in Richtung Sperrschicht."),
+                   T("The depletion layer becomes narrower. Below the threshold voltage, however, hardly any current flows yet.", "Die Sperrschicht wird schmaler. Unterhalb der Schleusenspannung fließt aber noch kaum Strom.")];
+          LT.status(status, "warn", T("Voltage below the threshold voltage", "Spannung unterhalb der Schleusenspannung"), isLED ? T("The LED stays dark.", "Die LED bleibt dunkel.") : T("The light -P1 stays off.", "Die Leuchte -P1 bleibt aus."));
         } else {
-          steps = ["Die Ladungsträger werden in Richtung Sperrschicht gedrückt.",
-                   "Die Sperrschicht wird sehr schmal, Elektronen und Löcher rekombinieren an der Grenzfläche. Der PN-Übergang leitet." +
-                   (isLED ? " Bei jeder Rekombination wird Energie als Licht frei." : "")];
-          LT.status(status, "ok", isLED ? "Die LED leuchtet" : "Der PN-Übergang leitet – die Leuchte -P1 leuchtet", "Strom fließt in Durchlassrichtung.");
+          steps = [T("The charge carriers are pushed towards the depletion layer.", "Die Ladungsträger werden in Richtung Sperrschicht gedrückt."),
+                   T("The depletion layer becomes very narrow, electrons and holes recombine at the interface. The PN junction conducts.", "Die Sperrschicht wird sehr schmal, Elektronen und Löcher rekombinieren an der Grenzfläche. Der PN-Übergang leitet.") +
+                   (isLED ? T(" With every recombination, energy is released as light.", " Bei jeder Rekombination wird Energie als Licht frei.") : "")];
+          LT.status(status, "ok", isLED ? T("The LED lights up", "Die LED leuchtet") : T("The PN junction conducts – the light -P1 is on", "Der PN-Übergang leitet – die Leuchte -P1 leuchtet"), T("Current flows in the forward direction.", "Strom fließt in Durchlassrichtung."));
         }
       } else {
-        title = "Sperrrichtung: Minus an P (Anode), Plus an N (Kathode)";
-        steps = ["Die Quelle zieht Löcher und Elektronen von der Sperrschicht weg zu den Anschlüssen.",
-                 "Die Sperrschicht wird breiter. Der PN-Übergang sperrt, es fließt praktisch kein Strom."];
-        if (isLED && U > 5) LT.status(status, "bad", "Maximale Sperrspannung überschritten", "LEDs vertragen in Sperrrichtung meist nur etwa 5 V. Darüber kann die LED zerstört werden.");
-        else LT.status(status, "info", "Der PN-Übergang sperrt", isLED ? "Die LED bleibt dunkel." : "Die Leuchte -P1 bleibt aus.");
+        title = T("Reverse direction: minus at P (anode), plus at N (cathode)", "Sperrrichtung: Minus an P (Anode), Plus an N (Kathode)");
+        steps = [T("The source pulls holes and electrons away from the depletion layer towards the terminals.", "Die Quelle zieht Löcher und Elektronen von der Sperrschicht weg zu den Anschlüssen."),
+                 T("The depletion layer becomes wider. The PN junction blocks, practically no current flows.", "Die Sperrschicht wird breiter. Der PN-Übergang sperrt, es fließt praktisch kein Strom.")];
+        if (isLED && U > 5) LT.status(status, "bad", T("Maximum reverse voltage exceeded", "Maximale Sperrspannung überschritten"), T("In the reverse direction LEDs usually only withstand about 5 V. Above this the LED can be destroyed.", "LEDs vertragen in Sperrrichtung meist nur etwa 5 V. Darüber kann die LED zerstört werden."));
+        else LT.status(status, "info", T("The PN junction blocks", "Der PN-Übergang sperrt"), isLED ? T("The LED stays dark.", "Die LED bleibt dunkel.") : T("The light -P1 stays off.", "Die Leuchte -P1 bleibt aus."));
       }
       explain.innerHTML = "<strong>" + title + "</strong><ol>" + steps.map(function (s) { return "<li>" + s + "</li>"; }).join("") + "</ol>";
-      canvas.setAttribute("aria-label", "PN-Übergang: " + title + ". " + steps.join(" "));
+      canvas.setAttribute("aria-label", T("PN junction: ", "PN-Übergang: ") + title + ". " + steps.join(" "));
     }
 
     /* ---------- Schleife ---------- */

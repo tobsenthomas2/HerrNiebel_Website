@@ -5,15 +5,15 @@
    ========================================================================= */
 (function () {
   "use strict";
-  var LT = window.LT, svgEl = LT.svg;
+  var LT = window.LT, svgEl = LT.svg, T = LT.t;
   var MAT = [
-    { w: "GaAsSi", c: "Infrarot", nm: 930, uf: 1.2 },
-    { w: "GaAsP", c: "Rot", nm: 655, uf: 1.6 },
+    { w: "GaAsSi", c: T("Infrared", "Infrarot"), nm: 930, uf: 1.2 },
+    { w: "GaAsP", c: T("Red", "Rot"), nm: 655, uf: 1.6 },
     { w: "GaAsPN", c: "Orange", nm: 625, uf: 1.6 },
-    { w: "GaAsPN", c: "Gelb", nm: 590, uf: 1.8 },
-    { w: "GaPN", c: "Grün", nm: 555, uf: 1.8 },
-    { w: "InGaN", c: "Blau", nm: 465, uf: 3.0 },
-    { w: "GaN/InGaN", c: "Weiß", nm: null, uf: 3.5 }
+    { w: "GaAsPN", c: T("Yellow", "Gelb"), nm: 590, uf: 1.8 },
+    { w: "GaPN", c: T("Green", "Grün"), nm: 555, uf: 1.8 },
+    { w: "InGaN", c: T("Blue", "Blau"), nm: 465, uf: 3.0 },
+    { w: "GaN/InGaN", c: T("White", "Weiß"), nm: null, uf: 3.5 }
   ];
   var PRODUCTS = [
     { n: "L-7113SURDK", nm: 630 }, { n: "L-7113SGD", nm: 568 }, { n: "L-7113MBTL", nm: 466 }
@@ -22,7 +22,7 @@
   LT.$$('[data-sim="spektrum"]').forEach(function (host) {
     var ui = LT.lab(host, { icon: "bulb", top: true });
     var st = { sel: 1 };
-    var picker = LT.segmented(ui.controls, "Werkstoff wählen", MAT.map(function (m, i) {
+    var picker = LT.segmented(ui.controls, T("Select material", "Werkstoff wählen"), MAT.map(function (m, i) {
       var col = m.nm ? (m.nm > 780 ? "#5b2a2a" : LT.phys.wavelengthToRGB(m.nm)) : "#f4f4f4";
       return { value: String(i), html: '<span class="dot" style="background:' + col + ';box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)"></span>' + m.c };
     }), "1", function (v) { st.sel = +v; draw(); });
@@ -41,17 +41,17 @@
       var w = Math.max(300, bar.clientWidth || 600), h = 160, m = { l: 10, r: 10 };
       var x0 = 380, x1 = 1000;
       function sx(nm) { return m.l + (nm - x0) / (x1 - x0) * (w - m.l - m.r); }
-      var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, role: "img", "aria-label": "Spektrum von 380 bis 1000 Nanometer mit den Wellenlängen typischer LED-Werkstoffe" });
+      var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, role: "img", "aria-label": T("Spectrum from 380 to 1000 nanometres with the wavelengths of typical LED materials", "Spektrum von 380 bis 1000 Nanometer mit den Wellenlängen typischer LED-Werkstoffe") });
       for (var nm = 380; nm < 780; nm += 4) svgEl("rect", { x: sx(nm), y: 48, width: sx(nm + 4) - sx(nm) + 0.6, height: 34, fill: LT.phys.wavelengthToRGB(nm + 2) }, svg);
       var defs = svgEl("defs", null, svg), pat = svgEl("pattern", { id: "ir-hatch", width: 8, height: 8, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" }, defs);
       svgEl("rect", { width: 8, height: 8, fill: "#3a2626" }, pat); svgEl("line", { x1: 0, y1: 0, x2: 0, y2: 8, stroke: "#5b3a3a", "stroke-width": 4 }, pat);
       svgEl("rect", { x: sx(780), y: 48, width: sx(1000) - sx(780), height: 34, fill: "url(#ir-hatch)" }, svg);
-      var t = svgEl("text", { x: (sx(780) + sx(1000)) / 2, y: 70, "text-anchor": "middle", "font-size": 12, "font-weight": 650, fill: "#f2dede" }, svg); t.textContent = "Infrarot, unsichtbar";
+      var t = svgEl("text", { x: (sx(780) + sx(1000)) / 2, y: 70, "text-anchor": "middle", "font-size": 12, "font-weight": 650, fill: "#f2dede" }, svg); t.textContent = T("Infrared, invisible", "Infrarot, unsichtbar");
       [400, 500, 600, 700, 800, 900, 1000].forEach(function (v) {
         svgEl("line", { x1: sx(v), x2: sx(v), y1: 82, y2: 88, stroke: "#17202b" }, svg);
         var tt = svgEl("text", { x: sx(v), y: 102, "text-anchor": v === 1000 ? "end" : "middle", "font-size": 12, fill: "#6b7684" }, svg); tt.textContent = v;
       });
-      var u = svgEl("text", { x: w - m.r, y: 120, "text-anchor": "end", "font-size": 12, "font-weight": 600, fill: "#4a5563" }, svg); u.textContent = "Wellenlänge λ in nm";
+      var u = svgEl("text", { x: w - m.r, y: 120, "text-anchor": "end", "font-size": 12, "font-weight": 600, fill: "#4a5563" }, svg); u.textContent = T("Wavelength λ in nm", "Wellenlänge λ in nm");
       // Werkstoffe (oben)
       var order = MAT.filter(function (q) { return q.nm; }).sort(function (a, b) { return a.nm - b.nm; });
       MAT.forEach(function (mt, i) {
@@ -81,13 +81,13 @@
       info.innerHTML =
         '<div class="spec-led" style="--glow:' + glow + '"><span></span></div>' +
         '<dl class="readout readout--list">' +
-        "<div><dt>Werkstoff</dt><dd>" + mt.w + "</dd></div>" +
-        "<div><dt>Farbe, Bereich</dt><dd>" + mt.c + "</dd></div>" +
-        "<div><dt>Wellenlänge</dt><dd>" + (mt.nm ? mt.nm + " nm" : "– (Mischlicht)") + "</dd></div>" +
-        "<div><dt>Photonenenergie</dt><dd>" + (E ? "≈ " + LT.num(E, 2) + " eV" : "–") + "</dd></div>" +
-        "<div><dt>Durchlassspannung U<sub>F</sub></dt><dd>≈ " + LT.num(mt.uf, 1) + " V</dd></div>" +
+        "<div>" + T("<dt>Material</dt>", "<dt>Werkstoff</dt>") + "<dd>" + mt.w + "</dd></div>" +
+        "<div>" + T("<dt>Colour, range</dt>", "<dt>Farbe, Bereich</dt>") + "<dd>" + mt.c + "</dd></div>" +
+        "<div>" + T("<dt>Wavelength</dt>", "<dt>Wellenlänge</dt>") + "<dd>" + (mt.nm ? mt.nm + " nm" : T("– (mixed light)", "– (Mischlicht)")) + "</dd></div>" +
+        "<div>" + T("<dt>Photon energy</dt>", "<dt>Photonenenergie</dt>") + "<dd>" + (E ? "≈ " + LT.num(E, 2) + " eV" : "–") + "</dd></div>" +
+        "<div>" + T("<dt>Forward voltage U<sub>F</sub></dt>", "<dt>Durchlassspannung U<sub>F</sub></dt>") + "<dd>≈ " + LT.num(mt.uf, 1) + " V</dd></div>" +
         "</dl>" +
-        '<p class="ctl__help">' + (mt.nm ? (mt.nm > 780 ? "Infrarot-LEDs sieht das Auge nicht – sie stecken in Fernbedienungen und Lichtschranken." : "Je kürzer die Wellenlänge, desto energiereicher das Licht und desto größer die Durchlassspannung.") : "Weißes Licht entsteht durch Mischen von Rot, Grün und Blau oder durch einen blauen Chip mit Leuchtstoffschicht (Phosphor).") + "</p>";
+        '<p class="ctl__help">' + (mt.nm ? (mt.nm > 780 ? T("The eye cannot see infrared LEDs – they are found in remote controls and light barriers.", "Infrarot-LEDs sieht das Auge nicht – sie stecken in Fernbedienungen und Lichtschranken.") : T("The shorter the wavelength, the more energetic the light and the higher the forward voltage.", "Je kürzer die Wellenlänge, desto energiereicher das Licht und desto größer die Durchlassspannung.")) : T("White light is produced by mixing red, green and blue or by a blue chip with a phosphor layer.", "Weißes Licht entsteht durch Mischen von Rot, Grün und Blau oder durch einen blauen Chip mit Leuchtstoffschicht (Phosphor).")) + "</p>";
     }
     draw();
     var lw = 0;

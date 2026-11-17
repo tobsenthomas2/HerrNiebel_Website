@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en" data-title-de="Applikation: Verpolschutz und Diodenschaltungen | LUMIATECH Semiconductor">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Applikation: Verpolschutz und Diodenschaltungen | LUMIATECH Semiconductor</title>
-  <meta name="description" content="So schützen Sie Gleichstrommotoren mit einer Diode vor Verpolung, wählen die passende Diode aus und berechnen Schaltungen mit Dioden.">
+  <title>Application: reverse polarity protection and diode circuits | LUMIATECH Semiconductor</title>
+  <meta name="description" content="How to protect DC motors against reverse polarity with a diode, select the right diode and calculate circuits with diodes.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/products.css">
+  <script src="assets/js/lang.js"></script>
   <script src="assets/js/config.js"></script>
   <script src="assets/js/woche.js"></script>
   <script defer src="assets/js/site.js"></script>
@@ -22,94 +23,94 @@
   <main id="main">
     <div class="page-head">
       <div class="container">
-        <nav class="crumbs" aria-label="Brotkrumen"><a href="index.html">Start</a><span aria-hidden="true">/</span><span>Applikationen</span><span aria-hidden="true">/</span><span>Verpolschutz &amp; Diodenschaltungen</span></nav>
-        <h1>Verpolschutz und Diodenschaltungen</h1>
-        <p class="lead">Applikationsschrift AN-D01 aus unserem Labor: wie eine einzelne Diode Antriebe vor vertauschten Anschlüssen schützt – und wie Sie Schaltungen mit Dioden sicher berechnen.</p>
+        <nav class="crumbs" aria-label="Breadcrumb" data-de-aria-label="Brotkrumen"><a href="index.html"><span data-lang="en">Home</span><span data-lang="de">Start</span></a><span aria-hidden="true">/</span><span><span data-lang="en">Applications</span><span data-lang="de">Applikationen</span></span><span aria-hidden="true">/</span><span><span data-lang="en">Reverse polarity protection &amp; diode circuits</span><span data-lang="de">Verpolschutz &amp; Diodenschaltungen</span></span></nav>
+        <h1><span data-lang="en">Reverse polarity protection and diode circuits</span><span data-lang="de">Verpolschutz und Diodenschaltungen</span></h1>
+        <p class="lead"><span data-lang="en">Application note AN-D01 from our lab: how a single diode protects drives against swapped connections – and how to calculate circuits with diodes reliably.</span><span data-lang="de">Applikationsschrift AN-D01 aus unserem Labor: wie eine einzelne Diode Antriebe vor vertauschten Anschlüssen schützt – und wie Sie Schaltungen mit Dioden sicher berechnen.</span></p>
       </div>
     </div>
 
     <div class="container section--tight">
       <div class="doc">
-        <aside class="toc" data-toc="#doc-body" aria-label="Inhaltsverzeichnis"></aside>
+        <aside class="toc" data-toc="#doc-body" aria-label="Table of contents" data-de-aria-label="Inhaltsverzeichnis"></aside>
         <div class="doc__body" id="doc-body">
 
-          <section id="verpolschutz" data-toc-label="Verpolschutz">
-            <h2>Verpolschutz für Gleichstrommotoren</h2>
-            <p class="intro">Ein Gleichstrommotor dreht je nach Polung rechts- oder linksherum. Wird ein Antrieb versehentlich verpolt angeschlossen, läuft das Förderband rückwärts, eine Pumpe saugt statt zu fördern – und Bauteile werden beschädigt.</p>
-            <p>Die Lösung ist eine Diode, die nur bei richtiger Polung leitet. Bei vertauschten Anschlüssen sperrt sie und nimmt die gesamte Spannung auf. Der Motor bleibt stehen, nichts geht kaputt. Probieren Sie aus, wo die Diode sitzen muss und wie herum sie eingebaut wird.</p>
+          <section id="verpolschutz" data-toc-label="Reverse polarity protection" data-de-data-toc-label="Verpolschutz">
+            <h2><span data-lang="en">Reverse polarity protection for DC motors</span><span data-lang="de">Verpolschutz für Gleichstrommotoren</span></h2>
+            <p class="intro"><span data-lang="en">A DC motor turns clockwise or anticlockwise depending on the polarity. If a drive is accidentally connected with reversed polarity, the conveyor belt runs backwards, a pump sucks instead of delivering – and components are damaged.</span><span data-lang="de">Ein Gleichstrommotor dreht je nach Polung rechts- oder linksherum. Wird ein Antrieb versehentlich verpolt angeschlossen, läuft das Förderband rückwärts, eine Pumpe saugt statt zu fördern – und Bauteile werden beschädigt.</span></p>
+            <p><span data-lang="en">The solution is a diode that only conducts with correct polarity. With swapped connections it blocks and takes up the entire voltage. The motor stays at rest, nothing is damaged. Try out where the diode has to sit and which way round it is installed.</span><span data-lang="de">Die Lösung ist eine Diode, die nur bei richtiger Polung leitet. Bei vertauschten Anschlüssen sperrt sie und nimmt die gesamte Spannung auf. Der Motor bleibt stehen, nichts geht kaputt. Probieren Sie aus, wo die Diode sitzen muss und wie herum sie eingebaut wird.</span></p>
 
-            <div data-sim="verpolschutz" data-title="Förderband-Antrieb mit Verpolschutz" data-hint="Wählen Sie Anschluss und Schutzdiode. Drehen Sie die Diode auch einmal um."></div>
+            <div data-sim="verpolschutz" data-title="Conveyor belt drive with reverse polarity protection" data-de-data-title="Förderband-Antrieb mit Verpolschutz" data-hint="Select connection and protection diode. Also turn the diode around once." data-de-data-hint="Wählen Sie Anschluss und Schutzdiode. Drehen Sie die Diode auch einmal um."></div>
 
             <div class="table-wrap">
               <table class="spec">
-                <caption>Zwei Varianten im Vergleich</caption>
-                <thead><tr><th>Variante</th><th>Vorteile</th><th>Nachteile</th></tr></thead>
+                <caption><span data-lang="en">Two variants compared</span><span data-lang="de">Zwei Varianten im Vergleich</span></caption>
+                <thead><tr><th><span data-lang="en">Variant</span><span data-lang="de">Variante</span></th><th><span data-lang="en">Advantages</span><span data-lang="de">Vorteile</span></th><th><span data-lang="en">Disadvantages</span><span data-lang="de">Nachteile</span></th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Diode in Reihe</th><td>Einfach und zuverlässig. Nach dem richtigen Anschließen läuft alles sofort wieder.</td><td>An der Diode fallen ständig etwa 0,7 V ab, sie erwärmt sich. Sie muss den vollen Motorstrom tragen.</td></tr>
-                  <tr><th scope="row">Diode parallel mit Sicherung</th><td>Kein Spannungsverlust im Normalbetrieb.</td><td>Bei Verpolung löst die Sicherung aus und muss ersetzt werden. Die Diode muss den Kurzschlussstrom kurzzeitig aushalten.</td></tr>
+                  <tr><th scope="row"><span data-lang="en">Diode in series</span><span data-lang="de">Diode in Reihe</span></th><td><span data-lang="en">Simple and reliable. Once connected correctly, everything runs again immediately.</span><span data-lang="de">Einfach und zuverlässig. Nach dem richtigen Anschließen läuft alles sofort wieder.</span></td><td><span data-lang="en">About 0.7 V drop permanently across the diode, it heats up. It must carry the full motor current.</span><span data-lang="de">An der Diode fallen ständig etwa 0,7 V ab, sie erwärmt sich. Sie muss den vollen Motorstrom tragen.</span></td></tr>
+                  <tr><th scope="row"><span data-lang="en">Diode in parallel with fuse</span><span data-lang="de">Diode parallel mit Sicherung</span></th><td><span data-lang="en">No voltage loss in normal operation.</span><span data-lang="de">Kein Spannungsverlust im Normalbetrieb.</span></td><td><span data-lang="en">With reversed polarity the fuse blows and must be replaced. The diode must withstand the short-circuit current for a short time.</span><span data-lang="de">Bei Verpolung löst die Sicherung aus und muss ersetzt werden. Die Diode muss den Kurzschlussstrom kurzzeitig aushalten.</span></td></tr>
                 </tbody>
               </table>
             </div>
           </section>
 
-          <section id="auswahl" data-toc-label="Diode auswählen">
-            <h2>Die passende Diode auswählen</h2>
-            <p class="intro">Ob eine Diode für Ihre Schaltung taugt, entscheiden die Grenzwerte im Datenblatt. Rechnen Sie dafür vereinfacht mit einer konstanten Durchlassspannung U<sub>F</sub> ≈ U<sub>S</sub> = 0,7 V. Bei großen Strömen liegt die tatsächliche Durchlassspannung höher – <a href="dioden.html#kennlinie">siehe Kennlinie</a>.</p>
+          <section id="auswahl" data-toc-label="Selecting a diode" data-de-data-toc-label="Diode auswählen">
+            <h2><span data-lang="en">Selecting the right diode</span><span data-lang="de">Die passende Diode auswählen</span></h2>
+            <p class="intro"><span data-lang="en">Whether a diode is suitable for your circuit is decided by the limit values in the data sheet. For this, calculate in simplified form with a constant forward voltage U<sub>F</sub> ≈ U<sub>S</sub> = 0.7 V. At high currents the actual forward voltage is higher – <a href="dioden.html#kennlinie">see characteristic curve</a>.</span><span data-lang="de">Ob eine Diode für Ihre Schaltung taugt, entscheiden die Grenzwerte im Datenblatt. Rechnen Sie dafür vereinfacht mit einer konstanten Durchlassspannung U<sub>F</sub> ≈ U<sub>S</sub> = 0,7 V. Bei großen Strömen liegt die tatsächliche Durchlassspannung höher – <a href="dioden.html#kennlinie">siehe Kennlinie</a>.</span></p>
             <ol class="steps">
-              <li><div><h3>Strom berechnen und mit I<sub>F</sub> vergleichen</h3><p>Der Strom durch Motor und Diode ergibt sich aus der Restspannung am Motor und seinem Widerstand.</p></div></li>
-              <li><div><h3>Sperrspannung mit U<sub>R</sub> vergleichen</h3><p>Bei Verpolung liegt die volle Versorgungsspannung in Sperrrichtung an der Diode.</p></div></li>
-              <li><div><h3>Verlustleistung mit P<sub>tot</sub> vergleichen</h3><p>P = U<sub>F</sub> · I<sub>F</sub> – diese Leistung wird in der Diode in Wärme umgesetzt.</p></div></li>
-              <li><div><h3>Reserve prüfen</h3><p>Liegt ein Wert knapp am Grenzwert, wählen Sie eine stärkere Diode. Toleranzen, Anlaufströme und Wärme verkleinern die Reserve im Betrieb.</p></div></li>
+              <li><div><h3><span data-lang="en">Calculate the current and compare with I<sub>F</sub></span><span data-lang="de">Strom berechnen und mit I<sub>F</sub> vergleichen</span></h3><p><span data-lang="en">The current through motor and diode results from the remaining voltage across the motor and its resistance.</span><span data-lang="de">Der Strom durch Motor und Diode ergibt sich aus der Restspannung am Motor und seinem Widerstand.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Compare the reverse voltage with U<sub>R</sub></span><span data-lang="de">Sperrspannung mit U<sub>R</sub> vergleichen</span></h3><p><span data-lang="en">With reversed polarity the full supply voltage is applied to the diode in the reverse direction.</span><span data-lang="de">Bei Verpolung liegt die volle Versorgungsspannung in Sperrrichtung an der Diode.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Compare the power loss with P<sub>tot</sub></span><span data-lang="de">Verlustleistung mit P<sub>tot</sub> vergleichen</span></h3><p><span data-lang="en">P = U<sub>F</sub> · I<sub>F</sub> – this power is converted into heat in the diode.</span><span data-lang="de">P = U<sub>F</sub> · I<sub>F</sub> – diese Leistung wird in der Diode in Wärme umgesetzt.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Check the margin</span><span data-lang="de">Reserve prüfen</span></h3><p><span data-lang="en">If a value is close to the limit, choose a more powerful diode. Tolerances, starting currents and heat reduce the margin in operation.</span><span data-lang="de">Liegt ein Wert knapp am Grenzwert, wählen Sie eine stärkere Diode. Toleranzen, Anlaufströme und Wärme verkleinern die Reserve im Betrieb.</span></p></div></li>
             </ol>
 
-            <h3 class="mt-2">Rechenbeispiel: Stellmotor an 9 V</h3>
-            <p>Ein Stellmotor mit einem Widerstand von 60 Ω wird an 9 V betrieben und soll mit einer BAY 44 geschützt werden (U<sub>R</sub> = 50 V, I<sub>F</sub> = 250 mA, P<sub>tot</sub> = 250 mW).</p>
+            <h3 class="mt-2"><span data-lang="en">Worked example: servomotor at 9 V</span><span data-lang="de">Rechenbeispiel: Stellmotor an 9 V</span></h3>
+            <p><span data-lang="en">A servomotor with a resistance of 60 Ω is operated at 9 V and is to be protected with a BAY 44 (U<sub>R</sub> = 50 V, I<sub>F</sub> = 250 mA, P<sub>tot</sub> = 250 mW).</span><span data-lang="de">Ein Stellmotor mit einem Widerstand von 60 Ω wird an 9 V betrieben und soll mit einer BAY 44 geschützt werden (U<sub>R</sub> = 50 V, I<sub>F</sub> = 250 mA, P<sub>tot</sub> = 250 mW).</span></p>
             <div class="calc">
-              <div class="row"><span>Spannung am Motor</span><span>U<sub>M</sub> = 9 V – 0,7 V = 8,3 V</span></div>
-              <div class="row"><span>Strom</span><span>I = U<sub>M</sub> / R<sub>M</sub> = 8,3 V / 60 Ω ≈ 138 mA <span class="res">≤ 250 mA ✓</span></span></div>
-              <div class="row"><span>Sperrspannung bei Verpolung</span><span>9 V <span class="res">≤ 50 V ✓</span></span></div>
-              <div class="row"><span>Verlustleistung</span><span>P = 0,7 V · 0,138 A ≈ 0,10 W <span class="res">≤ 0,25 W ✓</span></span></div>
-              <div class="row"><span>Ergebnis</span><span class="res">BAY 44 geeignet, Stromreserve rund 45 %</span></div>
-              <div class="row"><span>Genauer mit der Kennlinie</span><span>Bei diesem Strom liegt U<sub>F</sub> der BAY 44 laut Kennlinie bei ≈ 1,06 V statt 0,7 V. Der Strom sinkt leicht auf ≈ 132 mA, die Verlustleistung steigt auf P ≈ 1,06 V · 0,132 A ≈ 0,14 W <span class="res">≤ 0,25 W ✓</span></span></div>
+              <div class="row"><span><span data-lang="en">Voltage across the motor</span><span data-lang="de">Spannung am Motor</span></span><span>U<sub>M</sub><span data-lang="en"> = 9 V – 0.7 V = 8.3 V</span><span data-lang="de"> = 9 V – 0,7 V = 8,3 V</span></span></div>
+              <div class="row"><span><span data-lang="en">Current</span><span data-lang="de">Strom</span></span><span>I = U<sub>M</sub> / R<sub>M</sub><span data-lang="en"> = 8.3 V / 60 Ω ≈ 138 mA </span><span data-lang="de"> = 8,3 V / 60 Ω ≈ 138 mA </span><span class="res">≤ 250 mA ✓</span></span></div>
+              <div class="row"><span><span data-lang="en">Reverse voltage with reversed polarity</span><span data-lang="de">Sperrspannung bei Verpolung</span></span><span>9 V <span class="res">≤ 50 V ✓</span></span></div>
+              <div class="row"><span><span data-lang="en">Power loss</span><span data-lang="de">Verlustleistung</span></span><span><span data-lang="en">P = 0.7 V · 0.138 A ≈ 0.10 W </span><span data-lang="de">P = 0,7 V · 0,138 A ≈ 0,10 W </span><span class="res"><span data-lang="en">≤ 0.25 W ✓</span><span data-lang="de">≤ 0,25 W ✓</span></span></span></div>
+              <div class="row"><span><span data-lang="en">Result</span><span data-lang="de">Ergebnis</span></span><span class="res"><span data-lang="en">BAY 44 suitable, current margin about 45 %</span><span data-lang="de">BAY 44 geeignet, Stromreserve rund 45 %</span></span></div>
+              <div class="row"><span><span data-lang="en">More precisely with the characteristic</span><span data-lang="de">Genauer mit der Kennlinie</span></span><span><span data-lang="en">At this current, U<sub>F</sub> of the BAY 44 is ≈ 1.06 V according to the characteristic instead of 0.7 V. The current drops slightly to ≈ 132 mA, the power loss rises to P ≈ 1.06 V · 0.132 A ≈ 0.14 W </span><span data-lang="de">Bei diesem Strom liegt U<sub>F</sub> der BAY 44 laut Kennlinie bei ≈ 1,06 V statt 0,7 V. Der Strom sinkt leicht auf ≈ 132 mA, die Verlustleistung steigt auf P ≈ 1,06 V · 0,132 A ≈ 0,14 W </span><span class="res"><span data-lang="en">≤ 0.25 W ✓</span><span data-lang="de">≤ 0,25 W ✓</span></span></span></div>
             </div>
-            <p class="mt-2">Alle Grenzwerte finden Sie auf der <a href="dioden.html#kenndaten">Produktseite</a> und im <a href="datenblaetter/LUMIATECH_BAY44_BAY45_BAY46.pdf" download>Datenblatt (PDF)</a>.</p>
+            <p class="mt-2"><span data-lang="en">You will find all limit values on the <a href="dioden.html#kenndaten">product page</a> and in the <a href="datenblaetter/LUMIATECH_BAY44_BAY45_BAY46.pdf" download>data sheet (PDF, German)</a>.</span><span data-lang="de">Alle Grenzwerte finden Sie auf der <a href="dioden.html#kenndaten">Produktseite</a> und im <a href="datenblaetter/LUMIATECH_BAY44_BAY45_BAY46.pdf" download>Datenblatt (PDF)</a>.</span></p>
           </section>
 
-          <section id="schaltungen" data-toc-label="Diodenschaltungen berechnen">
-            <h2>Schaltungen mit Dioden berechnen</h2>
-            <p class="intro">Dioden stecken nicht nur im Verpolschutz. In vielen Schaltungen müssen Sie bestimmen, welche Spannungen anliegen und welche Ströme fließen. Die Widerstände stehen dabei stellvertretend für Verbraucher.</p>
+          <section id="schaltungen" data-toc-label="Calculating diode circuits" data-de-data-toc-label="Diodenschaltungen berechnen">
+            <h2><span data-lang="en">Calculating circuits with diodes</span><span data-lang="de">Schaltungen mit Dioden berechnen</span></h2>
+            <p class="intro"><span data-lang="en">Diodes are not only found in reverse polarity protection. In many circuits you have to determine which voltages are present and which currents flow. The resistors stand in for loads.</span><span data-lang="de">Dioden stecken nicht nur im Verpolschutz. In vielen Schaltungen müssen Sie bestimmen, welche Spannungen anliegen und welche Ströme fließen. Die Widerstände stehen dabei stellvertretend für Verbraucher.</span></p>
             <ol class="steps">
-              <li><div><h3>Jede Diode prüfen: leitet sie oder sperrt sie?</h3><p>Liegt das höhere Potenzial an der Anode, leitet sie. Liegt es an der Kathode, sperrt sie.</p></div></li>
-              <li><div><h3>Leitende Si-Diode: U = 0,7 V</h3><p>Vereinfacht wird die Durchlassspannung U<sub>F</sub> als konstant und gleich der Schleusenspannung U<sub>S</sub> ≈ 0,7 V angenommen.</p></div></li>
-              <li><div><h3>Sperrende Diode: I = 0</h3><p>Sie wirkt wie eine unterbrochene Leitung und nimmt die anliegende Spannung auf.</p></div></li>
-              <li><div><h3>Restliche Größen berechnen</h3><p>Spannungen mit der Maschenregel, Ströme mit dem ohmschen Gesetz und der Knotenregel.</p></div></li>
+              <li><div><h3><span data-lang="en">Check every diode: does it conduct or block?</span><span data-lang="de">Jede Diode prüfen: leitet sie oder sperrt sie?</span></h3><p><span data-lang="en">If the higher potential is at the anode, it conducts. If it is at the cathode, it blocks.</span><span data-lang="de">Liegt das höhere Potenzial an der Anode, leitet sie. Liegt es an der Kathode, sperrt sie.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Conducting Si diode: U = 0.7 V</span><span data-lang="de">Leitende Si-Diode: U = 0,7 V</span></h3><p><span data-lang="en">As a simplification, the forward voltage U<sub>F</sub> is assumed to be constant and equal to the threshold voltage U<sub>S</sub> ≈ 0.7 V.</span><span data-lang="de">Vereinfacht wird die Durchlassspannung U<sub>F</sub> als konstant und gleich der Schleusenspannung U<sub>S</sub> ≈ 0,7 V angenommen.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Blocking diode: I = 0</span><span data-lang="de">Sperrende Diode: I = 0</span></h3><p><span data-lang="en">It acts like an interrupted line and takes up the applied voltage.</span><span data-lang="de">Sie wirkt wie eine unterbrochene Leitung und nimmt die anliegende Spannung auf.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Calculate the remaining quantities</span><span data-lang="de">Restliche Größen berechnen</span></h3><p><span data-lang="en">Voltages with Kirchhoff's voltage law (loop rule), currents with Ohm's law and Kirchhoff's current law (node rule).</span><span data-lang="de">Spannungen mit der Maschenregel, Ströme mit dem ohmschen Gesetz und der Knotenregel.</span></p></div></li>
             </ol>
 
             <div class="grid grid-2 mt-2">
               <figure class="figure">
                 <div class="figure__frame"><div data-art="sch-beispiel" data-variant="fwd"></div></div>
-                <figcaption><strong>Beispiel 1:</strong> Die Diode -R2 leitet, also U<sub>R2</sub> = 0,7 V. Damit ist U<sub>R1</sub> = 5 V – 0,7 V = 4,3 V und I = 4,3 V / 1 kΩ = 4,3 mA.</figcaption>
+                <figcaption><span data-lang="en"><strong>Example 1:</strong> The diode -R2 conducts, so U<sub>R2</sub> = 0.7 V. Thus U<sub>R1</sub> = 5 V – 0.7 V = 4.3 V and I = 4.3 V / 1 kΩ = 4.3 mA.</span><span data-lang="de"><strong>Beispiel 1:</strong> Die Diode -R2 leitet, also U<sub>R2</sub> = 0,7 V. Damit ist U<sub>R1</sub> = 5 V – 0,7 V = 4,3 V und I = 4,3 V / 1 kΩ = 4,3 mA.</span></figcaption>
               </figure>
               <figure class="figure">
                 <div class="figure__frame"><div data-art="sch-beispiel" data-variant="rev"></div></div>
-                <figcaption><strong>Beispiel 2:</strong> Die Diode -R2 sperrt, also I = 0. Dann ist U<sub>R1</sub> = 0 V und an der Diode liegt die volle Spannung U<sub>R2</sub> = 5 V.</figcaption>
+                <figcaption><span data-lang="en"><strong>Example 2:</strong> The diode -R2 blocks, so I = 0. Then U<sub>R1</sub> = 0 V and the full voltage U<sub>R2</sub> = 5 V is across the diode.</span><span data-lang="de"><strong>Beispiel 2:</strong> Die Diode -R2 sperrt, also I = 0. Dann ist U<sub>R1</sub> = 0 V und an der Diode liegt die volle Spannung U<sub>R2</sub> = 5 V.</span></figcaption>
               </figure>
             </div>
 
-            <div data-sim="schaltung" data-title="Schaltungs-Check" data-hint="Drehen Sie die Dioden um und beobachten Sie, welche leitet."></div>
+            <div data-sim="schaltung" data-title="Circuit check" data-de-data-title="Schaltungs-Check" data-hint="Turn the diodes around and observe which one conducts." data-de-data-hint="Drehen Sie die Dioden um und beobachten Sie, welche leitet."></div>
           </section>
 
-          <section id="widerstand" data-toc-label="Die Diode als Widerstand">
-            <h2>Die Diode als Widerstand</h2>
-            <p class="intro">Eine Diode verhält sich wie ein Widerstand, dessen Wert vom Arbeitspunkt abhängt.</p>
-            <p>Lesen Sie aus der Kennlinie Spannung und Strom am Arbeitspunkt ab, erhalten Sie mit dem ohmschen Gesetz ihren Widerstand in genau diesem Punkt. Beispiel: Bei U<sub>F</sub> = 0,65 V und I<sub>F</sub> = 10 mA ist R = 0,65 V / 0,01 A = 65 Ω.</p>
+          <section id="widerstand" data-toc-label="The diode as a resistor" data-de-data-toc-label="Die Diode als Widerstand">
+            <h2><span data-lang="en">The diode as a resistor</span><span data-lang="de">Die Diode als Widerstand</span></h2>
+            <p class="intro"><span data-lang="en">A diode behaves like a resistor whose value depends on the operating point.</span><span data-lang="de">Eine Diode verhält sich wie ein Widerstand, dessen Wert vom Arbeitspunkt abhängt.</span></p>
+            <p><span data-lang="en">If you read voltage and current at the operating point from the characteristic, Ohm's law gives you its resistance at exactly this point. Example: at U<sub>F</sub> = 0.64 V and I<sub>F</sub> = 10 mA, R = 0.64 V / 0.01 A = 64 Ω.</span><span data-lang="de">Lesen Sie aus der Kennlinie Spannung und Strom am Arbeitspunkt ab, erhalten Sie mit dem ohmschen Gesetz ihren Widerstand in genau diesem Punkt. Beispiel: Bei U<sub>F</sub> = 0,64 V und I<sub>F</sub> = 10 mA ist R = 0,64 V / 0,01 A = 64 Ω.</span></p>
             <div class="grid grid-2">
-              <div class="tile"><h3>Leitende Diode</h3><p>Kleiner Widerstand, der mit steigendem Strom weiter sinkt.</p></div>
-              <div class="tile"><h3>Sperrende Diode</h3><p>Sehr großer Widerstand. In der Rechnung setzen Sie R → ∞, es fließt kein Strom.</p></div>
+              <div class="tile"><h3><span data-lang="en">Conducting diode</span><span data-lang="de">Leitende Diode</span></h3><p><span data-lang="en">Small resistance that decreases further as the current rises.</span><span data-lang="de">Kleiner Widerstand, der mit steigendem Strom weiter sinkt.</span></p></div>
+              <div class="tile"><h3><span data-lang="en">Blocking diode</span><span data-lang="de">Sperrende Diode</span></h3><p><span data-lang="en">Very high resistance. In the calculation you set R → ∞, no current flows.</span><span data-lang="de">Sehr großer Widerstand. In der Rechnung setzen Sie R → ∞, es fließt kein Strom.</span></p></div>
             </div>
             <div class="note note--plain" data-thema="leds">
-              <div class="note__title">Weiterlesen</div>
-              <p>Wie Sie einen Arbeitspunkt grafisch aus Kennlinie und Widerstandsgerade bestimmen, zeigt unsere <a href="led-applikation.html#arbeitspunkt">LED-Applikation</a>.</p>
+              <div class="note__title"><span data-lang="en">Further reading</span><span data-lang="de">Weiterlesen</span></div>
+              <p><span data-lang="en">How to determine an operating point graphically from the characteristic and the load line is shown in our <a href="led-applikation.html#arbeitspunkt">LED application note</a>.</span><span data-lang="de">Wie Sie einen Arbeitspunkt grafisch aus Kennlinie und Widerstandsgerade bestimmen, zeigt unsere <a href="led-applikation.html#arbeitspunkt">LED-Applikation</a>.</span></p>
             </div>
           </section>
 

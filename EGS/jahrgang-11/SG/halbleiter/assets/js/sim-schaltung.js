@@ -9,6 +9,7 @@
 (function () {
   "use strict";
   var LT = window.LT;
+  var T = LT.t;
   var UD = 0.7;
 
   /* Bauteile: V (Quelle), R (Widerstand), D (Diode). a/b = Knoten (0 = Masse).
@@ -16,7 +17,7 @@
      Kennzeichnung links daneben (Dioden nach DIN EN 81346-2 ebenfalls -R). */
   var CIRCUITS = [
     {
-      id: "reihe", name: "Reihenschaltung",
+      id: "reihe", name: T("Series circuit", "Reihenschaltung"),
       parts: [
         { t: "V", name: "-G1", a: 1, b: 0, U: 5, cx: 110, cy: 150 },
         { t: "R", name: "-R1", a: 1, b: 2, R: 1000, cx: 380, cy: 105 },
@@ -25,7 +26,7 @@
       wires: ["M110 126 V50 H380 V250 H110 V174"]
     },
     {
-      id: "parallel", name: "Diode parallel zum Widerstand",
+      id: "parallel", name: T("Diode parallel to the resistor", "Diode parallel zum Widerstand"),
       parts: [
         { t: "V", name: "-G1", a: 1, b: 0, U: 9, cx: 110, cy: 150 },
         { t: "R", name: "-R1", a: 1, b: 2, R: 1000, cx: 300, cy: 98 },
@@ -36,7 +37,7 @@
       dots: [[300, 150], [300, 250]]
     },
     {
-      id: "zweige", name: "Zwei Zweige",
+      id: "zweige", name: T("Two branches", "Zwei Zweige"),
       parts: [
         { t: "V", name: "-G1", a: 1, b: 0, U: 5, cx: 110, cy: 150 },
         { t: "R", name: "-R1", a: 1, b: 2, R: 470, cx: 290, cy: 105 },
@@ -136,12 +137,12 @@
     // Grundzustand: Anode oben (Knoten a liegt oben) bzw. unten, wenn a = 0
     var down = p.a !== 0;
     if (flipped) down = !down;
-    var s = '<g class="sc-diode" data-name="' + p.name + '" tabindex="0" role="button" aria-label="Diode ' + p.name + ' umdrehen, zurzeit ' + (on ? "leitend" : "sperrend") + '" style="cursor:pointer">';
+    var s = '<g class="sc-diode" data-name="' + p.name + '" tabindex="0" role="button" aria-label="' + T("Turn diode " + p.name + " around, currently " + (on ? "conducting" : "blocking"), "Diode " + p.name + " umdrehen, zurzeit " + (on ? "leitend" : "sperrend")) + '" style="cursor:pointer">';
     s += '<rect x="' + (p.cx - 30) + '" y="' + (p.cy - 30) + '" width="60" height="60" fill="transparent"/>';
     s += LT.sym.diode({ cx: p.cx, cy: p.cy, s: 34, dir: down ? "down" : "up", lead: 0, hl: on ? "#fff3c4" : null });
     s += '<circle cx="' + (p.cx + 30) + '" cy="' + (p.cy - 20) + '" r="10" fill="#17202b"/><path d="M' + (p.cx + 25.5) + " " + (p.cy - 22) + "a4.6 4.6 0 1 1 1 4.6" + '" fill="none" stroke="#ffc400" stroke-width="1.8"/>';
     s += "</g>";
-    s += LT.sym.bmk({ x: p.cx, y: p.cy, gap: 36, name: p.name, value: on ? "leitet" : "sperrt", extra: show && res ? vals(res) : null });
+    s += LT.sym.bmk({ x: p.cx, y: p.cy, gap: 36, name: p.name, value: on ? T("conducts", "leitet") : T("blocks", "sperrt"), extra: show && res ? vals(res) : null });
     return s;
   }
   function source(p, res, show) {
@@ -153,10 +154,10 @@
     var ui = LT.lab(host, { icon: "circuit" });
     var show = !!LT.config.messwerteAnzeigen;
     var st = { idx: 0, flips: {} };
-    LT.segmented(ui.controls, "Schaltung", CIRCUITS.map(function (c, i) { return { value: String(i), label: c.name }; }), "0", function (v) { st.idx = +v; st.flips = {}; draw(); });
+    LT.segmented(ui.controls, T("Circuit", "Schaltung"), CIRCUITS.map(function (c, i) { return { value: String(i), label: c.name }; }), "0", function (v) { st.idx = +v; st.flips = {}; draw(); });
     var hint = document.createElement("p");
     hint.className = "ctl__help";
-    hint.textContent = "Tippen Sie auf eine Diode, um sie umzudrehen.";
+    hint.textContent = T("Tap a diode to turn it around.", "Tippen Sie auf eine Diode, um sie umzudrehen.");
     ui.controls.appendChild(hint);
     var summary = document.createElement("div");
     summary.className = "pn-explain";
@@ -168,7 +169,7 @@
 
     function draw() {
       var c = CIRCUITS[st.idx], res = solve(c, st.flips) || {};
-      var h = '<svg viewBox="0 0 540 290" role="img" aria-label="Schaltplan ' + c.name + '">';
+      var h = '<svg viewBox="0 0 540 290" role="img" aria-label="' + T('Circuit diagram ', 'Schaltplan ') + '' + c.name + '">';
       c.wires.forEach(function (d) { h += LT.sym.wire(d); });
       (c.dots || []).forEach(function (d) { h += LT.sym.dot(d[0], d[1]); });
       c.parts.forEach(function (p) {
@@ -185,9 +186,9 @@
       });
       var lines = c.parts.filter(function (p) { return p.t === "D"; }).map(function (p) {
         var r = res[p.name];
-        return "<li><b>" + p.name + (r && r.on ? " leitet</b> – das höhere Potenzial liegt an der Anode. Spannung an der Diode: vereinfacht 0,7 V." : " sperrt</b> – es fließt kein Strom durch die Diode, sie nimmt die anliegende Spannung auf.") + "</li>";
+        return "<li><b>" + p.name + (r && r.on ? T(" conducts</b> – the higher potential is at the anode. Voltage across the diode: simplified 0.7 V.", " leitet</b> – das höhere Potenzial liegt an der Anode. Spannung an der Diode: vereinfacht 0,7 V.") : T(" blocks</b> – no current flows through the diode, it takes up the applied voltage.", " sperrt</b> – es fließt kein Strom durch die Diode, sie nimmt die anliegende Spannung auf.")) + "</li>";
       });
-      summary.innerHTML = "<strong>Ergebnis</strong><ul>" + lines.join("") + "</ul>" + (show ? "" : "<p>Spannungen und Ströme berechnen Sie mit Maschen- und Knotenregel selbst.</p>");
+      summary.innerHTML = "" + T("<strong>Result</strong>", "<strong>Ergebnis</strong>") + "<ul>" + lines.join("") + "</ul>" + (show ? "" : T("<p>Calculate voltages and currents yourself using Kirchhoff's voltage and current laws.</p>", "<p>Spannungen und Ströme berechnen Sie mit Maschen- und Knotenregel selbst.</p>"));
     }
     draw();
   });

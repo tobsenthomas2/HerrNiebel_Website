@@ -14,6 +14,7 @@
                          (Ersatztext für die frühen Wochen, z. B. „Dioden“ statt „Dioden und LEDs“)
      <html data-seite="leds">            ganze Seite gesperrt → Weiterleitung zur Startseite
      <html data-titel-ohne-leds="…">     Seitentitel, solange das Thema gesperrt ist
+                                         (deutsch: data-titel-ohne-leds-de, Sprache siehe lang.js)
      NAV-Eintrag in site.js: thema: "leds"
 
    Link-Zusatz ?w=1 zeigt einen früheren Stand (z. B. für eine Parallelklasse),
@@ -33,7 +34,10 @@
   // ganze Seite noch gesperrt → zur Startseite (Sprung im Verlauf ersetzen)
   var seite = html.getAttribute("data-seite");
   if (seite && !frei(seite)) {
-    location.replace("index.html" + (W < cfgW ? "?w=" + W : ""));
+    var q = [], lm = /[?&]lang=(de|en)(&|#|$)/.exec(location.search);
+    if (W < cfgW) q.push("w=" + W);
+    if (lm) q.push("lang=" + lm[1]); // gewählte Sprache behalten
+    location.replace("index.html" + (q.length ? "?" + q.join("&") : ""));
     return;
   }
 
@@ -44,7 +48,7 @@
       css += '[data-ohne~="' + t + '"]{display:none!important}';
     } else {
       css += '[data-thema~="' + t + '"]{display:none!important}';
-      var titel = html.getAttribute("data-titel-ohne-" + t);
+      var titel = (html.lang === "de" && html.getAttribute("data-titel-ohne-" + t + "-de")) || html.getAttribute("data-titel-ohne-" + t);
       if (titel) document.title = titel;
     }
   });

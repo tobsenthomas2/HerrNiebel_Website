@@ -10,24 +10,32 @@
 (function () {
   "use strict";
 
+  /* ---------- Sprache (lang.js): Englisch ist Standard, Deutsch über ?lang=de ----------
+     Texte in den Seiten: <span data-lang="en">…</span><span data-lang="de">…</span>
+     Texte in Skripten:   T("English", "Deutsch")
+     Attribute:           aria-label="EN" data-de-aria-label="DE" (auch alt, data-title, data-hint, data-toc-label) */
+  var LT = (window.LT = window.LT || {});
+  if (!LT.t) { LT.lang = "en"; LT.langGewaehlt = true; LT.t = function (en) { return en; }; }
+  var T = LT.t;
+
   /* ---------- Navigation: hier neue Seiten eintragen ---------- */
   var NAV = [
     {
-      label: "Produkte",
+      label: T("Products", "Produkte"),
       children: [
-        { href: "dioden.html", label: "Silizium-Dioden", sub: "Serie BAY 44, BAY 45, BAY 46" },
-        { href: "leds.html", label: "5-mm-LEDs", sub: "Serie L-7113 in Rot, Grün und Blau", thema: "leds" }
+        { href: "dioden.html", label: T("Silicon diodes", "Silizium-Dioden"), sub: T("Series BAY 44, BAY 45, BAY 46", "Serie BAY 44, BAY 45, BAY 46") },
+        { href: "leds.html", label: T("5 mm LEDs", "5-mm-LEDs"), sub: T("Series L-7113 in red, green and blue", "Serie L-7113 in Rot, Grün und Blau"), thema: "leds" }
       ]
     },
     {
-      label: "Applikationen",
+      label: T("Applications", "Applikationen"),
       children: [
-        { href: "dioden-applikation.html", label: "Verpolschutz & Diodenschaltungen", sub: "Dioden richtig einsetzen und berechnen" },
-        { href: "led-applikation.html", label: "LEDs richtig betreiben", sub: "Vorwiderstand, Arbeitspunkt, Signalsäulen-Retrofit", thema: "leds" }
+        { href: "dioden-applikation.html", label: T("Reverse polarity protection & diode circuits", "Verpolschutz & Diodenschaltungen"), sub: T("Using and calculating diodes correctly", "Dioden richtig einsetzen und berechnen") },
+        { href: "led-applikation.html", label: T("Operating LEDs correctly", "LEDs richtig betreiben"), sub: T("Series resistor, operating point, signal tower retrofit", "Vorwiderstand, Arbeitspunkt, Signalsäulen-Retrofit"), thema: "leds" }
       ]
     },
-    { href: "technologie.html", label: "Technologie" },
-    { href: "unternehmen.html", label: "Unternehmen" },
+    { href: "technologie.html", label: T("Technology", "Technologie") },
+    { href: "unternehmen.html", label: T("Company", "Unternehmen") },
     { href: "downloads.html", label: "Downloads" }
   ];
 
@@ -56,10 +64,23 @@
   LT.$ = function (sel, root) { return (root || document).querySelector(sel); };
   LT.$$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
 
-  /** Zahl im deutschen Format: LT.num(1.953, 2) -> "1,95" */
+  /* deutsche Fassung der Attribute einsetzen (vor dem Start der Simulationen) */
+  if (LT.lang === "de") {
+    ["aria-label", "alt", "data-title", "data-hint", "data-toc-label"].forEach(function (n) {
+      LT.$$("[data-de-" + n + "]").forEach(function (el) { el.setAttribute(n, el.getAttribute("data-de-" + n)); });
+    });
+  }
+  /** Text eines Elements in der aktuellen Sprache (ohne die andere Sprachfassung) */
+  LT.text = function (el) {
+    var c = el.cloneNode(true);
+    LT.$$("[data-lang]", c).forEach(function (x) { if (x.getAttribute("data-lang") !== LT.lang) x.parentNode.removeChild(x); });
+    return c.textContent;
+  };
+
+  /** Zahl im Format der Sprache: LT.num(1.953, 2) -> "1.95" (en) bzw. "1,95" (de) */
   LT.num = function (v, digits) {
     if (!isFinite(v)) return "–";
-    return v.toLocaleString("de-DE", { minimumFractionDigits: digits || 0, maximumFractionDigits: digits || 0 });
+    return v.toLocaleString(LT.lang === "de" ? "de-DE" : "en-US", { minimumFractionDigits: digits || 0, maximumFractionDigits: digits || 0 });
   };
   /** Strom mit passender Einheit */
   LT.fmtI = function (amp) {
@@ -102,6 +123,7 @@
     circuit: '<path d="M2 10h4M14 10h4M6 6v8l7-4-7-4zM13 6v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>',
     chat: '<path d="M3.6 3.8h12.8c.6 0 1.1.5 1.1 1.1v8.2c0 .6-.5 1.1-1.1 1.1H9.2l-4 3.1v-3.1H3.6c-.6 0-1.1-.5-1.1-1.1V4.9c0-.6.5-1.1 1.1-1.1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.8" cy="9" r="1.05" fill="currentColor"/><circle cx="10" cy="9" r="1.05" fill="currentColor"/><circle cx="13.2" cy="9" r="1.05" fill="currentColor"/>',
     external: '<path d="M11.5 3H17v5.5M17 3l-7.5 7.5M14.5 12v3.9c0 .6-.5 1.1-1.1 1.1H4.1c-.6 0-1.1-.5-1.1-1.1V6.6c0-.6.5-1.1 1.1-1.1H8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+    globe: '<circle cx="10" cy="10" r="7.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M2.4 10h15.2M10 2.4c2.3 2.1 3.5 4.6 3.5 7.6s-1.2 5.5-3.5 7.6c-2.3-2.1-3.5-4.6-3.5-7.6S7.7 4.5 10 2.4z" fill="none" stroke="currentColor" stroke-width="1.7"/>',
     copy: '<rect x="7" y="7" width="10" height="10" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M13 7V4.6c0-.9-.7-1.6-1.6-1.6H4.6C3.7 3 3 3.7 3 4.6v6.8c0 .9.7 1.6 1.6 1.6H7" fill="none" stroke="currentColor" stroke-width="1.7"/>'
   };
   LT.icon = function (name, cls) {
@@ -132,7 +154,7 @@
   LT.segmented = function (parent, label, options, value, onChange) {
     var wrap = document.createElement("div");
     wrap.className = "ctl";
-    wrap.innerHTML = (label ? '<span class="ctl__label">' + label + "</span>" : "") + '<div class="seg" role="group" aria-label="' + (label || "Auswahl") + '"></div>';
+    wrap.innerHTML = (label ? '<span class="ctl__label">' + label + "</span>" : "") + '<div class="seg" role="group" aria-label="' + (label || T("Selection", "Auswahl")) + '"></div>';
     var seg = LT.$(".seg", wrap);
     options.forEach(function (op) {
       var b = document.createElement("button");
@@ -224,14 +246,14 @@
     }).join("");
 
     host.innerHTML =
-      '<a class="skip-link" href="#main">Zum Inhalt springen</a>' +
+      '<a class="skip-link" href="#main">' + T('Skip to content', 'Zum Inhalt springen') + '</a>' +
       '<div class="container site-header__bar">' +
-      '<a class="brand" href="index.html" aria-label="LUMIATECH – zur Startseite">' + LT.logo() +
+      '<a class="brand" href="index.html" aria-label="' + T('LUMIATECH – to the home page', 'LUMIATECH – zur Startseite') + '">' + LT.logo() +
       '<span><span class="brand__name">LUMIATECH</span><span class="brand__claim">Semiconductor GmbH</span></span></a>' +
-      '<button class="menu-btn" aria-expanded="false" aria-controls="main-nav">' + LT.icon("menu") + "<span>Menü</span></button>" +
-      '<nav class="nav" id="main-nav" aria-label="Hauptnavigation">' + items +
-      '<a class="btn btn--litho nav__mobile-cta" href="downloads.html">' + LT.icon("download") + "Datenblätter</a></nav>" +
-      '<a class="btn btn--litho btn--small header-cta" href="downloads.html">' + LT.icon("download") + "Datenblätter</a>" +
+      '<button class="menu-btn" aria-expanded="false" aria-controls="main-nav">' + LT.icon("menu") + "" + T("<span>Menu</span>", "<span>Menü</span>") + "</button>" +
+      '<nav class="nav" id="main-nav" aria-label="' + T('Main navigation', 'Hauptnavigation') + '">' + items +
+      '<a class="btn btn--litho nav__mobile-cta" href="downloads.html">' + LT.icon("download") + "" + T("Data sheets</a>", "Datenblätter</a>") + "</nav>" +
+      '<a class="btn btn--litho btn--small header-cta" href="downloads.html">' + LT.icon("download") + "" + T("Data sheets</a>", "Datenblätter</a>") + "" +
       "</div>";
 
     var toggles = LT.$$(".nav__toggle", host);
@@ -262,7 +284,7 @@
       menuBtn.setAttribute("aria-expanded", String(open));
       nav.classList.toggle("is-open", open);
       document.documentElement.classList.toggle("nav-open", open);
-      menuBtn.innerHTML = LT.icon(open ? "close" : "menu") + "<span>" + (open ? "Schließen" : "Menü") + "</span>";
+      menuBtn.innerHTML = LT.icon(open ? "close" : "menu") + "<span>" + (open ? T("Close", "Schließen") : T("Menu", "Menü")) + "</span>";
     });
   }
 
@@ -281,37 +303,89 @@
       '<div class="footer-brand"><a class="brand" href="index.html">' + LT.logo() +
       '<span><span class="brand__name">LUMIATECH</span><span class="brand__claim">Semiconductor GmbH</span></span></a>' +
       "<address>" + COMPANY.name + "<br>" + COMPANY.street + "<br>" + COMPANY.city + "</address></div>" +
-      '<div><h4>Produkte</h4><ul>' + links([["dioden.html", "Silizium-Dioden BAY 44/45/46"], ["leds.html", "5-mm-LEDs L-7113", "leds"], ["downloads.html", "Datenblätter"]]) + "</ul></div>" +
-      '<div><h4>Applikationen</h4><ul>' + links([["dioden-applikation.html", "Verpolschutz"], ["dioden-applikation.html#schaltungen", "Diodenschaltungen"], ["led-applikation.html", "LED-Vorwiderstand", "leds"], ["led-applikation.html#signalsaeule", "Signalsäulen-Retrofit", "leds"]]) + "</ul></div>" +
-      '<div><h4>Unternehmen</h4><ul><li><a href="unternehmen.html">Über uns</a></li><li><a href="unternehmen.html#fertigung">Fertigung & Prüfung</a></li><li><a href="unternehmen.html#ausbildung">Ausbildung</a></li><li><a href="technologie.html">Halbleitertechnik</a></li></ul></div>' +
+      '<div><h4>' + T("Products", "Produkte") + '</h4><ul>' + links([["dioden.html", T("Silicon diodes BAY 44/45/46", "Silizium-Dioden BAY 44/45/46")], ["leds.html", T("5 mm LEDs L-7113", "5-mm-LEDs L-7113"), "leds"], ["downloads.html", T("Data sheets", "Datenblätter")]]) + "</ul></div>" +
+      '<div><h4>' + T("Applications", "Applikationen") + '</h4><ul>' + links([["dioden-applikation.html", T("Reverse polarity protection", "Verpolschutz")], ["dioden-applikation.html#schaltungen", T("Diode circuits", "Diodenschaltungen")], ["led-applikation.html", T("LED series resistor", "LED-Vorwiderstand"), "leds"], ["led-applikation.html#signalsaeule", T("Signal tower retrofit", "Signalsäulen-Retrofit"), "leds"]]) + "</ul></div>" +
+      '<div><h4>' + T("Company", "Unternehmen") + '</h4><ul><li><a href="unternehmen.html">' + T("About us", "Über uns") + '</a></li><li><a href="unternehmen.html#fertigung">' + T("Manufacturing & testing", "Fertigung & Prüfung") + '</a></li><li><a href="unternehmen.html#ausbildung">' + T("Vocational training", "Ausbildung") + '</a></li><li><a href="technologie.html">' + T("Semiconductor technology", "Halbleitertechnik") + "</a></li></ul></div>" +
       "</div>" +
-      '<div class="footer-bottom"><span>© ' + year + " " + COMPANY.name + "</span><span>Zertifiziert nach ISO 9001, alle Produkte RoHS-konform</span></div>" +
-      '<div class="footer-legal"><p>KI-generierte Inhalte. Diese Website dient ausschließlich Lehrzwecken, LUMIATECH ist ein fiktives Unternehmen.</p>' +
-      '<p><a href="../../../../impressum.html">Impressum</a> · <a href="../../../../datenschutz.html">Datenschutz</a> · Kontakt und Feedback: <a href="mailto:kontakt@herrniebel.de">kontakt@herrniebel.de</a></p></div></div>';
+      '<div class="footer-bottom"><span>© ' + year + " " + COMPANY.name + "</span>" + T("<span>Certified to ISO 9001, all products RoHS compliant</span>", "<span>Zertifiziert nach ISO 9001, alle Produkte RoHS-konform</span>") + "</div>" +
+      '<div class="footer-legal"><p>' + T('AI-generated content. This website is for teaching purposes only, LUMIATECH is a fictitious company.', 'KI-generierte Inhalte. Diese Website dient ausschließlich Lehrzwecken, LUMIATECH ist ein fiktives Unternehmen.') + '</p>' +
+      '<p><a href="../../../../impressum.html">' + T("Legal notice", "Impressum") + '</a> · <a href="../../../../datenschutz.html">' + T("Privacy policy", "Datenschutz") + "</a> · " + T("Contact and feedback", "Kontakt und Feedback") + ': <a href="mailto:kontakt@herrniebel.de">kontakt@herrniebel.de</a></p></div></div>';
+  }
+
+  /* ---------- Dock am rechten Rand: Übersetzen (oben) und KI-Support (darunter) ---------- */
+  function buildDock() {
+    if (document.getElementById("support")) return;
+    var wrap = document.createElement("div");
+    wrap.className = "support";
+    wrap.id = "support";
+    document.body.appendChild(wrap);
+    buildSupport(wrap, buildLang(wrap));
+  }
+
+  /* ---------- Übersetzen: Englisch ist Standard, Deutsch auf Wunsch ----------
+     Erster Aufruf (Adresse ohne ?lang=): Am rechten Rand schwebt eine Karte „Übersetzen?“.
+     Nach dem Schließen (x) bleibt der Reiter „Übersetzen?“ am Rand, wie der KI-Chat-Reiter.
+     In der deutschen Fassung heißt der Reiter „English?“.
+     Die Wahl steht nur in der Adresse (?lang=de / ?lang=en) und wandert über die internen
+     Links mit. Es wird nichts gespeichert (keine Cookies, kein localStorage). */
+  function switchLang(to) {
+    var u = new URL(location.href), max = document.documentElement.scrollHeight - window.innerHeight;
+    u.searchParams.set("lang", to);
+    if (max > 0 && window.scrollY > 0) u.searchParams.set("y", (window.scrollY / max).toFixed(4)); // Leseposition mitnehmen
+    location.assign(u.href);
+  }
+  function buildLang(wrap) {
+    var other = LT.lang === "de" ? "en" : "de", first = !LT.langGewaehlt, after = [];
+    var slot = document.createElement("div");
+    slot.className = "support-slot support-slot--lang";
+    slot.innerHTML =
+      '<div class="lang-card" lang="de" role="region" aria-label="Übersetzung"' + (first ? "" : " hidden") + ">" +
+      '<button class="lang-card__close" type="button" aria-label="Schließen (close)">' + LT.icon("close") + "</button>" +
+      '<span class="lang-card__badge">' + LT.icon("globe") + "</span>" +
+      "<strong>Übersetzen?</strong>" +
+      '<p><span lang="en">This website is in English.</span> Sie können sie auch auf Deutsch lesen.</p>' +
+      '<button class="btn btn--litho btn--small lang-card__go" type="button">Auf Deutsch anzeigen</button></div>' +
+      '<button class="support-tab support-tab--lang" type="button" lang="' + other + '" aria-label="' +
+      (other === "de" ? "Seite auf Deutsch übersetzen" : "Show this page in English") + '"' + (first ? " hidden" : "") + ">" +
+      LT.icon("globe") + "<span>" + (other === "de" ? "Übersetzen?" : "English?") + "</span></button>";
+    wrap.appendChild(slot);
+    var card = LT.$(".lang-card", slot), tab = LT.$(".support-tab--lang", slot);
+    wrap.classList.toggle("has-card", first);
+    tab.addEventListener("click", function () { switchLang(other); });
+    LT.$(".lang-card__go", slot).addEventListener("click", function () { switchLang("de"); });
+    LT.$(".lang-card__close", slot).addEventListener("click", function () {
+      card.hidden = true; tab.hidden = false; wrap.classList.remove("has-card");
+      LT.langGewaehlt = true; // ab jetzt nehmen die internen Links ?lang=en mit
+      var u = new URL(location.href); u.searchParams.set("lang", LT.lang);
+      try { history.replaceState(null, "", u.href); } catch (err) { /* z. B. lokal als Datei geöffnet */ }
+      keepParams(document);
+      tab.focus();
+      after.forEach(function (fn) { fn(); });
+    });
+    return { open: first, onClose: function (fn) { after.push(fn); } };
   }
 
   /* ---------- KI-Support: Reiter, Hinweis beim Laden, Fenster mit QR-Code ----------
      Einstellungen in config.js (kiChat). Der QR-Code wird aus dem Link erzeugt
      (assets/js/vendor/qrcode.js, wird erst beim Öffnen des Fensters geladen). */
-  function buildSupport() {
+  function buildSupport(wrap, lang) {
     var cfg = LT.config.kiChat || {};
     var url = cfg.url;
-    if (!url || document.getElementById("support")) return;
+    if (!url) return;
     var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); };
     var U = esc(url);
 
-    var wrap = document.createElement("div");
-    wrap.className = "support";
-    wrap.id = "support";
-    wrap.innerHTML =
+    var slot = document.createElement("div");
+    slot.className = "support-slot support-slot--chat";
+    wrap.appendChild(slot);
+    slot.innerHTML =
       '<button class="support-tab" type="button" aria-haspopup="dialog" aria-controls="support-dialog">' + LT.icon("chat") +
-      '<span class="support-tab__long">Fragen? KI-Chat</span><span class="support-tab__short">Fragen?</span></button>' +
+      '<span class="support-tab__long">' + T('Questions? AI chat', 'Fragen? KI-Chat') + '</span><span class="support-tab__short">' + T('Questions?</span>', 'Fragen?</span>') + '</button>' +
       '<div class="support-teaser" aria-live="polite">' +
-      '<button class="support-teaser__close" type="button" aria-label="Hinweis schließen">' + LT.icon("close") + "</button>" +
-      "<strong>Fragen zu Dioden" + (LT.frei("leds") ? " oder LEDs" : "") + "?</strong>" +
-      "<p>Unser KI-Support beantwortet sie direkt im Chat.</p>" +
-      '<button class="btn btn--litho btn--small support-teaser__open" type="button">' + LT.icon("chat") + "Chat öffnen</button></div>";
-    document.body.appendChild(wrap);
+      '<button class="support-teaser__close" type="button" aria-label="' + T('Close hint', 'Hinweis schließen') + '">' + LT.icon("close") + "</button>" +
+      "<strong>" + T("Questions about diodes" + (LT.frei("leds") ? " or LEDs" : ""), "Fragen zu Dioden" + (LT.frei("leds") ? " oder LEDs" : "")) + "?</strong>" +
+      T("<p>Our AI support answers them directly in the chat.</p>", "<p>Unser KI-Support beantwortet sie direkt im Chat.</p>") +
+      '<button class="btn btn--litho btn--small support-teaser__open" type="button">' + LT.icon("chat") + "" + T("Open chat</button></div>", "Chat öffnen</button></div>") + "";
 
     var dlg = document.createElement("dialog");
     dlg.className = "support-dialog";
@@ -320,23 +394,23 @@
     dlg.innerHTML =
       '<div class="support-dialog__inner">' +
       '<div class="support-dialog__head"><span class="support-dialog__badge">' + LT.icon("chat") + "</span>" +
-      '<div><span class="kicker">Technischer Support</span><h2 id="support-title">Stellen Sie Ihre Fragen im Chat</h2></div>' +
-      '<button class="support-dialog__close" type="button" aria-label="Fenster schließen">' + LT.icon("close") + "</button></div>" +
+      '<div><span class="kicker">' + T('Technical support', 'Technischer Support') + '</span><h2 id="support-title">' + T('Ask your questions in the chat', 'Stellen Sie Ihre Fragen im Chat') + '</h2></div>' +
+      '<button class="support-dialog__close" type="button" aria-label="' + T('Close window', 'Fenster schließen') + '">' + LT.icon("close") + "</button></div>" +
       '<div class="support-dialog__body">' +
-      '<figure class="support-qr"><div class="support-qr__code"><span class="support-qr__wait">QR-Code wird erzeugt …</span></div>' +
-      '<figcaption>Mit der Smartphone-Kamera scannen</figcaption>' +
-      '<a class="support-qr__save" href="#" download="KI-Chat_QR-Code.svg" hidden>QR-Code speichern</a></figure>' +
+      '<figure class="support-qr"><div class="support-qr__code"><span class="support-qr__wait">' + T('Generating QR code …', 'QR-Code wird erzeugt …') + '</span></div>' +
+      '<figcaption>' + T('Scan with your smartphone camera', 'Mit der Smartphone-Kamera scannen') + '</figcaption>' +
+      '<a class="support-qr__save" href="#" download="KI-Chat_QR-Code.svg" hidden' + T('>Save QR code<', '>QR-Code speichern<') + '/a></figure>' +
       '<div class="support-dialog__text">' +
-      "<p>Unser KI-Assistent hilft bei Fragen zu " + (LT.frei("leds") ? "Dioden, LEDs, Kennlinien, Vorwiderständen" : "Dioden, Kennlinien, Diodenschaltungen") + " und unseren Applikationen.</p>" +
-      '<a class="btn btn--litho support-dialog__go" href="' + U + '" target="_blank" rel="noopener">' + LT.icon("external") + "Chat im neuen Tab öffnen</a>" +
-      '<div class="support-link"><span class="support-link__label">Link zum Chat</span>' +
+      "<p>" + T("Our AI assistant helps with questions about " + (LT.frei("leds") ? "diodes, LEDs, characteristic curves, series resistors" : "diodes, characteristic curves, diode circuits") + " and our application notes.", "Unser KI-Assistent hilft bei Fragen zu " + (LT.frei("leds") ? "Dioden, LEDs, Kennlinien, Vorwiderständen" : "Dioden, Kennlinien, Diodenschaltungen") + " und unseren Applikationen.") + "</p>" +
+      '<a class="btn btn--litho support-dialog__go" href="' + U + '" target="_blank" rel="noopener">' + LT.icon("external") + "" + T("Open chat in a new tab</a>", "Chat im neuen Tab öffnen</a>") + "" +
+      '<div class="support-link"><span class="support-link__label">' + T('Link to the chat', 'Link zum Chat') + '</span>' +
       '<a class="support-link__url" href="' + U + '" target="_blank" rel="noopener">' + esc(url.replace(/^https?:\/\//, "")) + "</a>" +
-      '<button class="support-link__copy" type="button">' + LT.icon("copy") + '<span>Link kopieren</span></button></div>' +
-      '<p class="support-dialog__note">' + LT.icon("info") + "<span>Der Chat ist ein KI-Assistent. Antworten können Fehler enthalten – wichtige Werte bitte im Datenblatt prüfen.</span></p>" +
+      '<button class="support-link__copy" type="button">' + LT.icon("copy") + '' + T('<span>Copy link</span>', '<span>Link kopieren</span>') + '</button></div>' +
+      '<p class="support-dialog__note">' + LT.icon("info") + "" + T("<span>The chat is an AI assistant. Answers may contain errors – please check important values in the data sheet.</span>", "<span>Der Chat ist ein KI-Assistent. Antworten können Fehler enthalten – wichtige Werte bitte im Datenblatt prüfen.</span>") + "</p>" +
       "</div></div></div>";
     document.body.appendChild(dlg);
 
-    var tab = LT.$(".support-tab", wrap), teaser = LT.$(".support-teaser", wrap), timer = null;
+    var tab = LT.$(".support-tab", slot), teaser = LT.$(".support-teaser", slot), timer = null;
     function hideTeaser() { clearTimeout(timer); wrap.classList.remove("show-teaser"); }
     function open() {
       hideTeaser();
@@ -358,9 +432,9 @@
     var copyBtn = LT.$(".support-link__copy", dlg), copyLabel = LT.$("span", copyBtn);
     copyBtn.addEventListener("click", function () {
       function done(ok) {
-        copyLabel.textContent = ok ? "Kopiert" : "Bitte manuell kopieren";
+        copyLabel.textContent = ok ? T("Copied", "Kopiert") : T("Please copy manually", "Bitte manuell kopieren");
         copyBtn.classList.toggle("is-done", ok);
-        setTimeout(function () { copyLabel.textContent = "Link kopieren"; copyBtn.classList.remove("is-done"); }, 2200);
+        setTimeout(function () { copyLabel.textContent = T("Copy link", "Link kopieren"); copyBtn.classList.remove("is-done"); }, 2200);
       }
       function fallback() {
         var ta = document.createElement("textarea");
@@ -384,7 +458,7 @@
           q.addData(url); q.make();
           var n = q.getModuleCount(), b = 4, size = n + 2 * b, d = "";
           for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (q.isDark(r, c)) d += "M" + (c + b) + " " + (r + b) + "h1v1h-1z";
-          var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + size + " " + size + '" shape-rendering="crispEdges" role="img" aria-label="QR-Code zum KI-Support-Chat">' +
+          var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + size + " " + size + '" shape-rendering="crispEdges" role="img" aria-label="' + T('QR code to the AI support chat', 'QR-Code zum KI-Support-Chat') + '">' +
             '<rect width="' + size + '" height="' + size + '" fill="#fff"/><path d="' + d + '" fill="#17202b"/></svg>';
           host.innerHTML = svg;
           var save = LT.$(".support-qr__save", dlg);
@@ -393,7 +467,7 @@
           qrDone = true;
         } catch (err) { fail(); }
       }
-      function fail() { host.innerHTML = '<span class="support-qr__wait">QR-Code nicht verfügbar – bitte den Link nutzen.</span>'; }
+      function fail() { host.innerHTML = '<span class="support-qr__wait">' + T('QR code not available – please use the link.', 'QR-Code nicht verfügbar – bitte den Link nutzen.') + '</span>'; }
       if (window.qrcode) { draw(); return; }
       var s = document.createElement("script");
       s.src = JS_BASE + "vendor/qrcode.js";
@@ -401,14 +475,17 @@
       document.head.appendChild(s);
     }
 
-    // Hinweis beim Laden der Seite
+    // Hinweis beim Laden der Seite – solange die Übersetzen-Karte offen ist, erst nach deren Schließen
     if (cfg.hinweisBeimLaden !== false) {
-      setTimeout(function () {
-        if (dlg.open) return;
-        wrap.classList.add("show-teaser");
-        var sec = cfg.hinweisSekunden === undefined ? 10 : +cfg.hinweisSekunden;
-        if (sec > 0) timer = setTimeout(hideTeaser, sec * 1000);
-      }, 1200);
+      var showTeaser = function () {
+        setTimeout(function () {
+          if (dlg.open) return;
+          wrap.classList.add("show-teaser");
+          var sec = cfg.hinweisSekunden === undefined ? 10 : +cfg.hinweisSekunden;
+          if (sec > 0) timer = setTimeout(hideTeaser, sec * 1000);
+        }, 1200);
+      };
+      if (lang && lang.open) lang.onClose(showTeaser); else showTeaser();
       // solange die Maus auf dem Hinweis ist, nicht automatisch schließen
       teaser.addEventListener("mouseenter", function () { clearTimeout(timer); });
       teaser.addEventListener("focusin", function () { clearTimeout(timer); });
@@ -421,10 +498,10 @@
       var root = LT.$(toc.getAttribute("data-toc"));
       if (!root) return;
       var sections = LT.$$(":scope > section[id]", root).filter(function (s) { return getComputedStyle(s).display !== "none"; });
-      var html = '<div class="toc__title">Auf dieser Seite</div><ol>' +
+      var html = '<div class="toc__title">' + T('On this page', 'Auf dieser Seite') + '</div><ol>' +
         sections.map(function (s) {
           var h = LT.$("h2", s);
-          var label = s.getAttribute("data-toc-label") || (h ? h.textContent : s.id);
+          var label = s.getAttribute("data-toc-label") || (h ? LT.text(h) : s.id);
           return '<li><a href="#' + s.id + '">' + label + "</a></li>";
         }).join("") + "</ol>";
       toc.innerHTML = html;
@@ -459,27 +536,41 @@
     });
   }
 
-  /* Früheren Stand (?w=1) über alle internen Links mitnehmen */
-  if (WOCHE.woche < WOCHE.eingestellt) {
-    document.addEventListener("click", function (e) {
-      var a = e.target.closest && e.target.closest("a[href]");
-      if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
-      var href = a.getAttribute("href");
-      if (/^(#|mailto:|tel:|https?:)/i.test(href)) return;
-      var u = new URL(href, location.href);
-      if (!/\.html$/i.test(u.pathname) || /(impressum|datenschutz)\.html$/i.test(u.pathname)) return;
-      u.searchParams.set("w", WOCHE.woche);
-      a.href = u.href;
-    }, true);
+  /* Sprache (?lang=) und früheren Stand (?w=1) über alle internen Links mitnehmen */
+  function keepLink(a) {
+    if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+    var href = a.getAttribute("href");
+    if (!href || /^(#|mailto:|tel:)/i.test(href)) return;
+    var u = new URL(href, location.href), vorher = u.search;
+    if (u.origin !== location.origin || !/\.html$/i.test(u.pathname) || /(impressum|datenschutz)\.html$/i.test(u.pathname)) return;
+    if (LT.langGewaehlt) u.searchParams.set("lang", LT.lang);
+    if (WOCHE.woche < WOCHE.eingestellt) u.searchParams.set("w", WOCHE.woche);
+    if (u.search !== vorher) a.href = u.href;
+  }
+  function keepParams(root) { LT.$$("a[href]", root).forEach(keepLink); }
+  document.addEventListener("click", function (e) { keepLink(e.target.closest && e.target.closest("a[href]")); }, true); // später eingefügte Links
+
+  /* Leseposition nach dem Sprachwechsel wiederherstellen (?y= wird danach aus der Adresse entfernt) */
+  function restoreScroll() {
+    var q = new URLSearchParams(location.search), y = parseFloat(q.get("y"));
+    if (!q.has("y")) return;
+    var u = new URL(location.href); u.searchParams.delete("y");
+    try { history.replaceState(null, "", u.href); } catch (err) { /* lokal als Datei geöffnet */ }
+    if (!(y > 0)) return;
+    var go = function () { window.scrollTo({ top: y * (document.documentElement.scrollHeight - window.innerHeight), behavior: "instant" }); };
+    go();
+    window.addEventListener("load", function () { setTimeout(go, 60); });
   }
 
   function init() {
     buildHeader();
     buildFooter();
-    buildSupport();
+    buildDock();
     buildToc();
     initHotspots();
+    keepParams(document);
     LT.$$('input[type="range"]').forEach(LT.paintRange);
+    restoreScroll();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

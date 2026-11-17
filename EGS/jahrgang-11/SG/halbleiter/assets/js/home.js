@@ -2,6 +2,7 @@
 (function () {
   "use strict";
   var LT = window.LT;
+  var T = LT.t;
 
   /* Diode BAY 44/45/46: Typen unterscheiden sich nur in der Sperrspannung */
   var dhost = document.getElementById("hero-diode");
@@ -22,13 +23,13 @@
   if (!host) return;
   var D = LT.phys.devices;
   var INFO = {
-    red: { type: "L-7113SURDK", col: "Rot, λ<sub>D</sub> 630 nm", dev: D.red },
-    green: { type: "L-7113SGD", col: "Grün, λ<sub>D</sub> 568 nm", dev: D.green },
-    blue: { type: "L-7113MBTL", col: "Blau, λ<sub>D</sub> 466 nm", dev: D.blue }
+    red: { type: "L-7113SURDK", col: T("Red, λ<sub>D</sub> 630 nm", "Rot, λ<sub>D</sub> 630 nm"), dev: D.red },
+    green: { type: "L-7113SGD", col: T("Green, λ<sub>D</sub> 568 nm", "Grün, λ<sub>D</sub> 568 nm"), dev: D.green },
+    blue: { type: "L-7113MBTL", col: T("Blue, λ<sub>D</sub> 466 nm", "Blau, λ<sub>D</sub> 466 nm"), dev: D.blue }
   };
 
   function show(color) {
-    host.innerHTML = LT.artLED({ color: color, dims: true, lit: true, label: "5-mm-LED " + LT.LED_COLORS[color].name + " – Maßzeichnung" });
+    host.innerHTML = LT.artLED({ color: color, dims: true, lit: true, label: T("5 mm LED " + LT.LED_COLORS[color].name.toLowerCase() + " – dimensional drawing", "5-mm-LED " + LT.LED_COLORS[color].name + " – Maßzeichnung") });
     var i = INFO[color];
     LT.$("#hero-type").textContent = i.type;
     LT.$("#hero-col").innerHTML = i.col;

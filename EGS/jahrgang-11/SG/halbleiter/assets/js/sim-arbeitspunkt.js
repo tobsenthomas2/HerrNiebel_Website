@@ -6,6 +6,7 @@
 (function () {
   "use strict";
   var LT = window.LT, P = LT.phys, D = P.devices;
+  var T = LT.t;
   var LEDS = ["red", "green", "blue"];
   var RS = P.e12Range(100, 2200);
 
@@ -15,18 +16,18 @@
     var st = { led: "red", Ub: 12, ri: RS.indexOf(1000) };
 
     LT.segmented(ui.controls, "LED", [
-      { value: "red", html: '<span class="dot" style="background:#d3262b"></span>Rot' },
-      { value: "green", html: '<span class="dot" style="background:#14873d"></span>Grün' },
-      { value: "blue", html: '<span class="dot" style="background:#1f5bd8"></span>Blau' },
-      { value: "all", label: "Alle drei" }
+      { value: "red", html: '<span class="dot" style="background:#d3262b"></span>' + T("Red", "Rot") },
+      { value: "green", html: '<span class="dot" style="background:#14873d"></span>' + T("Green", "Grün") },
+      { value: "blue", html: '<span class="dot" style="background:#1f5bd8"></span>' + T("Blue", "Blau") },
+      { value: "all", label: T("All three", "Alle drei") }
     ], "red", function (v) { st.led = v; update(); });
     LT.slider(ui.controls, {
-      label: "Betriebsspannung U<sub>b</sub>", min: 3, max: 24, step: 0.5, value: st.Ub,
+      label: T("Operating voltage U<sub>b</sub>", "Betriebsspannung U<sub>b</sub>"), min: 3, max: 24, step: 0.5, value: st.Ub,
       format: function (v) { return LT.num(v, v % 1 ? 1 : 0) + " V"; },
       onInput: function (v) { st.Ub = v; update(); }
     });
     LT.slider(ui.controls, {
-      label: "Vorwiderstand R<sub>V</sub> (E12)", min: 0, max: RS.length - 1, step: 1, value: st.ri,
+      label: T("Series resistor R<sub>V</sub> (E12)", "Vorwiderstand R<sub>V</sub> (E12)"), min: 0, max: RS.length - 1, step: 1, value: st.ri,
       format: function (i) { return LT.fmtR(RS[i]); },
       onInput: function (i) { st.ri = i; update(); }
     });
@@ -40,7 +41,7 @@
     if (show) ui.controls.appendChild(values);
 
     var chart = LT.chart(ui.stage, {
-      ariaLabel: "Kennlinie der LED mit Widerstandsgerade und Arbeitspunkt",
+      ariaLabel: T("LED characteristic with load line and operating point", "Kennlinie der LED mit Widerstandsgerade und Arbeitspunkt"),
       height: function (w) { return LT.clamp(w * 0.64, 300, 460); },
       margin: { t: 20, r: 24, b: 50, l: 52 },
       x: { domain: [0, 13], ticks: [], label: "U in V" },
@@ -73,7 +74,7 @@
         c.el("circle", { cx: c.sx(0), cy: c.sy(IK), r: 5.5, fill: "#17202b" }, c.gOver);
         c.text(c.sx(0) + 10, c.sy(IK) - 8, "P2", { class: "series-label" });
       } else {
-        c.text(c.sx(0) + 10, c.sy(58), "P2 liegt oberhalb (I<sub>K</sub> > 60 mA)", { class: "series-label", "font-size": 11.5 });
+        c.text(c.sx(0) + 10, c.sy(58), T("P2 lies above (I<sub>K</sub> > 60 mA)", "P2 liegt oberhalb (I<sub>K</sub> > 60 mA)"), { class: "series-label", "font-size": 11.5 });
       }
       // Arbeitspunkte
       sel.forEach(function (k) {
@@ -105,9 +106,9 @@
         lines.push('<span class="ap-led" style="--c:' + LT.LED_COLORS[k].glow + ";--a:" + LT.clamp(op.I / 0.02, 0, 1.5).toFixed(2) + '" title="' + d.short + '"></span>');
       });
       leds.innerHTML = lines.join("");
-      if (worst === "bad") LT.status(status, "bad", "Arbeitspunkt über I<sub>F,max</sub>", "Die LED wird überlastet und fällt früher oder später aus. Vorwiderstand vergrößern.");
-      else if (dim) LT.status(status, "warn", "Zulässig, aber sehr dunkel", "Der Strom ist deutlich kleiner als der Nennstrom von 20 mA.");
-      else LT.status(status, "ok", "Arbeitspunkt im zulässigen Bereich", "Der Strom bleibt unter dem maximalen Durchlassstrom.");
+      if (worst === "bad") LT.status(status, "bad", T("Operating point above I<sub>F,max</sub>", "Arbeitspunkt über I<sub>F,max</sub>"), T("The LED is overloaded and will fail sooner or later. Increase the series resistor.", "Die LED wird überlastet und fällt früher oder später aus. Vorwiderstand vergrößern."));
+      else if (dim) LT.status(status, "warn", T("Permissible, but very dim", "Zulässig, aber sehr dunkel"), T("The current is considerably smaller than the rated current of 20 mA.", "Der Strom ist deutlich kleiner als der Nennstrom von 20 mA."));
+      else LT.status(status, "ok", T("Operating point within the permissible range", "Arbeitspunkt im zulässigen Bereich"), T("The current stays below the maximum forward current.", "Der Strom bleibt unter dem maximalen Durchlassstrom."));
       values.innerHTML = vals.join("");
     }
 

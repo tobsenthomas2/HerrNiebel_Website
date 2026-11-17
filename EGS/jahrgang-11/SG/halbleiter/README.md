@@ -25,6 +25,7 @@ assets/css/site.css        Design für alle Seiten (Farben, Schrift, Bausteine)
 assets/css/home.css        nur Startseite
 assets/css/products.css    Produkt- und Applikationsseiten
 assets/js/config.js        Einstellungen (siehe unten)
+assets/js/lang.js          Sprache: Englisch ist Standard, Deutsch über ?lang=de (ohne defer als erstes Skript laden!)
 assets/js/woche.js         Unterrichtswoche: blendet Inhalte je nach Woche ein/aus (ohne defer laden!)
 assets/js/site.js          Kopfzeile, Navigation, Fußzeile, Inhaltsverzeichnis, Helfer
 assets/js/physics.js       Bauteilmodelle (Kennlinien von BAY 44 und den drei LEDs)
@@ -59,6 +60,32 @@ Eine Simulation wird mit einem Platzhalter eingebunden und das passende Skript i
 | `vergleich` | `sim-vergleich.js` | leds |
 | `arbeitspunkt` | `sim-arbeitspunkt.js` | led-applikation |
 | `signalsaeule` | `sim-signalsaeule.js` | led-applikation |
+
+## Sprache: Englisch als Standard, Deutsch auf Knopfdruck
+
+Die Website erscheint auf Englisch. Beim ersten Aufruf (Adresse ohne `?lang=`) schwebt am rechten
+Rand die Karte „Übersetzen?“. Nach dem Schließen (x) bleibt dort der Reiter „Übersetzen?“ über dem
+KI-Chat-Reiter; in der deutschen Fassung heißt er „English?“. Die Wahl steht nur in der Adresse
+(`?lang=de` bzw. `?lang=en`) und wandert über die internen Links mit – es wird nichts gespeichert
+(keine Cookies, kein localStorage). Direktlink zur deutschen Fassung: `index.html?lang=de`.
+
+Beide Sprachen stehen in derselben Datei:
+
+```html
+<p><span data-lang="en">Forward voltage</span><span data-lang="de">Durchlassspannung</span></p>
+<nav aria-label="Breadcrumb" data-de-aria-label="Brotkrumen">   <!-- auch alt, data-title, data-hint, data-toc-label -->
+<html lang="en" data-title-de="Deutscher Seitentitel">
+```
+
+```js
+T("Forward direction", "Durchlassrichtung")   // in Skripten: var T = LT.t;
+LT.num(1.95, 2)                               // "1.95" (en) bzw. "1,95" (de)
+```
+
+Formelzeichen (U_F, U_S, I_F …) und Betriebsmittelkennzeichen (-R1, -P1 …) sind in beiden Sprachen
+gleich. Feste Begriffe: forward voltage U_F, threshold voltage U_S, reverse voltage U_R,
+series resistor, depletion layer, operating point, load line, signal tower.
+Die PDF-Datenblätter sind deutsch.
 
 ## Einstellung: Unterrichtswoche (die Website wächst mit)
 

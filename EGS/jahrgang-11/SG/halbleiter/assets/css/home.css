@@ -18,8 +18,9 @@
   background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
 }
 .hero__sheet::after {
-  content: "Maßzeichnung in mm"; position: absolute; right: 12px; bottom: 8px; font-size: var(--fs-xs); color: var(--ink-3);
+  content: "Dimensions in mm"; position: absolute; right: 12px; bottom: 8px; font-size: var(--fs-xs); color: var(--ink-3);
 }
+html[lang="de"] .hero__sheet::after { content: "Maßzeichnung in mm"; }
 .hero__led { max-width: 300px; justify-self: center; width: 100%; }
 .hero__led svg { width: 100%; height: auto; overflow: visible; }
 .hero__led .led-glow { transition: opacity .5s ease; }

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en" data-title-de="Halbleitertechnik verstehen | LUMIATECH Semiconductor">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Halbleitertechnik verstehen | LUMIATECH Semiconductor</title>
-  <meta name="description" content="Leiter, Halbleiter und Nichtleiter, Dotierung und PN-Übergang – das Grundlagenwissen hinter unseren Dioden und LEDs, mit interaktiven Simulationen.">
+  <title>Understanding semiconductor technology | LUMIATECH Semiconductor</title>
+  <meta name="description" content="Conductors, semiconductors and insulators, doping and the PN junction – the fundamentals behind our diodes and LEDs, with interactive simulations.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/lang.js"></script>
   <script src="assets/js/config.js"></script>
   <script src="assets/js/woche.js"></script>
   <script defer src="assets/js/site.js"></script>
@@ -22,110 +23,110 @@
   <main id="main">
     <div class="page-head">
       <div class="container">
-        <nav class="crumbs" aria-label="Brotkrumen"><a href="index.html">Start</a><span aria-hidden="true">/</span><span>Technologie</span></nav>
-        <h1>Halbleitertechnik verstehen</h1>
-        <p class="lead">Was im Kristall passiert, entscheidet über jede Kennlinie im Datenblatt. Hier erklären wir die Grundlagen, auf denen unsere Dioden<span data-thema="leds"> und LEDs</span> aufbauen – zum Lesen und zum Ausprobieren.</p>
+        <nav class="crumbs" aria-label="Breadcrumb" data-de-aria-label="Brotkrumen"><a href="index.html"><span data-lang="en">Home</span><span data-lang="de">Start</span></a><span aria-hidden="true">/</span><span><span data-lang="en">Technology</span><span data-lang="de">Technologie</span></span></nav>
+        <h1><span data-lang="en">Understanding semiconductor technology</span><span data-lang="de">Halbleitertechnik verstehen</span></h1>
+        <p class="lead"><span data-lang="en">What happens in the crystal determines every characteristic curve in the data sheet. Here we explain the fundamentals on which our diodes<span data-thema="leds"> and LEDs</span> are based – to read and to try out.</span><span data-lang="de">Was im Kristall passiert, entscheidet über jede Kennlinie im Datenblatt. Hier erklären wir die Grundlagen, auf denen unsere Dioden<span data-thema="leds"> und LEDs</span> aufbauen – zum Lesen und zum Ausprobieren.</span></p>
       </div>
     </div>
 
     <div class="container section--tight">
       <div class="doc">
-        <aside class="toc" data-toc="#doc-body" aria-label="Inhaltsverzeichnis"></aside>
+        <aside class="toc" data-toc="#doc-body" aria-label="Table of contents" data-de-aria-label="Inhaltsverzeichnis"></aside>
         <div class="doc__body" id="doc-body">
 
           <section id="leitfaehigkeit">
-            <h2>Halbleiter? Leiter? Nichtleiter?</h2>
-            <p class="intro">Die elektrische Leitfähigkeit gibt an, wie gut ein Stoff elektrischen Strom leitet. Entscheidend ist die Zahl der beweglichen Ladungsträger: Je mehr davon vorhanden sind, desto höher ist die Leitfähigkeit.</p>
+            <h2><span data-lang="en">Semiconductor? Conductor? Insulator?</span><span data-lang="de">Halbleiter? Leiter? Nichtleiter?</span></h2>
+            <p class="intro"><span data-lang="en">Electrical conductivity indicates how well a material conducts electric current. The decisive factor is the number of mobile charge carriers: the more there are, the higher the conductivity.</span><span data-lang="de">Die elektrische Leitfähigkeit gibt an, wie gut ein Stoff elektrischen Strom leitet. Entscheidend ist die Zahl der beweglichen Ladungsträger: Je mehr davon vorhanden sind, desto höher ist die Leitfähigkeit.</span></p>
 
             <div class="grid grid-3 mt-2">
               <div class="tile">
-                <h3>Leiter</h3>
-                <p>Metalle besitzen eine <strong>hohe</strong> Leitfähigkeit. In ihnen bewegen sich sehr viele freie Elektronen.</p>
-                <ul class="chips mt-0" style="margin-top:.8rem"><li>Kupfer</li><li>Eisen</li><li>Aluminium</li></ul>
+                <h3><span data-lang="en">Conductors</span><span data-lang="de">Leiter</span></h3>
+                <p><span data-lang="en">Metals have a <strong>high</strong> conductivity. A very large number of free electrons move in them.</span><span data-lang="de">Metalle besitzen eine <strong>hohe</strong> Leitfähigkeit. In ihnen bewegen sich sehr viele freie Elektronen.</span></p>
+                <ul class="chips mt-0" style="margin-top:.8rem"><li><span data-lang="en">Copper</span><span data-lang="de">Kupfer</span></li><li><span data-lang="en">Iron</span><span data-lang="de">Eisen</span></li><li>Aluminium</li></ul>
               </div>
               <div class="tile">
-                <h3>Halbleiter</h3>
-                <p>Halbleiter besitzen eine <strong>mittlere</strong> Leitfähigkeit, die sich durch Wärme, Licht und Dotierung gezielt verändern lässt.</p>
-                <ul class="chips" style="margin-top:.8rem"><li>Silizium</li><li>Germanium</li><li>Galliumarsenid</li></ul>
+                <h3><span data-lang="en">Semiconductors</span><span data-lang="de">Halbleiter</span></h3>
+                <p><span data-lang="en">Semiconductors have a <strong>medium</strong> conductivity that can be changed in a targeted way by heat, light and doping.</span><span data-lang="de">Halbleiter besitzen eine <strong>mittlere</strong> Leitfähigkeit, die sich durch Wärme, Licht und Dotierung gezielt verändern lässt.</span></p>
+                <ul class="chips" style="margin-top:.8rem"><li><span data-lang="en">Silicon</span><span data-lang="de">Silizium</span></li><li>Germanium</li><li><span data-lang="en">Gallium arsenide</span><span data-lang="de">Galliumarsenid</span></li></ul>
               </div>
               <div class="tile">
-                <h3>Nichtleiter</h3>
-                <p>Isolatoren besitzen eine <strong>sehr geringe</strong> Leitfähigkeit. Fast alle Elektronen sind fest gebunden.</p>
-                <ul class="chips" style="margin-top:.8rem"><li>Keramik</li><li>Kunststoffe</li><li>Glas</li></ul>
+                <h3><span data-lang="en">Insulators</span><span data-lang="de">Nichtleiter</span></h3>
+                <p><span data-lang="en">Insulators have a <strong>very low</strong> conductivity. Almost all electrons are firmly bound.</span><span data-lang="de">Isolatoren besitzen eine <strong>sehr geringe</strong> Leitfähigkeit. Fast alle Elektronen sind fest gebunden.</span></p>
+                <ul class="chips" style="margin-top:.8rem"><li><span data-lang="en">Ceramics</span><span data-lang="de">Keramik</span></li><li><span data-lang="en">Plastics</span><span data-lang="de">Kunststoffe</span></li><li><span data-lang="en">Glass</span><span data-lang="de">Glas</span></li></ul>
               </div>
             </div>
 
-            <div data-sim="ladungstraeger" data-title="Werkstoffprobe im Messaufbau" data-hint="Legen Sie eine Spannung an und vergleichen Sie die Ströme."></div>
+            <div data-sim="ladungstraeger" data-title="Material sample in the test setup" data-de-data-title="Werkstoffprobe im Messaufbau" data-hint="Apply a voltage and compare the currents." data-de-data-hint="Legen Sie eine Spannung an und vergleichen Sie die Ströme."></div>
 
             <figure class="figure mt-2">
               <div class="figure__frame"><div data-chart="leitfaehigkeit"></div></div>
-              <figcaption>Leitfähigkeit ausgewählter Werkstoffe. Die Skala ist logarithmisch – jede Zehnerpotenz ist gleich breit. Zwischen Kupfer und Kunststoff liegen über 20 Zehnerpotenzen.</figcaption>
+              <figcaption><span data-lang="en">Conductivity of selected materials. The scale is logarithmic – every power of ten has the same width. There are more than 20 powers of ten between copper and plastic.</span><span data-lang="de">Leitfähigkeit ausgewählter Werkstoffe. Die Skala ist logarithmisch – jede Zehnerpotenz ist gleich breit. Zwischen Kupfer und Kunststoff liegen über 20 Zehnerpotenzen.</span></figcaption>
             </figure>
           </section>
 
           <section id="kristall">
-            <h2>Silizium: Kristall, Eigenleitung und Dotierung</h2>
-            <p class="intro">Silizium hat vier Außenelektronen. Im Kristall bildet jedes Atom mit seinen vier Nachbarn feste Elektronenpaarbindungen. Reines Silizium leitet deshalb nur schwach.</p>
-            <p>Erst gezielte Fremdatome machen Silizium für Bauteile nutzbar. Diesen Vorgang nennen wir <strong>Dotierung</strong>. Schon ein Fremdatom auf eine Million Siliziumatome erhöht die Leitfähigkeit um ein Vielfaches.</p>
+            <h2><span data-lang="en">Silicon: crystal, intrinsic conduction and doping</span><span data-lang="de">Silizium: Kristall, Eigenleitung und Dotierung</span></h2>
+            <p class="intro"><span data-lang="en">Silicon has four valence electrons. In the crystal each atom forms firm covalent bonds with its four neighbours. Pure silicon therefore conducts only weakly.</span><span data-lang="de">Silizium hat vier Außenelektronen. Im Kristall bildet jedes Atom mit seinen vier Nachbarn feste Elektronenpaarbindungen. Reines Silizium leitet deshalb nur schwach.</span></p>
+            <p><span data-lang="en">Only deliberately added impurity atoms make silicon usable for components. We call this process <strong>doping</strong>. Even one impurity atom per million silicon atoms increases the conductivity many times over.</span><span data-lang="de">Erst gezielte Fremdatome machen Silizium für Bauteile nutzbar. Diesen Vorgang nennen wir <strong>Dotierung</strong>. Schon ein Fremdatom auf eine Million Siliziumatome erhöht die Leitfähigkeit um ein Vielfaches.</span></p>
 
-            <div data-sim="dotierung" data-title="Kristallgitter im Modell" data-hint="Wählen Sie den Kristall und beobachten Sie die Ladungsträger."></div>
+            <div data-sim="dotierung" data-title="Crystal lattice model" data-de-data-title="Kristallgitter im Modell" data-hint="Select the crystal and observe the charge carriers." data-de-data-hint="Wählen Sie den Kristall und beobachten Sie die Ladungsträger."></div>
 
             <div class="table-wrap">
               <table class="spec">
-                <caption>N-Leiter und P-Leiter im Vergleich</caption>
-                <thead><tr><th></th><th>N-Leiter</th><th>P-Leiter</th></tr></thead>
+                <caption><span data-lang="en">N-type and P-type compared</span><span data-lang="de">N-Leiter und P-Leiter im Vergleich</span></caption>
+                <thead><tr><th></th><th><span data-lang="en">N-type</span><span data-lang="de">N-Leiter</span></th><th><span data-lang="en">P-type</span><span data-lang="de">P-Leiter</span></th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Fremdatom (Beispiel)</th><td>Phosphor, 5 Außenelektronen</td><td>Bor, 3 Außenelektronen</td></tr>
-                  <tr><th scope="row">bewegliche Ladungsträger</th><td>freie Elektronen (negativ)</td><td>Löcher (wirken positiv)</td></tr>
-                  <tr><th scope="row">ortsfest zurück bleibt</th><td>positives Ion</td><td>negatives Ion</td></tr>
-                  <tr><th scope="row">nach außen</th><td colspan="2">elektrisch neutral – jede bewegliche Ladung hat ihr Gegenstück im Ion</td></tr>
+                  <tr><th scope="row"><span data-lang="en">Impurity atom (example)</span><span data-lang="de">Fremdatom (Beispiel)</span></th><td><span data-lang="en">Phosphorus, 5 valence electrons</span><span data-lang="de">Phosphor, 5 Außenelektronen</span></td><td><span data-lang="en">Boron, 3 valence electrons</span><span data-lang="de">Bor, 3 Außenelektronen</span></td></tr>
+                  <tr><th scope="row"><span data-lang="en">mobile charge carriers</span><span data-lang="de">bewegliche Ladungsträger</span></th><td><span data-lang="en">free electrons (negative)</span><span data-lang="de">freie Elektronen (negativ)</span></td><td><span data-lang="en">holes (act as positive)</span><span data-lang="de">Löcher (wirken positiv)</span></td></tr>
+                  <tr><th scope="row"><span data-lang="en">what stays fixed</span><span data-lang="de">ortsfest zurück bleibt</span></th><td><span data-lang="en">positive ion</span><span data-lang="de">positives Ion</span></td><td><span data-lang="en">negative ion</span><span data-lang="de">negatives Ion</span></td></tr>
+                  <tr><th scope="row"><span data-lang="en">to the outside</span><span data-lang="de">nach außen</span></th><td colspan="2"><span data-lang="en">electrically neutral – every mobile charge has its counterpart in the ion</span><span data-lang="de">elektrisch neutral – jede bewegliche Ladung hat ihr Gegenstück im Ion</span></td></tr>
                 </tbody>
               </table>
             </div>
           </section>
 
           <section id="pn-uebergang">
-            <h2>Der PN-Übergang</h2>
-            <p class="intro">Grenzen ein P-Leiter und ein N-Leiter in einem Kristall aneinander, entsteht der PN-Übergang – das Herz jeder Diode<span data-thema="leds"> und jeder LED</span>.</p>
-            <p>An der Grenzfläche wandern freie Elektronen aus dem N-Leiter in den P-Leiter und füllen dort Löcher. Zurück bleiben nur die ortsfesten Ionen: negative Ionen auf der P-Seite, positive Ionen auf der N-Seite. Diese Zone ohne freie Ladungsträger heißt <strong>Sperrschicht</strong> oder Raumladungszone (RLZ). Ihr elektrisches Feld verhindert, dass weitere Ladungsträger hinüberwandern.</p>
+            <h2><span data-lang="en">The PN junction</span><span data-lang="de">Der PN-Übergang</span></h2>
+            <p class="intro"><span data-lang="en">Where a P-type and an N-type region adjoin in one crystal, the PN junction is formed – the heart of every diode<span data-thema="leds"> and every LED</span>.</span><span data-lang="de">Grenzen ein P-Leiter und ein N-Leiter in einem Kristall aneinander, entsteht der PN-Übergang – das Herz jeder Diode<span data-thema="leds"> und jeder LED</span>.</span></p>
+            <p><span data-lang="en">At the interface, free electrons move from the N-type region into the P-type region and fill holes there. Only the fixed ions remain: negative ions on the P side, positive ions on the N side. This zone without free charge carriers is called the <strong>depletion layer</strong> or space charge region. Its electric field prevents further charge carriers from moving across.</span><span data-lang="de">An der Grenzfläche wandern freie Elektronen aus dem N-Leiter in den P-Leiter und füllen dort Löcher. Zurück bleiben nur die ortsfesten Ionen: negative Ionen auf der P-Seite, positive Ionen auf der N-Seite. Diese Zone ohne freie Ladungsträger heißt <strong>Sperrschicht</strong> oder Raumladungszone (RLZ). Ihr elektrisches Feld verhindert, dass weitere Ladungsträger hinüberwandern.</span></p>
 
-            <div data-sim="pn" data-mode="diode" data-title="PN-Übergang im Stromkreis" data-hint="Wählen Sie die Polung und erhöhen Sie die Spannung langsam."></div>
+            <div data-sim="pn" data-mode="diode" data-title="PN junction in the circuit" data-de-data-title="PN-Übergang im Stromkreis" data-hint="Select the polarity and increase the voltage slowly." data-de-data-hint="Wählen Sie die Polung und erhöhen Sie die Spannung langsam."></div>
 
             <div class="table-wrap">
               <table class="spec">
-                <caption>Durchlass- und Sperrrichtung</caption>
-                <thead><tr><th></th><th>Durchlassrichtung</th><th>Sperrrichtung</th></tr></thead>
+                <caption><span data-lang="en">Forward and reverse direction</span><span data-lang="de">Durchlass- und Sperrrichtung</span></caption>
+                <thead><tr><th></th><th><span data-lang="en">Forward direction</span><span data-lang="de">Durchlassrichtung</span></th><th><span data-lang="en">Reverse direction</span><span data-lang="de">Sperrrichtung</span></th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Polung</th><td>Plus an P (Anode), Minus an N (Kathode)</td><td>Minus an P (Anode), Plus an N (Kathode)</td></tr>
-                  <tr><th scope="row">Ladungsträger</th><td>werden in Richtung Sperrschicht gedrückt</td><td>werden aus der Sperrschicht gezogen</td></tr>
-                  <tr><th scope="row">Sperrschicht</th><td>wird schmaler, Elektronen und Löcher rekombinieren</td><td>wird breiter</td></tr>
-                  <tr><th scope="row">Strom</th><td>steigt stark an, sobald die Schleusenspannung U<sub>S</sub> erreicht ist (Si ≈ 0,7 V)</td><td>praktisch kein Strom (nur winziger Sperrstrom)</td></tr>
+                  <tr><th scope="row"><span data-lang="en">Polarity</span><span data-lang="de">Polung</span></th><td><span data-lang="en">Plus at P (anode), minus at N (cathode)</span><span data-lang="de">Plus an P (Anode), Minus an N (Kathode)</span></td><td><span data-lang="en">Minus at P (anode), plus at N (cathode)</span><span data-lang="de">Minus an P (Anode), Plus an N (Kathode)</span></td></tr>
+                  <tr><th scope="row"><span data-lang="en">Charge carriers</span><span data-lang="de">Ladungsträger</span></th><td><span data-lang="en">are pushed towards the depletion layer</span><span data-lang="de">werden in Richtung Sperrschicht gedrückt</span></td><td><span data-lang="en">are pulled away from the depletion layer</span><span data-lang="de">werden von der Sperrschicht weggezogen</span></td></tr>
+                  <tr><th scope="row"><span data-lang="en">Depletion layer</span><span data-lang="de">Sperrschicht</span></th><td><span data-lang="en">becomes narrower, electrons and holes recombine</span><span data-lang="de">wird schmaler, Elektronen und Löcher rekombinieren</span></td><td><span data-lang="en">becomes wider</span><span data-lang="de">wird breiter</span></td></tr>
+                  <tr><th scope="row"><span data-lang="en">Current</span><span data-lang="de">Strom</span></th><td><span data-lang="en">rises sharply as soon as the threshold voltage U<sub>S</sub> is reached (Si ≈ 0.7 V)</span><span data-lang="de">steigt stark an, sobald die Schleusenspannung U<sub>S</sub> erreicht ist (Si ≈ 0,7 V)</span></td><td><span data-lang="en">practically no current (only a tiny reverse current)</span><span data-lang="de">praktisch kein Strom (nur winziger Sperrstrom)</span></td></tr>
                 </tbody>
               </table>
             </div>
             <div class="note">
-              <div class="note__title">Merkregel aus dem Labor</div>
-              <p>Der Strom fließt in Pfeilrichtung des Schaltzeichens: von der Anode zur Kathode. Liegt das Plus an der Anode, leitet die Diode.</p>
+              <div class="note__title"><span data-lang="en">Rule of thumb from the lab</span><span data-lang="de">Merkregel aus dem Labor</span></div>
+              <p><span data-lang="en">The current flows in the direction of the arrow in the circuit symbol: from the anode to the cathode. If plus is at the anode, the diode conducts.</span><span data-lang="de">Der Strom fließt in Pfeilrichtung des Schaltzeichens: von der Anode zur Kathode. Liegt das Plus an der Anode, leitet die Diode.</span></p>
             </div>
           </section>
 
           <section id="bauteile">
-            <h2>Vom PN-Übergang zum Bauteil</h2>
-            <p class="intro">Aus demselben Prinzip entstehen ganz unterschiedliche Bauteile. Welcher Halbleiterwerkstoff verwendet wird, bestimmt ihre Eigenschaften.</p>
+            <h2><span data-lang="en">From the PN junction to the component</span><span data-lang="de">Vom PN-Übergang zum Bauteil</span></h2>
+            <p class="intro"><span data-lang="en">Very different components are created from the same principle. Which semiconductor material is used determines their properties.</span><span data-lang="de">Aus demselben Prinzip entstehen ganz unterschiedliche Bauteile. Welcher Halbleiterwerkstoff verwendet wird, bestimmt ihre Eigenschaften.</span></p>
             <div class="grid grid-2 grid--lines">
               <article class="product">
                 <div class="product__visual"><div data-art="diode" data-dims="false" style="width:100%;max-width:380px"></div></div>
                 <div class="product__body">
-                  <h3>Silizium-Diode</h3>
-                  <p>Lässt Strom nur in eine Richtung durch. Einsatz als Gleichrichter, Verpolschutz oder Freilaufdiode.</p>
-                  <div class="btn-row"><a class="btn btn--ghost" href="dioden.html">Dioden BAY 44/45/46</a></div>
+                  <h3><span data-lang="en">Silicon diode</span><span data-lang="de">Silizium-Diode</span></h3>
+                  <p><span data-lang="en">Allows current to pass in one direction only. Used as a rectifier, for reverse polarity protection or as a freewheeling diode.</span><span data-lang="de">Lässt Strom nur in eine Richtung durch. Einsatz als Gleichrichter, Verpolschutz oder Freilaufdiode.</span></p>
+                  <div class="btn-row"><a class="btn btn--ghost" href="dioden.html"><span data-lang="en">Diodes BAY 44/45/46</span><span data-lang="de">Dioden BAY 44/45/46</span></a></div>
                 </div>
               </article>
               <article class="product" data-thema="leds">
                 <div class="product__visual" style="display:flex;justify-content:center;gap:4px"><div data-art="led" data-color="blue" style="width:84px"></div><div data-art="led" data-color="green" style="width:84px"></div></div>
                 <div class="product__body">
-                  <h3>Leuchtdiode (LED)</h3>
-                  <p>Wandelt die Energie der Rekombination in Licht um. Die Farbe hängt vom Halbleiterwerkstoff ab.</p>
+                  <h3><span data-lang="en">Light-emitting diode (LED)</span><span data-lang="de">Leuchtdiode (LED)</span></h3>
+                  <p><span data-lang="en">Converts the energy of recombination into light. The colour depends on the semiconductor material.</span><span data-lang="de">Wandelt die Energie der Rekombination in Licht um. Die Farbe hängt vom Halbleiterwerkstoff ab.</span></p>
                   <div class="btn-row"><a class="btn btn--ghost" href="leds.html">LEDs L-7113</a></div>
                 </div>
               </article>

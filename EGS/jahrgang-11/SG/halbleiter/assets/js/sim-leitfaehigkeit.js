@@ -7,12 +7,13 @@
 (function () {
   "use strict";
   var LT = window.LT, svgEl = LT.svg;
+  var T = LT.t;
 
   /* ---------- 1) Werkstoffproben ---------- */
   var SAMPLES = [
-    { name: "Kupfer", group: "Leiter", n: 64, col: "#b87333", text: "sehr viele freie Elektronen" },
-    { name: "Silizium", group: "Halbleiter", n: 7, col: "#6b7684", text: "wenige freie Ladungsträger" },
-    { name: "Keramik", group: "Nichtleiter", n: 0, col: "#c9b79c", text: "praktisch keine freien Ladungsträger" }
+    { name: T("Copper", "Kupfer"), group: T("Conductor", "Leiter"), n: 64, col: "#b87333", text: T("very many free electrons", "sehr viele freie Elektronen") },
+    { name: T("Silicon", "Silizium"), group: T("Semiconductor", "Halbleiter"), n: 7, col: "#6b7684", text: T("few free charge carriers", "wenige freie Ladungsträger") },
+    { name: T("Ceramic", "Keramik"), group: T("Insulator", "Nichtleiter"), n: 0, col: "#c9b79c", text: T("practically no free charge carriers", "praktisch keine freien Ladungsträger") }
   ];
 
   LT.$$('[data-sim="ladungstraeger"]').forEach(function (host) {
@@ -20,11 +21,11 @@
     var st = { on: false, warm: false };
     var sw = document.createElement("label");
     sw.className = "switch";
-    sw.innerHTML = '<input type="checkbox"> Spannung anlegen';
+    sw.innerHTML = T('<input type="checkbox"> Apply voltage', '<input type="checkbox"> Spannung anlegen');
     ui.controls.appendChild(sw);
     var sw2 = document.createElement("label");
     sw2.className = "switch";
-    sw2.innerHTML = '<input type="checkbox"> Proben erwärmen';
+    sw2.innerHTML = T('<input type="checkbox"> Heat samples', '<input type="checkbox"> Proben erwärmen');
     ui.controls.appendChild(sw2);
     var info = document.createElement("div");
     info.className = "pn-explain";
@@ -35,7 +36,7 @@
     var canvas = document.createElement("canvas");
     canvas.style.width = "100%";
     canvas.setAttribute("role", "img");
-    canvas.setAttribute("aria-label", "Drei Werkstoffproben: Kupfer mit vielen, Silizium mit wenigen und Keramik ohne freie Ladungsträger. Mit angelegter Spannung fließt im Kupfer ein großer, im Silizium ein kleiner und in der Keramik kein Strom.");
+    canvas.setAttribute("aria-label", T("Three material samples: copper with many, silicon with few and ceramic without free charge carriers. With voltage applied, a large current flows in the copper, a small one in the silicon and none in the ceramic.", "Drei Werkstoffproben: Kupfer mit vielen, Silizium mit wenigen und Keramik ohne freie Ladungsträger. Mit angelegter Spannung fließt im Kupfer ein großer, im Silizium ein kleiner und in der Keramik kein Strom."));
     ui.stage.appendChild(canvas);
 
     var dpr = Math.min(window.devicePixelRatio || 1, 2), W = 600, H = 300, parts = [];
@@ -63,8 +64,8 @@
     }
     function upd() {
       info.innerHTML = st.on
-        ? "<strong>Je mehr bewegliche Ladungsträger, desto größer die Leitfähigkeit.</strong><p>Die angelegte Spannung setzt die freien Elektronen in Bewegung. Im Kupfer fließt ein großer Strom, im Silizium ein kleiner, in der Keramik praktisch keiner." + (st.warm ? " Erwärmt steigt die Zahl der freien Ladungsträger im Silizium deutlich." : "") + "</p>"
-        : "<strong>Ohne Spannung</strong><p>Die freien Elektronen bewegen sich ungeordnet durch das Material – im Mittel fließt kein Strom. Schalten Sie die Spannung ein.</p>";
+        ? T("<strong>The more mobile charge carriers, the higher the conductivity.</strong><p>The applied voltage sets the free electrons in motion. A large current flows in the copper, a small one in the silicon, practically none in the ceramic.", "<strong>Je mehr bewegliche Ladungsträger, desto größer die Leitfähigkeit.</strong><p>Die angelegte Spannung setzt die freien Elektronen in Bewegung. Im Kupfer fließt ein großer Strom, im Silizium ein kleiner, in der Keramik praktisch keiner.") + (st.warm ? T(" When heated, the number of free charge carriers in the silicon rises considerably.", " Erwärmt steigt die Zahl der freien Ladungsträger im Silizium deutlich.") : "") + "</p>"
+        : T("<strong>Without voltage</strong><p>The free electrons move randomly through the material – on average no current flows. Switch on the voltage.</p>", "<strong>Ohne Spannung</strong><p>Die freien Elektronen bewegen sich ungeordnet durch das Material – im Mittel fließt kein Strom. Schalten Sie die Spannung ein.</p>");
     }
     var running = false, last = 0;
     function frame(ts) {
@@ -109,7 +110,7 @@
         ctx.fillStyle = "#e1e6eb"; ctx.fillRect(b.x, my, b.w, 8);
         ctx.fillStyle = "#e0a100"; ctx.fillRect(b.x, my, b.w * Math.min(1, I), 8);
         ctx.fillStyle = "#4a5563"; ctx.font = "600 12px " + font; ctx.textAlign = "left";
-        ctx.fillText(st.on ? (I > 0.5 ? "großer Strom" : I > 0.01 ? "kleiner Strom" : "kein Strom") : "Spannung aus", b.x, my + 24);
+        ctx.fillText(st.on ? (I > 0.5 ? T("large current", "großer Strom") : I > 0.05 ? T("small current", "kleiner Strom") : I > 0 ? T("hardly any current", "kaum Strom") : T("no current", "kein Strom")) : T("voltage off", "Spannung aus"), b.x, my + 24);
       });
       if (running) requestAnimationFrame(frame);
     }
@@ -123,14 +124,14 @@
 
   /* ---------- 2) Logarithmische Leitfähigkeitsskala ---------- */
   var MAT = [
-    { n: "Kupfer", v: 5.8e7, g: 2 }, { n: "Eisen", v: 1.0e7, g: 2 },
-    { n: "Silizium, stark dotiert", v: 1e4, g: 1 }, { n: "Germanium, rein", v: 2.2, g: 1 }, { n: "Silizium, rein", v: 4.3e-4, g: 1 },
-    { n: "Glas", v: 1e-12, g: 0 }, { n: "Keramik (Porzellan)", v: 1e-13, g: 0 }, { n: "PVC", v: 1e-14, g: 0 }, { n: "Polyethylen", v: 1e-16, g: 0 }
+    { n: T("Copper", "Kupfer"), v: 5.8e7, g: 2 }, { n: T("Iron", "Eisen"), v: 1.0e7, g: 2 },
+    { n: T("Silicon, heavily doped", "Silizium, stark dotiert"), v: 1e4, g: 1 }, { n: T("Germanium, pure", "Germanium, rein"), v: 2.2, g: 1 }, { n: T("Silicon, pure", "Silizium, rein"), v: 4.3e-4, g: 1 },
+    { n: T("Glass", "Glas"), v: 1e-12, g: 0 }, { n: T("Ceramic (porcelain)", "Keramik (Porzellan)"), v: 1e-13, g: 0 }, { n: "PVC", v: 1e-14, g: 0 }, { n: T("Polyethylene", "Polyethylen"), v: 1e-16, g: 0 }
   ];
   var ZONES = [
-    { from: -17, to: -8, label: "Nichtleiter", col: "#f4efe6" },
-    { from: -8, to: 5, label: "Halbleiter", col: "#eef1f4" },
-    { from: 5, to: 9, label: "Leiter", col: "#f6e7da" }
+    { from: -17, to: -8, label: T("Insulator", "Nichtleiter"), col: "#f4efe6" },
+    { from: -8, to: 5, label: T("Semiconductor", "Halbleiter"), col: "#eef1f4" },
+    { from: 5, to: 9, label: T("Conductor", "Leiter"), col: "#f6e7da" }
   ];
 
   LT.$$('[data-chart="leitfaehigkeit"]').forEach(function (host) {
@@ -138,7 +139,7 @@
       host.innerHTML = "";
       var w = Math.max(300, host.clientWidth), narrow = w < 640;
       var h = narrow ? 300 : 220, m = { l: 14, r: 14 };
-      var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, role: "img", "aria-label": "Logarithmische Skala der elektrischen Leitfähigkeit von 10 hoch minus 17 bis 10 hoch 9 Siemens pro Meter mit den Bereichen Nichtleiter, Halbleiter und Leiter." });
+      var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, role: "img", "aria-label": T("Logarithmic scale of electrical conductivity from 10 to the power of minus 17 to 10 to the power of 9 siemens per metre with the ranges insulator, semiconductor and conductor.", "Logarithmische Skala der elektrischen Leitfähigkeit von 10 hoch minus 17 bis 10 hoch 9 Siemens pro Meter mit den Bereichen Nichtleiter, Halbleiter und Leiter.") });
       host.appendChild(svg);
       var axisY = narrow ? 170 : 120;
       function sx(e) { return m.l + (e + 17) / 26 * (w - m.l - m.r); }
@@ -155,7 +156,7 @@
         t.innerHTML = "10<tspan dy='-6' font-size='9'>" + (e < 0 ? "−" + (-e) : e) + "</tspan>";
       }
       var unit = svgEl("text", { x: w - m.r, y: axisY + 68, "text-anchor": "end", "font-size": 12, "font-weight": 600, fill: "#4a5563" }, svg);
-      unit.textContent = "Leitfähigkeit γ in S/m (bei 20 °C)";
+      unit.textContent = T("Conductivity γ in S/m (at 20 °C)", "Leitfähigkeit γ in S/m (bei 20 °C)");
       // Werkstoffe mit Markierung, Beschriftung abwechselnd oben
       var placed = [];
       MAT.slice().sort(function (a, b) { return b.v - a.v; }).forEach(function (mt) {
@@ -172,7 +173,7 @@
         lab.setAttribute("y", ly);
         svgEl("line", { x1: x, x2: x, y1: ly + 4, y2: axisY - 26, stroke: "#9aa4af", "stroke-width": 1 }, svg);
         svgEl("circle", { cx: x, cy: axisY - 26, r: 4, fill: "#17202b" }, svg);
-        var tt = svgEl("title", null, lab); tt.textContent = mt.n + ": etwa " + mt.v.toExponential(1).replace(".", ",") + " S/m";
+        var tt = svgEl("title", null, lab); tt.textContent = mt.n + T(": approx. " + mt.v.toExponential(1), ": etwa " + mt.v.toExponential(1).replace(".", ",")) + " S/m";
       });
       var maxRow = Math.max.apply(null, placed.map(function (p) { return p.row; }));
       var top = axisY - 34 - maxRow * 18 - 16;

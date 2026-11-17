@@ -6,13 +6,14 @@
 (function () {
   "use strict";
   var LT = (window.LT = window.LT || {});
+  var T = LT.t;
   var uid = 0;
 
   var LED_COLORS = {
-    red:   { lens: "#e8463f", glow: "#ff3b2f", chip: "#fff1e8", name: "Rot" },
-    green: { lens: "#2fb85a", glow: "#3ff07a", chip: "#f0fff3", name: "Grün" },
-    blue:  { lens: "#3f7bff", glow: "#4d8bff", chip: "#eef4ff", name: "Blau" },
-    clear: { lens: "#c9d3dd", glow: "#ffffff", chip: "#ffffff", name: "klar" }
+    red:   { lens: "#e8463f", glow: "#ff3b2f", chip: "#fff1e8", name: T("Red", "Rot") },
+    green: { lens: "#2fb85a", glow: "#3ff07a", chip: "#f0fff3", name: T("Green", "Grün") },
+    blue:  { lens: "#3f7bff", glow: "#4d8bff", chip: "#eef4ff", name: T("Blue", "Blau") },
+    clear: { lens: "#c9d3dd", glow: "#ffffff", chip: "#ffffff", name: T("clear", "klar") }
   };
   LT.LED_COLORS = LED_COLORS;
 
@@ -37,7 +38,7 @@
     var c = LED_COLORS[o.color || "red"];
     var id = "led" + (++uid);
     var lit = o.lit !== false;
-    var s = '<svg class="art-led" viewBox="0 0 300 470" role="img" aria-label="' + (o.label || "5-mm-LED, Seitenansicht mit innerem Aufbau") + '">';
+    var s = '<svg class="art-led" viewBox="0 0 300 470" role="img" aria-label="' + (o.label || T("5 mm LED, side view with internal structure", "5-mm-LED, Seitenansicht mit innerem Aufbau")) + '">';
     s += "<defs>" +
       '<radialGradient id="' + id + 'g" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="' + c.glow + '" stop-opacity=".85"/><stop offset=".35" stop-color="' + c.glow + '" stop-opacity=".35"/><stop offset="1" stop-color="' + c.glow + '" stop-opacity="0"/></radialGradient>' +
       '<linearGradient id="' + id + 'l" x1="0" x2="1"><stop offset="0" stop-color="' + c.lens + '" stop-opacity=".55"/><stop offset=".45" stop-color="' + c.lens + '" stop-opacity=".28"/><stop offset="1" stop-color="' + c.lens + '" stop-opacity=".6"/></linearGradient>' +
@@ -63,10 +64,10 @@
     // abgeflachte Seite (Kathode) angedeutet
     s += '<line x1="103" y1="177" x2="103" y2="195" stroke="#17202b" stroke-width="2.5"/>';
     if (o.dims) {
-      s += dim(105, 22, 195, 22, "Ø 5,0");
-      s += dim(238, 40, 238, 195, "8,6");
+      s += dim(105, 22, 195, 22, T("Ø 5.0", "Ø 5,0"));
+      s += dim(238, 40, 238, 195, T("8.6", "8,6"));
       s += '<line x1="196" y1="40" x2="246" y2="40" stroke="#6b7684" stroke-dasharray="3 3"/><line x1="203" y1="195" x2="246" y2="195" stroke="#6b7684" stroke-dasharray="3 3"/>';
-      s += dim(127, 462, 173, 462, "2,54", { below: false });
+      s += dim(127, 462, 173, 462, T("2.54", "2,54"), { below: false });
       s += '<text x="127" y="440" text-anchor="middle" font-size="13" font-weight="700" fill="#17202b">K</text>';
       s += '<text x="195" y="446" font-size="13" font-weight="700" fill="#17202b">A</text>';
     }
@@ -77,7 +78,7 @@
   LT.artDiode = function (o) {
     o = o || {};
     var id = "dio" + (++uid);
-    var s = '<svg class="art-diode" viewBox="0 0 520 190" role="img" aria-label="Silizium-Diode im Glasgehäuse DO-7 mit Kathodenring">';
+    var s = '<svg class="art-diode" viewBox="0 0 520 190" role="img" aria-label="' + T('Silicon diode in the DO-7 glass package with cathode band', 'Silizium-Diode im Glasgehäuse DO-7 mit Kathodenring') + '">';
     s += "<defs>" +
       '<linearGradient id="' + id + 'g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f3f1"/><stop offset=".25" stop-color="#ffffff"/><stop offset=".6" stop-color="#cfe2de"/><stop offset="1" stop-color="#a9c6c0"/></linearGradient>' +
       '<linearGradient id="' + id + 'w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a7b0ba"/><stop offset=".45" stop-color="#eef1f4"/><stop offset="1" stop-color="#8b96a3"/></linearGradient>' +
@@ -97,11 +98,11 @@
     s += '<rect x="204" y="74" width="12" height="42" fill="#17202b"/>';
     s += '<path d="M206 80 h110" stroke="#fff" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/>';
     if (o.dims !== false) {
-      s += dim(200, 50, 320, 50, "7,3 max.");
+      s += dim(200, 50, 320, 50, T("7.3 max.", "7,3 max."));
       s += '<line x1="200" y1="56" x2="200" y2="72" stroke="#6b7684"/><line x1="320" y1="56" x2="320" y2="72" stroke="#6b7684"/>';
-      s += dim(352, 74, 352, 116, "Ø 2,6 max.");
+      s += dim(352, 74, 352, 116, T("Ø 2.6 max.", "Ø 2,6 max."));
       s += '<line x1="322" y1="74" x2="360" y2="74" stroke="#6b7684" stroke-dasharray="3 3"/><line x1="322" y1="116" x2="360" y2="116" stroke="#6b7684" stroke-dasharray="3 3"/>';
-      s += '<path d="M210 120 L190 150" stroke="#17202b" stroke-width="1.2"/><text x="186" y="166" text-anchor="end" font-size="14" font-weight="650" fill="#17202b">Kathodenring</text>';
+      s += '<path d="M210 120 L190 150" stroke="#17202b" stroke-width="1.2"/><text x="186" y="166" text-anchor="end" font-size="14" font-weight="650" fill="#17202b">' + T("Cathode band", "Kathodenring") + '</text>';
       s += '<text x="22" y="80" font-size="14" font-weight="700" fill="#17202b">K</text><text x="498" y="80" text-anchor="end" font-size="14" font-weight="700" fill="#17202b">A</text>';
     }
     return s + "</svg>";
@@ -113,7 +114,7 @@
     var st = o.states || { red: 1, green: 1, blue: 1 };
     var id = "tw" + (++uid);
     var seg = [["red", "#d3262b", "#ff4a3d"], ["green", "#14873d", "#3ff07a"], ["blue", "#1f5bd8", "#5b95ff"]];
-    var s = '<svg class="art-tower" viewBox="0 0 200 420" role="img" aria-label="Signalsäule mit roter, grüner und blauer Leuchte">';
+    var s = '<svg class="art-tower" viewBox="0 0 200 420" role="img" aria-label="' + T('Signal tower with red, green and blue light', 'Signalsäule mit roter, grüner und blauer Leuchte') + '">';
     s += "<defs>";
     seg.forEach(function (g) {
       s += '<radialGradient id="' + id + g[0] + '" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="' + g[2] + '" stop-opacity=".9"/><stop offset="1" stop-color="' + g[2] + '" stop-opacity="0"/></radialGradient>';

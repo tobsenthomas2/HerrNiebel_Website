@@ -6,6 +6,7 @@
 (function () {
   "use strict";
   var LT = window.LT;
+  var T = LT.t;
   var DEV = LT.phys.devices.si;
   var Y0 = 0.4; // Lage der U-Achse (Anteil der Höhe von unten)
   var IMAX = 300, IRMAX = 10, URMAX_AX = 80, UFMAX_AX = 1.6;
@@ -19,13 +20,13 @@
   var DS = { I: 0.1, U: 0.97, Umax: 1.1 };
 
   var TERMS = {
-    durchlass: { t: "Durchlassrichtung", d: "Plus an der Anode, Minus an der Kathode. Ab der Schleusenspannung U<sub>S</sub> steigt der Strom sehr steil an – die Diode leitet." },
-    schleuse: { t: "Schleusenspannung U<sub>S</sub>", d: "Beschreibt den Knick der Kennlinie: Ab hier steigt der Strom stark an. Zeichnerisch legt man eine Tangente an den steilen Teil der Kennlinie – ihr Schnittpunkt mit der U-Achse ist U<sub>S</sub>. Silizium: etwa 0,6 bis 0,7 V, BAY 44: rund 0,7 V. Auch darunter fließt schon ein sehr kleiner Strom; einen scharfen Einschaltpunkt gibt es nicht." },
-    uf: { t: "Durchlassspannung U<sub>F</sub>", d: "Spannung, die bei einem bestimmten Durchlassstrom I<sub>F</sub> tatsächlich an der Diode abfällt – ein Punkt auf der Kennlinie. Weil die Kennlinie oberhalb von U<sub>S</sub> nicht senkrecht verläuft, steigt U<sub>F</sub> mit dem Strom weiter an. Das Datenblatt nennt U<sub>F</sub> deshalb immer mit Prüfstrom und Temperatur: BAY 44 typ. 0,97 V, max. 1,1 V bei I<sub>F</sub> = 100 mA und 25 °C." },
-    ifmax: { t: "Maximaler Durchlassstrom", d: "Größter Strom in Durchlassrichtung, der dauerhaft fließen darf, ohne dass die Diode beschädigt wird. BAY 44: I<sub>F</sub> = 250 mA." },
-    sperr: { t: "Sperrrichtung", d: "Minus an der Anode, Plus an der Kathode. Es fließt nur ein winziger Sperrstrom im Nano- bis Mikroampere-Bereich – die Diode sperrt." },
-    urmax: { t: "Maximale Sperrspannung", d: "Größte Spannung, die in Sperrrichtung angelegt werden darf. BAY 44: U<sub>R</sub> = 50 V. Höhere Werte sind nicht zulässig." },
-    durchbruch: { t: "Durchbruchspannung", d: "Ab dieser Spannung leitet die Diode in Sperrrichtung schlagartig. Ohne Strombegrenzung wird sie durch Überhitzung zerstört." }
+    durchlass: { t: T("Forward direction", "Durchlassrichtung"), d: T("Plus at the anode, minus at the cathode. From the threshold voltage U<sub>S</sub> the current rises very steeply – the diode conducts.", "Plus an der Anode, Minus an der Kathode. Ab der Schleusenspannung U<sub>S</sub> steigt der Strom sehr steil an – die Diode leitet.") },
+    schleuse: { t: T("Threshold voltage U<sub>S</sub>", "Schleusenspannung U<sub>S</sub>"), d: T("Describes the knee of the characteristic: from here the current rises sharply. Graphically, a tangent is drawn to the steep part of the characteristic – its intersection with the U axis is U<sub>S</sub>. Silicon: about 0.6 to 0.7 V, BAY 44: around 0.7 V. Even below it a very small current already flows; there is no sharp switch-on point.", "Beschreibt den Knick der Kennlinie: Ab hier steigt der Strom stark an. Zeichnerisch legt man eine Tangente an den steilen Teil der Kennlinie – ihr Schnittpunkt mit der U-Achse ist U<sub>S</sub>. Silizium: etwa 0,6 bis 0,7 V, BAY 44: rund 0,7 V. Auch darunter fließt schon ein sehr kleiner Strom; einen scharfen Einschaltpunkt gibt es nicht.") },
+    uf: { t: T("Forward voltage U<sub>F</sub>", "Durchlassspannung U<sub>F</sub>"), d: T("Voltage that actually drops across the diode at a specific forward current I<sub>F</sub> – a point on the characteristic. Because the characteristic does not run vertically above U<sub>S</sub>, U<sub>F</sub> continues to rise with the current. The data sheet therefore always states U<sub>F</sub> with test current and temperature: BAY 44 typ. 0.97 V, max. 1.1 V at I<sub>F</sub> = 100 mA and 25 °C.", "Spannung, die bei einem bestimmten Durchlassstrom I<sub>F</sub> tatsächlich an der Diode abfällt – ein Punkt auf der Kennlinie. Weil die Kennlinie oberhalb von U<sub>S</sub> nicht senkrecht verläuft, steigt U<sub>F</sub> mit dem Strom weiter an. Das Datenblatt nennt U<sub>F</sub> deshalb immer mit Prüfstrom und Temperatur: BAY 44 typ. 0,97 V, max. 1,1 V bei I<sub>F</sub> = 100 mA und 25 °C.") },
+    ifmax: { t: T("Maximum forward current", "Maximaler Durchlassstrom"), d: T("Largest current in the forward direction that may flow continuously without damaging the diode. BAY 44: I<sub>F</sub> = 250 mA.", "Größter Strom in Durchlassrichtung, der dauerhaft fließen darf, ohne dass die Diode beschädigt wird. BAY 44: I<sub>F</sub> = 250 mA.") },
+    sperr: { t: T("Reverse direction", "Sperrrichtung"), d: T("Minus at the anode, plus at the cathode. Only a tiny reverse current in the nanoampere to microampere range flows – the diode blocks.", "Minus an der Anode, Plus an der Kathode. Es fließt nur ein winziger Sperrstrom im Nano- bis Mikroampere-Bereich – die Diode sperrt.") },
+    urmax: { t: T("Maximum reverse voltage", "Maximale Sperrspannung"), d: T("Highest voltage that may be applied in the reverse direction. BAY 44: U<sub>R</sub> = 50 V. Higher values are not permissible.", "Größte Spannung, die in Sperrrichtung angelegt werden darf. BAY 44: U<sub>R</sub> = 50 V. Höhere Werte sind nicht zulässig.") },
+    durchbruch: { t: T("Breakdown voltage", "Durchbruchspannung"), d: T("From this voltage the diode suddenly conducts in the reverse direction. Without current limiting it is destroyed by overheating.", "Ab dieser Spannung leitet die Diode in Sperrrichtung schlagartig. Ohne Strombegrenzung wird sie durch Überhitzung zerstört.") }
   };
 
   LT.$$('[data-sim="kennlinie"]').forEach(init);
@@ -39,20 +40,20 @@
     function uOfK(k) { return k <= 500 ? -URMAX_AX * (1 - k / 500) : (k - 500) / 500 * 1.4; }
 
     var slider = LT.slider(ui.controls, {
-      label: "Spannung an der Diode", min: 0, max: 1000, step: 1, value: st.k,
+      label: T("Voltage across the diode", "Spannung an der Diode"), min: 0, max: 1000, step: 1, value: st.k,
       format: function (k) { var u = uOfK(k); return (u < 0 ? "–" : "") + LT.num(Math.abs(u), u < 0 ? 1 : 2) + " V"; },
       onInput: function (k) { st.k = k; chart.render(); update(); },
-      help: "Links vom Nullpunkt: Sperrrichtung, rechts: Durchlassrichtung."
+      help: T("Left of the origin: reverse direction, right: forward direction.", "Links vom Nullpunkt: Sperrrichtung, rechts: Durchlassrichtung.")
     });
     var sw = document.createElement("label");
     sw.className = "switch";
-    sw.innerHTML = '<input type="checkbox"> Alle Fachbegriffe einblenden';
+    sw.innerHTML = T('<input type="checkbox"> Show all technical terms', '<input type="checkbox"> Alle Fachbegriffe einblenden');
     ui.controls.appendChild(sw);
     LT.$("input", sw).addEventListener("change", function (e) { st.show = e.target.checked; chart.render(); });
     var swT = document.createElement("div");
     swT.className = "ctl";
-    swT.innerHTML = '<label class="switch"><input type="checkbox"><span>U<sub>S</sub> und U<sub>F</sub> einzeichnen</span></label>' +
-      '<span class="ctl__help">Tangente an den steilen Teil legen: Schnitt mit der U-Achse = Schleusenspannung U<sub>S</sub>. Der Datenblattpunkt zeigt U<sub>F</sub> bei 100 mA.</span>';
+    swT.innerHTML = '<label class="switch"><input type="checkbox"><span>' + T('Draw in U<sub>S</sub> and U<sub>F</sub>', 'U<sub>S</sub> und U<sub>F</sub> einzeichnen') + '</span></label>' +
+      '<span class="ctl__help">' + T('Draw a tangent to the steep part: intersection with the U axis = threshold voltage U<sub>S</sub>. The data sheet point shows U<sub>F</sub> at 100 mA.', 'Tangente an den steilen Teil legen: Schnitt mit der U-Achse = Schleusenspannung U<sub>S</sub>. Der Datenblattpunkt zeigt U<sub>F</sub> bei 100 mA.') + '</span>';
     ui.controls.appendChild(swT);
     LT.$("input", swT).addEventListener("change", function (e) { st.tangent = e.target.checked; chart.render(); });
 
@@ -64,7 +65,7 @@
     var term = document.createElement("div");
     term.className = "hotspot-info kl-term";
     term.setAttribute("aria-live", "polite");
-    term.innerHTML = "<strong>Fachbegriffe an der Kennlinie</strong><p>Tippen Sie auf eine nummerierte Markierung im Diagramm.</p>";
+    term.innerHTML = T("<strong>Technical terms on the characteristic</strong><p>Tap a numbered marker in the diagram.</p>", "<strong>Fachbegriffe an der Kennlinie</strong><p>Tippen Sie auf eine nummerierte Markierung im Diagramm.</p>");
 
     var xs = {
       map: function (u) { return u < 0 ? 0.5 * (1 + u / URMAX_AX) : 0.5 + 0.5 * u / UFMAX_AX; },
@@ -82,7 +83,7 @@
     };
 
     var chart = LT.chart(ui.stage, {
-      ariaLabel: "Kennlinie der Silizium-Diode BAY 44 mit Durchlass- und Sperrbereich",
+      ariaLabel: T("Characteristic curve of the silicon diode BAY 44 with forward and reverse region", "Kennlinie der Silizium-Diode BAY 44 mit Durchlass- und Sperrbereich"),
       height: function (w) { return LT.clamp(w * 0.62, 360, 520); },
       margin: { t: 26, r: 18, b: 12, l: 44 },
       x: xs, y: ys,
@@ -111,7 +112,7 @@
           var tTop = U_S + R_TAN * IMAX / 1e3;
           c.el("line", { x1: c.sx(U_S), y1: c.sy(0), x2: c.sx(tTop), y2: c.sy(IMAX), stroke: "#8a6400", "stroke-width": 2, "stroke-dasharray": "8 5" }, c.gOver);
           var iLab = narrow ? 0.07 : 0.035;
-          c.text(c.sx(U_S + R_TAN * iLab) + 9, c.sy(iLab * 1e3) + 4, "Tangente", { "text-anchor": "start", class: "series-label", fill: "#8a6400", "font-size": 12 }, c.gOver);
+          c.text(c.sx(U_S + R_TAN * iLab) + 9, c.sy(iLab * 1e3) + 4, T("Tangent", "Tangente"), { "text-anchor": "start", class: "series-label", fill: "#8a6400", "font-size": 12 }, c.gOver);
           c.el("path", { d: "M" + c.sx(U_S) + " " + (c.sy(0) - 6) + " l5 6 l-5 6 l-5 -6z", fill: "#8a6400" }, c.gOver);
           c.text(c.sx(U_S) - 16, c.sy(0) - 9, "U<sub>S</sub> ≈ " + LT.num(U_S, 2) + " V", { "text-anchor": "end", class: "series-label", fill: "#8a6400" }, c.gOver);
           var dx = c.sx(DS.U), dy = c.sy(DS.I * 1e3);
@@ -119,8 +120,8 @@
           c.el("line", { x1: c.sx(0), x2: dx, y1: dy, y2: dy, class: "guide", stroke: "#1f5bd8" }, c.gOver);
           // breit: rechts unter dem Punkt; schmal: im freien Feld unter der U-Achse (rechts unten)
           var tx = narrow ? c.sx(UFMAX_AX) : dx + 16, a = narrow ? "end" : "start", ty = narrow ? c.sy(0) + 64 : dy + 24;
-          c.text(tx, ty, "U<sub>F</sub> = 0,97 V", { "text-anchor": a, class: "series-label", fill: "#1f5bd8" }, c.gOver);
-          c.text(tx, ty + 15, "bei I<sub>F</sub> = 100 mA", { "text-anchor": a, class: "series-label", fill: "#1f5bd8", "font-size": 11.5 }, c.gOver);
+          c.text(tx, ty, T("U<sub>F</sub> = 0.97 V", "U<sub>F</sub> = 0,97 V"), { "text-anchor": a, class: "series-label", fill: "#1f5bd8" }, c.gOver);
+          c.text(tx, ty + 15, T("at I<sub>F</sub> = 100 mA", "bei I<sub>F</sub> = 100 mA"), { "text-anchor": a, class: "series-label", fill: "#1f5bd8", "font-size": 11.5 }, c.gOver);
         }
 
         // aktueller Punkt
@@ -151,10 +152,10 @@
           g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
         });
         if (narrow && st.show && !st.active) {
-          term.innerHTML = "<strong>Fachbegriffe an der Kennlinie</strong><ol class=\"kl-legend\">" +
-            spots.map(function (s) { return "<li>" + TERMS[s.id].t + "</li>"; }).join("") + "</ol><p>Tippen Sie auf eine Nummer für die Erklärung.</p>";
+          term.innerHTML = "" + T("<strong>Technical terms on the characteristic</strong>", "<strong>Fachbegriffe an der Kennlinie</strong>") + "<ol class=\"kl-legend\">" +
+            spots.map(function (s) { return "<li>" + TERMS[s.id].t + "</li>"; }).join("") + "</ol>" + T("<p>Tap a number for the explanation.</p>", "<p>Tippen Sie auf eine Nummer für die Erklärung.</p>") + "";
         } else if (!st.active) {
-          term.innerHTML = "<strong>Fachbegriffe an der Kennlinie</strong><p>Tippen Sie auf eine nummerierte Markierung im Diagramm.</p>";
+          term.innerHTML = T("<strong>Technical terms on the characteristic</strong><p>Tap a numbered marker in the diagram.</p>", "<strong>Fachbegriffe an der Kennlinie</strong><p>Tippen Sie auf eine nummerierte Markierung im Diagramm.</p>");
         }
         c.text(c.sx(UFMAX_AX) - 4, c.sy(DEV.IFmax * 1e3) - 6, "I<sub>F,max</sub>", { "text-anchor": "end", class: "limit-label" }, c.gOver);
         c.text(c.sx(-DEV.URmax) - 6, c.sy(-IRMAX) - 4, "U<sub>R,max</sub>", { "text-anchor": "end", class: "limit-label" }, c.gOver);
@@ -164,24 +165,24 @@
     ui.stage.appendChild(term);
     var cap = document.createElement("p");
     cap.className = "table-note";
-    cap.textContent = "Achtung: Durchlass- und Sperrbereich haben unterschiedliche Maßstäbe (V und mA bzw. V und µA).";
+    cap.textContent = T("Note: forward and reverse region have different scales (V and mA or V and µA).", "Achtung: Durchlass- und Sperrbereich haben unterschiedliche Maßstäbe (V und mA bzw. V und µA).");
     ui.stage.insertBefore(cap, term);
 
     function update() {
       var u = uOfK(st.k), I = LT.phys.current(DEV, u);
       readout.innerHTML =
-        "<div><dt>Spannung</dt><dd>" + (u < 0 ? "U<sub>R</sub> = " + LT.num(-u, 1) : "U<sub>F</sub> = " + LT.num(u, 2)) + " V</dd></div>" +
-        "<div><dt>Strom</dt><dd>" + (u < 0 ? "I<sub>R</sub> = " + LT.fmtI(-I) : "I<sub>F</sub> = " + LT.fmtI(I)) + "</dd></div>" +
-        (u > 0 ? "<div class=\"readout__wide\"><dt>Abstand zur Schleusenspannung U<sub>S</sub> ≈ " + LT.num(U_S, 2) + " V</dt><dd>U<sub>F</sub> − U<sub>S</sub> = " + (Math.round((u - U_S) * 100) < 0 ? "−" : "") + LT.num(Math.abs(Math.round((u - U_S) * 100) / 100), 2) + " V</dd></div>" : "");
+        "<div>" + T("<dt>Voltage</dt>", "<dt>Spannung</dt>") + "<dd>" + (u < 0 ? "U<sub>R</sub> = " + LT.num(-u, 1) : "U<sub>F</sub> = " + LT.num(u, 2)) + " V</dd></div>" +
+        "<div>" + T("<dt>Current</dt>", "<dt>Strom</dt>") + "<dd>" + (u < 0 ? "I<sub>R</sub> = " + LT.fmtI(-I) : "I<sub>F</sub> = " + LT.fmtI(I)) + "</dd></div>" +
+        (u > 0 ? "<div class=\"readout__wide\">" + T("<dt>Distance to the threshold voltage U<sub>S</sub> ≈ ", "<dt>Abstand zur Schleusenspannung U<sub>S</sub> ≈ ") + "" + LT.num(U_S, 2) + " V</dt><dd>U<sub>F</sub> − U<sub>S</sub> = " + (Math.round((u - U_S) * 100) < 0 ? "−" : "") + LT.num(Math.abs(Math.round((u - U_S) * 100) / 100), 2) + " V</dd></div>" : "");
       if (u >= 0) {
-        if (u < U_S - 0.15) LT.status(status, "info", "Unterhalb der Schleusenspannung U<sub>S</sub>", "Es fließt nur ein sehr kleiner Strom.");
-        else if (u < U_S - 0.005) LT.status(status, "info", "Knickbereich", "Der Strom steigt immer schneller an. Die Schleusenspannung U<sub>S</sub> ≈ 0,7 V ist fast erreicht.");
-        else if (I <= DEV.IFmax) LT.status(status, "ok", "Durchlassbereich", "Die Diode leitet. Die Spannung U<sub>F</sub> gilt nur für diesen Strom: Mehr Strom ergibt ein größeres U<sub>F</sub>, weil die Kennlinie nicht senkrecht verläuft.");
-        else LT.status(status, "bad", "Überlast", "Der maximale Durchlassstrom von 250 mA ist überschritten.");
+        if (u < U_S - 0.15) LT.status(status, "info", T("Below the threshold voltage U<sub>S</sub>", "Unterhalb der Schleusenspannung U<sub>S</sub>"), T("Only a very small current flows.", "Es fließt nur ein sehr kleiner Strom."));
+        else if (u < U_S - 0.005) LT.status(status, "info", T("Knee region", "Knickbereich"), T("The current rises faster and faster. The threshold voltage U<sub>S</sub> ≈ 0.7 V is almost reached.", "Der Strom steigt immer schneller an. Die Schleusenspannung U<sub>S</sub> ≈ 0,7 V ist fast erreicht."));
+        else if (I <= DEV.IFmax) LT.status(status, "ok", T("Forward region", "Durchlassbereich"), T("The diode conducts. The voltage U<sub>F</sub> applies only to this current: more current results in a larger U<sub>F</sub> because the characteristic does not run vertically.", "Die Diode leitet. Die Spannung U<sub>F</sub> gilt nur für diesen Strom: Mehr Strom ergibt ein größeres U<sub>F</sub>, weil die Kennlinie nicht senkrecht verläuft."));
+        else LT.status(status, "bad", T("Overload", "Überlast"), T("The maximum forward current of 250 mA is exceeded.", "Der maximale Durchlassstrom von 250 mA ist überschritten."));
       } else {
-        if (-u <= DEV.URmax) LT.status(status, "ok", "Sperrbereich", "Die Diode sperrt, nur ein winziger Sperrstrom fließt.");
-        else if (-u < DEV.UBR - 3) LT.status(status, "warn", "Über der maximalen Sperrspannung", "Nicht zulässig – die Diode ist dafür nicht spezifiziert.");
-        else LT.status(status, "bad", "Durchbruch", "Die Diode leitet in Sperrrichtung. Ohne Strombegrenzung wird sie zerstört.");
+        if (-u <= DEV.URmax) LT.status(status, "ok", T("Reverse region", "Sperrbereich"), T("The diode blocks, only a tiny reverse current flows.", "Die Diode sperrt, nur ein winziger Sperrstrom fließt."));
+        else if (-u < DEV.UBR - 3) LT.status(status, "warn", T("Above the maximum reverse voltage", "Über der maximalen Sperrspannung"), T("Not permissible – the diode is not specified for this.", "Nicht zulässig – die Diode ist dafür nicht spezifiziert."));
+        else LT.status(status, "bad", T("Breakdown", "Durchbruch"), T("The diode conducts in the reverse direction. Without current limiting it is destroyed.", "Die Diode leitet in Sperrrichtung. Ohne Strombegrenzung wird sie zerstört."));
       }
     }
     update();

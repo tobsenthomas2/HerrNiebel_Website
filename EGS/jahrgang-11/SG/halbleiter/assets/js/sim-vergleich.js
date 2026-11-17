@@ -5,6 +5,7 @@
 (function () {
   "use strict";
   var LT = window.LT, P = LT.phys, D = P.devices;
+  var T = LT.t;
   var ORDER = ["si", "red", "green", "blue"];
 
   LT.$$('[data-sim="vergleich"]').forEach(function (host) {
@@ -12,15 +13,15 @@
     var st = { IF: 20, on: { si: true, red: true, green: true, blue: true } };
 
     var slider = LT.slider(ui.controls, {
-      label: "Durchlassstrom I<sub>F</sub>", min: 1, max: 30, step: 1, value: st.IF,
+      label: T("Forward current I<sub>F</sub>", "Durchlassstrom I<sub>F</sub>"), min: 1, max: 30, step: 1, value: st.IF,
       format: function (v) { return v + " mA"; },
       onInput: function (v) { st.IF = v; chart.render(); table(); }
     });
-    LT.$(".ctl__label span", slider.el).innerHTML = "Durchlassstrom I<sub>F</sub>";
+    LT.$(".ctl__label span", slider.el).innerHTML = T("Forward current I<sub>F</sub>", "Durchlassstrom I<sub>F</sub>");
 
     var boxes = document.createElement("fieldset");
     boxes.className = "series-pick";
-    boxes.innerHTML = "<legend>Kennlinien</legend>" + ORDER.map(function (k) {
+    boxes.innerHTML = "" + T("<legend>Characteristic curves</legend>", "<legend>Kennlinien</legend>") + "" + ORDER.map(function (k) {
       return '<label class="switch switch--sm"><input type="checkbox" checked data-k="' + k + '">' + LT.legendLine(D[k].color, D[k].dash) + D[k].short + "</label>";
     }).join("");
     ui.controls.appendChild(boxes);
@@ -31,7 +32,7 @@
     ui.controls.appendChild(tbl);
 
     var chart = LT.chart(ui.stage, {
-      ariaLabel: "Durchlasskennlinien von Silizium-Diode und LEDs in Rot, Grün und Blau",
+      ariaLabel: T("Forward characteristics of silicon diode and LEDs in red, green and blue", "Durchlasskennlinien von Silizium-Diode und LEDs in Rot, Grün und Blau"),
       height: function (w) { return LT.clamp(w * 0.66, 300, 460); },
       margin: { t: 20, r: 20, b: 50, l: 52 },
       x: { domain: [0, 4.5], ticks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5], minor: 0.1, digits: 1, label: "U<sub>F</sub> in V", fmt: function (v) { return LT.num(v, 1); } },
@@ -74,7 +75,7 @@
       var rows = ORDER.filter(function (k) { return st.on[k]; }).map(function (k) {
         return "<div><dt>" + LT.legendLine(D[k].color, D[k].dash).replace("<svg", '<svg style="width:20px;height:10px;display:inline-block;margin-right:6px"') + D[k].short + "</dt><dd>U<sub>F</sub> = " + LT.num(P.U_of_I(D[k], st.IF / 1000), 2) + " V</dd></div>";
       }).join("");
-      tbl.innerHTML = '<p class="ctl__title">Abgelesen bei I<sub>F</sub> = ' + st.IF + " mA</p><dl class=\"readout readout--list\">" + rows + "</dl>";
+      tbl.innerHTML = '<p class="ctl__title">' + T('Read off at I<sub>F</sub> = ', 'Abgelesen bei I<sub>F</sub> = ') + '' + st.IF + " mA</p><dl class=\"readout readout--list\">" + rows + "</dl>";
     }
     table();
   });

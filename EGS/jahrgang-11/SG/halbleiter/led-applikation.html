@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="de" data-seite="leds">
+<html lang="en" data-seite="leds" data-title-de="Applikation: LEDs richtig betreiben | LUMIATECH Semiconductor">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Applikation: LEDs richtig betreiben | LUMIATECH Semiconductor</title>
-  <meta name="description" content="Vorwiderstand berechnen, Arbeitspunkt grafisch bestimmen und Signalsäulen auf LEDs umrüsten – die Applikationsschrift von LUMIATECH mit interaktiven Werkzeugen.">
+  <title>Application: operating LEDs correctly | LUMIATECH Semiconductor</title>
+  <meta name="description" content="Calculate the series resistor, determine the operating point graphically and retrofit signal towers with LEDs – the LUMIATECH application note with interactive tools.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/products.css">
+  <script src="assets/js/lang.js"></script>
   <script src="assets/js/config.js"></script>
   <script src="assets/js/woche.js"></script>
   <script defer src="assets/js/site.js"></script>
@@ -24,118 +25,118 @@
   <main id="main">
     <div class="page-head">
       <div class="container">
-        <nav class="crumbs" aria-label="Brotkrumen"><a href="index.html">Start</a><span aria-hidden="true">/</span><span>Applikationen</span><span aria-hidden="true">/</span><span>LEDs richtig betreiben</span></nav>
-        <h1>LEDs richtig betreiben</h1>
-        <p class="lead">Applikationsschrift AN-L02 aus unserem Labor: Vorwiderstand auslegen, Arbeitspunkt prüfen und Signalsäulen sicher von Glühlampen auf LEDs umrüsten.</p>
+        <nav class="crumbs" aria-label="Breadcrumb" data-de-aria-label="Brotkrumen"><a href="index.html"><span data-lang="en">Home</span><span data-lang="de">Start</span></a><span aria-hidden="true">/</span><span><span data-lang="en">Applications</span><span data-lang="de">Applikationen</span></span><span aria-hidden="true">/</span><span><span data-lang="en">Operating LEDs correctly</span><span data-lang="de">LEDs richtig betreiben</span></span></nav>
+        <h1><span data-lang="en">Operating LEDs correctly</span><span data-lang="de">LEDs richtig betreiben</span></h1>
+        <p class="lead"><span data-lang="en">Application note AN-L02 from our lab: dimension the series resistor, check the operating point and safely retrofit signal towers from incandescent lamps to LEDs.</span><span data-lang="de">Applikationsschrift AN-L02 aus unserem Labor: Vorwiderstand auslegen, Arbeitspunkt prüfen und Signalsäulen sicher von Glühlampen auf LEDs umrüsten.</span></p>
       </div>
     </div>
 
     <div class="container section--tight">
       <div class="doc">
-        <aside class="toc" data-toc="#doc-body" aria-label="Inhaltsverzeichnis"></aside>
+        <aside class="toc" data-toc="#doc-body" aria-label="Table of contents" data-de-aria-label="Inhaltsverzeichnis"></aside>
         <div class="doc__body" id="doc-body">
 
-          <section id="vorwiderstand" data-toc-label="Warum ein Vorwiderstand?">
-            <h2>Warum jede LED einen Vorwiderstand braucht</h2>
-            <p class="intro">Oberhalb der Schleusenspannung steigt der Strom einer LED extrem steil an. Eine LED direkt an 12 V würde in Sekundenbruchteilen zerstört.</p>
+          <section id="vorwiderstand" data-toc-label="Why a series resistor?" data-de-data-toc-label="Warum ein Vorwiderstand?">
+            <h2><span data-lang="en">Why every LED needs a series resistor</span><span data-lang="de">Warum jede LED einen Vorwiderstand braucht</span></h2>
+            <p class="intro"><span data-lang="en">Above the threshold voltage the current of an LED rises extremely steeply. An LED connected directly to 12 V would be destroyed in a fraction of a second.</span><span data-lang="de">Oberhalb der Schleusenspannung steigt der Strom einer LED extrem steil an. Eine LED direkt an 12 V würde in Sekundenbruchteilen zerstört.</span></p>
             <div class="split split--top mt-2">
               <div>
-                <p>Der <strong>Vorwiderstand R<sub>V</sub></strong> (im Schaltplan -R1) wird in Reihe zur LED -P1 geschaltet. Er begrenzt den Strom auf einen Wert, den die LED dauerhaft verträgt, und nimmt die überschüssige Spannung auf.</p>
-                <p>Für die Masche gilt:</p>
+                <p><span data-lang="en">The <strong>series resistor R<sub>V</sub></strong> (-R1 in the circuit diagram) is connected in series with the LED -P1. It limits the current to a value that the LED can withstand permanently and takes up the excess voltage.</span><span data-lang="de">Der <strong>Vorwiderstand R<sub>V</sub></strong> (im Schaltplan -R1) wird in Reihe zur LED -P1 geschaltet. Er begrenzt den Strom auf einen Wert, den die LED dauerhaft verträgt, und nimmt die überschüssige Spannung auf.</span></p>
+                <p><span data-lang="en">For the loop the following applies:</span><span data-lang="de">Für die Masche gilt:</span></p>
                 <div class="formula">U<sub>b</sub> = U<sub>RV</sub> + U<sub>F</sub></div>
-                <p>Durch Vorwiderstand und LED fließt derselbe Strom I<sub>F</sub>. Die Spannungspfeile zeigen jeweils von Plus nach Minus, der Strompfeil in technischer Stromrichtung.</p>
+                <p><span data-lang="en">The same current I<sub>F</sub> flows through series resistor and LED. The voltage arrows each point from plus to minus, the current arrow in the conventional current direction.</span><span data-lang="de">Durch Vorwiderstand und LED fließt derselbe Strom I<sub>F</sub>. Die Spannungspfeile zeigen jeweils von Plus nach Minus, der Strompfeil in technischer Stromrichtung.</span></p>
               </div>
               <figure class="figure">
                 <div class="figure__frame"><div data-art="sch-grund-led"></div></div>
-                <figcaption>Grundschaltung: Spannungsquelle -G1, Vorwiderstand -R1 und LED -P1 mit Zählpfeilen</figcaption>
+                <figcaption><span data-lang="en">Basic circuit: voltage source -G1, series resistor -R1 and LED -P1 with reference arrows</span><span data-lang="de">Grundschaltung: Spannungsquelle -G1, Vorwiderstand -R1 und LED -P1 mit Zählpfeilen</span></figcaption>
               </figure>
             </div>
           </section>
 
-          <section id="berechnung" data-toc-label="Vorwiderstand berechnen">
-            <h2>Vorwiderstand berechnen</h2>
-            <p class="intro">Mit drei Formeln und dem Datenblatt ist der Vorwiderstand in wenigen Minuten ausgelegt.</p>
+          <section id="berechnung" data-toc-label="Calculating the series resistor" data-de-data-toc-label="Vorwiderstand berechnen">
+            <h2><span data-lang="en">Calculating the series resistor</span><span data-lang="de">Vorwiderstand berechnen</span></h2>
+            <p class="intro"><span data-lang="en">With three formulas and the data sheet, the series resistor is dimensioned in a few minutes.</span><span data-lang="de">Mit drei Formeln und dem Datenblatt ist der Vorwiderstand in wenigen Minuten ausgelegt.</span></p>
             <div class="formula-list">
               <div class="formula">U<sub>RV</sub> = U<sub>b</sub> − U<sub>F</sub></div>
               <div class="formula">R<sub>V</sub> = U<sub>RV</sub> / I<sub>F</sub></div>
               <div class="formula">P<sub>RV</sub> = U<sub>RV</sub> · I<sub>F</sub></div>
             </div>
             <ol class="steps mt-2">
-              <li><div><h3>Strom festlegen und prüfen</h3><p>Wählen Sie den Betriebsstrom I<sub>F</sub> (üblich: 20 mA) und prüfen Sie, ob er unter I<sub>F,max</sub> aus dem Datenblatt liegt.</p></div></li>
-              <li><div><h3>Durchlassspannung ablesen</h3><p>U<sub>F</sub> bei diesem Strom steht im Datenblatt (Typwert) – nicht in allgemeinen Tabellen.</p></div></li>
-              <li><div><h3>Widerstand berechnen</h3><p>Aus der Spannung am Vorwiderstand und dem Strom ergibt sich R<sub>V</sub>.</p></div></li>
-              <li><div><h3>Normwert wählen</h3><p>Nehmen Sie aus der E12-Reihe den nächstgrößeren Wert. So wird der Strom etwas kleiner und I<sub>F</sub> nicht überschritten.</p></div></li>
-              <li><div><h3>Strom und Leistung nachrechnen</h3><p>Mit dem Normwert den tatsächlichen Strom und die Verlustleistung im Widerstand bestimmen. Danach die Belastbarkeit wählen (0,25 W, 0,5 W, 1 W).</p></div></li>
+              <li><div><h3><span data-lang="en">Define and check the current</span><span data-lang="de">Strom festlegen und prüfen</span></h3><p><span data-lang="en">Choose the operating current I<sub>F</sub> (typically 20 mA) and check whether it is below I<sub>F,max</sub> from the data sheet.</span><span data-lang="de">Wählen Sie den Betriebsstrom I<sub>F</sub> (üblich: 20 mA) und prüfen Sie, ob er unter I<sub>F,max</sub> aus dem Datenblatt liegt.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Read off the forward voltage</span><span data-lang="de">Durchlassspannung ablesen</span></h3><p><span data-lang="en">U<sub>F</sub> at this current is given in the data sheet (typical value) – not in general tables.</span><span data-lang="de">U<sub>F</sub> bei diesem Strom steht im Datenblatt (Typwert) – nicht in allgemeinen Tabellen.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Calculate the resistance</span><span data-lang="de">Widerstand berechnen</span></h3><p><span data-lang="en">R<sub>V</sub> results from the voltage across the series resistor and the current.</span><span data-lang="de">Aus der Spannung am Vorwiderstand und dem Strom ergibt sich R<sub>V</sub>.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Choose a standard value</span><span data-lang="de">Normwert wählen</span></h3><p><span data-lang="en">Take the next larger value from the E12 series. This makes the current slightly smaller and I<sub>F</sub> is not exceeded.</span><span data-lang="de">Nehmen Sie aus der E12-Reihe den nächstgrößeren Wert. So wird der Strom etwas kleiner und I<sub>F</sub> nicht überschritten.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Recalculate current and power</span><span data-lang="de">Strom und Leistung nachrechnen</span></h3><p><span data-lang="en">Use the standard value to determine the actual current and the power loss in the resistor. Then choose the power rating (0.25 W, 0.5 W, 1 W).</span><span data-lang="de">Mit dem Normwert den tatsächlichen Strom und die Verlustleistung im Widerstand bestimmen. Danach die Belastbarkeit wählen (0,25 W, 0,5 W, 1 W).</span></p></div></li>
             </ol>
 
             <div class="e12 mt-2">
-              <p class="ctl__title">Normreihe E12 (Werte × 10<sup>n</sup> Ω)</p>
-              <ul><li>1,0</li><li>1,2</li><li>1,5</li><li>1,8</li><li>2,2</li><li>2,7</li><li>3,3</li><li>3,9</li><li>4,7</li><li>5,6</li><li>6,8</li><li>8,2</li></ul>
+              <p class="ctl__title"><span data-lang="en">E12 standard series (values × 10<sup>n</sup> Ω)</span><span data-lang="de">Normreihe E12 (Werte × 10<sup>n</sup> Ω)</span></p>
+              <ul><li><span data-lang="en">1.0</span><span data-lang="de">1,0</span></li><li><span data-lang="en">1.2</span><span data-lang="de">1,2</span></li><li><span data-lang="en">1.5</span><span data-lang="de">1,5</span></li><li><span data-lang="en">1.8</span><span data-lang="de">1,8</span></li><li><span data-lang="en">2.2</span><span data-lang="de">2,2</span></li><li><span data-lang="en">2.7</span><span data-lang="de">2,7</span></li><li><span data-lang="en">3.3</span><span data-lang="de">3,3</span></li><li><span data-lang="en">3.9</span><span data-lang="de">3,9</span></li><li><span data-lang="en">4.7</span><span data-lang="de">4,7</span></li><li><span data-lang="en">5.6</span><span data-lang="de">5,6</span></li><li><span data-lang="en">6.8</span><span data-lang="de">6,8</span></li><li><span data-lang="en">8.2</span><span data-lang="de">8,2</span></li></ul>
             </div>
 
-            <h3 class="mt-3">Rechenbeispiel: grüne Statusanzeige an 24 V</h3>
-            <p>Eine LED L-7113SGD (grün) soll in einem Schaltschrank an U<sub>b</sub> = 24 V DC mit I<sub>F</sub> = 20 mA leuchten. Laut Datenblatt: U<sub>F</sub> = 2,2 V bei 20 mA, I<sub>F,max</sub> = 25 mA.</p>
+            <h3 class="mt-3"><span data-lang="en">Worked example: green status indicator at 24 V</span><span data-lang="de">Rechenbeispiel: grüne Statusanzeige an 24 V</span></h3>
+            <p><span data-lang="en">An LED L-7113SGD (green) is to light up in a control cabinet at U<sub>b</sub> = 24 V DC with I<sub>F</sub> = 20 mA. According to the data sheet: U<sub>F</sub> = 2.2 V at 20 mA, I<sub>F,max</sub> = 25 mA.</span><span data-lang="de">Eine LED L-7113SGD (grün) soll in einem Schaltschrank an U<sub>b</sub> = 24 V DC mit I<sub>F</sub> = 20 mA leuchten. Laut Datenblatt: U<sub>F</sub> = 2,2 V bei 20 mA, I<sub>F,max</sub> = 25 mA.</span></p>
             <div class="calc">
-              <div class="row"><span>Strom zulässig?</span><span>20 mA ≤ 25 mA <span class="res">✓</span></span></div>
-              <div class="row"><span>Spannung am Vorwiderstand</span><span>U<sub>RV</sub> = 24 V − 2,2 V = 21,8 V</span></div>
-              <div class="row"><span>Rechnerischer Widerstand</span><span>R<sub>V</sub> = 21,8 V / 0,02 A = 1.090 Ω</span></div>
-              <div class="row"><span>Normwert E12</span><span class="res">1,2 kΩ</span></div>
-              <div class="row"><span>Strom mit Normwert</span><span>I<sub>F</sub> = 21,8 V / 1.200 Ω ≈ 18,2 mA</span></div>
-              <div class="row"><span>Leistung im Widerstand</span><span>P<sub>RV</sub> = 21,8 V · 0,0182 A ≈ 0,40 W</span></div>
-              <div class="row"><span>Ergebnis</span><span class="res">1,2 kΩ mit 0,5 W – ein 0,25-W-Widerstand würde überlastet</span></div>
+              <div class="row"><span><span data-lang="en">Current permissible?</span><span data-lang="de">Strom zulässig?</span></span><span>20 mA ≤ 25 mA <span class="res">✓</span></span></div>
+              <div class="row"><span><span data-lang="en">Voltage across the series resistor</span><span data-lang="de">Spannung am Vorwiderstand</span></span><span>U<sub>RV</sub><span data-lang="en"> = 24 V − 2.2 V = 21.8 V</span><span data-lang="de"> = 24 V − 2,2 V = 21,8 V</span></span></div>
+              <div class="row"><span><span data-lang="en">Calculated resistance</span><span data-lang="de">Rechnerischer Widerstand</span></span><span>R<sub>V</sub><span data-lang="en"> = 21.8 V / 0.02 A = 1,090 Ω</span><span data-lang="de"> = 21,8 V / 0,02 A = 1.090 Ω</span></span></div>
+              <div class="row"><span><span data-lang="en">E12 standard value</span><span data-lang="de">Normwert E12</span></span><span class="res"><span data-lang="en">1.2 kΩ</span><span data-lang="de">1,2 kΩ</span></span></div>
+              <div class="row"><span><span data-lang="en">Current with standard value</span><span data-lang="de">Strom mit Normwert</span></span><span>I<sub>F</sub><span data-lang="en"> = 21.8 V / 1,200 Ω ≈ 18.2 mA</span><span data-lang="de"> = 21,8 V / 1.200 Ω ≈ 18,2 mA</span></span></div>
+              <div class="row"><span><span data-lang="en">Power in the resistor</span><span data-lang="de">Leistung im Widerstand</span></span><span>P<sub>RV</sub><span data-lang="en"> = 21.8 V · 0.0182 A ≈ 0.40 W</span><span data-lang="de"> = 21,8 V · 0,0182 A ≈ 0,40 W</span></span></div>
+              <div class="row"><span><span data-lang="en">Result</span><span data-lang="de">Ergebnis</span></span><span class="res"><span data-lang="en">1.2 kΩ with 0.5 W – a 0.25 W resistor would be overloaded</span><span data-lang="de">1,2 kΩ mit 0,5 W – ein 0,25-W-Widerstand würde überlastet</span></span></div>
             </div>
             <div class="note">
-              <div class="note__title">Praxistipp</div>
-              <p>Je höher die Betriebsspannung, desto mehr Leistung verheizt der Vorwiderstand. Prüfen Sie die Belastbarkeit deshalb immer mit – besonders bei 24-V-Anlagen.</p>
+              <div class="note__title"><span data-lang="en">Practical tip</span><span data-lang="de">Praxistipp</span></div>
+              <p><span data-lang="en">The higher the operating voltage, the more power the series resistor turns into heat. Therefore always check the power rating as well – especially in 24 V systems.</span><span data-lang="de">Je höher die Betriebsspannung, desto mehr Leistung verheizt der Vorwiderstand. Prüfen Sie die Belastbarkeit deshalb immer mit – besonders bei 24-V-Anlagen.</span></p>
             </div>
           </section>
 
-          <section id="arbeitspunkt" data-toc-label="Arbeitspunkt grafisch">
-            <h2>Arbeitspunkt grafisch bestimmen</h2>
-            <p class="intro">Die Rechnung nimmt eine feste Durchlassspannung an. Genauer wird es mit der echten Kennlinie: Der Arbeitspunkt liegt dort, wo sich LED-Kennlinie und Widerstandsgerade schneiden.</p>
+          <section id="arbeitspunkt" data-toc-label="Operating point graphically" data-de-data-toc-label="Arbeitspunkt grafisch">
+            <h2><span data-lang="en">Determining the operating point graphically</span><span data-lang="de">Arbeitspunkt grafisch bestimmen</span></h2>
+            <p class="intro"><span data-lang="en">The calculation assumes a fixed forward voltage. The real characteristic is more accurate: the operating point lies where the LED characteristic and the load line intersect.</span><span data-lang="de">Die Rechnung nimmt eine feste Durchlassspannung an. Genauer wird es mit der echten Kennlinie: Der Arbeitspunkt liegt dort, wo sich LED-Kennlinie und Widerstandsgerade schneiden.</span></p>
             <ol class="steps">
-              <li><div><h3>P1 eintragen: (U<sub>b</sub> | 0)</h3><p>Fließt kein Strom, liegt die gesamte Betriebsspannung an der LED.</p></div></li>
-              <li><div><h3>P2 eintragen: (0 | U<sub>b</sub> / R<sub>V</sub>)</h3><p>Wäre die LED überbrückt, flösse der Kurzschlussstrom I<sub>K</sub> = U<sub>b</sub> / R<sub>V</sub>.</p></div></li>
-              <li><div><h3>P1 und P2 verbinden</h3><p>Die Verbindungslinie heißt Widerstandsgerade.</p></div></li>
-              <li><div><h3>Schnittpunkt ablesen</h3><p>Der Schnittpunkt mit der Kennlinie ist der Arbeitspunkt. Dort lesen Sie U<sub>F</sub> und I<sub>F</sub> ab – und vergleichen I<sub>F</sub> mit I<sub>F,max</sub>.</p></div></li>
+              <li><div><h3><span data-lang="en">Plot P1: (U<sub>b</sub> | 0)</span><span data-lang="de">P1 eintragen: (U<sub>b</sub> | 0)</span></h3><p><span data-lang="en">If no current flows, the entire operating voltage is across the LED.</span><span data-lang="de">Fließt kein Strom, liegt die gesamte Betriebsspannung an der LED.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Plot P2: (0 | U<sub>b</sub> / R<sub>V</sub>)</span><span data-lang="de">P2 eintragen: (0 | U<sub>b</sub> / R<sub>V</sub>)</span></h3><p><span data-lang="en">If the LED were bridged, the short-circuit current I<sub>K</sub> = U<sub>b</sub> / R<sub>V</sub> would flow.</span><span data-lang="de">Wäre die LED überbrückt, flösse der Kurzschlussstrom I<sub>K</sub> = U<sub>b</sub> / R<sub>V</sub>.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Connect P1 and P2</span><span data-lang="de">P1 und P2 verbinden</span></h3><p><span data-lang="en">The connecting line is called the load line.</span><span data-lang="de">Die Verbindungslinie heißt Widerstandsgerade.</span></p></div></li>
+              <li><div><h3><span data-lang="en">Read off the intersection</span><span data-lang="de">Schnittpunkt ablesen</span></h3><p><span data-lang="en">The intersection with the characteristic is the operating point. There you read off U<sub>F</sub> and I<sub>F</sub> – and compare I<sub>F</sub> with I<sub>F,max</sub>.</span><span data-lang="de">Der Schnittpunkt mit der Kennlinie ist der Arbeitspunkt. Dort lesen Sie U<sub>F</sub> und I<sub>F</sub> ab – und vergleichen I<sub>F</sub> mit I<sub>F,max</sub>.</span></p></div></li>
             </ol>
-            <div data-sim="arbeitspunkt" data-title="Arbeitspunkt-Werkzeug" data-hint="LED, Betriebsspannung und Vorwiderstand wählen. Gepunktete Kennlinienabschnitte liegen über I&lt;sub&gt;F,max&lt;/sub&gt;."></div>
-            <p class="table-note">Kennlinien typisch bei 25 °C aus dem Bauteilmodell unseres Labors. Den Arbeitspunkt lesen Sie wie auf Millimeterpapier an den Achsen ab.</p>
+            <div data-sim="arbeitspunkt" data-title="Operating point tool" data-de-data-title="Arbeitspunkt-Werkzeug" data-hint="Select LED, operating voltage and series resistor. Dotted sections of the characteristic are above I&lt;sub&gt;F,max&lt;/sub&gt;." data-de-data-hint="LED, Betriebsspannung und Vorwiderstand wählen. Gepunktete Kennlinienabschnitte liegen über I&lt;sub&gt;F,max&lt;/sub&gt;."></div>
+            <p class="table-note"><span data-lang="en">Typical characteristics at 25 °C from the component model of our lab. Read off the operating point at the axes as you would on graph paper.</span><span data-lang="de">Kennlinien typisch bei 25 °C aus dem Bauteilmodell unseres Labors. Den Arbeitspunkt lesen Sie wie auf Millimeterpapier an den Achsen ab.</span></p>
           </section>
 
-          <section id="gemeinsam" data-toc-label="Ein Widerstand für alle?">
-            <h2>Ein Vorwiderstand für alle Farben?</h2>
-            <p class="intro">Viele Instandhalter möchten nur eine Widerstandsgröße auf Lager halten. Das ist möglich – aber nicht mit jedem Wert.</p>
-            <p>Jede Farbe hat eine andere Durchlassspannung. Mit demselben Vorwiderstand stellen sich deshalb unterschiedliche Ströme ein. Prüfen Sie für jede LED einzeln, ob ihr Strom unter dem jeweiligen I<sub>F,max</sub> bleibt – und ob sie noch hell genug leuchtet. Wählen Sie im Arbeitspunkt-Werkzeug „Alle drei“: Dann sehen Sie eine Widerstandsgerade mit drei Arbeitspunkten.</p>
+          <section id="gemeinsam" data-toc-label="One resistor for all?" data-de-data-toc-label="Ein Widerstand für alle?">
+            <h2><span data-lang="en">One series resistor for all colours?</span><span data-lang="de">Ein Vorwiderstand für alle Farben?</span></h2>
+            <p class="intro"><span data-lang="en">Many maintenance technicians would like to keep only one resistor value in stock. That is possible – but not with every value.</span><span data-lang="de">Viele Instandhalter möchten nur eine Widerstandsgröße auf Lager halten. Das ist möglich – aber nicht mit jedem Wert.</span></p>
+            <p><span data-lang="en">Each colour has a different forward voltage. With the same series resistor, different currents therefore result. Check for each LED individually whether its current stays below the respective I<sub>F,max</sub> – and whether it still lights up brightly enough. Select “All three” in the operating point tool: you will then see one load line with three operating points.</span><span data-lang="de">Jede Farbe hat eine andere Durchlassspannung. Mit demselben Vorwiderstand stellen sich deshalb unterschiedliche Ströme ein. Prüfen Sie für jede LED einzeln, ob ihr Strom unter dem jeweiligen I<sub>F,max</sub> bleibt – und ob sie noch hell genug leuchtet. Wählen Sie im Arbeitspunkt-Werkzeug „Alle drei“: Dann sehen Sie eine Widerstandsgerade mit drei Arbeitspunkten.</span></p>
             <div class="grid grid-3">
-              <div class="tile"><h3>Zu klein</h3><p>Mindestens eine LED wird überlastet und fällt früher oder später aus.</p></div>
-              <div class="tile"><h3>Passend</h3><p>Alle LEDs bleiben unter ihrem Grenzwert und leuchten nahe am Nennstrom.</p></div>
-              <div class="tile"><h3>Zu groß</h3><p>Sicher, aber die Leuchten sind zu dunkel, um Störungen zuverlässig zu melden.</p></div>
+              <div class="tile"><h3><span data-lang="en">Too small</span><span data-lang="de">Zu klein</span></h3><p><span data-lang="en">At least one LED is overloaded and will fail sooner or later.</span><span data-lang="de">Mindestens eine LED wird überlastet und fällt früher oder später aus.</span></p></div>
+              <div class="tile"><h3><span data-lang="en">Suitable</span><span data-lang="de">Passend</span></h3><p><span data-lang="en">All LEDs stay below their limit value and light up close to the rated current.</span><span data-lang="de">Alle LEDs bleiben unter ihrem Grenzwert und leuchten nahe am Nennstrom.</span></p></div>
+              <div class="tile"><h3><span data-lang="en">Too large</span><span data-lang="de">Zu groß</span></h3><p><span data-lang="en">Safe, but the lights are too dim to signal faults reliably.</span><span data-lang="de">Sicher, aber die Leuchten sind zu dunkel, um Störungen zuverlässig zu melden.</span></p></div>
             </div>
           </section>
 
-          <section id="signalsaeule" data-toc-label="Signalsäulen-Retrofit">
-            <h2>Signalsäulen-Retrofit</h2>
-            <p class="intro">Rot meldet eine Störung, Grün „Anlage läuft“, Blau „Eingriff durch den Bediener nötig“. Mit unserem Konfigurator prüfen Sie Ihre Auslegung, bevor Sie die Säule umbauen.</p>
-            <div data-sim="signalsaeule" data-title="Retrofit-Konfigurator Signalsäule" data-hint="Bestücken Sie jede Leuchte mit einem Vorwiderstand."></div>
+          <section id="signalsaeule" data-toc-label="Signal tower retrofit" data-de-data-toc-label="Signalsäulen-Retrofit">
+            <h2><span data-lang="en">Signal tower retrofit</span><span data-lang="de">Signalsäulen-Retrofit</span></h2>
+            <p class="intro"><span data-lang="en">Red signals a fault, green “system running”, blue “operator intervention required”. With our configurator you check your design before you convert the tower.</span><span data-lang="de">Rot meldet eine Störung, Grün „Anlage läuft“, Blau „Eingriff durch den Bediener nötig“. Mit unserem Konfigurator prüfen Sie Ihre Auslegung, bevor Sie die Säule umbauen.</span></p>
+            <div data-sim="signalsaeule" data-title="Retrofit configurator signal tower" data-de-data-title="Retrofit-Konfigurator Signalsäule" data-hint="Fit each light with a series resistor." data-de-data-hint="Bestücken Sie jede Leuchte mit einem Vorwiderstand."></div>
           </section>
 
-          <section id="verpolung" data-toc-label="Schutz vor Verpolung">
-            <h2>LEDs vor Verpolung schützen</h2>
-            <p class="intro">In Sperrrichtung halten LEDs nur etwa 5 V aus. Wird eine Signalsäule an 12 V oder 24 V verpolt angeschlossen, sind die LEDs in Gefahr.</p>
-            <p>Abhilfe schafft eine Silizium-Diode in Reihe, zum Beispiel aus unserer <a href="dioden.html">Serie BAY 44</a> mit 50 V Sperrspannung. Bei richtiger Polung leitet sie, bei Verpolung sperrt sie und nimmt die Sperrspannung auf – die LEDs bleiben geschützt. Berücksichtigen Sie beim Vorwiderstand dann die zusätzlichen 0,7 V an der Schutzdiode.</p>
-            <a class="btn btn--ghost" href="dioden-applikation.html#verpolschutz">Zur Applikation Verpolschutz</a>
+          <section id="verpolung" data-toc-label="Protection against reverse polarity" data-de-data-toc-label="Schutz vor Verpolung">
+            <h2><span data-lang="en">Protecting LEDs against reverse polarity</span><span data-lang="de">LEDs vor Verpolung schützen</span></h2>
+            <p class="intro"><span data-lang="en">In the reverse direction LEDs only withstand about 5 V. If a signal tower is connected to 12 V or 24 V with reversed polarity, the LEDs are at risk.</span><span data-lang="de">In Sperrrichtung halten LEDs nur etwa 5 V aus. Wird eine Signalsäule an 12 V oder 24 V verpolt angeschlossen, sind die LEDs in Gefahr.</span></p>
+            <p><span data-lang="en">The remedy is a silicon diode in series, for example from our <a href="dioden.html">BAY 44 series</a> with 50 V reverse voltage. With correct polarity it conducts, with reversed polarity it blocks and takes up the reverse voltage – the LEDs remain protected. When dimensioning the series resistor, then take into account the additional 0.7 V across the protection diode.</span><span data-lang="de">Abhilfe schafft eine Silizium-Diode in Reihe, zum Beispiel aus unserer <a href="dioden.html">Serie BAY 44</a> mit 50 V Sperrspannung. Bei richtiger Polung leitet sie, bei Verpolung sperrt sie und nimmt die Sperrspannung auf – die LEDs bleiben geschützt. Berücksichtigen Sie beim Vorwiderstand dann die zusätzlichen 0,7 V an der Schutzdiode.</span></p>
+            <a class="btn btn--ghost" href="dioden-applikation.html#verpolschutz"><span data-lang="en">To the application note on reverse polarity protection</span><span data-lang="de">Zur Applikation Verpolschutz</span></a>
           </section>
 
-          <section id="energie" data-toc-label="Energie sparen">
-            <h2>So viel Energie sparen Sie</h2>
-            <p class="intro">Die Leistung einer Leuchte berechnen Sie mit P = U · I. Bei der LED zählt der Strom durch LED und Vorwiderstand zusammen.</p>
+          <section id="energie" data-toc-label="Saving energy" data-de-data-toc-label="Energie sparen">
+            <h2><span data-lang="en">How much energy you save</span><span data-lang="de">So viel Energie sparen Sie</span></h2>
+            <p class="intro"><span data-lang="en">You calculate the power of a light with P = U · I. For the LED light, the power of the series resistor is part of it. Therefore calculate with the entire operating voltage: P = U<sub>b</sub> · I<sub>F</sub>.</span><span data-lang="de">Die Leistung einer Leuchte berechnen Sie mit P = U · I. Bei der LED-Leuchte gehört die Leistung des Vorwiderstands dazu. Rechnen Sie deshalb mit der gesamten Betriebsspannung: P = U<sub>b</sub> · I<sub>F</sub>.</span></p>
             <div class="calc">
-              <div class="row"><span>Glühlampe 24 V / 5 W</span><span>P = 5 W</span></div>
-              <div class="row"><span>LED mit 1,2 kΩ an 24 V</span><span>P = 24 V · 0,0182 A ≈ 0,44 W</span></div>
-              <div class="row"><span>Ersparnis je Leuchte</span><span class="res">≈ 4,56 W, also rund 91 %</span></div>
+              <div class="row"><span><span data-lang="en">Incandescent lamp 24 V / 5 W</span><span data-lang="de">Glühlampe 24 V / 5 W</span></span><span>P = 5 W</span></div>
+              <div class="row"><span><span data-lang="en">LED with 1.2 kΩ at 24 V</span><span data-lang="de">LED mit 1,2 kΩ an 24 V</span></span><span><span data-lang="en">P = 24 V · 0.0182 A ≈ 0.44 W</span><span data-lang="de">P = 24 V · 0,0182 A ≈ 0,44 W</span></span></div>
+              <div class="row"><span><span data-lang="en">Saving per light</span><span data-lang="de">Ersparnis je Leuchte</span></span><span class="res"><span data-lang="en">≈ 4.56 W, i.e. about 91 %</span><span data-lang="de">≈ 4,56 W, also rund 91 %</span></span></div>
             </div>
-            <p class="mt-2">Bei einer Anlage im Dreischichtbetrieb summiert sich das schnell – und weil LEDs kaum Wärme abgeben, altern auch die umliegenden Bauteile langsamer.</p>
+            <p class="mt-2"><span data-lang="en">In a system running in three shifts this quickly adds up – and because LEDs give off hardly any heat, the surrounding components also age more slowly.</span><span data-lang="de">Bei einer Anlage im Dreischichtbetrieb summiert sich das schnell – und weil LEDs kaum Wärme abgeben, altern auch die umliegenden Bauteile langsamer.</span></p>
           </section>
 
         </div>

@@ -15,6 +15,7 @@
 (function () {
   "use strict";
   var LT = (window.LT = window.LT || {});
+  var T = LT.t;
   var NS = "http://www.w3.org/2000/svg";
 
   function el(tag, attrs, parent) {
@@ -46,7 +47,7 @@
     tip.className = "chart-tip";
     tip.setAttribute("aria-hidden", "true");
     wrap.appendChild(tip);
-    var svg = el("svg", { role: "img", "aria-label": opts.ariaLabel || "Diagramm" });
+    var svg = el("svg", { role: "img", "aria-label": opts.ariaLabel || T("Diagram", "Diagramm") });
     wrap.insertBefore(svg, tip);
 
     var m = Object.assign({ t: 18, r: 22, b: 48, l: 56 }, opts.margin || {});
