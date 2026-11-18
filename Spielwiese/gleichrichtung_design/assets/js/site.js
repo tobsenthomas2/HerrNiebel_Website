@@ -9,7 +9,7 @@
 (function () {
   "use strict";
   var SITE = (window.SITE = window.SITE || {});
-  var ROOT = "../../../../";                       // Repo-Wurzel: Impressum, Datenschutz
+  var ROOT = "../../";                       // Repo-Wurzel: Impressum, Datenschutz
   var JS_BASE = (function () {                      // Ordner dieser Datei (für vendor/qrcode.js)
     var s = document.querySelector('script[src*="assets/js/site.js"]');
     return s ? s.getAttribute("src").replace(/site\.js.*$/, "") : "assets/js/";

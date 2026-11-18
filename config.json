@@ -54,6 +54,29 @@
       ]
     },
     {
+      "id": "spielwiese",
+      "title": "Spielwiese",
+      "description": "Design-Tests und Prototypen – nicht für den Unterricht",
+      "icon": "🧪",
+      "color": "#7c3aed",
+      "folder": "Spielwiese",
+      "childLabel": [
+        "Test",
+        "Tests"
+      ],
+      "children": [
+        {
+          "id": "gleichrichtung_design",
+          "title": "Watt auf Achse – Design-Test",
+          "description": "Alternatives Design (Modern Tactile) des DIY-Blogs zur Gleichrichtung, EBT 11 · SG. Wird nicht mehr mitgepflegt.",
+          "icon": "🎨",
+          "tags": [
+            "Design-Test"
+          ]
+        }
+      ]
+    },
+    {
       "id": "et10",
       "title": "ET 10",
       "description": "Berufsfachschule Elektrotechnik – Klasse 10",

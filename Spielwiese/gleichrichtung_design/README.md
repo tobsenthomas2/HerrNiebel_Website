@@ -1,12 +1,14 @@
 # WATT AUF ACHSE – Design-Spielwiese („Modern Tactile / Neo-Editorial“)
 
-> **Kopie** von `../gleichrichtung/` mit gleichem Inhalt, gleicher Wochen-Logik und gleichen Simulationen –
+> **Archiv (seit 18.11.2026):** Für den Unterricht gilt das Original-Design in `EBT/jahrgang-11/SG/gleichrichtung/`.
+> Diese Kopie liegt nur noch zum Nachschauen in der Spielwiese und wird **nicht mehr mitgepflegt**.
+>
+> Ursprünglich eine **Kopie** von `EBT/jahrgang-11/SG/gleichrichtung/` mit gleichem Inhalt, gleicher Wochen-Logik und gleichen Simulationen –
 > nur das Design ist anders: Sand-Papier mit 24-px-Punktraster, Tinte-Rahmen (1,5 px) mit harten
 > Offset-Schatten (4 px), Fraunces / Plus Jakarta Sans / JetBrains Mono / Caveat (lokal in `assets/fonts`,
 > SIL Open Font License), asymmetrisches 12er-Raster, Werkbank-Widget, Skizze im herausgehobenen Beitrag,
 > Logbuch mit Themen-Filter, Randnotizen in den Beiträgen. Alle Seiten tragen `noindex`.
 > Neue Dateien: `assets/css/fonts.css`, `assets/js/home.js` (Werkbank, Stream-Filter, Skizzen).
-> Inhaltliche Änderungen bitte in **beiden** Ordnern pflegen, solange beide online sind.
 
 
 DIY-Blog der fiktiven Bloggerin **Kathi** („Watt auf Achse – selbstgebauter Strom für Rad, Hütte & Trail")
