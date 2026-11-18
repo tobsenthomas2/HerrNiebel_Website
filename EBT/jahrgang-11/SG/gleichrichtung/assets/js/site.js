@@ -221,7 +221,7 @@
       '<div class="support-teaser" aria-live="polite">' +
       '<button class="support-teaser__close" type="button" aria-label="Close / Schließen">' + SITE.icon("close") + "</button>" +
       "<strong>" + both({ en: "Stuck at the workbench?", de: "Hängst du fest?" }) + "</strong>" +
-      "<p>" + both({ en: "Ask the Schrauber-Chat – my AI workshop assistant answers right away.", de: "Frag im Schrauber-Chat – mein KI-Werkstattassistent antwortet sofort." }) + "</p>" +
+      "<p>" + both({ en: "Ask me in the Schrauber-Chat – I’ll answer right away (as an AI).", de: "Frag mich im Schrauber-Chat – ich antworte dir sofort (als KI)." }) + "</p>" +
       '<button class="btn btn--small support-teaser__open" type="button">' + SITE.icon("chat") + both({ en: "Open chat", de: "Chat öffnen" }) + "</button></div>";
     dock.appendChild(slot);
 
@@ -238,12 +238,12 @@
       "<figcaption>" + both({ en: "Scan with your phone camera", de: "Mit der Handykamera scannen" }) + "</figcaption>" +
       '<a class="support-qr__save" href="#" download="Schrauber-Chat_QR.svg" hidden>' + both({ en: "Save QR code", de: "QR-Code speichern" }) + "</a></figure>" +
       '<div class="support-dialog__text">' +
-      "<p>" + both({ en: "My AI workshop assistant knows my projects and helps with " + topics.en + ". It asks back instead of handing you finished solutions – that’s how you learn the craft.", de: "Mein KI-Werkstattassistent kennt meine Projekte und hilft bei " + topics.de + ". Er fragt lieber zurück, als dir fertige Lösungen hinzulegen – so lernst du das Handwerk." }) + "</p>" +
+      "<p>" + both({ en: "In the Schrauber-Chat I answer as an AI version of myself. I know my projects and help with " + topics.en + ". I’d rather ask back than hand you finished solutions – that’s how you learn the craft.", de: "Im Schrauber-Chat antworte ich dir als KI-Version von mir. Ich kenne meine Projekte und helfe bei " + topics.de + ". Ich frage lieber zurück, als dir fertige Lösungen hinzulegen – so lernst du das Handwerk." }) + "</p>" +
       '<a class="btn support-dialog__go" href="' + U + '" target="_blank" rel="noopener">' + SITE.icon("external") + both({ en: "Open chat in new tab", de: "Chat im neuen Tab öffnen" }) + "</a>" +
       '<div class="support-link"><span class="support-link__label">' + both({ en: "Link to the chat", de: "Link zum Chat" }) + "</span>" +
       '<a class="support-link__url" href="' + U + '" target="_blank" rel="noopener">' + esc(url.replace(/^https?:\/\//, "")) + "</a>" +
       '<button class="support-link__copy" type="button">' + SITE.icon("copy") + '<span class="copy-label">' + both({ en: "Copy link", de: "Link kopieren" }) + "</span></button></div>" +
-      '<p class="support-dialog__note">' + SITE.icon("info") + both({ en: "AI assistant – it can be wrong. Always check values in the datasheet. Please don’t type in any personal data.", de: "KI-Assistent – kann sich irren. Werte immer im Datenblatt checken. Bitte keine persönlichen Daten eingeben." }) + "</p>" +
+      '<p class="support-dialog__note">' + SITE.icon("info") + both({ en: "AI version of Kathi – it can be wrong. Always check values in the datasheet. Please don’t type in any personal data.", de: "KI-Version von Kathi – kann sich irren. Werte immer im Datenblatt checken. Bitte keine persönlichen Daten eingeben." }) + "</p>" +
       "</div></div>";
     document.body.appendChild(dlg);
 
