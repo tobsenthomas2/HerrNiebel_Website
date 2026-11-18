@@ -2,7 +2,8 @@
 
 DIY-Blog der fiktiven Bloggerin **Kathi** („Watt auf Achse – selbstgebauter Strom für Rad, Hütte & Trail")
 für die Reihe Gleichrichtung (Fach SG, Jahrgang 11, EBT, LF 6). Aufmachung nach KI-Website-Guide,
-Abschnitt 2b (DIY-Blog). Englisch Standard, Umschalter EN | DE. Reines HTML/CSS/JS, keine externen
+Abschnitt 2b (DIY-Blog). Englisch Standard; Sprachreiter am rechten Rand über dem Schrauber-Chat
+(„Übersetzen?“ bzw. „English?“, schaltet ohne Neuladen um). Reines HTML/CSS/JS, keine externen
 Abhängigkeiten, läuft auch per Doppelklick (Schriften aus `/vendor/fonts`).
 
 Die Lernsituation (Flo, sein Rad, seine Nachricht) steht **nicht** auf dem Blog – sie liegt in OneNote.

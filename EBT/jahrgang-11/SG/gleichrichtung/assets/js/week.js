@@ -21,7 +21,10 @@
 
   var pageWeek = parseInt(html.getAttribute("data-week"), 10);
   if (pageWeek > W) {                                     // ganze Seite noch gesperrt
-    location.replace("index.html" + (W < cfgW ? "?w=" + W : ""));
+    var q = [];
+    if (W < cfgW) q.push("w=" + W);
+    if (new URLSearchParams(location.search).get("lang") === "de") q.push("lang=de");   // Sprache behalten
+    location.replace("index.html" + (q.length ? "?" + q.join("&") : ""));
     return;
   }
 

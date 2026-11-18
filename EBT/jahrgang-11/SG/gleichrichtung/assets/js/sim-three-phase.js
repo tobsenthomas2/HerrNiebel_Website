@@ -49,8 +49,8 @@
         C.wire([[x, bot - 50], [x, mids[k]]], "l" + k);
         C.diode(x, bot, x, bot - 50, "l" + k);
         C.dot(x, mids[k]);
-        C.text(x + 10, top + 30, "-R" + (k + 1), { size: 11 });
-        C.text(x + 10, bot - 20, "-R" + (k + 4), { size: 11 });
+        C.text(x + 13, top + 30, "-R" + (k + 1), { size: 11 });
+        C.text(x + 13, bot - 20, "-R" + (k + 4), { size: 11 });
       });
       var ys = [105, 120, 135];
       xs.forEach(function (x, k) {

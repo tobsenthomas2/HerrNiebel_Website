@@ -224,24 +224,29 @@
         t.textContent = txt;
         return t;
       },
-      // Diode von Anode (ax,ay) nach Kathode (cx,cy); led = true zeichnet die Lichtpfeile
+      // Diode von Anode (ax,ay) nach Kathode (cx,cy); led = true zeichnet die Lichtpfeile.
+      // DIN EN 60617-5: Die Leitung läuft durch das Dreieck bis zum Kathodenstrich.
+      // LED: zwei Pfeile setzen neben dem Kathodenstrich an und zeigen schräg von ihm weg.
       diode: function (ax, ay, cx, cy, seg, led) {
         var g = api.g(seg);
         var dx = cx - ax, dy = cy - ay, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = -uy, ny = ux;
-        var mx = (ax + cx) / 2, my = (ay + cy) / 2, s = 11;
+        var mx = (ax + cx) / 2, my = (ay + cy) / 2, s = 14, hw = 9.4;
         var bx = mx - ux * s / 2, by = my - uy * s / 2, tx = mx + ux * s / 2, ty = my + uy * s / 2;
         SIM.el("line", { x1: ax, y1: ay, x2: bx, y2: by, stroke: S, "stroke-width": 2, class: "w" }, g);
         SIM.el("line", { x1: tx, y1: ty, x2: cx, y2: cy, stroke: S, "stroke-width": 2, class: "w" }, g);
-        SIM.el("polygon", { points: [bx + nx * s * 0.8, by + ny * s * 0.8, bx - nx * s * 0.8, by - ny * s * 0.8, tx, ty].join(","), fill: "#fbf8f1", stroke: S, "stroke-width": 2, "stroke-linejoin": "round", class: "w body" }, g);
-        SIM.el("line", { x1: tx + nx * s * 0.8, y1: ty + ny * s * 0.8, x2: tx - nx * s * 0.8, y2: ty - ny * s * 0.8, stroke: S, "stroke-width": 2.4, class: "w" }, g);
+        SIM.el("polygon", { points: [bx + nx * hw, by + ny * hw, bx - nx * hw, by - ny * hw, tx, ty].join(","), fill: "#fbf8f1", stroke: S, "stroke-width": 1.8, "stroke-linejoin": "miter", class: "w body" }, g);
+        SIM.el("line", { x1: bx, y1: by, x2: tx, y2: ty, stroke: S, "stroke-width": 1.8, class: "w" }, g);   // Leitung durch das Dreieck
+        SIM.el("line", { x1: tx + nx * hw, y1: ty + ny * hw, x2: tx - nx * hw, y2: ty - ny * hw, stroke: S, "stroke-width": 2.4, class: "w" }, g);
         if (led) {
           if (nx < -0.5 || ny < -0.5) { nx = -nx; ny = -ny; }   // Lichtpfeile nach rechts bzw. unten – weg vom Kennzeichen
-          [-0.25, 0.35].forEach(function (o) {
-            var px = mx + ux * s * o + nx * s * 1.1, py = my + uy * s * o + ny * s * 1.1;
-            var qx = px + (nx * 0.8 + ux * 0.5) * 12, qy = py + (ny * 0.8 + uy * 0.5) * 12;
-            SIM.el("line", { x1: px, y1: py, x2: qx, y2: qy, stroke: S, "stroke-width": 1.6, class: "w" }, g);
-            var ax2 = qx - (nx * 0.8 + ux * 0.5) * 5, ay2 = qy - (ny * 0.8 + uy * 0.5) * 5;
-            SIM.el("polygon", { points: [qx, qy, ax2 + ux * 2.6, ay2 + uy * 2.6, ax2 - ux * 2.6, ay2 - uy * 2.6].join(","), fill: S, class: "arrow" }, g);
+          var du = -0.652, dn = 0.758, len = 12, head = 5;          // Richtung: schräg zurück, weg vom Kathodenstrich
+          var ex = ux * du + nx * dn, ey = uy * du + ny * dn;
+          [[1.6, 6.2], [6.2, 11.2]].forEach(function (o) {           // Ansatz: neben der Flanke, nahe am Strich (u, n)
+            var px = mx + ux * o[0] + nx * o[1], py = my + uy * o[0] + ny * o[1];
+            var qx = px + ex * len, qy = py + ey * len;
+            var hx = qx - ex * head, hy = qy - ey * head;
+            SIM.el("line", { x1: px, y1: py, x2: hx, y2: hy, stroke: S, "stroke-width": 1.6, class: "w" }, g);
+            SIM.el("polygon", { points: [qx, qy, hx - ey * 2.6, hy + ex * 2.6, hx + ey * 2.6, hy - ex * 2.6].join(","), fill: S, class: "arrow" }, g);
           });
         }
         return g;

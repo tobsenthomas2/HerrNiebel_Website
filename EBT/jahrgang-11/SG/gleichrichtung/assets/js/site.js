@@ -48,7 +48,8 @@
     right: '<path d="M5 12h14M13 6l6 6-6 6" ' + P + '/>',
     wind: '<path d="M3 9h11a3 3 0 1 0-3-3M3 15h15a3 3 0 1 1-3 3M3 12h7" ' + P + '/>',
     sun: '<circle cx="12" cy="12" r="4" ' + P + '/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M5 19l1.4-1.4M17.6 6.4L19 5" ' + P + '/>',
-    led: '<path d="M8 14V9a4 4 0 0 1 8 0v5H8zM6 14h12M10 14v6M14 14v4" ' + P + '/>'
+    led: '<path d="M8 14V9a4 4 0 0 1 8 0v5H8zM6 14h12M10 14v6M14 14v4" ' + P + '/>',
+    globe: '<circle cx="12" cy="12" r="9" ' + P + '/><path d="M3 12h18M12 3c2.6 2.4 4 5.4 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.4-4-9s1.4-6.6 4-9z" ' + P + '/>'
   };
   SITE.icon = function (name, cls) {
     return '<svg class="ico' + (cls ? " " + cls : "") + '" viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[name] || "") + "</svg>";
@@ -78,10 +79,6 @@
         '<div class="container nav__bar">' +
           '<a class="brand" href="index.html" aria-label="Watt auf Achse – Blog">' + BRAND + "</a>" +
           '<div class="nav__links">' + links + "</div>" +
-          '<div class="lang-switch" role="group" aria-label="Language / Sprache">' +
-            '<button type="button" data-set-lang="en" aria-pressed="true">EN</button>' +
-            '<button type="button" data-set-lang="de" aria-pressed="false">DE</button>' +
-          "</div>" +
           '<button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel">' +
             '<span class="visually-hidden">Menu</span>' + SITE.icon("menu") + "</button>" +
         "</div>" +
@@ -175,21 +172,50 @@
     SITE.$$(".comments").forEach(function (c) { c.classList.add("show-verdicts"); });
   }
 
+  /* ---------- Dock am rechten Rand: Übersetzen (oben) und Schrauber-Chat (darunter) ---------- */
+  function buildDock() {
+    if (document.getElementById("support")) return;
+    var dock = document.createElement("div");
+    dock.className = "support";
+    dock.id = "support";
+    document.body.appendChild(dock);
+    buildLangTab(dock);
+    buildSupport(dock);
+  }
+
+  /* Sprachreiter: auf Englisch „Übersetzen?“, auf Deutsch „English?“ – schaltet ohne Neuladen um */
+  function buildLangTab(dock) {
+    var slot = document.createElement("div");
+    slot.className = "support-slot";
+    slot.innerHTML =
+      '<button class="support-tab support-tab--lang" type="button">' + SITE.icon("globe") +
+      '<span class="support-tab__long"><span data-lang="en" lang="de">Übersetzen?</span><span data-lang="de" lang="en">English?</span></span>' +
+      '<span class="support-tab__short"><span data-lang="en">DE</span><span data-lang="de">EN</span></span></button>';
+    dock.appendChild(slot);
+    var tab = SITE.$(".support-tab--lang", slot);
+    function label() {
+      tab.setAttribute("aria-label", SITE.lang() === "de" ? "Show this page in English" : "Seite auf Deutsch anzeigen");
+    }
+    label();
+    document.addEventListener("langchange", label);
+    tab.addEventListener("click", function () { SITE.setLang(SITE.lang() === "de" ? "en" : "de", true); });
+  }
+
   /* ---------- Schrauber-Chat (KI) ---------- */
-  function buildSupport() {
+  function buildSupport(dock) {
     var cfg = SITE.config.kiChat || {};
     var url = cfg.url;
-    if (!url || document.getElementById("support")) return;
+    if (!url) return;
     var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); };
     var U = esc(url);
     var topics = SITE.open(2)
       ? { en: "AC, diodes, LEDs, rectifiers, Schottky vs. silicon, generators and measuring with the scope", de: "Wechselspannung, Dioden, LEDs, Gleichrichter, Schottky vs. Silizium, Generatoren und Messen mit dem Oszi" }
       : { en: "AC, diodes, LEDs, half-wave rectifiers and measuring with the scope", de: "Wechselspannung, Dioden, LEDs, Einweggleichrichter und Messen mit dem Oszi" };
 
-    var wrap = document.createElement("div");
-    wrap.className = "support";
-    wrap.id = "support";
-    wrap.innerHTML =
+    var wrap = dock;                                // Hinweis-Klasse show-teaser sitzt am Dock
+    var slot = document.createElement("div");
+    slot.className = "support-slot";
+    slot.innerHTML =
       '<button class="support-tab" type="button" aria-haspopup="dialog" aria-controls="support-dialog">' + SITE.icon("wrench") +
       '<span class="support-tab__long">Schrauber-Chat</span><span class="support-tab__short">Schrauber-Chat</span></button>' +
       '<div class="support-teaser" aria-live="polite">' +
@@ -197,7 +223,7 @@
       "<strong>" + both({ en: "Stuck at the workbench?", de: "Hängst du fest?" }) + "</strong>" +
       "<p>" + both({ en: "Ask the Schrauber-Chat – my AI workshop assistant answers right away.", de: "Frag im Schrauber-Chat – mein KI-Werkstattassistent antwortet sofort." }) + "</p>" +
       '<button class="btn btn--small support-teaser__open" type="button">' + SITE.icon("chat") + both({ en: "Open chat", de: "Chat öffnen" }) + "</button></div>";
-    document.body.appendChild(wrap);
+    dock.appendChild(slot);
 
     var dlg = document.createElement("dialog");
     dlg.className = "support-dialog";
@@ -221,7 +247,7 @@
       "</div></div>";
     document.body.appendChild(dlg);
 
-    var tab = SITE.$(".support-tab", wrap), teaser = SITE.$(".support-teaser", wrap), timer = null;
+    var tab = SITE.$(".support-tab", slot), teaser = SITE.$(".support-teaser", slot), timer = null;
     function hideTeaser() { clearTimeout(timer); wrap.classList.remove("show-teaser"); }
     function open() {
       hideTeaser(); renderQR();
@@ -231,8 +257,8 @@
     function close() { if (typeof dlg.close === "function") dlg.close(); else dlg.removeAttribute("open"); }
     dlg.addEventListener("close", function () { tab.setAttribute("aria-expanded", "false"); });
     tab.addEventListener("click", open);
-    SITE.$(".support-teaser__open", wrap).addEventListener("click", open);
-    SITE.$(".support-teaser__close", wrap).addEventListener("click", hideTeaser);
+    SITE.$(".support-teaser__open", slot).addEventListener("click", open);
+    SITE.$(".support-teaser__close", slot).addEventListener("click", hideTeaser);
     SITE.$(".support-dialog__close", dlg).addEventListener("click", close);
     dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
 
@@ -299,6 +325,6 @@
   verdicts();
   SITE.setLang(fromUrl(), false);
   buildToc();
-  buildSupport();
+  buildDock();
   document.dispatchEvent(new CustomEvent("siteready"));
 })();
