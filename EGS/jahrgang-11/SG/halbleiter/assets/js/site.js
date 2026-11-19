@@ -475,8 +475,14 @@
       document.head.appendChild(s);
     }
 
-    // Hinweis beim Laden der Seite – solange die Übersetzen-Karte offen ist, erst nach deren Schließen
-    if (cfg.hinweisBeimLaden !== false) {
+    // Hinweis nur beim Aufruf der Startseite (index.html, auch mit ?lang=en/de) – nicht, wenn man von
+    // einer anderen Seite dieser Website kommt oder die Sprache wechselt. Ohne Speicherung (nur document.referrer).
+    // Solange die Übersetzen-Karte offen ist, erscheint er erst nach deren Schließen.
+    var ordner = location.pathname.replace(/[^/]*$/, "");
+    var startseite = /\/(index\.html)?$/i.test(location.pathname);
+    var vonHier = false;
+    try { var ref = new URL(document.referrer); vonHier = ref.origin === location.origin && ref.pathname.indexOf(ordner) === 0; } catch (err) { /* kein Referrer */ }
+    if (cfg.hinweisBeimLaden !== false && startseite && !vonHier) {
       var showTeaser = function () {
         setTimeout(function () {
           if (dlg.open) return;

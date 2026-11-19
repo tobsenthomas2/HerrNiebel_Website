@@ -136,8 +136,10 @@ Ergebnisse nur grafisch bzw. qualitativ. `true`: zusätzlich alle berechneten Za
 ## Einstellung: KI-Support-Chat
 
 Auf jeder Seite gibt es rechts einen Reiter „Fragen? KI-Chat“ (auf dem Handy unten rechts „Fragen?“).
-Er öffnet ein Fenster mit QR-Code, Link und Kopier-Knopf. Beim Laden jeder Seite klappt
-zusätzlich kurz ein Hinweis neben dem Reiter auf.
+Er öffnet ein Fenster mit QR-Code, Link und Kopier-Knopf. Beim Aufruf der Startseite
+(`index.html`, auch mit `?lang=en` oder `?lang=de`) klappt zusätzlich kurz ein Hinweis neben dem
+Reiter auf. Auf den anderen Seiten, beim Zurückkehren zur Startseite und nach dem Sprachwechsel
+bleibt es beim Reiter (erkannt über die Herkunftsseite, ohne Speicherung).
 
 In `assets/js/config.js`:
 

@@ -15,8 +15,10 @@
  *   url:              Link zum KI-Chatbot. Der QR-Code im Support-Fenster wird
  *                     daraus automatisch erzeugt – neuer Link = neuer QR-Code.
  *                     Leer lassen (""), um den Support-Reiter auszublenden.
- *   hinweisBeimLaden: true  = beim Laden jeder Seite klappt kurz ein Hinweis
- *                             „Fragen? …“ neben dem Reiter auf.
+ *   hinweisBeimLaden: true  = beim Aufruf der Startseite (index.html) klappt kurz ein
+ *                             Hinweis „Fragen? …“ neben dem Reiter auf. Auf den
+ *                             anderen Seiten und beim Zurückkehren zur Startseite
+ *                             ist nur der Reiter sichtbar.
  *                     false = nur der Reiter ist sichtbar.
  *   hinweisSekunden:  wie lange der Hinweis stehen bleibt (0 = bis er geschlossen wird).
  *
