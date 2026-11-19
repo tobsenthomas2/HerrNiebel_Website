@@ -52,7 +52,8 @@
     var out = "";
     if (o.hl) out += '<rect x="' + f(o.cx - s * 0.85) + '" y="' + f(o.cy - s * 0.85) + '" width="' + f(s * 1.7) + '" height="' + f(s * 1.7) + '" rx="' + f(s * 0.25) + '" fill="' + o.hl + '"/>';
     out += '<g transform="' + matrix(o.dir || "right", o.cx, o.cy) + '" stroke="' + col + '" stroke-width="' + SW + '" fill="none">';
-    if (L > 0) out += '<line x1="' + f(-L) + '" y1="0" x2="' + f(L) + '" y2="0"/>';
+    var Lw = Math.max(L, h);   // Leitung immer mindestens durch das ganze Dreieck bis zum Kathodenstrich
+    out += '<line x1="' + f(-Lw) + '" y1="0" x2="' + f(Lw) + '" y2="0"/>';
     out += '<path d="M' + f(-h) + " " + f(-h) + " L" + f(h) + " 0 L" + f(-h) + " " + f(h) + ' Z" stroke-linejoin="miter"/>';
     out += '<line x1="' + f(h) + '" y1="' + f(-h) + '" x2="' + f(h) + '" y2="' + f(h) + '"/>';
     if (o.led) {
