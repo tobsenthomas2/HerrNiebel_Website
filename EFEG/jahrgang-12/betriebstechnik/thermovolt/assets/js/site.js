@@ -15,7 +15,7 @@
   var cfgWeek = Math.min(MAXW, Math.max(1, parseInt(CFG.week, 10) || 1));
   var urlWeek = parseInt(new URLSearchParams(location.search).get("w"), 10);
   var WEEK = urlWeek >= 1 && urlWeek < cfgWeek ? urlWeek : cfgWeek;
-  SITE.week = WEEK;
+  SITE.week = WEEK;   // Fußzeile zeigt „Rev. Woche.maxWeek“ (maxWeek in config.js) – Hinweis für die Lehrkraft
   for (var wk = 2; wk <= WEEK; wk++) document.documentElement.classList.add("wk" + wk);
 
   var NAV = [
@@ -167,7 +167,7 @@
           "</ul></div>" +
         "</div>" +
         '<div class="footer__legal">' +
-          "<span>© " + new Date().getFullYear() + " THERMOVOLT Systems GmbH · " +
+          "<span>© " + new Date().getFullYear() + " THERMOVOLT Systems GmbH · <span class=\"footer__rev\">Rev. " + WEEK + "." + Math.max(cfgWeek, parseInt(CFG.maxWeek, 10) || 1) + "</span> · " +
             both({ en: "AI-generated content · for teaching purposes only", de: "KI-generierte Inhalte · ausschließlich für Lehrzwecke" }) +
             ' · <a href="mailto:' + mail + '">' + mail + "</a></span>" +
           '<span><a href="' + ROOT + 'impressum.html">Impressum</a> · <a href="' + ROOT + 'datenschutz.html">Datenschutz</a></span>' +

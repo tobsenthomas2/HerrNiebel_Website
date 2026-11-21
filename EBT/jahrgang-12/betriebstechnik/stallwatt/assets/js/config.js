@@ -11,6 +11,10 @@ window.SITE_CONFIG = {
   // Einen früheren Stand zeigt der Link-Zusatz ?w=1 (z. B. für eine zweite Klasse) – nie mehr als hier freigegeben.
   week: 1,
 
+  // Höchste Woche, für die es Inhalte gibt (data-week="N"). Nur für die Revisionsnummer
+  // in der Fußzeile: „Rev. 1.2“ = angezeigte Woche 1 von höchstens 2. Bei neuer Woche erhöhen.
+  maxWeek: 2,
+
   // Stromkreis-Prüfstand (technology.html): Stromstärke und Leistung als Zahl anzeigen?
   // false = nur Ampel/Meldung (Schüler rechnen selbst), true = Zahlenwerte sichtbar
   showValues: false,

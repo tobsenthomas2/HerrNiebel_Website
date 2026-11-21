@@ -138,3 +138,9 @@ SONST
 
 Playwright: jede Seite in Woche 1, 2, 3 bei 320/375/1280 px laden – keine Fremd-Anfragen,
 keine Konsolenfehler, kein horizontales Scrollen. Danach `week` in `config.js` auf die aktuelle Woche setzen.
+
+## Revisionsnummer in der Fußzeile (für die Lehrkraft)
+
+Hinter dem © steht unauffällig „Rev. 1.3“: erste Zahl = Woche, die die Seite gerade zeigt (auch mit `?w=`),
+zweite Zahl = höchste Woche der Website (aus dem größten `week` im NAV-Array in `site.js`).
+Für Schüler wirkt es wie eine normale Revisionsnummer.

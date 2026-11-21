@@ -50,6 +50,14 @@
   LT.config = window.LT_CONFIG || { messwerteAnzeigen: false };
   /* Unterrichtswoche (woche.js): LT.frei("leds") → ist das Thema schon freigeschaltet? */
   var WOCHE = window.LT_WOCHE || { woche: 1, eingestellt: 1, frei: function () { return true; } };
+  /* Revisionsnummer in der Fußzeile (für die Lehrkraft): „Rev. 1.3“ = angezeigte Woche 1, höchste Woche 3.
+     Die höchste Woche ergibt sich aus config.js (woche und themen). */
+  function rev() {
+    var cfg = window.LT_CONFIG || {}, max = Math.max(1, WOCHE.eingestellt || 1, +cfg.woche || 1);
+    var th = cfg.themen || {};
+    Object.keys(th).forEach(function (k) { max = Math.max(max, +th[k] || 0); });
+    return (WOCHE.woche || 1) + "." + max;
+  }
   LT.woche = WOCHE.woche;
   LT.frei = WOCHE.frei;
   function sichtbar(item) { return !item.thema || LT.frei(item.thema); }
@@ -307,7 +315,7 @@
       '<div><h4>' + T("Applications", "Applikationen") + '</h4><ul>' + links([["dioden-applikation.html", T("Reverse polarity protection", "Verpolschutz")], ["dioden-applikation.html#schaltungen", T("Diode circuits", "Diodenschaltungen")], ["led-applikation.html", T("LED series resistor", "LED-Vorwiderstand"), "leds"], ["led-applikation.html#signalsaeule", T("Signal tower retrofit", "Signalsäulen-Retrofit"), "leds"]]) + "</ul></div>" +
       '<div><h4>' + T("Company", "Unternehmen") + '</h4><ul><li><a href="unternehmen.html">' + T("About us", "Über uns") + '</a></li><li><a href="unternehmen.html#fertigung">' + T("Manufacturing & testing", "Fertigung & Prüfung") + '</a></li><li><a href="unternehmen.html#ausbildung">' + T("Vocational training", "Ausbildung") + '</a></li><li><a href="technologie.html">' + T("Semiconductor technology", "Halbleitertechnik") + "</a></li></ul></div>" +
       "</div>" +
-      '<div class="footer-bottom"><span>© ' + year + " " + COMPANY.name + "</span>" + T("<span>Certified to ISO 9001, all products RoHS compliant</span>", "<span>Zertifiziert nach ISO 9001, alle Produkte RoHS-konform</span>") + "</div>" +
+      '<div class="footer-bottom"><span>© ' + year + " " + COMPANY.name + ' · <span class="footer-rev">Rev. ' + rev() + "</span></span>" + T("<span>Certified to ISO 9001, all products RoHS compliant</span>", "<span>Zertifiziert nach ISO 9001, alle Produkte RoHS-konform</span>") + "</div>" +
       '<div class="footer-legal"><p>' + T('AI-generated content. This website is for teaching purposes only, LUMIATECH is a fictitious company.', 'KI-generierte Inhalte. Diese Website dient ausschließlich Lehrzwecken, LUMIATECH ist ein fiktives Unternehmen.') + '</p>' +
       '<p><a href="../../../../impressum.html">' + T("Legal notice", "Impressum") + '</a> · <a href="../../../../datenschutz.html">' + T("Privacy policy", "Datenschutz") + "</a> · " + T("Contact and feedback", "Kontakt und Feedback") + ': <a href="mailto:kontakt@herrniebel.de">kontakt@herrniebel.de</a></p></div></div>';
   }

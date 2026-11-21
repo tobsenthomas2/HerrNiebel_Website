@@ -165,3 +165,9 @@ Der QR-Code wird im Browser aus dem Link erzeugt, es muss keine Bilddatei ausget
 Alle Schaltzeichen kommen aus `assets/js/symbols.js` (`LT.sym.diode`, `LT.sym.source`, …).
 Kennbuchstaben: -G Quelle, -R Widerstand und Diode, -P LED/Meldeleuchte, -M Motor, -F Sicherung.
 Die Kennzeichnung steht links neben senkrechten und oberhalb von waagerechten Bauteilen.
+
+## Revisionsnummer in der Fußzeile (für die Lehrkraft)
+
+Hinter dem © steht unauffällig „Rev. 1.3“: erste Zahl = Woche, die die Seite gerade zeigt (auch mit `?w=`),
+zweite Zahl = höchste Woche der Website (aus `woche` und `themen` in `config.js`).
+Für Schüler wirkt es wie eine normale Revisionsnummer.

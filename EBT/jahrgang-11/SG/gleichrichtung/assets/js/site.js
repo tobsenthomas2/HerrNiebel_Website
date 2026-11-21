@@ -17,6 +17,13 @@
   SITE.config = window.WAA_CONFIG || {};
   var WK = window.WAA_WEEK || { week: 1, configured: 1, open: function () { return true; } };
   SITE.week = WK.week;
+  /* Fußzeile: „Rev. 1.2“ = angezeigte Woche 1, höchste Woche 2 – Hinweis für die Lehrkraft.
+     Höchste Woche = größtes week im NAV-Array (bzw. config.js week, falls größer). */
+  function rev() {
+    var max = Math.max(1, WK.configured || 1);
+    NAV.forEach(function (n) { max = Math.max(max, +n.week || 0); });
+    return (WK.week || 1) + "." + max;
+  }
   SITE.open = WK.open;
   SITE.values = !!SITE.config.messwerteAnzeigen;
 
@@ -106,7 +113,7 @@
       '<div class="container footer__bar">' +
         '<a class="brand" href="index.html">' + BRAND + "</a>" +
         '<div class="footer__text">' +
-          "<p>© " + year + " Kathi · Watt auf Achse – " + both({ en: "self-built power for bike, hut &amp; trail", de: "selbstgebauter Strom für Rad, Hütte &amp; Trail" }) + "</p>" +
+          "<p>© " + year + " Kathi · Watt auf Achse – " + both({ en: "self-built power for bike, hut &amp; trail", de: "selbstgebauter Strom für Rad, Hütte &amp; Trail" }) + ' · <span class="footer__rev">Rev. ' + rev() + "</span></p>" +
           "<p>" + both({ en: "AI-generated content · for teaching purposes only", de: "KI-generierte Inhalte · ausschließlich für Lehrzwecke" }) +
           ' · <a href="mailto:kontakt@herrniebel.de">kontakt@herrniebel.de</a></p>' +
         "</div>" +

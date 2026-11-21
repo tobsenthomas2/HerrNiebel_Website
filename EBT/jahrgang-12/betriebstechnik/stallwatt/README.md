@@ -57,3 +57,9 @@ Lernwebsite nach `KI_Website_Guide.md` für **EBT 12**, Lernfelder „Elektrotec
 - Schrift Inter lokal als woff2 (`assets/fonts/`, SIL Open Font License 1.1).
 - Downloads: `docs/Projektsteckbrief_Vorlage.pdf` (Woche 1), `docs/07_Rollenkarten.pdf` (Woche 1, Beispiel einer möglichen Rollenverteilung) und `docs/Pflichtenheft_Vorlage.pdf` (Woche 2).
 - Alle Firmen, Personen und Produkte sind erfunden. Technische Angaben sind für den Unterricht vereinfacht; maßgeblich sind Normen und Herstellerangaben.
+
+## Revisionsnummer in der Fußzeile (für die Lehrkraft)
+
+Hinter dem © steht unauffällig „Rev. 1.3“: erste Zahl = Woche, die die Seite gerade zeigt (auch mit `?w=`),
+zweite Zahl = höchste Woche der Website (aus `maxWeek` in `config.js` (bei einer neuen Woche erhöhen)).
+Für Schüler wirkt es wie eine normale Revisionsnummer.

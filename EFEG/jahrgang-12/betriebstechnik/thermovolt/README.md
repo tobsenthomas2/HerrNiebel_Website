@@ -64,3 +64,9 @@ Lernwebsite nach `KI_Website_Guide.md` für **EFEG 12**, LF 12 „Energie- und g
 
 - Kachel in `config.json`, fiktive Firma **THERMOVOLT Systems GmbH** ins Impressum eintragen.
 - Keine externen Dienste → Datenschutzerklärung unverändert (außer ein KI-Chat-Link wird gesetzt).
+
+## Revisionsnummer in der Fußzeile (für die Lehrkraft)
+
+Hinter dem © steht unauffällig „Rev. 1.3“: erste Zahl = Woche, die die Seite gerade zeigt (auch mit `?w=`),
+zweite Zahl = höchste Woche der Website (aus `maxWeek` in `config.js` (bei einer neuen Woche erhöhen)).
+Für Schüler wirkt es wie eine normale Revisionsnummer.
