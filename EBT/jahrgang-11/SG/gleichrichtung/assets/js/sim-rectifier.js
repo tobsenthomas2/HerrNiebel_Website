@@ -86,7 +86,7 @@
         C.wire([[300, 132], [300, 172], [60, 172], [60, 127]], "bot");
         C.text(155, 26, "-R1", { anchor: "middle" });
         C.text(28, 109, "-G1", { anchor: "end" });
-        C.text(282, 109, "-P1", { anchor: "end" });
+        C.text(282, 109, "-E1", { anchor: "end" });
       } else {
         C = SIM.circuit(circuitHost, 360, 230, { en: "Circuit: bridge rectifier with LED", de: "Schaltplan: Brückengleichrichter mit LED" });
         var T = [175, 58], B = [175, 162], L = [122, 110], R = [228, 110];
@@ -103,7 +103,7 @@
         [T, B, L, R].forEach(function (p) { C.dot(p[0], p[1]); });
         C.text(214, 76, "-R1"); C.text(214, 156, "-R2"); C.text(102, 76, "-R3"); C.text(102, 156, "-R4");
         C.text(23, 114, "-G1", { anchor: "end" });
-        C.text(307, 114, "-P1", { anchor: "end" });
+        C.text(307, 114, "-E1", { anchor: "end" });
       }
       var lx = st.rect === "e1u" ? 300 : 325, ly1 = st.rect === "e1u" ? 72 : 76, ly2 = st.rect === "e1u" ? 140 : 146;
       C.text(lx + 10, ly1 + 2, "CH1", { size: 12, color: "#a93c17", bold: true });

@@ -67,7 +67,7 @@
         C.wire([[155, 40], [300, 40], [300, 76]], "mid");
       }
       C.diode(300, 76, 300, 128, "led", true);
-      C.text(285, 106, "-P1", { anchor: "end" });
+      C.text(285, 106, "-E1", { anchor: "end" });
       if (st.prot === "anti") {
         C.wire([[300, 58], [240, 58], [240, 76]], "pa");
         C.diode(240, 128, 240, 76, "dpar");

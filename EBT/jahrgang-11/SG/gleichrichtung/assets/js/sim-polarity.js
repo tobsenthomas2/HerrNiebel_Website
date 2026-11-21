@@ -34,7 +34,7 @@
     C.wire([[240, 112], [240, 142], [50, 142], [50, 107]], "w2");
     C.text(125, 17, "-R1", { anchor: "middle" });
     C.text(20, 89, "-G1", { anchor: "end" });
-    C.text(222, 90, "-P1", { anchor: "end" });
+    C.text(222, 90, "-E1", { anchor: "end" });
     var pTop = C.text(64, 60, "+", { size: 16, bold: true }), pBot = C.text(64, 122, "−", { size: 16, bold: true });
 
     var gauge = document.createElement("div");

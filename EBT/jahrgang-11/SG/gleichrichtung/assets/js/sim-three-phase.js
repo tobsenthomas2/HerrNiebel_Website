@@ -64,7 +64,7 @@
       C.diode(325, 92, 325, 148, "led", true);
       C.wire([[325, 148], [325, bot], [xs[0], bot]], "minus");
       C.dot(xs[1], top); C.dot(xs[2], top); C.dot(xs[1], bot); C.dot(xs[2], bot);
-      C.text(307, 124, "-P1", { anchor: "end" });
+      C.text(307, 124, "-E1", { anchor: "end" });
       C.text(332, top + 4, "+", { size: 14, bold: true }); C.text(332, bot + 4, "−", { size: 14, bold: true });
     }
 
