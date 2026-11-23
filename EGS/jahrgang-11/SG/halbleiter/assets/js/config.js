@@ -35,7 +35,7 @@
  *   Braucht ein Thema länger, einfach die Zahl erhöhen.
  */
 window.LT_CONFIG = {
-  woche: 1,
+  woche: 2,
   themen: { leds: 2, transistoren: 3 },
 
   messwerteAnzeigen: false,
