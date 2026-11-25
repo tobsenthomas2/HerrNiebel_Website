@@ -24,7 +24,8 @@
       label: T("Products", "Produkte"),
       children: [
         { href: "dioden.html", label: T("Silicon diodes", "Silizium-Dioden"), sub: T("Series BAY 44, BAY 45, BAY 46", "Serie BAY 44, BAY 45, BAY 46") },
-        { href: "leds.html", label: T("5 mm LEDs", "5-mm-LEDs"), sub: T("Series L-7113 in red, green and blue", "Serie L-7113 in Rot, Grün und Blau"), thema: "leds" }
+        { href: "leds.html", label: T("5 mm LEDs", "5-mm-LEDs"), sub: T("Series L-7113 in red, green and blue", "Serie L-7113 in Rot, Grün und Blau"), thema: "leds" },
+        { href: "standardtypen.html", label: T("Standard types", "Standardtypen"), sub: T("1N4001 … 1N4007, Schottky 1N5817 … 1N5819, power LED", "1N4001 … 1N4007, Schottky 1N5817 … 1N5819, Power-LED") }
       ]
     },
     {
@@ -311,7 +312,7 @@
       '<div class="footer-brand"><a class="brand" href="index.html">' + LT.logo() +
       '<span><span class="brand__name">LUMIATECH</span><span class="brand__claim">Semiconductor GmbH</span></span></a>' +
       "<address>" + COMPANY.name + "<br>" + COMPANY.street + "<br>" + COMPANY.city + "</address></div>" +
-      '<div><h4>' + T("Products", "Produkte") + '</h4><ul>' + links([["dioden.html", T("Silicon diodes BAY 44/45/46", "Silizium-Dioden BAY 44/45/46")], ["leds.html", T("5 mm LEDs L-7113", "5-mm-LEDs L-7113"), "leds"], ["downloads.html", T("Data sheets", "Datenblätter")]]) + "</ul></div>" +
+      '<div><h4>' + T("Products", "Produkte") + '</h4><ul>' + links([["dioden.html", T("Silicon diodes BAY 44/45/46", "Silizium-Dioden BAY 44/45/46")], ["leds.html", T("5 mm LEDs L-7113", "5-mm-LEDs L-7113"), "leds"], ["standardtypen.html", T("Standard types", "Standardtypen")], ["downloads.html", T("Data sheets", "Datenblätter")]]) + "</ul></div>" +
       '<div><h4>' + T("Applications", "Applikationen") + '</h4><ul>' + links([["dioden-applikation.html", T("Reverse polarity protection", "Verpolschutz")], ["dioden-applikation.html#schaltungen", T("Diode circuits", "Diodenschaltungen")], ["led-applikation.html", T("LED series resistor", "LED-Vorwiderstand"), "leds"], ["led-applikation.html#signalsaeule", T("Signal tower retrofit", "Signalsäulen-Retrofit"), "leds"]]) + "</ul></div>" +
       '<div><h4>' + T("Company", "Unternehmen") + '</h4><ul><li><a href="unternehmen.html">' + T("About us", "Über uns") + '</a></li><li><a href="unternehmen.html#fertigung">' + T("Manufacturing & testing", "Fertigung & Prüfung") + '</a></li><li><a href="unternehmen.html#ausbildung">' + T("Vocational training", "Ausbildung") + '</a></li><li><a href="technologie.html">' + T("Semiconductor technology", "Halbleitertechnik") + "</a></li></ul></div>" +
       "</div>" +

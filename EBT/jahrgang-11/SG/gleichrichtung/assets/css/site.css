@@ -251,6 +251,7 @@ html[lang="de"] .comment--author .comment__meta strong::after { content: "AUTORI
 .part__pic svg { display: block; width: 100%; height: auto; }
 .part h3 { margin-bottom: .3rem; }
 .part .table-wrap { margin: .8rem 0; }
+.part .small { font-size: .9rem; color: var(--ink-2); margin: .5rem 0 .9rem; }
 @media (max-width: 600px) { .part { grid-template-columns: 1fr; } .part__pic { max-width: 180px; } }
 
 /* ---------- Footer ---------- */

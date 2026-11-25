@@ -94,7 +94,7 @@
     if (window.ResizeObserver) new ResizeObserver(function () { if (Math.abs(chartBox.clientWidth - 16 - W) > 1) drawChart(); }).observe(chartBox);
     S.foot.hidden = false;
     function foot() {
-      S.foot.innerHTML = "<p>" + SITE.t({ en: "Curves: typical forward characteristics at 25 °C, matching the datasheets in my parts corner. Your own diode may differ a little – measure it!", de: "Kurven: typische Durchlasskennlinien bei 25 °C, passend zu den Datenblättern in meiner Bauteil-Ecke. Deine eigene Diode kann etwas abweichen – miss nach!" }) + "</p>";
+      S.foot.innerHTML = "<p>" + SITE.t({ en: "Curves: typical forward characteristics at 25 °C, matching the manufacturer’s datasheets (linked in my parts corner). Your own diode may differ a little – measure it!", de: "Kurven: typische Durchlasskennlinien bei 25 °C, passend zu den Datenblättern des Herstellers (verlinkt in meiner Bauteil-Ecke). Deine eigene Diode kann etwas abweichen – miss nach!" }) + "</p>";
     }
     foot(); update(); SIM.onLang(function () { foot(); update(); });
   }

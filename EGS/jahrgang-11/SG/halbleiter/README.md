@@ -16,6 +16,7 @@ funktioniert auch offline und per Doppelklick auf `index.html`.
 | `leds.html` | L-7113: Vorteile, Aufbau, Lichtentstehung, Farben/Werkstoffe, Kennlinien, Kenndaten, Datenblätter |
 | `led-applikation.html` | Vorwiderstand, Arbeitspunkt grafisch, gemeinsamer Vorwiderstand, Signalsäulen-Konfigurator, Verpolung, Energie |
 | `unternehmen.html` | Geschichte, Fertigung, Qualität, Ausbildung |
+| `standardtypen.html` | Standardtypen 1N4001 … 1N4007, Schottky 1N5817 … 1N5819, 3-W-Power-LED L-3W-WW (immer sichtbar; Datenblätter EN, verlinkt aus dem EBT-Blog „Watt auf Achse“) |
 | `downloads.html` | alle Datenblätter (PDF) und Applikationsschriften |
 
 ## Ordner
@@ -36,7 +37,7 @@ assets/js/sim-*.js         je eine Simulation
 assets/js/vendor/qrcode.js QR-Code-Erzeugung für den KI-Support (qrcode-generator, MIT-Lizenz, K. Arase)
 assets/img/logo/           Logo als SVG und PNG (auch auf downloads.html zum Herunterladen)
 assets/fonts/              Schriften lokal (Archivo, griechische Zeichen aus IBM Plex Sans)
-datenblaetter/             PDF-Datenblätter
+datenblaetter/             PDF-Datenblätter (die Standardtypen verlinkt der EBT-Blog „Watt auf Achse“ direkt – Dateinamen nicht ändern)
 ```
 
 ## Simulationen
