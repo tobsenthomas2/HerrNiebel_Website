@@ -314,7 +314,13 @@
       document.head.appendChild(s);
     }
 
-    if (cfg.hinweisBeimLaden !== false) {
+    // Hinweis nur beim Aufruf der Startseite (index.html, auch mit ?lang=…) – nicht auf den Unterseiten
+    // und nicht, wenn man von einer anderen Seite dieser Website zurückkommt. Ohne Speicherung (nur document.referrer).
+    var ordner = location.pathname.replace(/[^/]*$/, "");
+    var startseite = /\/(index\.html)?$/i.test(location.pathname);
+    var vonHier = false;
+    try { var ref = new URL(document.referrer); vonHier = ref.origin === location.origin && ref.pathname.indexOf(ordner) === 0; } catch (err) { /* kein Referrer */ }
+    if (cfg.hinweisBeimLaden !== false && startseite && !vonHier) {
       setTimeout(function () {
         if (dlg.open) return;
         wrap.classList.add("show-teaser");

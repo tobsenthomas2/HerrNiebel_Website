@@ -51,7 +51,7 @@ docs/                        eigene Datenblatt-Zusammenfassungen (PDF, EN)
 week: 1,                   // vor jeder Stunde die aktuelle Woche eintragen
 messwerteAnzeigen: false,  // true = Simulationen zeigen Zahlen (Mittelwert, Dunkelphase, Sperrspannung …)
 tippsMarkieren: false,     // true = Leserkommentare bekommen „hilfreich / unvollständig / falsch / am Thema vorbei"
-kiChat: { url: "…", hinweisBeimLaden: true, hinweisSekunden: 10 }
+kiChat: { url: "…", hinweisBeimLaden: true, hinweisSekunden: 10 }  // Hinweis klappt nur beim Aufruf der Startseite auf
 ```
 
 | Woche | Stunde | sichtbar |

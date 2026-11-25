@@ -25,7 +25,9 @@
  * kiChat  (Schrauber-Chat: Reiter am rechten Rand bzw. unten rechts auf dem Handy)
  *   url:              Link zum KI-Chat. Der QR-Code wird daraus erzeugt.
  *                     Leer lassen (""), um den Chat-Reiter auszublenden.
- *   hinweisBeimLaden: true = beim Laden klappt kurz ein Hinweis neben dem Reiter auf.
+ *   hinweisBeimLaden: true = beim Aufruf der Startseite (index.html) klappt kurz ein Hinweis
+ *                     neben dem Reiter auf. Auf den anderen Seiten und beim Zurückkehren
+ *                     zur Startseite ist nur der Reiter sichtbar. false = nur der Reiter.
  *   hinweisSekunden:  wie lange der Hinweis stehen bleibt (0 = bis er geschlossen wird).
  */
 window.WAA_CONFIG = {
