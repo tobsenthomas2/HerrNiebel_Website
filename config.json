@@ -396,7 +396,27 @@
           "description": "3. Ausbildungsjahr – Prüfungsvorbereitung",
           "icon": "📙",
           "folder": "jahrgang-13",
-          "children": []
+          "children": [
+            {
+              "id": "pruefungsvorbereitung",
+              "title": "Prüfungsvorbereitung",
+              "description": "Üben für die Abschlussprüfung",
+              "icon": "🎯",
+              "children": [
+                {
+                  "id": "ap2",
+                  "title": "Abschlussprüfung Teil 2",
+                  "description": "Testen Sie Ihr Wissen: kleine Tests mit Erklärungen – ohne Zeitlimit.",
+                  "icon": "📝",
+                  "tags": [
+                    "Test",
+                    "Übung"
+                  ],
+                  "badge": "Neu"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
