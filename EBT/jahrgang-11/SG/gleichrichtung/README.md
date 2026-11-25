@@ -123,7 +123,7 @@ WERTE AUS DEN LUMIATECH-DATENBLÄTTERN (nur diese verwenden)
 - 1N4007 (Silizium): U_RRM 1000 V, I_F(AV) 1 A, U_F ≈ 0,86 V bei 0,5 A.
 - 1N5817 (Schottky): U_RRM 20 V, U_F ≈ 0,37 V bei 0,5 A.
 - 1N5819 (Schottky): U_RRM 40 V, U_F ≈ 0,45 V bei 0,5 A.
-- Power-LED 3 W warmweiß auf 20-mm-Alustern (LUMIATECH L-3W-WW): I_F max. 700 mA, U_F ≈ 3,0 V bei 350 mA, U_R max. 5 V, braucht Kühlung.
+- Power-LED 3 W warmweiß auf 20-mm-Alustern (LUMIATECH L-3W-WW): I_F max. 700 mA, U_F ≈ 3,1 V bei 350 mA und ≈ 3,2–3,4 V bei 0,5 A (warm etwas weniger), glimmt schwach schon ab ≈ 2,4 V, U_R max. 5 V, braucht Kühlung.
 - Ein Fahrraddynamo (6 V, 3 W) liefert Wechselspannung und begrenzt unter Last den Strom selbst (≈ 0,5 A) – deshalb haben Dynamolampen keinen Vorwiderstand.
 
 SICHERHEIT
