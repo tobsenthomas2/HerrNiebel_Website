@@ -37,7 +37,7 @@ window.WAA_CONFIG = {
   tippsMarkieren: false,
 
   kiChat: {
-    url: "https://app.ais-chat.schule/ua/learning-scenarios/0c2fb146-e7e4-447d-a06e-949461142630/dialog?inviteCode=T4JSE8CQ",
+    url: "https://app.ais-chat.schule/ua/learning-scenarios/0c2fb146-e7e4-447d-a06e-949461142630/dialog?inviteCode=UJW7Q1MC",
     hinweisBeimLaden: true,
     hinweisSekunden: 10
   }
