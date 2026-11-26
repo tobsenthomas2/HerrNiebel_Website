@@ -37,6 +37,7 @@ assets/js/sim-*.js         je eine Simulation
 assets/js/vendor/qrcode.js QR-Code-Erzeugung für den KI-Support (qrcode-generator, MIT-Lizenz, K. Arase)
 assets/img/logo/           Logo als SVG und PNG (auch auf downloads.html zum Herunterladen)
 assets/fonts/              Schriften lokal (Archivo, griechische Zeichen aus IBM Plex Sans)
+applikationen/             AN-G03 Prüfprotokoll-Vorlage (PDF, leer) – Watt auf Achse/EBT 11: daraus entsteht das vorausgefüllte Prüfprotokoll
 datenblaetter/             PDF-Datenblätter (die Standardtypen verlinkt der EBT-Blog „Watt auf Achse“ direkt – Dateinamen nicht ändern)
 ```
 
