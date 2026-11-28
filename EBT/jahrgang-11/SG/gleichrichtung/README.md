@@ -18,6 +18,7 @@ Die **Datenblätter** kommen vom Hersteller: Kathi kauft bei LUMIATECH (Halbleit
 | Datei | Inhalt | ab Woche |
 |---|---|---|
 | `index.html` | Start: Kathi, neueste Beiträge, Mini-Simulation „Welche Richtung?", Werkbank-Notizen | 1 |
+| `test-rig.html` | Beitrag LOG #10 (Mini-Artikel): Kathis Kurbel-Prüfstand mit Explosionszeichnung – erklärt die Dynamo-Prüfstände im Fachraum (Oszi-Übung vor S-1, am Beamer zeigen); Satz zum Funktionsgenerator als Begründung für S-1 | 1 |
 | `led-on-ac.html` | Beitrag LOG #11: LEDs am Gartentrafo – Scheitelwert, LED-Sperrspannung 5 V, Schutzdiode in Reihe / antiparallel, Messen mit dem Oszi, Leserkommentare | 1 |
 | `basics.html` | So funktioniert's: û/T/f, Diode, Einweggleichrichter (Woche 1); Brückengleichrichter, Mittelwert U_d, Generatoren (ab Woche 2); Oszi-Regeln | 1 / 2 |
 | `parts.html` | Bauteil-Ecke: 1N4007, 3-W-Power-LED (Woche 1); 1N5817, 1N5819 (ab Woche 2) – Kathis Notizen ohne Kennwerte, Links zu den Datenblättern bei LUMIATECH | 1 / 2 |

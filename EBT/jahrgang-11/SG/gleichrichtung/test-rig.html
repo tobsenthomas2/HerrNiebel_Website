@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="My crank test rig – Watt auf Achse" data-title-de="Mein Kurbel-Prüfstand – Watt auf Achse">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My crank test rig – Watt auf Achse</title>
+  <script>if (/[?&]lang=de(&|$)/.test(location.search)) document.documentElement.lang = "de";</script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/week.js"></script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../vendor/fonts/montserrat.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="../../../../vendor/fonts/fira-code.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script defer src="assets/js/site.js"></script>
+  <style>
+    .rig-img { display: block; width: 100%; max-width: 560px; height: auto; margin-inline: auto; }
+    .rig-parts { columns: 2 220px; column-gap: 28px; padding-left: 1.2rem; }
+    .rig-parts li { break-inside: avoid; margin-bottom: .3rem; }
+  </style>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <header class="article-head">
+    <div class="narrow">
+      <a class="backlink" href="index.html"><i data-icon="left"></i><span data-lang="en">All posts</span><span data-lang="de">Alle Beiträge</span></a>
+      <span class="post-card__meta">LOG #10 · <span data-lang="en">Sep 2026 · 2 min read</span><span data-lang="de">Sep. 2026 · 2 Min. Lesezeit</span> · #dynamo #testrig #3dprint</span>
+      <h1><span data-lang="en">My crank test rig: testing dynamos without a bike</span><span data-lang="de">Mein Kurbel-Prüfstand: Dynamo testen ohne Fahrrad</span></h1>
+      <p class="lead" data-lang="en">Bike upside down, one hand on the pedal, the other on the probe – never again. So I built myself a test rig for the workbench.</p>
+      <p class="lead" data-lang="de">Rad auf dem Kopf, eine Hand an der Pedale, die andere am Tastkopf – nie wieder. Also hab ich mir einen Prüfstand für die Werkbank gebaut.</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="narrow">
+      <h2 id="why"><span data-lang="en">Why a test rig?</span><span data-lang="de">Warum ein Prüfstand?</span></h2>
+      <ul>
+        <li><span data-lang="en">A normal <strong>side-wall dynamo (6&nbsp;V / 3&nbsp;W)</strong>, like on many bikes – its roller runs on a 200&nbsp;mm disc instead of the tyre.</span><span data-lang="de">Ein ganz normaler <strong>Seitenläufer-Dynamo (6&nbsp;V / 3&nbsp;W)</strong> wie an vielen Rädern – seine Rolle läuft auf einer 200-mm-Scheibe statt auf dem Reifen.</span></li>
+        <li><span data-lang="en">You turn the disc with the crank handle. Crank slowly or quickly – just like riding slowly or quickly.</span><span data-lang="de">Die Scheibe dreht man mit dem Kurbelgriff. Langsam oder schnell kurbeln – wie langsam oder schnell fahren.</span></li>
+        <li><span data-lang="en">Sitting at the bench, in a team: one cranks, one measures. The scope stands right next to it.</span><span data-lang="de">Im Sitzen an der Werkbank, im Team: eine Person kurbelt, eine misst. Das Oszi steht gleich daneben.</span></li>
+        <li><span data-lang="en">Four printed parts, a few screws and two skateboard bearings. That’s it.</span><span data-lang="de">Vier Druckteile, ein paar Schrauben und zwei Skateboard-Kugellager. Mehr nicht.</span></li>
+      </ul>
+
+      <figure class="figure">
+        <div class="figure__frame">
+          <a href="assets/img/pruefstand-explosion-stueckliste.png" target="_blank" rel="noopener"><img class="rig-img" src="assets/img/pruefstand-explosion.png" width="870" height="1220" alt="Exploded view of the crank test rig: base plate with column, 200 mm disc on two ball bearings, crank handle, dynamo in a printed holder" loading="lazy"></a>
+        </div>
+        <figcaption><span data-lang="en">Exploded view – tap for the full drawing with parts list (labels in German).</span><span data-lang="de">Explosionszeichnung – antippen für die ganze Zeichnung mit Stückliste.</span></figcaption>
+      </figure>
+
+      <h3><span data-lang="en">The main parts</span><span data-lang="de">Die wichtigsten Teile</span></h3>
+      <ul class="rig-parts">
+        <li><span data-lang="en"><strong>1</strong> base plate with column (print)</span><span data-lang="de"><strong>1</strong> Grundplatte mit Säule (Druckteil)</span></li>
+        <li><span data-lang="en"><strong>3</strong> threaded rod M8 = axle</span><span data-lang="de"><strong>3</strong> Gewindestange M8 = Achse</span></li>
+        <li><span data-lang="en"><strong>5, 7</strong> ball bearings 608</span><span data-lang="de"><strong>5, 7</strong> Kugellager 608</span></li>
+        <li><span data-lang="en"><strong>6</strong> disc 200&nbsp;mm (print)</span><span data-lang="de"><strong>6</strong> Scheibe 200&nbsp;mm (Druckteil)</span></li>
+        <li><span data-lang="en"><strong>12</strong> crank handle (print)</span><span data-lang="de"><strong>12</strong> Kurbelgriff (Druckteil)</span></li>
+        <li><span data-lang="en"><strong>14</strong> dynamo holder (print)</span><span data-lang="de"><strong>14</strong> Dynamo-Halter (Druckteil)</span></li>
+        <li><span data-lang="en"><strong>17</strong> side-wall dynamo 6&nbsp;V / 3&nbsp;W</span><span data-lang="de"><strong>17</strong> Seitenläufer-Dynamo 6&nbsp;V / 3&nbsp;W</span></li>
+      </ul>
+
+      <div class="box"><p data-lang="en"><strong>Crank or function generator?</strong> Cranking feels like the real ride. But if I want to test a circuit at one <em>exact</em> voltage, I connect the function generator instead of the dynamo – it delivers exactly the same signal every time.</p><p data-lang="de"><strong>Kurbel oder Funktionsgenerator?</strong> Kurbeln fühlt sich an wie echtes Fahren. Wenn ich eine Schaltung aber bei einer <em>ganz bestimmten</em> Spannung prüfen will, hänge ich statt des Dynamos den Funktionsgenerator dran – der liefert jedes Mal genau dasselbe Signal.</p></div>
+
+      <div class="note"><strong><span data-lang="en">Before you crank</span><span data-lang="de">Bevor du kurbelst</span></strong><br>
+        <span data-lang="en">Clamp the base plate to the table. Roller in the middle of the disc rim, pressed on just enough that it doesn’t slip. Fingers off the disc while someone is cranking.</span>
+        <span data-lang="de">Grundplatte am Tisch festklemmen. Rolle mittig auf den Scheibenrand, nur so fest andrücken, dass sie nicht rutscht. Finger weg von der Scheibe, solange jemand kurbelt.</span></div>
+
+      <hr>
+      <div class="btn-row">
+        <a class="btn btn--ghost" href="index.html"><i data-icon="left"></i><span data-lang="en">All posts</span><span data-lang="de">Alle Beiträge</span></a>
+        <a class="btn" href="basics.html"><span data-lang="en">How it works</span><span data-lang="de">So funktioniert’s</span><i data-icon="right"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>
