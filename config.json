@@ -67,7 +67,7 @@
       "children": [
         {
           "id": "gleichrichtung_design",
-          "title": "Watt auf Achse – Design-Test",
+          "title": "Playground - Design Test",
           "description": "Alternatives Design (Modern Tactile) des DIY-Blogs zur Gleichrichtung, EBT 11 · SG. Wird nicht mehr mitgepflegt.",
           "icon": "🎨",
           "tags": [
@@ -359,7 +359,7 @@
               "children": [
                 {
                   "id": "gleichrichtung",
-                  "title": "Gleichrichtung",
+                  "title": "Gleichrichtung - Watt auf Achse",
                   "description": "DIY-Blog „Watt auf Achse“: Dynamo, Dioden, Brückengleichrichter – mit Simulationen und Schrauber-Chat.",
                   "icon": "🚲",
                   "folder": "gleichrichtung",
