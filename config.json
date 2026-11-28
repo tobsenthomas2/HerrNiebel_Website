@@ -501,6 +501,34 @@
               ]
             }
           ]
+        },
+        {
+          "id": "jg13",
+          "title": "Jahrgang 13",
+          "description": "3. Ausbildungsjahr – Prüfungsvorbereitung",
+          "icon": "📙",
+          "folder": "jahrgang-13",
+          "children": [
+            {
+              "id": "pruefungsvorbereitung",
+              "title": "Prüfungsvorbereitung",
+              "description": "Üben für die Gesellenprüfung",
+              "icon": "🎯",
+              "children": [
+                {
+                  "id": "gp2",
+                  "title": "Gesellenprüfung Teil 2",
+                  "description": "Testen Sie Ihr Wissen: kleine Tests mit Erklärungen – ohne Zeitlimit.",
+                  "icon": "📝",
+                  "tags": [
+                    "Test",
+                    "Übung"
+                  ],
+                  "badge": "Neu"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
