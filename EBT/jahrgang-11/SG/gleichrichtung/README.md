@@ -66,13 +66,7 @@ kiChat: { url: "…", hinweisBeimLaden: true, hinweisSekunden: 10 }  // Hinweis 
 
 Einen früheren Stand zeigt der Link-Zusatz `?w=1` (nie mehr als in `config.js`). Interne Links nehmen `?w=` und `?lang=de` mit.
 
-**Kachel:** noch nicht in `config.json` eingetragen (Seite nur per Link erreichbar). Zum Freischalten unter EBT → Jahrgang 11 ein Fach SG anlegen, z. B.:
-
-```json
-{ "id": "sg", "title": "SG - System- und Gerätetechnik", "folder": "SG", "children": [
-  { "id": "gleichrichtung", "title": "Gleichrichtung", "description": "DIY-Blog „Watt auf Achse“: Dynamo, Dioden, Brückengleichrichter – mit Simulationen.", "icon": "🚲", "tags": ["Simulation"], "badge": "Neu" }
-] }
-```
+**Kachel:** in `config.json` unter EBT → Jahrgang 11 → SG → Gleichrichtung eingetragen (28.11.2026).
 
 ## Prompt für das AIS-Lernszenario „Schrauber-Chat“ (KI-Kathi)
 

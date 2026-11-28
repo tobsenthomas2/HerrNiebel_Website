@@ -349,6 +349,26 @@
                   ]
                 }
               ]
+            },
+            {
+              "id": "sg",
+              "title": "SG - System- und Gerätetechnik",
+              "description": "System- und Gerätetechnik, Bauelemente und Schaltungsanalyse",
+              "icon": "🔌",
+              "folder": "SG",
+              "children": [
+                {
+                  "id": "gleichrichtung",
+                  "title": "Gleichrichtung",
+                  "description": "DIY-Blog „Watt auf Achse“: Dynamo, Dioden, Brückengleichrichter – mit Simulationen und Schrauber-Chat.",
+                  "icon": "🚲",
+                  "folder": "gleichrichtung",
+                  "tags": [
+                    "Simulation"
+                  ],
+                  "badge": "Neu"
+                }
+              ]
             }
           ]
         },

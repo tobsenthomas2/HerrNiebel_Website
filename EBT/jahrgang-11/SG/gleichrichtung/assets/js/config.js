@@ -31,7 +31,7 @@
  *   hinweisSekunden:  wie lange der Hinweis stehen bleibt (0 = bis er geschlossen wird).
  */
 window.WAA_CONFIG = {
-  week: 2,
+  week: 1,
 
   messwerteAnzeigen: false,
   tippsMarkieren: false,
